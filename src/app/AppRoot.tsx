@@ -13,7 +13,6 @@ const Router: FunctionComponent = () => {
   useEvent('router.view')
   const router = app.router
   const { view, current } = router
-  console.log('Views', view)
   if (!view) {
     return null
   }
