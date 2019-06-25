@@ -6,8 +6,8 @@ interface ErrorProps {
   error?: ErrorLike
 }
 
-const ErrorView: FunctionComponent<ErrorProps> = ({ code, error }) => {
+const Error: FunctionComponent<ErrorProps> = ({ code, error }) => {
   return <div className='Error'>Error {code}: {stringifyError(error)}</div>
 }
 
-export default ErrorView
+export default Error

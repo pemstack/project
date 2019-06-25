@@ -1,7 +1,7 @@
 import { AppContext, useApp, useEvent } from '@pema/app-react'
 import React, { ComponentType, FunctionComponent } from 'react'
-import ErrorView from './ErrorView'
-import LoadingView from './LoadingView'
+import Error from './Error'
+import Loading from './Loading'
 import { App } from './types'
 
 interface AppRootProps {
@@ -23,9 +23,10 @@ const Router: FunctionComponent = () => {
       const View = view.view as ComponentType<typeof current>
       return <View {...current} />
     case 'error':
-      return <ErrorView code={view.code} error={view.error} />
+      return <Error code={view.code} error={view.error} />
     case 'fallback':
-      return view.fallback || <LoadingView />
+      const Fallback = view.fallback || Loading
+      return <Fallback />
     default:
       return null
   }

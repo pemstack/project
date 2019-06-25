@@ -1,5 +1,5 @@
 export { default as AppRoot } from './AppRoot'
-export { default as ErrorView } from './ErrorView'
-export { default as LoadingView } from './LoadingView'
+export { default as Error } from './Error'
+export { default as Loading } from './Loading'
 export { default as init } from './init'
 export { default as routes } from './routes'
