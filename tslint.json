@@ -1,0 +1,30 @@
+{
+  "defaultSeverity": "warning",
+  "extends": [
+    "tslint:recommended",
+    "tslint-react"
+  ],
+  "rules": {
+    "trailing-comma": [
+      true,
+      "never"
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "arrow-parens": false,
+    "no-console": false,
+    "interface-name": false,
+    "only-arrow-functions": false,
+    "space-before-function-paren": [true, {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }]
+  }
+}

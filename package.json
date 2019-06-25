@@ -1,0 +1,48 @@
+{
+  "name": "project-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/express": "^4.17.0",
+    "@types/jest": "24.0.15",
+    "@types/node": "12.0.10",
+    "@types/react": "16.8.22",
+    "@types/react-dom": "16.8.4",
+    "express": "^4.17.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "typescript": "3.5.2"
+  },
+  "scripts": {
+    "start:server": "cd server && ts-node-dev --no-notify --respawn --transpileOnly ./server.ts && wait-on tcp:4000",
+    "start:app": "react-scripts start",
+    "start": "concurrently --kill-others \"npm run start:app\" \"npm run start:server\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "ts-node-dev": "^1.0.0-pre.40",
+    "tslint": "^5.18.0",
+    "tslint-react": "^4.0.0",
+    "wait-on": "^3.2.0"
+  },
+  "proxy": "http://localhost:4000"
+}
