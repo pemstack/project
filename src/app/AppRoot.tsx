@@ -1,7 +1,7 @@
 import { AppContext, useApp, useEvent } from '@pema/app-react'
 import React, { ComponentType, FunctionComponent } from 'react'
-import Error from './Error'
-import Loading from './Loading'
+import Error from './components/Error'
+import Loading from './components/Loading'
 import { App } from './types'
 
 interface AppRootProps {
@@ -13,6 +13,7 @@ const Router: FunctionComponent = () => {
   useEvent('router.view')
   const router = app.router
   const { view, current } = router
+
   if (!view) {
     return null
   }
@@ -24,6 +25,10 @@ const Router: FunctionComponent = () => {
     case 'error':
       return <Error code={view.code} error={view.error} />
     case 'fallback':
+      if (typeof view.fallback === 'string') {
+        return <div>{view.fallback}</div>
+      }
+
       const Fallback = view.fallback || Loading
       return <Fallback />
     default:
@@ -34,7 +39,7 @@ const Router: FunctionComponent = () => {
 const AppRoot: FunctionComponent<AppRootProps> = ({ app }) => {
   return (
     <AppContext.Provider value={app}>
-      <div className='App'>
+      <div className='AppRoot'>
         <Router />
       </div>
     </AppContext.Provider>

@@ -1,6 +1,4 @@
 export * from './types'
+export * from './routing'
 export { default as AppRoot } from './AppRoot'
-export { default as Error } from './Error'
-export { default as Loading } from './Loading'
 export { default as init } from './init'
-export { default as routes } from './routes'
