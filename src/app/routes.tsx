@@ -1,17 +1,12 @@
-import { RoutingTable, view } from '@pema/router'
-import React from 'react'
+import { redirect, RoutingTable } from '@pema/router'
+import { lazyView } from './Loading'
 
-function Home() {
-  return <div>Home</div>
-}
-
-function About() {
-  return <div>About</div>
-}
+// tslint:disable: object-literal-sort-keys
 
 const routes: RoutingTable = {
-  '/': view(Home),
-  '/about': view(About)
+  '/': lazyView(() => import('../pages/Home')),
+  '/home': redirect('/'),
+  '/about': lazyView(() => import('../pages/About'))
 }
 
 export default routes

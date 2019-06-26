@@ -1,7 +1,7 @@
 import { ErrorLike, stringifyError } from '@pema/utils'
 import React, { FunctionComponent } from 'react'
 
-interface ErrorProps {
+export interface ErrorProps {
   code: number
   error?: ErrorLike
 }
