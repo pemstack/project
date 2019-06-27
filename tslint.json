@@ -21,10 +21,20 @@
     "no-console": false,
     "interface-name": false,
     "only-arrow-functions": false,
-    "space-before-function-paren": [true, {
-      "anonymous": "always",
-      "named": "never",
-      "asyncArrow": "always"
-    }]
+    "no-empty": false,
+    "max-classes-per-file": false,
+    "member-access": false,
+    "member-ordering": false,
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
+    "jsx-boolean-value": false,
+    "space-before-function-paren": [
+      true,
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ]
   }
 }

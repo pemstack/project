@@ -1,9 +1,14 @@
 import { View } from 'app'
+import Links from 'components/Links'
 import React from 'react'
-import './Home.css'
 
 const Home: View = () => {
-  return <div className='Home'>Home</div>
+  return (
+    <div className='Home'>
+      Home
+      <Links />
+    </div>
+  )
 }
 
 export default Home

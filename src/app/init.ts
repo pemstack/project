@@ -5,10 +5,12 @@ import { createBrowserHistory } from 'history'
 import routes from './routes'
 import { App } from './types'
 
-export default function build(state: JObject): App {
-  return app(state)
+export default function init(state: JObject): App {
+  const root = app(state)
     .extend(withRouter({
       createHistory: createBrowserHistory,
       routes
     }))
+
+  return root
 }

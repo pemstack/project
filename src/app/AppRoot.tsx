@@ -11,6 +11,7 @@ interface AppRootProps {
 const Router: FunctionComponent = () => {
   const app = useApp<App>()
   useEvent('router.view')
+  useEvent('render')
   const router = app.router
   const { view, current } = router
 

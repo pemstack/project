@@ -1,9 +1,14 @@
 import { View } from 'app'
+import Links from 'components/Links'
 import React from 'react'
-import './About.css'
 
 const About: View = () => {
-  return <div className='About'>About</div>
+  return (
+    <div className='About'>
+      About
+      <Links />
+    </div>
+  )
 }
 
 export default About

@@ -21,6 +21,7 @@
     "start:server": "cd server && ts-node-dev --no-notify --respawn --transpileOnly ./server.ts && wait-on tcp:4000",
     "start:app": "react-scripts start",
     "start": "concurrently --kill-others \"npm run start:app\" \"npm run start:server\"",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
+    "source-map-explorer": "^2.0.1",
     "ts-node-dev": "^1.0.0-pre.40",
     "tslint": "^5.18.0",
     "tslint-react": "^4.0.0",

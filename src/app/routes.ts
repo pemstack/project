@@ -6,7 +6,9 @@ const routes: RoutingTable = {
   '/': lazyView(() => import('pages/Home')),
   '/home': redirect('/'),
   '/about': lazyView(() => import('pages/About')),
-  '/contact': lazyController(() => import('pages/Contact'))
+  '/state-counter': lazyView(() => import('pages/StateCounter')),
+  '/session-counter': lazyView(() => import('pages/SessionCounter')),
+  '/controller-counter': lazyController(() => import('pages/ControllerCounter')),
 }
 
 export default routes
