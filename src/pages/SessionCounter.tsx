@@ -11,6 +11,7 @@ type SessionCounter = View<WithSession<CounterSession>>
 const SessionCounter: SessionCounter = ({ app, session }) => {
   return (
     <div className='Counter'>
+      <Links />
       Count {session.count}
       <br />
       <button
@@ -20,7 +21,6 @@ const SessionCounter: SessionCounter = ({ app, session }) => {
         }}>
         Add
       </button>
-      <Links />
     </div>
   )
 }

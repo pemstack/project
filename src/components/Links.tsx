@@ -1,5 +1,6 @@
-import { Link } from '@pema/router-react'
+import { NavLink } from '@pema/router-react'
 import React, { FunctionComponent } from 'react'
+import './Links.css'
 
 const Links: FunctionComponent = () => {
   const paths = {
@@ -10,14 +11,14 @@ const Links: FunctionComponent = () => {
   }
 
   return (
-    <ul>
+    <ul className='Links'>
       {Object.entries(paths).map(([route, name]) => (
         <li key={route}>
-          <Link to={route}>{name}</Link>
+          <NavLink to={route}>{name}</NavLink>
         </li>
       ))}
       <li>
-        <Link prefetch to='/about'>About (Prefetched)</Link>
+        <NavLink prefetch to='/about'>About (Prefetched)</NavLink>
       </li>
     </ul>
   )

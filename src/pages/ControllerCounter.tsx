@@ -31,10 +31,10 @@ type CounterView = View<WithController<CounterController>>
 const CounterView: CounterView = ({ controller }) => {
   return (
     <div className='Counter'>
+      <Links />
       Count {controller.count}
       <br />
       <button onClick={() => controller.increment()}>Add</button>
-      <Links />
     </div>
   )
 }

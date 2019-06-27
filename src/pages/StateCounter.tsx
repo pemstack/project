@@ -11,6 +11,7 @@ type StateCounter = View<WithState<CounterState>>
 const StateCounter: StateCounter = ({ app, state }) => {
   return (
     <div className='Counter'>
+      <Links />
       Count {state.count}
       <br />
       <button
@@ -20,7 +21,6 @@ const StateCounter: StateCounter = ({ app, state }) => {
         }}>
         Add
       </button>
-      <Links />
     </div>
   )
 }

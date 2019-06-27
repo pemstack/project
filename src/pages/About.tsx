@@ -5,8 +5,8 @@ import React from 'react'
 const About: View = () => {
   return (
     <div className='About'>
-      About
       <Links />
+      About
     </div>
   )
 }
