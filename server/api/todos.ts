@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import http from 'http-status-codes'
 import { Todo } from 'models'
 
 const router = Router()
@@ -10,7 +11,12 @@ router.get('/', async function (req, res) {
 router.post('/', async function (req, res) {
   const { title, done = false }: typeof Todo = req.body
   await Todo.create({ title, done })
-  res.status(201).end()
+  res.status(http.CREATED).end()
+})
+
+router.delete('/', async function (req, res) {
+  await Todo.deleteMany({})
+  res.status(http.OK)
 })
 
 export default router
