@@ -23,7 +23,6 @@ class TodosController implements Controller {
   async addTodo(title: string) {
     if (title) {
       await api.post({ title })
-      console.log('DONE')
       this.todos.push({ title, done: false })
     }
   }
@@ -34,7 +33,6 @@ class TodosController implements Controller {
   }
 
   async onEnter() {
-    console.log(this)
     await this.getTodos()
     return view(Todos)
   }
