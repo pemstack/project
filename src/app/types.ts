@@ -27,10 +27,10 @@ export type WithApp<TApp extends App> =
 export type WithAppExtension<TExtension extends AppExtension> =
   RouteProps & { readonly app: Services<TExtension> }
 
-export type WithState<TState extends { [TKey in keyof TState]: JValue }> =
+export type WithState<TState extends { [TKey in keyof TState]: JValue | {} }> =
   RouteProps & { readonly state: TState }
 
-export type WithSession<TSession extends { [TKey in keyof TSession]: JValue }> =
+export type WithSession<TSession extends { [TKey in keyof TSession]: JValue | {} }> =
   RouteProps & { readonly session: TSession }
 
 export default 0
