@@ -7,7 +7,8 @@ const Links: FunctionComponent = () => {
     '/': 'Home',
     'controller-counter': 'Controller Counter',
     'session-counter': 'Session Counter',
-    'state-counter': 'State Counter'
+    'state-counter': 'State Counter',
+    'todos': 'MobX Todos'
   }
 
   return (

@@ -9,6 +9,7 @@ const routes: RoutingTable = {
   '/state-counter': lazyView(() => import('pages/StateCounter')),
   '/session-counter': lazyView(() => import('pages/SessionCounter')),
   '/controller-counter': lazyController(() => import('pages/ControllerCounter')),
+  '/todos': lazyController(() => import('pages/Todos'))
 }
 
 export default routes
