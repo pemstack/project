@@ -20,6 +20,7 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "reflect-metadata": "^0.1.13",
+    "typegoose": "^5.7.2",
     "typescript": "3.5.2"
   },
   "scripts": {
