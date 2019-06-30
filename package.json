@@ -49,6 +49,7 @@
   "devDependencies": {
     "commitizen": "^3.1.1",
     "concurrently": "^4.1.0",
+    "cz-conventional-changelog": "^2.1.0",
     "source-map-explorer": "^2.0.1",
     "ts-node-dev": "^1.0.0-pre.40",
     "tsconfig-paths": "^3.8.0",
@@ -56,5 +57,10 @@
     "tslint-react": "^4.0.0",
     "wait-on": "^3.2.0"
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
