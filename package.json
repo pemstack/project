@@ -28,7 +28,8 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "commit": "git-cz"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "commitizen": "^3.1.1",
     "concurrently": "^4.1.0",
     "source-map-explorer": "^2.0.1",
     "ts-node-dev": "^1.0.0-pre.40",
