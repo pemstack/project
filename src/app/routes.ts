@@ -1,4 +1,4 @@
-import { lazyController, lazyView, redirect, RoutingTable } from './routing'
+import { lazyController, lazyView, redirect, RoutingTable } from 'app/routing'
 
 // tslint:disable: object-literal-sort-keys
 

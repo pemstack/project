@@ -28,6 +28,7 @@
     "jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
     "jsx-boolean-value": false,
+    "no-empty-interface": false,
     "space-before-function-paren": [
       true,
       {

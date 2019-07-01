@@ -1,6 +1,7 @@
 import { AppExtension, AppNode, Services } from '@pema/app'
 import { ActionParams, Controller as RouteController, Router, View as RouteView } from '@pema/router'
 import { JValue } from '@pema/utils'
+import { DefaultLayoutProps } from 'app/layout/DefaultLayout'
 import { FunctionComponent } from 'react'
 
 export interface App extends AppNode {
@@ -11,8 +12,25 @@ export
   interface RouteProps<TApp extends App = App>
   extends ActionParams<TApp> { }
 
+type StringOrProps<TType extends string, TProps extends {} = {}> =
+  | TType
+  | TProps & { type: TType }
+
+type LayoutType =
+  | StringOrProps<'default', DefaultLayoutProps>
+  | StringOrProps<'none'>
+  | null
+
+export type LayoutPicker<TProps extends RouteProps = RouteProps> =
+  | LayoutType
+  | ((props: TProps) => LayoutType)
+
+interface LayoutRouteView<TProps extends RouteProps> extends RouteView<TProps> {
+  layout?: LayoutPicker<TProps>
+}
+
 export type View<TProps extends RouteProps = RouteProps> =
-  FunctionComponent<TProps> & RouteView<TProps>
+  FunctionComponent<TProps> & LayoutRouteView<TProps>
 
 export
   interface Controller<TProps extends RouteProps = RouteProps>

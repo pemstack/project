@@ -8,8 +8,8 @@ import {
   RoutingTable
 } from '@pema/router'
 import { mapLazy } from '@pema/utils'
-import Loading from './components/Loading'
-import { RouteProps } from './types'
+import Loading from 'app/components/Loading'
+import { RouteProps } from 'app/types'
 
 export { redirect, view, controller, lazy, allow, deny, error } from '@pema/router'
 
