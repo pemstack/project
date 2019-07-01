@@ -1,3 +1,4 @@
+import { Button } from 'antd'
 import { Controller, View, view, WithController } from 'app'
 import Links from 'components/Links'
 import { observable } from 'mobx'
@@ -44,15 +45,15 @@ const Todos: TodosType = observer(({ controller }) => {
   const { todos } = controller
   const [title, setTitle] = useState('')
   return (
-    <div className='Home'>
+    <div className='Todos'>
       <Links />
       <h3>Todos</h3>
       <ul>
         {todos.map((todo, i) => <li key={i}>{todo.title} {todo.done ? '✓' : 'X'}</li>)}
       </ul>
       <div>
-        <button onClick={() => controller.addTodo(title)}>Add</button>
-        <button onClick={() => controller.clearTodos()}>Clear</button>
+        <Button style={{ margin: 4 }} type='primary' onClick={() => controller.addTodo(title)}>Add</Button>
+        <Button style={{ margin: 4 }} type='danger' onClick={() => controller.clearTodos()}>Clear</Button>
         <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
       </div>
     </div>
