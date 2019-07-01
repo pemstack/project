@@ -8,4 +8,6 @@ class Todo extends Typegoose {
   done: boolean
 }
 
+export type TodoType = Todo
+
 export default new Todo().getModelForClass(Todo)
