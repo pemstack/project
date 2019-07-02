@@ -1,0 +1,53 @@
+{
+  "name": "@my-app/web",
+  "private": true,
+  "version": "0.1.0",
+  "proxy": "http://localhost:4000",
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "eject": "react-scripts eject",
+    "test": "react-app-rewired test",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
+  },
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  },
+  "dependencies": {
+    "@my-app/shared": "^0.1.0",
+    "@ant-design/icons": "^2.1.0",
+    "@pema/app": "^0.1.0",
+    "@pema/app-react": "^0.1.0",
+    "@pema/router": "^0.1.0",
+    "@pema/router-react": "^0.1.0",
+    "@pema/utils": "^0.1.0",
+    "@types/history": "^4.7.2",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.0.10",
+    "@types/react": "^16.8.22",
+    "@types/react-dom": "^16.8.4",
+    "antd": "^3.20.0",
+    "babel-plugin-import": "^1.12.0",
+    "classnames": "^2.2.6",
+    "customize-cra": "^0.2.14",
+    "formik": "^1.5.7",
+    "history": "^4.9.0",
+    "http-status-codes": "^1.3.2",
+    "mobx": "^5.10.1",
+    "mobx-react-lite": "^1.4.1",
+    "react": "^16.8.6",
+    "react-app-rewired": "^2.1.3",
+    "react-dom": "^16.8.6",
+    "react-scripts": "^3.0.1",
+    "wretch": "^1.5.2"
+  }
+}

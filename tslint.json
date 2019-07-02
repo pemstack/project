@@ -1,14 +1,21 @@
 {
   "defaultSeverity": "warning",
   "extends": [
-    "tslint:recommended",
-    "tslint-react"
+    "tslint:recommended"
   ],
   "rules": {
-    "trailing-comma": [
-      true,
-      "never"
-    ],
+    "arrow-parens": false,
+    "interface-name": false,
+    "jsx-boolean-value": false,
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
+    "max-classes-per-file": false,
+    "member-access": false,
+    "member-ordering": false,
+    "no-console": false,
+    "no-empty": false,
+    "no-empty-interface": false,
+    "only-arrow-functions": false,
     "quotemark": [
       true,
       "single"
@@ -17,25 +24,22 @@
       true,
       "never"
     ],
-    "arrow-parens": false,
-    "no-console": false,
-    "interface-name": false,
-    "only-arrow-functions": false,
-    "no-empty": false,
-    "max-classes-per-file": false,
-    "member-access": false,
-    "member-ordering": false,
-    "jsx-no-lambda": false,
-    "jsx-no-multiline-js": false,
-    "jsx-boolean-value": false,
-    "no-empty-interface": false,
     "space-before-function-paren": [
       true,
       {
         "anonymous": "always",
-        "named": "never",
-        "asyncArrow": "always"
+        "asyncArrow": "always",
+        "named": "never"
       }
+    ],
+    "trailing-comma": [
+      true,
+      "never"
+    ]
+  },
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts"
     ]
   }
 }
