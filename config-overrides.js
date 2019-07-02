@@ -1,3 +1,4 @@
+const path = require('path')
 const { override, fixBabelImports } = require('customize-cra')
 
 module.exports = override(
@@ -8,7 +9,7 @@ module.exports = override(
   }),
   function (config, env) {
     const alias = (config.resolve.alias || {})
-    alias['@ant-design/icons'] = 'purched-antd-icons'
+    alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './src/icons.ts')
     config.resolve.alias = alias
     return config
   }

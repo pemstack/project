@@ -5,10 +5,11 @@ import './Links.css'
 const Links: FunctionComponent = () => {
   const paths = {
     '/': 'Home',
-    'controller-counter': 'Controller Counter',
-    'session-counter': 'Session Counter',
-    'state-counter': 'State Counter',
-    'todos': 'MobX Todos'
+    '/login': 'Login',
+    '/controller-counter': 'Controller Counter',
+    '/session-counter': 'Session Counter',
+    '/state-counter': 'State Counter',
+    '/todos': 'MobX Todos'
   }
 
   return (
