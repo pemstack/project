@@ -10,6 +10,7 @@ yarn.lock
 
 ### VisualStudioCode ###
 .vscode/*
+!.vscode/pema.code-snippets
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
