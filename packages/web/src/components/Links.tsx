@@ -6,9 +6,7 @@ const Links: FunctionComponent = () => {
   const paths = {
     '/': 'Home',
     '/login': 'Login',
-    '/controller-counter': 'Controller Counter',
-    '/session-counter': 'Session Counter',
-    '/state-counter': 'State Counter',
+    '/counter': 'Controller Counter',
     '/todos': 'MobX Todos'
   }
 
