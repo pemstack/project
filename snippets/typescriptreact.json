@@ -1,0 +1,78 @@
+{
+  "Pema view (controller)": {
+    "prefix": "viewc",
+    "body": [
+      "import React from 'react'",
+      "import { View, WithController } from 'app'",
+      "import { observer } from 'mobx-react-lite'",
+      "import { $1Controller } from './$1Controller'",
+      "",
+      "export interface $1Props { }",
+      "",
+      "export type $1ViewType = View<WithController<$1Controller> & $1Props>",
+      "",
+      "const $1View: $1ViewType = ({ controller }) => {",
+      "  return (",
+      "    <div className='$1'>",
+      "      $1 page",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "$1View.deriveProps = ({ }): $1Props => {",
+      "  return {}",
+      "}",
+      "",
+      "export default observer($1View)",
+      ""
+    ]
+  },
+  "Pema view": {
+    "prefix": "view",
+    "body": [
+      "import React from 'react'",
+      "import { View } from 'app'",
+      "",
+      "export interface $1Props { }",
+      "",
+      "export type $1ViewType = View<$1Props>",
+      "",
+      "const $1View: $1ViewType = ({ }) => {",
+      "  return (",
+      "    <div className='$1'>",
+      "      $1 page",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "$1View.deriveProps = ({ }): $1Props => {",
+      "  return {}",
+      "}",
+      "",
+      "$1View.onEnter = ({ }) => {",
+      "",
+      "}",
+      "",
+      "export default $1View",
+      ""
+    ]
+  },
+  "Pema view (static)": {
+    "prefix": "views",
+    "body": [
+      "import React from 'react'",
+      "import { View } from 'app'",
+      "",
+      "const $1View: View = ({ }) => {",
+      "  return (",
+      "    <div className='$1'>",
+      "      $1 page",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default $1View",
+      ""
+    ]
+  }
+}
