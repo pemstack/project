@@ -1,29 +1,32 @@
 import {
-  ControllerConstructor,
-  ControllerResult,
   delay as pemaDelay,
   Delayed,
-  lazy,
-  LazyResult,
+  FallbackView,
+  lazy as pemaLazy,
+  RouteAction,
   RoutingTable
 } from '@pema/router'
 import { mapLazy } from '@pema/utils'
-import Loading from 'app/components/Loading'
-import { RouteProps } from 'app/types'
+import { RouteParams } from 'app/types'
 
-export { redirect, view, controller, lazy, allow, deny, error } from '@pema/router'
+export {
+  allow,
+  deny,
+  controller,
+  error,
+  redirect,
+  view
+} from '@pema/router'
 
-export function lazyView<T>(resolver: () => Promise<{ default: T }>) {
-  return lazy.view(mapLazy(resolver, v => v.default), Loading)
+export function lazy(
+  resolver: () => Promise<{ default: RouteAction }>,
+  fallback: FallbackView = true) {
+  return pemaLazy(mapLazy(resolver, v => v.default), fallback)
 }
 
-export function lazyController
-  (resolver: () => Promise<{ default: ControllerConstructor }>): LazyResult<ControllerResult> {
-  return lazy.controller(mapLazy(resolver, v => v.default), Loading)
-}
-
-export function delay<T, TProps extends RouteProps = RouteProps>(delayed: Delayed<T, TProps>) {
-  return pemaDelay<T, TProps>(delayed, Loading)
+export function delay<T, TProps extends RouteParams = RouteParams>
+  (delayed: Delayed<T, TProps>, fallback: FallbackView = true) {
+  return pemaDelay<T, TProps>(delayed, fallback)
 }
 
 export type RoutingTable = RoutingTable

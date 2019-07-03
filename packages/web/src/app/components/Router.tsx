@@ -1,13 +1,13 @@
 import { useApp, useEvent } from '@pema/app-react'
 import DefaultLayout from 'app/layout/DefaultLayout'
-import { App, LayoutPicker, RouteProps, View } from 'app/types'
+import { App, LayoutPicker, RouteParams, View } from 'app/types'
 import React, { ComponentType, FunctionComponent } from 'react'
 import Error from './Error'
 import Loading from './Loading'
 
-const NoLayout: FunctionComponent<RouteProps> = ({ children }) => <>{children}</>
+const NoLayout: FunctionComponent<RouteParams> = ({ children }) => <>{children}</>
 
-function getLayout(props: RouteProps, type: LayoutPicker = 'default'): [ComponentType<RouteProps>, {}] {
+function getLayout(props: RouteParams, type: LayoutPicker = 'default'): [ComponentType<RouteParams>, {}] {
   if (typeof type === 'function') {
     type = type(props)
   }
@@ -31,13 +31,21 @@ function getLayout(props: RouteProps, type: LayoutPicker = 'default'): [Componen
   }
 }
 
+function deriveProps(view: View, params: RouteParams) {
+  if (view && typeof view.deriveProps === 'function') {
+    return view.deriveProps(params) || {}
+  } else {
+    return {}
+  }
+}
+
 const Router: FunctionComponent = () => {
   const app = useApp<App>()
   useEvent('router.view')
   useEvent('render')
   const router = app.router
   const view = router.view
-  const props: RouteProps = router.current as any
+  const props: RouteParams = router.current as any
   if (!view) {
     return <DefaultLayout {...props} />
   }
@@ -46,9 +54,10 @@ const Router: FunctionComponent = () => {
     case 'view':
       const ViewComponent = view.view as View
       const [ViewLayout, viewLayoutProps] = getLayout(props, ViewComponent.layout)
+      const derivedProps = deriveProps(ViewComponent, props)
       return (
         <ViewLayout {...props} {...viewLayoutProps}>
-          <ViewComponent {...props} />
+          <ViewComponent {...derivedProps} {...props} />
         </ViewLayout>
       )
     case 'error':
@@ -66,7 +75,7 @@ const Router: FunctionComponent = () => {
         )
       }
 
-      const Fallback = view.fallback || Loading
+      const Fallback = (view.fallback && view.fallback !== true) ? view.fallback : Loading
       const [FallbackLayout, fallbackLayoutProps] = getLayout(props, Fallback.layout)
       return (
         <FallbackLayout {...props} {...fallbackLayoutProps}>

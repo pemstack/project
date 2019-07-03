@@ -1,5 +1,12 @@
 import { AppExtension, AppNode, Services } from '@pema/app'
-import { ActionParams, Controller as RouteController, Router, View as RouteView } from '@pema/router'
+import {
+  ActionParams,
+  Controller as RouteController,
+  Router,
+  View as RouteView,
+  PickActionParams,
+  OmitActionParams
+} from '@pema/router'
 import { JValue } from '@pema/utils'
 import { DefaultLayoutProps } from 'app/layout/DefaultLayout'
 import { ComponentType } from 'react'
@@ -9,7 +16,7 @@ export interface App extends AppNode {
 }
 
 export
-  interface RouteProps<TApp extends App = App>
+  interface RouteParams<TApp extends App = App>
   extends ActionParams<TApp> { }
 
 type StringOrProps<TType extends string, TProps extends {} = {}> =
@@ -21,22 +28,20 @@ type LayoutType =
   | StringOrProps<'none'>
   | null
 
-export type LayoutPicker<TProps extends RouteProps = RouteProps> =
+export type LayoutPicker<TProps extends RouteParams = RouteParams> =
   | LayoutType
   | ((props: TProps) => LayoutType)
 
-interface LayoutRouteView<TProps extends RouteProps> extends RouteView<TProps> {
+interface LayoutRouteView<TProps extends RouteParams> extends RouteView<TProps> {
+  deriveProps?: (params: PickActionParams<TProps>) => OmitActionParams<TProps>
   layout?: LayoutPicker<TProps>
 }
 
 export type View<TProps = {}> =
-  ComponentType<RouteProps & TProps> & LayoutRouteView<RouteProps & TProps>
-
-export type PropsOf<TView> =
-  TView extends LayoutRouteView<infer TProps> ? TProps : RouteProps
+  ComponentType<RouteParams & TProps> & LayoutRouteView<RouteParams & TProps>
 
 export
-  interface Controller<TProps extends RouteProps = RouteProps>
+  interface Controller<TProps extends RouteParams = RouteParams>
   extends RouteController<TProps> { }
 
 export interface WithController<TController extends Controller> {

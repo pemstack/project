@@ -1,16 +1,14 @@
-import { lazyController, lazyView, redirect, RoutingTable } from 'app/routing'
+import { lazy, redirect, RoutingTable } from 'app/routing'
 
 // tslint:disable: object-literal-sort-keys
 
 const routes: RoutingTable = {
-  '/': lazyView(() => import('pages/Home')),
+  '/': lazy(() => import('pages/home')),
   '/home': redirect('/'),
-  '/about': lazyView(() => import('pages/About')),
-  '/login': lazyView(() => import('pages/Login')),
-  '/state-counter': lazyView(() => import('pages/StateCounter')),
-  '/session-counter': lazyView(() => import('pages/SessionCounter')),
-  '/controller-counter': lazyController(() => import('pages/ControllerCounter')),
-  '/todos': lazyController(() => import('pages/Todos'))
+  '/about': lazy(() => import('pages/about')),
+  '/login': lazy(() => import('pages/login')),
+  '/counter': lazy(() => import('pages/counter')),
+  '/todos': lazy(() => import('pages/todos'))
 }
 
 export default routes

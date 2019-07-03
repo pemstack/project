@@ -1,6 +1,6 @@
+import { AppRoot, init } from 'app'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { AppRoot, init } from './app'
 
 let app = init((window as any || {}).__STATE__);
 (window as any).app = app

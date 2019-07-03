@@ -23,6 +23,7 @@
     ]
   },
   "dependencies": {
+    "@my-app/presentation": "^0.1.0",
     "@my-app/shared": "^0.1.0",
     "@ant-design/icons": "^2.1.0",
     "@pema/app": "^0.1.0",

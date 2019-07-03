@@ -16,6 +16,7 @@
     "no-empty": false,
     "no-empty-interface": false,
     "only-arrow-functions": false,
+    "ordered-imports": false,
     "quotemark": [
       true,
       "single"
@@ -24,14 +25,7 @@
       true,
       "never"
     ],
-    "space-before-function-paren": [
-      true,
-      {
-        "anonymous": "always",
-        "asyncArrow": "always",
-        "named": "never"
-      }
-    ],
+    "space-before-function-paren": false,
     "trailing-comma": [
       true,
       "never"

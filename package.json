@@ -4,8 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist --force-local",
     "commit": "git-cz",
-    "link-pema": "./link-pema.sh",
-    "start": "lerna run build --scope @my-app/shared && lerna run start --parallel --stream"
+    "start": "lerna run build --scope @my-app/shared && lerna run build --scope @my-app/presentation && lerna run start --parallel --stream"
   },
   "config": {
     "commitizen": {

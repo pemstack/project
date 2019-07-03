@@ -15,6 +15,9 @@
       "@my-app/shared/lib/*": [
         "../../shared/src/*"
       ],
+      "@my-app/presentation/lib/*": [
+        "../../presentation/src/*"
+      ],
       "@my-app/*": [
         "../../*"
       ]
