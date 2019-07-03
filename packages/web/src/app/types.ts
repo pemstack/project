@@ -30,7 +30,7 @@ type LayoutType =
 
 export type LayoutPicker<TProps extends RouteParams = RouteParams> =
   | LayoutType
-  | ((props: TProps) => LayoutType)
+  | ((params: PickActionParams<TProps>) => LayoutType)
 
 interface LayoutRouteView<TProps extends RouteParams> extends RouteView<TProps> {
   deriveProps?: (params: PickActionParams<TProps>) => OmitActionParams<TProps>
