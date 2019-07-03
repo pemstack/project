@@ -12,6 +12,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "paths": {
+      "@my-app/shared/lib/*": [
+        "../../shared/src/*"
+      ],
       "@my-app/*": [
         "../../*"
       ]
