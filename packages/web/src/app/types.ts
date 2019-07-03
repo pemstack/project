@@ -37,12 +37,15 @@ interface LayoutRouteView<TProps extends RouteParams> extends RouteView<TProps> 
   layout?: LayoutPicker<TProps>
 }
 
+export type ExtendedApp<TExtension extends AppExtension = {}>
+  = App & Services<TExtension>
+
 export type View<TProps = {}> =
   ComponentType<RouteParams & TProps> & LayoutRouteView<RouteParams & TProps>
 
 export
-  interface Controller<TProps extends RouteParams = RouteParams>
-  extends RouteController<TProps> { }
+  interface Controller<TProps = {}>
+  extends RouteController<TProps & RouteParams> { }
 
 export interface WithController<TController extends Controller> {
   readonly controller: TController
