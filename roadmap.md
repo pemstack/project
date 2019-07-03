@@ -8,5 +8,6 @@
 - Error boundaries
 - Session
 - Auth
+- API/Swagger
 - Tests
 - Docker
