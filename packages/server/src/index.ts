@@ -9,7 +9,7 @@ dotenv.config({
   path: path.resolve(__dirname, '..', '.env')
 })
 
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true })
+mongoose.connect(process.env.DB_URI as string, { useNewUrlParser: true })
 
 const app = express()
 

@@ -23,6 +23,7 @@
     "removeComments": true,
     "skipLibCheck": true,
     "strict": true,
+    "strictPropertyInitialization": false,
     "target": "es6"
   },
   "exclude": [
