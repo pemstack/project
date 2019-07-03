@@ -10,7 +10,7 @@ export interface Todo {
   done: boolean
 }
 
-export default class TodosController implements Controller {
+export class TodosController implements Controller {
   @observable todos: Todo[] = []
 
   async getTodos() {

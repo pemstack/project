@@ -1,7 +1,7 @@
 import { Controller } from 'app'
 import { observable } from 'mobx'
 
-export default class CounterController implements Controller {
+export class CounterController implements Controller {
   @observable count: number = 0
 
   constructor(state: number) {

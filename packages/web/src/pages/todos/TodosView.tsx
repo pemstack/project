@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, WithController } from 'app'
 import { observer } from 'mobx-react-lite'
-import TodosController from './TodosController'
+import { TodosController } from './TodosController'
 import { Button } from 'antd'
 
 export interface TodosProps { }
