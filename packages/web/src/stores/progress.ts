@@ -36,6 +36,19 @@ export class ProgressStore {
     app.events.on('router.afterEnter', this.afterEnter)
   }
 
+  async track<T>(delayed: Promise<T> | (() => Promise<T>)): Promise<T> {
+    this.start()
+    try {
+      if (typeof delayed === 'function') {
+        return await delayed()
+      } else {
+        return await delayed
+      }
+    } finally {
+      this.done()
+    }
+  }
+
   start() {
     this.count++
     this.handler()
