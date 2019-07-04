@@ -1,6 +1,6 @@
 import { App } from 'app'
 import nprogress from 'nprogress'
-import debounce from 'lodash.throttle'
+import debounce from 'lodash/debounce'
 
 nprogress.configure({
   showSpinner: false,
