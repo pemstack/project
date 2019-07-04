@@ -14,12 +14,10 @@ export class ProgressStore {
   private count: number
 
   private onEnter = () => {
-    console.log('Start')
     this.start()
   }
 
   private afterEnter = () => {
-    console.log('Done')
     this.done()
   }
 
