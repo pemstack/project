@@ -10,7 +10,8 @@ export default function init(state: JObject): App {
   const root = app(state)
     .extend(withRouter({
       createHistory: createBrowserHistory,
-      routes
+      routes,
+      fallbackComputed: true
     }))
     .extend({
       progress: ProgressStore

@@ -7,7 +7,7 @@ nprogress.configure({
   trickleSpeed: 50
 })
 
-const DELAY = 10
+const DELAY = 50
 
 export class ProgressStore {
   private app: App
