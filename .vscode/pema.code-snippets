@@ -108,7 +108,6 @@
       ""
     ]
   },
-
   "Pema view (controller)": {
     "scope": "typescriptreact",
     "prefix": "viewc",
