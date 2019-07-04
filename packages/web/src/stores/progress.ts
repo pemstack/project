@@ -31,8 +31,7 @@ export class ProgressStore {
 
   constructor(_: any, app: App) {
     this.app = app
-    this.count = 0;
-    (this as any).np = nprogress
+    this.count = 0
     app.events.on('router.onEnter', this.onEnter)
     app.events.on('router.afterEnter', this.afterEnter)
   }
