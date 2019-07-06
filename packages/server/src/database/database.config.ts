@@ -9,14 +9,14 @@ export default {
     inSrc('**/!(*.d.ts).entity.{ts,js}')
   ],
   migrations: [
-    inSrc('database/migration/**/!(*.d.ts).{ts,js}')
+    inSrc('database/migrations/**/!(*.d.ts).{ts,js}')
   ],
   subscribers: [
     '**/!(*.d.ts).subscriber.{ts,js}'
   ],
   cli: {
-    entitiesDir: inSrc('database/entity'),
-    migrationsDir: inSrc('database/migration'),
-    subscribersDir: inSrc('database/subscriber')
+    entitiesDir: inSrc('database/entities'),
+    migrationsDir: inSrc('database/migrations'),
+    subscribersDir: inSrc('database/subscribers')
   }
 }

@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "declaration": false,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -17,6 +17,12 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "./src"
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./build/**/*",
+    "**/node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts"
   ]
 }

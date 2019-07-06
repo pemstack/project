@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from 'nestjs-config'
 import { inSrc, inProject } from 'globals'
-import { TodosModule } from 'todos'
+import { TodosModule } from 'modules/todos'
 
 @Module({
   imports: [

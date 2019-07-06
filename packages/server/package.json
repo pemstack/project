@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "ts-node-dev --no-notify --respawn --transpileOnly -r tsconfig-paths/register ./src/index.ts && wait-on tcp:4000",
-    "build": "tsc"
+    "build": "tsc",
+    "docs": "compodoc",
+    "docs:serve": "compodoc -s"
   },
   "dependencies": {
     "@my-app/shared": "^0.1.0",
@@ -24,5 +26,8 @@
     "sqlite3": "^4.0.9",
     "swagger-ui-express": "^4.0.7",
     "typeorm": "^0.2.18"
+  },
+  "devDependencies": {
+    "@compodoc/compodoc": "^1.1.9"
   }
 }
