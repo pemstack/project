@@ -1,14 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
 @Entity()
-export class User {
-
+export class Todo {
   @PrimaryGeneratedColumn()
   id: number
 
   @Column()
-  firstName: string
+  title: string
 
   @Column()
-  lastName: string
+  done: boolean
 }
