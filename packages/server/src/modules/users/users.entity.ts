@@ -14,23 +14,23 @@ export enum UserStatus {
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  public id: string
+  id: string
 
   @Column() @IsString()
-  public firstname: string
+  firstname: string
 
   @Column() @IsString()
-  public lastname: string
+  lastname: string
 
   @Column() @IsEmail()
-  public email: string
+  email: string
 
   @Column() @IsString()
-  public password: string
+  password: string
 
   @Column() @IsEnum(UserRole)
-  public role: UserRole = UserRole.USER
+  role: UserRole = UserRole.USER
 
   @Column() @IsEnum(UserStatus)
-  public status: UserStatus = UserStatus.PENDING
+  status: UserStatus = UserStatus.PENDING
 }
