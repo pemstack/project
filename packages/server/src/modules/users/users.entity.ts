@@ -29,8 +29,8 @@ export class User {
   public password: string
 
   @Column() @IsEnum(UserRole)
-  public role: UserRole
+  public role: UserRole = UserRole.USER
 
   @Column() @IsEnum(UserStatus)
-  public status: UserStatus
+  public status: UserStatus = UserStatus.PENDING
 }
