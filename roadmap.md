@@ -1,13 +1,24 @@
 # Todos
 
-- Support preloading? State?
-- Pass state via allow()?
-- Detach logic from ui
-- Toast, dialogs, progress
+## Server
+
+- AuthModule, roles, access control
+- UsersController
+- GraphQL?
+
+## Client
+
+- Utilities for data fetching/caching
+- Auth/session
+- Toast, dialogs
 - Forms
+- GraphQL?
 - Error boundaries
 - Session
-- Auth
-- API/Swagger
 - Tests
 - Docker
+
+### Ideas
+
+- Support preloading? State?
+- Pass state via allow()?
