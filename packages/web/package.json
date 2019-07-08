@@ -53,5 +53,8 @@
     "react-dom": "^16.8.6",
     "react-scripts": "^3.0.1",
     "wretch": "^1.5.2"
+  },
+  "devDependencies": {
+    "acorn-dynamic-import": "^3.0.0"
   }
 }
