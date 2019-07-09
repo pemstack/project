@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "emitDecoratorMetadata": true,
+    "noImplicitAny": false,
     "outDir": "./build"
   },
   "include": [

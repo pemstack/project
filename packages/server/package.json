@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@my-app/shared": "^0.1.0",
-    "@nestjs/common": "^6.4.1",
-    "@nestjs/core": "^6.4.1",
+    "@nestjs/common": "^6.5.0",
+    "@nestjs/core": "^6.5.0",
     "@nestjs/graphql": "^6.2.4",
-    "@nestjs/platform-express": "^6.4.1",
+    "@nestjs/platform-express": "^6.5.0",
     "@nestjs/swagger": "^3.0.2",
     "@nestjs/typeorm": "^6.1.2",
     "@types/bcrypt": "^3.0.0",
@@ -31,6 +31,7 @@
     "rxjs": "^6.5.2",
     "sqlite3": "^4.0.9",
     "swagger-ui-express": "^4.0.7",
+    "type-graphql": "^0.17.4",
     "typeorm": "^0.2.18"
   },
   "devDependencies": {
