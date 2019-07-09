@@ -29,4 +29,8 @@ export function delay<T, TProps extends RouteParams = RouteParams>
   return pemaDelay<T, TProps>(delayed, fallback)
 }
 
+export function hardRedirect(to: string) {
+  return pemaDelay(_ => window.location.href = to)
+}
+
 export type RoutingTable = RoutingTable
