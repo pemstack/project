@@ -26,7 +26,7 @@
 
 - [@types/node](https://www.npmjs.com/package/@types/node) - [typings](https://github.com/DefinitelyTyped/DefinitelyTyped) for [Node APIs](https://nodejs.org/en/docs). Needed for the server and various build tools.
 - [lerna](https://lerna.js.org) - A tool for managing JavaScript projects with multiple packages.
-- [typescript] - [TypeScript](https://github.com/Microsoft/TypeScript) compiler CLI.
+- [typescript](https://github.com/Microsoft/TypeScript) - TypeScript compiler CLI.
 
 ## Dev-dependencies (root package only)
 
