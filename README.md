@@ -2,6 +2,8 @@
 
 [Monorepo](https://en.wikipedia.org/wiki/Monorepo) for a [TypeScript](https://www.typescriptlang.org)-based [full stack application](https://www.w3schools.com/whatis/whatis_fullstack.asp).
 
+# Project structure
+
 ## File structure
 
 - `packages/` - Directory for all packages.
@@ -31,3 +33,58 @@
 ## Dev-dependencies (root package only)
 
 Used for various dev/build tasks.
+
+# Optional packages
+
+The following packages are considered optional and can be removed or substituted.
+Follow the listed instructions to uninstall them.
+
+Runtime dependencies are discussed separately in each package's readme.
+
+## commitizen and cz-conventional-changelog
+
+Optionally create formatted commits. Safe to remove.
+
+- Remove `commitizen` from `package.json`.
+- Remove `cz-conventional-changelog` from `package.json`.
+- Remove script `commit` in `package.json`.
+
+## source-map-explorer
+
+Optionally analyze web bundles. Safe to remove.
+
+- Remove `source-map-explorer` in `package.json`.
+- Remove script `analyze` in `package.json`.
+- Remove script `analyze` in `packages/web/package.json`.
+
+## compodoc
+
+Optionally generate docs for server using [compodoc](https://compodoc.app). Safe to remove.
+
+- Remove `packages/server/.compodocrc.json`.
+- Remove `@compodoc/compodoc` from `packages/server/package.json`.
+- Remove scripts `docs` and `docs:serve` from `packages/server/package.json`.
+
+## tslint
+
+Optionally check code for common errors and style violations. Safe to remove.
+
+- Remove `tslint` from `package.json`.
+- Remove `tslint-react` from `package.json`.
+- Remove `tslint.json` files from root and each package.
+
+## ts-node-dev and tsconfig-paths
+
+Runs typescript on the fly and watches required modules for changes.
+**Warning:** If you remove these tools then you need to provide a custom development start script for `packages/server`.
+
+- Remove `ts-node-dev` from `package.json`.
+- Remove `tsconfig-paths` from `package.json`.
+- Replace script `start` in `packages/server/package.json`.
+- Remove `wait-on` from `package.json` if it's no longer needed.
+
+## rimraf
+
+Delete files/directories. Some scripts may break.
+
+- Remove `rimraf` from `package.json`.
