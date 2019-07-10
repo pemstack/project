@@ -2,6 +2,22 @@
 
 [Monorepo](https://en.wikipedia.org/wiki/Monorepo) for a [TypeScript](https://www.typescriptlang.org)-based [full stack application](https://www.w3schools.com/whatis/whatis_fullstack.asp).
 
+## Getting started
+
+1. Clone this repository.
+2. Ensure a recent version of [Node.js](https://nodejs.org) is installed.
+3. Open a terminal in project root path.
+4. Perform initial installation `npm install`.
+5. Bootstrap and symlink packages using `npm run bootstrap`.
+6. Run a development build using `npm start`.
+
+If you get compilation errors for dynamic imports after following the steps above, run the following commands:
+
+```
+npm update acorn --depth 20
+npm dedupe
+```
+
 # Project structure
 
 ## File structure
