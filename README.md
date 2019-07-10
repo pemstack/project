@@ -7,10 +7,10 @@
 ## File structure
 
 - `packages/` - Directory for all packages.
-- `packages/web` - Web app built with [Create React App](https://facebook.github.io/create-react-app) - [read more](packages/web/README).
-- `packages/server` - Web server using [NestJS](https://nestjs.com) - [read more](packages/server/README).
-- `packages/shared` - Modules [shared](https://github.com/lerna/lerna/tree/master/commands/link) by all packages - [read more](packages/shared/README).
-- `packages/presentation` - Modules shared by `web` and `app` (todo) - [read more](packages/presentation/README).
+- `packages/web` - Web app built with [Create React App](https://facebook.github.io/create-react-app) - [read more](packages/web/README.md).
+- `packages/server` - Web server using [NestJS](https://nestjs.com) - [read more](packages/server/README.md).
+- `packages/shared` - Modules [shared](https://github.com/lerna/lerna/tree/master/commands/link) by all packages - [read more](packages/shared/README.md).
+- `packages/presentation` - Modules shared by `web` and `app` (todo) - [read more](packages/presentation/README.md).
 - `package.json` - Root [package.json](https://docs.npmjs.com/files/package.json) for common scripts and dev dependencies.
 - `lerna.json` - Root [lerna](https://lerna.js.org) configuration.
 - `tsconfig.json` - Root [TypeScript configuration](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
@@ -85,6 +85,6 @@ Runs typescript on the fly and watches required modules for changes.
 
 ## rimraf
 
-Delete files/directories. Some scripts may break.
+Delete files/directories. **Warning:** Some scripts may break.
 
 - Remove `rimraf` from `package.json`.
