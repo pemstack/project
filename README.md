@@ -9,10 +9,10 @@
 - `packages/server` - Web server using [NestJS](https://nestjs.com) - [read more](packages/server/README).
 - `packages/shared` - Modules [shared](https://github.com/lerna/lerna/tree/master/commands/link) by all packages - [read more](packages/shared/README).
 - `packages/presentation` - Modules shared by `web` and `app` (todo) - [read more](packages/presentation/README).
-- `lerna.json` - Root [lerna](https://lerna.js.org) configuration.
 - `package.json` - Root [package.json](https://docs.npmjs.com/files/package.json) for common scripts and dev dependencies.
+- `lerna.json` - Root [lerna](https://lerna.js.org) configuration.
 - `tsconfig.json` - Root [TypeScript configuration](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
-- `tslint.json` - [TSLint](https://palantir.github.io/tslint) root [configuration](https://palantir.github.io/tslint/usage/configuration) for linting.
+- `tslint.json` - [TSLint](https://palantir.github.io/tslint) shared [configuration](https://palantir.github.io/tslint/usage/configuration) for linting.
 
 ## Scripts
 
