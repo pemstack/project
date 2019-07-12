@@ -2,6 +2,8 @@
 
 [Monorepo](https://en.wikipedia.org/wiki/Monorepo) for a [TypeScript](https://www.typescriptlang.org)-based [full stack application](https://www.w3schools.com/whatis/whatis_fullstack.asp).
 
+[Click here](fullstack.md) for a full stack learning guide.
+
 ## Getting started
 
 1. Clone this repository.
