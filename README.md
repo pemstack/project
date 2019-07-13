@@ -8,10 +8,10 @@
 
 1. Clone this repository.
 2. Ensure a recent version of [Node.js](https://nodejs.org) is installed.
-3. Open a terminal in project root path.
-4. Perform initial installation `npm install`.
-5. Bootstrap and symlink packages using `npm run bootstrap`.
-6. Run a development build using `npm start`.
+3. Ensure `yarn` is installed `npm install -g yarn`
+4. Open a terminal in project root path.
+5. Perform installation `yarn install`.
+6. Run a development build using `yarn start`.
 
 If you get compilation errors for dynamic imports after following the steps above, run the following commands:
 
