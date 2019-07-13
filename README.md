@@ -13,13 +13,6 @@
 5. Perform installation `yarn install`.
 6. Run a development build using `yarn start`.
 
-If you get compilation errors for dynamic imports after following the steps above, run the following commands:
-
-```
-npm update acorn --depth 20
-npm dedupe
-```
-
 # Project structure
 
 ## File structure
