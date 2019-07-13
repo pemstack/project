@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { ConfigModule, ConfigService } from 'nestjs-config'
-import { inSrc, inProject } from 'globals'
+import { inProject, inSrc } from 'globals'
+import { AuthModule } from 'modules/auth'
 import { TodosModule } from 'modules/todos'
+import { ConfigModule, ConfigService } from 'nestjs-config'
 
 @Module({
   imports: [
@@ -19,8 +20,10 @@ import { TodosModule } from 'modules/todos'
       inject: [ConfigService],
     }),
     GraphQLModule.forRoot({
+      context: ({ req }) => ({ req }),
       autoSchemaFile: inProject('schema.gql')
     }),
+    AuthModule,
     TodosModule
   ]
 })
