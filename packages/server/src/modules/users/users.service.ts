@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { ensureValid } from 'common/utils'
 import { DeepPartial, Repository } from 'typeorm'
 import { User } from './users.entity'
