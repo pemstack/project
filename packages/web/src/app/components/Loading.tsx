@@ -6,7 +6,8 @@ const Loading: FunctionComponent = () => {
   return (
     <div className='Loading'>
       <Skeleton active />
-    </div>)
+    </div>
+  )
 }
 
 export default Loading

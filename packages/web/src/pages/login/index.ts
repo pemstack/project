@@ -1,4 +1,4 @@
 import { view } from 'app'
-import LoginView from './LoginView'
+import LoginView from './login.view'
 
 export default view(LoginView)

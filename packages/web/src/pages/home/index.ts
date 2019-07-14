@@ -1,4 +1,4 @@
 import { view } from 'app'
-import HomeView from './HomeView'
+import HomeView from './home.view'
 
 export default view(HomeView)
