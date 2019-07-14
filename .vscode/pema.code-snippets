@@ -4,8 +4,8 @@
     "prefix": "expc",
     "body": [
       "import { controller, view } from 'app'",
-      "import { $1Controller } from './$1Controller'",
-      "import $1View from './$1View'",
+      "import { $1Controller } from '${1/(.*)/${1:/downcase}/}.controller'",
+      "import $1View from './${1/(.*)/${1:/downcase}/}.view'",
       "",
       "export default controller($1Controller, view($1View))"
     ]
@@ -15,7 +15,7 @@
     "prefix": "expv",
     "body": [
       "import { view } from 'app'",
-      "import $1View from './$1View'",
+      "import $1View from './${1/(.*)/${1:/downcase}/}.view'",
       "",
       "export default view($1View)"
     ]
@@ -116,7 +116,7 @@
       "import { View, WithController } from 'app'",
       "import { Button } from 'antd'",
       "import { observer } from 'mobx-react-lite'",
-      "import { $1Controller } from './$1Controller'",
+      "import { $1Controller } from './${1/(.*)/${1:/downcase}/}.controller'",
       "",
       "export interface $1Props { }",
       "",
