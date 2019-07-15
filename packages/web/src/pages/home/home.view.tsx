@@ -2,9 +2,9 @@ import React from 'react'
 import { View } from 'app'
 import { observer } from 'mobx-react-lite'
 
-export interface HomeProps { }
+export interface HomeViewProps { }
 
-export type HomeViewType = View<HomeProps>
+export type HomeViewType = View<HomeViewProps>
 
 const HomeView: HomeViewType = ({ }) => {
   return (

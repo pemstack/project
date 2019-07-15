@@ -4,9 +4,9 @@ import { observer } from 'mobx-react-lite'
 import { TodosController } from './todos.controller'
 import { Button } from 'antd'
 
-export interface TodosProps { }
+export interface TodosViewProps { }
 
-export type TodosViewType = View<WithController<TodosController> & TodosProps>
+export type TodosViewType = View<WithController<TodosController> & TodosViewProps>
 
 const TodosView: TodosViewType = ({ controller }) => {
   const { todos } = controller

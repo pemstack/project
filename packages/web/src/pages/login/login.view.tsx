@@ -3,9 +3,9 @@ import { Button, Checkbox, Form, Icon, Input } from 'antd'
 import { View } from 'app'
 import { observer } from 'mobx-react-lite'
 
-export interface LoginProps { }
+export interface LoginViewProps { }
 
-export type LoginViewType = View<LoginProps>
+export type LoginViewType = View<LoginViewProps>
 
 const LoginView: LoginViewType = ({ }) => {
   return (
