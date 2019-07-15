@@ -158,7 +158,7 @@
       "  )",
       "}",
       "",
-      "$1View.deriveProps = ({ }): $1Props => {",
+      "$1View.deriveProps = ({ }): $1ViewProps => {",
       "  return {}",
       "}",
       "",
