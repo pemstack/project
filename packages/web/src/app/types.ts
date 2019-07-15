@@ -35,7 +35,7 @@ export type LayoutPicker<TProps extends RouteParams = RouteParams> =
   | ((params: PickActionParams<TProps>) => LayoutType)
 
 interface LayoutRouteView<TProps extends RouteParams> extends RouteView<TProps> {
-  deriveProps?: (params: PickActionParams<TProps>) => OmitActionParams<TProps>
+  deriveProps?: (params: PickActionParams<TProps>) => Partial<OmitActionParams<TProps>>
   layout?: LayoutPicker<TProps>
 }
 
@@ -44,7 +44,7 @@ export type ExtendedApp<TExtension extends AppExtension = {}>
 
 interface WithStateProps<TParams extends RouteParams> {
   state: {
-    props: OmitActionParams<TParams>
+    props?: OmitActionParams<TParams>
   }
 }
 
