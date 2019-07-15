@@ -42,8 +42,20 @@ interface LayoutRouteView<TProps extends RouteParams> extends RouteView<TProps> 
 export type ExtendedApp<TExtension extends AppExtension = {}>
   = App & Services<TExtension>
 
+interface WithStateProps<TParams extends RouteParams> {
+  state: {
+    props: OmitActionParams<TParams>
+  }
+}
+
+type ViewProps<TProps> =
+  & RouteParams
+  & TProps
+  & WithStateProps<RouteParams & TProps>
+
 export type View<TProps = {}> =
-  ComponentType<RouteParams & TProps> & LayoutRouteView<RouteParams & TProps>
+  & ComponentType<ViewProps<TProps>>
+  & LayoutRouteView<ViewProps<TProps>>
 
 export
   interface Controller<TProps = {}>
