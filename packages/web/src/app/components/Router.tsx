@@ -54,10 +54,11 @@ const Router: FunctionComponent = () => {
     case 'view':
       const ViewComponent = view.view as View
       const [ViewLayout, viewLayoutProps] = getLayout(params, ViewComponent.layout)
+      const initialProps = params.state.props || {}
       const derivedProps = deriveProps(ViewComponent, params)
       return (
         <ViewLayout {...params} {...viewLayoutProps}>
-          <ViewComponent {...derivedProps} {...params} />
+          <ViewComponent {...params} {...initialProps} {...derivedProps} />
         </ViewLayout>
       )
     case 'error':
