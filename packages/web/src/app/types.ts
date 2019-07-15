@@ -10,7 +10,7 @@ import {
 import { JValue } from '@pema/utils'
 import { DefaultLayoutProps } from 'app/layout/DefaultLayout'
 import { ComponentType } from 'react'
-import { ProgressStore } from 'stores/progress'
+import { ProgressStore } from 'stores/progress.store'
 
 export interface App extends AppNode {
   router: Router
