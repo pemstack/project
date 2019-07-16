@@ -34,9 +34,7 @@ Google basic concepts around:
 
 ## 2. Frontend
 
-1. [React](https://reactjs.org/docs) docs
-2. [Ant Design](https://ant.design) docs
-3. [Create React App](https://facebook.github.io/create-react-app/docs/getting-started) docs and try it out
+Complete the [frontend exercises](frontend/frontend.md).
 
 ## 3. Backend
 
