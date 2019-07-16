@@ -8,7 +8,7 @@ Use `create-react-app` to create an empty application. Get familiar with the pro
 
 ---
 
-Create a page in path `/home` with the following content:
+Create a page in path `/home` with the following content (without top text):
 
 ![](screen-1.png)
 
