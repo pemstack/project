@@ -14,7 +14,16 @@ export class AuthService {
     return await this.usersService.match(username, password) as any
   }
 
-  async login(user: User) {
+  async login(username: string, password: string) {
+    const user = await this.validateUser(username, password)
+    if (user) {
+      return await this.createToken(user)
+    } else {
+      return null
+    }
+  }
+
+  async createToken(user: User) {
     const payload: JwtPayload = {
       sub: user.id,
       email: user.email
