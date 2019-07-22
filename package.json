@@ -18,8 +18,9 @@
   },
   "dependencies": {
     "@types/node": "^12.6.0",
-    "lerna": "^3.15.0",
-    "typescript": "^3.5.2"
+    "lerna": "^3.16.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
   },
   "devDependencies": {
     "commitizen": "^3.1.1",

@@ -13,6 +13,10 @@ export enum UserStatus {
 
 @Entity()
 export class User {
+  constructor(values: Partial<User> = {}) {
+    Object.assign(this, values)
+  }
+
   @PrimaryGeneratedColumn('uuid')
   id: string
 

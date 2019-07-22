@@ -6,7 +6,8 @@
     "start": "ts-node-dev --no-notify --respawn --transpileOnly -r tsconfig-paths/register ./src/index.ts && wait-on tcp:4000",
     "build": "tsc",
     "docs": "compodoc",
-    "docs:serve": "compodoc -s"
+    "docs:serve": "compodoc -s",
+    "task": "ts-node --transpile-only -r tsconfig-paths/register ./src/run-task.ts"
   },
   "dependencies": {
     "@my-app/shared": "^0.1.0",

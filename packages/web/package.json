@@ -40,20 +40,20 @@
     "@types/nprogress": "^0.2.0",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
-    "antd": "^3.20.1",
+    "antd": "^3.20.5",
     "babel-plugin-import": "^1.12.0",
     "classnames": "^2.2.6",
-    "customize-cra": "^0.2.14",
-    "formik": "^1.5.7",
+    "customize-cra": "^0.4.1",
+    "formik": "^1.5.8",
     "history": "^4.9.0",
     "http-status-codes": "^1.3.2",
-    "mobx": "^5.11.0",
+    "mobx": "^5.13.0",
     "mobx-react-lite": "^1.4.1",
     "nprogress": "^0.2.0",
     "react": "^16.8.6",
     "react-app-rewired": "^2.1.3",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.0.1",
-    "wretch": "^1.5.2"
+    "wretch": "^1.5.4"
   }
 }
