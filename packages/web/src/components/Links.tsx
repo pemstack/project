@@ -7,7 +7,8 @@ const Links: FunctionComponent = () => {
     '/': 'Home',
     '/login': 'Login',
     '/counter': 'Controller Counter',
-    '/todos': 'MobX Todos'
+    '/todos': 'MobX Todos',
+    '/todos-api': 'API Todos'
   }
 
   return (
