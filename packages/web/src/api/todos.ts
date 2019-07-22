@@ -17,25 +17,30 @@ export const GET_TODOS: Query<TodoResult[]> = {
   resource: 'todos',
   progress: true,
   async fetch() {
-    console.log('GET_TODOS')
     return api.get().json()
   }
 }
 
 export const ADD_TODO: Action<AddTodoParams, void> = {
-  invalidates: ['todos'],
   progress: true,
   perform(params: AddTodoParams) {
-    console.log('ADD_TODO', params)
     return api.post(params).res()
+  },
+  optimistic: {
+    todos: ({ value, params }) => {
+      const todos = value as TodoResult[]
+      const { title, done = false } = params
+      return [...todos, { title, done }]
+    }
   }
 }
 
 export const CLEAR_TODOS: Action<void, void> = {
-  invalidates: ['todos'],
   progress: true,
-  perform() {
-    console.log('CLEAR_TODOS')
+  async perform() {
     return api.delete().res()
+  },
+  optimistic: {
+    todos: () => ([])
   }
 }
