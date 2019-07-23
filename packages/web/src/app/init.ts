@@ -5,7 +5,7 @@ import { JObject } from '@pema/utils'
 import { App } from 'app/types'
 import { createBrowserHistory } from 'history'
 import routes from 'routes'
-import { ProgressStore } from 'stores/progress.store'
+import { UserStore, ProgressStore } from 'stores'
 
 export default function init(state: JObject): App {
   const root = app(state)
@@ -16,7 +16,8 @@ export default function init(state: JObject): App {
     }))
     .extend({
       apiClient: CachedApiClient,
-      progress: ProgressStore
+      progress: ProgressStore,
+      user: UserStore
     })
 
   return root

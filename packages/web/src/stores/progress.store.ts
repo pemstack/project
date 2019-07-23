@@ -1,4 +1,3 @@
-import { ProgressStore as IProgressStore } from '@my-app/presentation'
 import { App } from 'app'
 import nprogress from 'nprogress'
 import debounce from 'lodash/debounce'
@@ -10,7 +9,7 @@ nprogress.configure({
 
 const DELAY = 50
 
-export class ProgressStore implements IProgressStore {
+export class ProgressStore {
   private app: App
   private count: number
 

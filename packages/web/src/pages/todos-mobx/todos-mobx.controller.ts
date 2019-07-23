@@ -1,4 +1,3 @@
-import { delay } from '@my-app/shared'
 import { Controller } from 'app'
 import { observable } from 'mobx'
 import wretch from 'wretch'
@@ -32,6 +31,5 @@ export class TodosMobxController implements Controller {
 
   async onEnter() {
     await this.getTodos()
-    await delay(2000)
   }
 }
