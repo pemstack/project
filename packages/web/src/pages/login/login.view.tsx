@@ -1,13 +1,8 @@
 import React from 'react'
 import { Button, Checkbox, Form, Icon, Input } from 'antd'
 import { View } from 'app'
-import { observer } from 'mobx-react-lite'
 
-export interface LoginViewProps { }
-
-export type LoginViewType = View<LoginViewProps>
-
-const LoginView: LoginViewType = ({ }) => {
+export const LoginView: View = () => {
   return (
     <div className='Login'>
       <div style={{ margin: '0 auto', maxWidth: 300 }}>
@@ -36,5 +31,3 @@ const LoginView: LoginViewType = ({ }) => {
     </div>
   )
 }
-
-export default observer(LoginView)

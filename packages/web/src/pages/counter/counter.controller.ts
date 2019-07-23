@@ -1,5 +1,5 @@
 import { Controller } from 'app'
-import { observable } from 'mobx'
+import { action, observable } from 'mobx'
 
 export class CounterController implements Controller {
   @observable count: number = 0
@@ -10,7 +10,7 @@ export class CounterController implements Controller {
 
   onEnter() { }
 
-  increment() {
+  @action increment() {
     this.count++
   }
 

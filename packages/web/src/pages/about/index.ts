@@ -1,4 +1,4 @@
 import { view } from 'app'
-import AboutView from './about.view'
+import { AboutView } from './about.view'
 
 export default view(AboutView)

@@ -6,7 +6,7 @@ import { Button } from 'antd'
 
 export type TodosMobxViewType = View<WithController<TodosMobxController>>
 
-const TodosMobxView: TodosMobxViewType = ({ controller }) => {
+export const TodosMobxView: TodosMobxViewType = observer(({ controller }) => {
   const { todos } = controller
   const [title, setTitle] = useState('')
   return (
@@ -22,6 +22,4 @@ const TodosMobxView: TodosMobxViewType = ({ controller }) => {
       </div>
     </div>
   )
-}
-
-export default observer(TodosMobxView)
+})

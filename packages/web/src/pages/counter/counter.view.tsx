@@ -5,7 +5,7 @@ import { CounterController } from './counter.controller'
 
 type CounterView = View<WithController<CounterController>>
 
-const CounterView: CounterView = ({ controller }) => {
+export const CounterView: CounterView = observer(({ controller }) => {
   return (
     <div className='Counter'>
       Count {controller.count}
@@ -13,6 +13,4 @@ const CounterView: CounterView = ({ controller }) => {
       <button onClick={() => controller.increment()}>Add</button>
     </div>
   )
-}
-
-export default observer(CounterView)
+})

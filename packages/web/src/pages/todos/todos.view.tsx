@@ -3,11 +3,7 @@ import { useAction, useQuery, View } from 'app'
 import { Button } from 'antd'
 import { ADD_TODO, CLEAR_TODOS, GET_TODOS } from './todos.api'
 
-export interface TodosViewProps { }
-
-export type TodosViewType = View<TodosViewProps>
-
-export const TodosView: TodosViewType = ({ }) => {
+export const TodosView: View = () => {
   const { data, loading, error } = useQuery(GET_TODOS)
   const addTodo = useAction(ADD_TODO)
   const clearTodos = useAction(CLEAR_TODOS)
