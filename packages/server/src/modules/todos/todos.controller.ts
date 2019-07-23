@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
 import { ApiResponse, ApiUseTags } from '@nestjs/swagger'
-import { CreateTodoDto } from './todos.dto'
-import { Todo } from './todos.entity'
+import { CreateTodoRequest, TodoResponse } from './todos.dto'
 import { TodosService } from './todos.service'
 
 @ApiUseTags('todos')
@@ -15,14 +14,14 @@ export class TodosController {
     private readonly todos: TodosService
   ) { }
 
-  @ApiResponse({ status: 200, type: [Todo] })
+  @ApiResponse({ status: 200, type: [TodoResponse] })
   @Get()
   async getTodos() {
     const todos = await this.repository.find()
     return todos
   }
 
-  @ApiResponse({ status: 200, type: Todo })
+  @ApiResponse({ status: 200, type: TodoResponse })
   @Get(':id')
   async getTodo(@Param('id') id: number) {
     const todo = await this.repository.findOne(id)
@@ -30,7 +29,7 @@ export class TodosController {
   }
 
   @Post()
-  async createTodo(@Body() todo: CreateTodoDto) {
+  async createTodo(@Body() todo: CreateTodoRequest) {
     await this.repository.insert(todo)
   }
 
