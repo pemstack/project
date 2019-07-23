@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
-import { IsEmail, IsEnum, IsString } from 'class-validator'
+import { IsEmail, IsEnum, IsString, ArrayUnique } from 'class-validator'
 
 export enum UserRole {
   USER = 'user',
@@ -32,8 +32,13 @@ export class User {
   @Column() @IsString()
   password: string
 
-  @Column() @IsEnum(UserRole)
-  role: UserRole = UserRole.USER
+  @Column({
+    type: 'simple-enum',
+    enum: UserRole,
+    array: true
+  })
+  @IsEnum(UserRole, { each: true }) @ArrayUnique()
+  roles: UserRole[] = [UserRole.USER]
 
   @Column() @IsEnum(UserStatus)
   status: UserStatus = UserStatus.PENDING

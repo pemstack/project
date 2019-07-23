@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { User, UsersService } from 'modules/users'
-import { JwtPayload } from './jwt-payload.interface'
+import { AccessTokenPayload, RefreshTokenPayload } from './interfaces'
 
 @Injectable()
 export class AuthService {
@@ -17,20 +17,49 @@ export class AuthService {
   async login(username: string, password: string) {
     const user = await this.validateUser(username, password)
     if (user) {
-      return await this.createToken(user)
+      return await this.createTokens(user)
     } else {
       return null
     }
   }
 
-  async createToken(user: User) {
-    const payload: JwtPayload = {
+  async extendTokens(refreshToken: string) {
+    if (!refreshToken) {
+      throw new UnauthorizedException()
+    }
+
+    const payload = await this.jwtService.verifyAsync(refreshToken) as RefreshTokenPayload
+    const id = payload.sub
+    if (!id || (payload as any).type !== 'refresh') {
+      throw new UnauthorizedException()
+    }
+
+    const user = await this.usersService.findOne({ id })
+    if (!user) {
+      throw new UnauthorizedException()
+    }
+
+    return this.createTokens(user)
+  }
+
+  async createTokens(user: User) {
+    const accessTokenPayload: AccessTokenPayload = {
       sub: user.id,
       email: user.email
     }
 
+    const refreshTokenPayload: RefreshTokenPayload = {
+      sub: user.id,
+      type: 'refresh'
+    }
+
     return {
-      access_token: this.jwtService.sign(payload)
+      access_token: await this.jwtService.signAsync(accessTokenPayload, {
+        expiresIn: '15m'
+      }),
+      refresh_token: await this.jwtService.signAsync(refreshTokenPayload, {
+        expiresIn: '7d'
+      })
     }
   }
 }
