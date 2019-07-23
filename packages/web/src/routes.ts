@@ -9,7 +9,7 @@ const routes: RoutingTable = {
   '/login': lazy(() => import('pages/login')),
   '/counter': lazy(() => import('pages/counter')),
   '/todos': lazy(() => import('pages/todos')),
-  '/todos-api': lazy(() => import('pages/todos-api'))
+  '/todos-mobx': lazy(() => import('pages/todos-mobx'))
 }
 
 if (process.env.NODE_ENV === 'development') {

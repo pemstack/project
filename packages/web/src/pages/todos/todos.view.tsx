@@ -1,16 +1,32 @@
 import React, { useState } from 'react'
-import { View, WithController } from 'app'
-import { observer } from 'mobx-react-lite'
-import { TodosController } from './todos.controller'
+import { useAction, useQuery, View } from 'app'
 import { Button } from 'antd'
+import { ADD_TODO, CLEAR_TODOS, GET_TODOS } from './todos.api'
 
 export interface TodosViewProps { }
 
-export type TodosViewType = View<WithController<TodosController> & TodosViewProps>
+export type TodosViewType = View<TodosViewProps>
 
-const TodosView: TodosViewType = ({ controller }) => {
-  const { todos } = controller
+export const TodosView: TodosViewType = ({ }) => {
+  const { data, loading, error } = useQuery(GET_TODOS)
+  const addTodo = useAction(ADD_TODO)
+  const clearTodos = useAction(CLEAR_TODOS)
+
   const [title, setTitle] = useState('')
+
+  if (loading) {
+    return (
+      <div>Loading</div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div>Error</div>
+    )
+  }
+
+  const todos = data
   return (
     <div className='Todos'>
       <h3>Todos</h3>
@@ -18,12 +34,10 @@ const TodosView: TodosViewType = ({ controller }) => {
         {todos.map((todo, i) => <li key={i}>{todo.title} {todo.done ? '✓' : 'X'}</li>)}
       </ul>
       <div>
-        <Button style={{ margin: 4 }} type='primary' onClick={() => controller.addTodo(title)}>Add</Button>
-        <Button style={{ margin: 4 }} type='danger' onClick={() => controller.clearTodos()}>Clear</Button>
+        <Button style={{ margin: 4 }} type='primary' onClick={() => addTodo({ title })}>Add</Button>
+        <Button style={{ margin: 4 }} type='danger' onClick={() => clearTodos()}>Clear</Button>
         <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
       </div>
     </div>
   )
 }
-
-export default observer(TodosView)

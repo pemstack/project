@@ -7,7 +7,8 @@
       "import { $1Controller } from '${1/(.*)/${1:/downcase}/}.controller'",
       "import $1View from './${1/(.*)/${1:/downcase}/}.view'",
       "",
-      "export default controller($1Controller, view($1View))"
+      "export default controller($1Controller, view($1View))",
+      ""
     ]
   },
   "Export pema view": {
@@ -15,9 +16,10 @@
     "prefix": "expv",
     "body": [
       "import { view } from 'app'",
-      "import $1View from './${1/(.*)/${1:/downcase}/}.view'",
+      "import { $1View } from './${1/(.*)/${1:/downcase}/}.view'",
       "",
-      "export default view($1View)"
+      "export default view($1View)",
+      ""
     ]
   },
   "Pema controller": {
@@ -151,7 +153,7 @@
       "",
       "export type $1ViewType = View<$1ViewProps>",
       "",
-      "const $1View: $1ViewType = ({ }) => {",
+      "export const $1View: $1ViewType = ({ }) => {",
       "  return (",
       "    <div className='$1'>",
       "      $1 page",
@@ -163,8 +165,6 @@
       "  const initialProps: $1ViewProps = {}",
       "  state.props = initialProps",
       "}",
-      "",
-      "export default $1View",
       ""
     ]
   },
@@ -176,15 +176,13 @@
       "import { View } from 'app'",
       "import { Button } from 'antd'",
       "",
-      "const $1View: View = ({ }) => {",
+      "export const $1View: View = ({ }) => {",
       "  return (",
       "    <div className='$1'>",
       "      $1 page",
       "    </div>",
       "  )",
       "}",
-      "",
-      "export default $1View",
       ""
     ]
   }
