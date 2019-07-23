@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common'
+import { CookieParserMiddleware } from '@nest-middlewares/cookie-parser'
+import { MiddlewareConsumer, Module } from '@nestjs/common'
 import { APP_GUARD } from '@nestjs/core'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
@@ -6,8 +7,8 @@ import { UsersModule } from 'modules/users'
 import authConfig from './auth.config'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
-import { LocalStrategy, JwtStrategy } from './strategies'
 import { RolesGuard } from './guards'
+import { JwtStrategy, LocalStrategy } from './strategies'
 
 @Module({
   imports: [
@@ -33,4 +34,10 @@ import { RolesGuard } from './guards'
   controllers: [AuthController],
   exports: [AuthService]
 })
-export class AuthModule { }
+export class AuthModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(CookieParserMiddleware)
+      .forRoutes(AuthController)
+  }
+}

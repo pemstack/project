@@ -17,7 +17,7 @@ export default class AddAdminTask {
       lastname: 'Last',
       email: 'admin@example.com',
       password: '123456',
-      roles: [UserRole.ADMIN],
+      roles: [UserRole.ADMIN, UserRole.USER],
       status: UserStatus.CONFIRMED
     }))
 
