@@ -19,7 +19,7 @@ export class AuthController {
   ) { }
 
   private sendTokens(res: Response, tokens: AuthTokens) {
-    const { persist, accessToken, refreshToken } = tokens
+    const { persist, accessToken, refreshToken, sessionId } = tokens
     const age = persist ? { maxAge: persistAge } : {}
     res.cookie('refresh_token', refreshToken, {
       httpOnly: true,
@@ -27,8 +27,14 @@ export class AuthController {
       ...age
     })
 
+    res.cookie('session_id', sessionId, {
+      sameSite: 'lax',
+      ...age
+    })
+
     res.status(200).json({
       access_token: accessToken,
+      session_id: sessionId,
       persist
     })
   }
@@ -50,16 +56,21 @@ export class AuthController {
   @Post('token')
   async token(
     @Cookie('refresh_token') refreshToken: string,
+    @Cookie('session_id') sessionId: string,
     @Body() { persist = true }: TokenRequest,
     @Res() res: Response) {
-    const tokens = await this.authService.extendTokens(refreshToken, persist)
+    const tokens = await this.authService.extendTokens(refreshToken, sessionId, persist)
     this.sendTokens(res, tokens)
   }
 
   @ApiResponse({ status: 200 })
   @Post('logout')
   async logout(@Res() res: Response) {
-    res.clearCookie('refresh_token').status(200).end()
+    res
+      .clearCookie('refresh_token')
+      .clearCookie('session_id')
+      .status(200)
+      .end()
   }
 
   @ApiBearerAuth()

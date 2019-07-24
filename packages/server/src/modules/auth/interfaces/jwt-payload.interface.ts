@@ -6,5 +6,6 @@ export interface AccessTokenPayload {
 export interface RefreshTokenPayload {
   sub: string
   type: 'refresh'
+  sid: string
   persist: boolean
 }

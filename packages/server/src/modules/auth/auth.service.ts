@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { User, UsersService } from 'modules/users'
+import uniqid from 'uniqid'
 import { AccessTokenPayload, AuthTokens, RefreshTokenPayload } from './interfaces'
 
 @Injectable()
@@ -23,8 +24,8 @@ export class AuthService {
     }
   }
 
-  async extendTokens(refreshToken: string, persist = true) {
-    if (!refreshToken) {
+  async extendTokens(refreshToken: string, sessionId: string, persist = true) {
+    if (!refreshToken || !sessionId || typeof sessionId !== 'string') {
       throw new UnauthorizedException()
     }
 
@@ -34,15 +35,19 @@ export class AuthService {
       throw new UnauthorizedException()
     }
 
+    if (payload.sid !== sessionId) {
+      throw new UnauthorizedException()
+    }
+
     const user = await this.usersService.findOne({ id })
     if (!user) {
       throw new UnauthorizedException()
     }
 
-    return this.createTokens(user, persist && payload.persist)
+    return this.createTokens(user, persist && payload.persist, payload.sid)
   }
 
-  async createTokens(user: User, persist = false): Promise<AuthTokens> {
+  async createTokens(user: User, persist = false, sessionId = uniqid()): Promise<AuthTokens> {
     const accessTokenPayload: AccessTokenPayload = {
       sub: user.id,
       email: user.email
@@ -51,6 +56,7 @@ export class AuthService {
     const refreshTokenPayload: RefreshTokenPayload = {
       sub: user.id,
       type: 'refresh',
+      sid: sessionId,
       persist
     }
 
@@ -61,6 +67,7 @@ export class AuthService {
       refreshToken: await this.jwtService.signAsync(refreshTokenPayload, {
         expiresIn: '7d'
       }),
+      sessionId,
       persist
     }
   }

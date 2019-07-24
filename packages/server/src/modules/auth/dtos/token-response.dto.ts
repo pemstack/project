@@ -6,5 +6,9 @@ export class TokenResponse {
   access_token: string
 
   @ApiResponseModelProperty()
-  persist?: boolean = true
+  // tslint:disable-next-line: variable-name
+  session_id: string
+
+  @ApiResponseModelProperty()
+  persist: boolean
 }
