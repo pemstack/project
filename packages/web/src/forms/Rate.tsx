@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { Rate as $Rate } from 'antd'
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 import { FormikFieldProps } from './FieldProps'
 import { RateProps as $RateProps } from 'antd/lib/rate'
 

@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { TimePicker as $TimePicker } from 'antd'
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 import moment from 'moment'
 import { FormikFieldProps } from './FieldProps'
 import { TimePickerProps as $TimePickerProps } from 'antd/lib/time-picker'

@@ -1,4 +1,6 @@
-import * as React from 'react'
+/* eslint-disable react/jsx-pascal-case */
+
+import React from 'react'
 import get from 'lodash.get'
 import { Field, FieldProps } from 'formik'
 import { Form } from 'antd'

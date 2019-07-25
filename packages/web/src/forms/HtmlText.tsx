@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 
 export const HtmlText = (props: { name: string }) => (
   <Field {...props}>

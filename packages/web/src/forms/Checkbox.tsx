@@ -1,4 +1,6 @@
-import * as React from 'react'
+/* eslint-disable react/jsx-pascal-case */
+
+import React from 'react'
 import { Checkbox as $Checkbox } from 'antd'
 import { Field, FieldProps } from 'formik'
 import { CheckboxProps as $CheckboxProps } from 'antd/lib/checkbox/Checkbox'

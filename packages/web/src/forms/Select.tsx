@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { Select as $Select } from 'antd'
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 import { SelectProps as $SelectProps, OptionProps } from 'antd/lib/select'
 import { FormikFieldProps } from './FieldProps'
 

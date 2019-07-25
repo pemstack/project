@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { Slider as $Slider } from 'antd'
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 import { FormikFieldProps } from './FieldProps'
 import { SliderProps as $SliderProps } from 'antd/lib/slider'
 

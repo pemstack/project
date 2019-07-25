@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { Switch as $Switch } from 'antd'
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 import { SwitchProps as $SwitchProps } from 'antd/lib/switch'
 import { FormikFieldProps } from './FieldProps'
 

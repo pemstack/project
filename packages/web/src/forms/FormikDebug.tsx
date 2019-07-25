@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { Field } from 'formik'
-import * as React from 'react'
+import React from 'react'
 
 export const isDevelopmentMode = () =>
   !process.env.NODE_ENV || process.env.NODE_ENV === 'development'

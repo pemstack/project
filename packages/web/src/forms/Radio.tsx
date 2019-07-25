@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { Radio as $Radio } from 'antd'
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 import { RadioGroupProps as $RadioGroupProps } from 'antd/lib/radio/interface'
 import { FormikFieldProps } from './FieldProps'
 

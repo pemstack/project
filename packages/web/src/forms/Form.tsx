@@ -1,5 +1,6 @@
-import * as React from 'react'
+/* eslint-disable react/jsx-pascal-case */
 
+import React from 'react'
 import { Field, FieldProps } from 'formik'
 import { Form as AntdForm } from 'antd'
 import { FormProps } from 'antd/lib/form'

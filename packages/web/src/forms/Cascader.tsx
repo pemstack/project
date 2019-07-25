@@ -1,4 +1,6 @@
-import * as React from 'react'
+/* eslint-disable react/jsx-pascal-case */
+
+import React from 'react'
 import { Cascader as $Cascader } from 'antd'
 import { Field, FieldProps } from 'formik'
 import { FormikFieldProps } from './FieldProps'

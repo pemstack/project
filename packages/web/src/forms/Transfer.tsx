@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { Transfer as $Transfer } from 'antd'
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 import { FormikFieldProps } from './FieldProps'
 import { TransferProps as $TransferProps } from 'antd/lib/transfer'
 

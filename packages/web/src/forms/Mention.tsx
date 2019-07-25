@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { Mention as $Mention } from 'antd'
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 import { MentionProps as $MentionProps } from 'antd/lib/mention'
 import { FormikFieldProps } from './FieldProps'
 

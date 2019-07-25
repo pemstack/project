@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { InputNumber as $InputNumber } from 'antd'
 import { Field, FieldProps } from 'formik'
-import * as React from 'react'
+import React from 'react'
 import { InputNumberProps as $InputNumberProps } from 'antd/lib/input-number'
 import { FormikFieldProps } from './FieldProps'
 
