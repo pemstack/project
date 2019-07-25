@@ -1,4 +1,8 @@
+import { FormikActions, FormikProps } from 'formik'
 export { Formik } from 'formik'
+export type FormikActions<Values> = FormikActions<Values>
+export type FormikProps<Values> = FormikProps<Values>
+export { Button, Icon } from 'antd'
 export * from './DatePicker'
 export * from './TimePicker'
 export * from './FormikDebug'

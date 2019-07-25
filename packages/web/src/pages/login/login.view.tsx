@@ -1,33 +1,46 @@
 import React from 'react'
-import { Button, Checkbox, Form, Icon, Input } from 'antd'
+import { Formik, Form, Input, Checkbox, SubmitButton, Icon, FormikActions } from 'forms'
 import { View } from 'app'
 
 export const LoginView: View = () => {
+  function submit(values: any, actions: FormikActions<any>) {
+    console.log(values)
+    actions.setSubmitting(false)
+  }
+
   return (
     <div className='Login'>
-      <div style={{ margin: '0 auto', maxWidth: 300 }}>
-        <Form.Item>
-          <Input
-            prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
-            placeholder='Username'
-          />
-        </Form.Item>
-        <Form.Item>
-          <Input
-            prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
-            type='password'
-            placeholder='Password'
-          />
-        </Form.Item>
-        <Form.Item>
-          <Checkbox>Remember me</Checkbox>
-          <a className='login-form-forgot' href='#'>Forgot password</a>
-          <Button type='primary' htmlType='submit' className='login-form-button'>
-            Log in
-        </Button>
-          Or <a href='#'>register now!</a>
-        </Form.Item>
-      </div>
+      <Formik
+        onSubmit={submit}
+        initialValues={{
+          username: '',
+          password: '',
+          persist: false
+        }}
+        render={() => (
+          <Form>
+            <Form.Item name='username'>
+              <Input
+                name='username'
+                prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder='Username'
+              />
+            </Form.Item>
+            <Form.Item name='password'>
+              <Input
+                name='password'
+                prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type='password'
+                placeholder='Password'
+              />
+            </Form.Item>
+            <Checkbox name='persist'>Remember me</Checkbox>
+            <SubmitButton>Log in</SubmitButton>
+            <a className='login-form-forgot' href='#'>Forgot password</a>
+            Or <a href='#'>register now!</a>
+          </Form>
+        )}
+      />
     </div>
   )
 }
