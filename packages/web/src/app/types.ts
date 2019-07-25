@@ -11,13 +11,14 @@ import { ApiClient } from '@pema/state'
 import { JValue } from '@pema/utils'
 import { DefaultLayoutProps } from 'app/layout/DefaultLayout'
 import { ComponentType } from 'react'
-import { UserStore, ProgressStore, CookiesStore } from 'stores'
+import { UserStore, ProgressStore, CookiesStore, SessionStore } from 'stores'
 
 export interface App extends AppNode {
   router: Router
   progress: ProgressStore
   user: UserStore
   cookies: CookiesStore
+  session: SessionStore
   apiClient: ApiClient
 }
 

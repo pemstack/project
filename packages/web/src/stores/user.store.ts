@@ -40,7 +40,7 @@ const TOKEN: Action<TokenParams, TokenResponse> = {
   }
 }
 
-const SYNCHRONIZE_INTERVAL = 15
+const SYNCHRONIZE_INTERVAL = 10
 
 export class UserStore {
   private readonly app: App
@@ -81,15 +81,19 @@ export class UserStore {
   }
 
   async login(params: LoginParams) {
-    const tokens = await this.app.apiClient.action(LOGIN, params)
+    const { apiClient } = this.app
+    const tokens = await apiClient.action(LOGIN, params)
     this.tokens = tokens
+    apiClient.invalidate('*', false)
     this.setInterval()
     return tokens
   }
 
   logout() {
     this.tokens = null
-    this.app.cookies.delete('session_id')
+    const { cookies, apiClient } = this.app
+    cookies.remove('session_id')
+    apiClient.invalidate('*', false)
     this.setInterval()
   }
 
@@ -98,6 +102,7 @@ export class UserStore {
     const current = this.getSessionId()
     // tslint:disable-next-line: triple-equals
     if (cached != current) {
+      this.app.apiClient.invalidate('*', false)
       // Session changed from other window
       document.location.reload()
       return true

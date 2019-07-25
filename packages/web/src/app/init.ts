@@ -5,7 +5,7 @@ import { JObject } from '@pema/utils'
 import { App } from 'app/types'
 import { createBrowserHistory } from 'history'
 import routes from 'routes'
-import { UserStore, ProgressStore, CookiesStore } from 'stores'
+import { UserStore, ProgressStore, CookiesStore, SessionStore } from 'stores'
 import wretch from 'wretch'
 
 wretch().errorType('json')
@@ -21,7 +21,8 @@ export default function init(state: JObject): App {
       progress: ProgressStore,
       user: UserStore,
       cookies: CookiesStore,
-      apiClient: CachedApiClient
+      apiClient: CachedApiClient,
+      session: SessionStore
     })
 
   return root
