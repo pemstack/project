@@ -42,7 +42,7 @@ const TOKEN: Action<TokenParams, TokenResponse> = {
 
 const SYNCHRONIZE_INTERVAL = 10
 
-interface TokenState {
+interface UserSession {
   access_token: string | null
   session_id: string
   persist: boolean
@@ -52,7 +52,38 @@ export class UserStore {
   private readonly app: App
 
   private intervalId: any
-  private tokens: TokenState | null
+  private session: UserSession | null
+
+  private getSessionId() {
+    return this.app.cookies.get('session_id')
+  }
+
+  private updateSession(sessionId: string | null | undefined) {
+    if (sessionId) {
+      this.session = {
+        access_token: null,
+        session_id: sessionId,
+        persist: true
+      }
+    } else {
+      this.session = null
+    }
+  }
+
+  private synchronize() {
+    const cached = this.sessionId
+    const current = this.getSessionId()
+    // tslint:disable-next-line: triple-equals
+    if (cached != current) {
+      // Session changed from other window
+      this.updateSession(current)
+      this.app.apiClient.invalidate('*', false)
+      document.location.reload()
+      return true
+    }
+
+    return false
+  }
 
   private setInterval() {
     if (this.intervalId) {
@@ -64,92 +95,105 @@ export class UserStore {
     }, SYNCHRONIZE_INTERVAL * 1000)
   }
 
-  private getSessionId() {
-    return this.app.cookies.get('session_id')
-  }
-
-  constructor(state: any, app: App) {
-    this.app = app
-    this.tokens = null
-    this.setInterval()
-  }
-
-  get authenticated() {
-    return !!this.tokens
-  }
-
-  get accessToken() {
-    return this.tokens ? this.tokens.access_token : null
-  }
-
-  get sessionId() {
-    return this.tokens ? this.tokens.session_id : null
-  }
-
-  async login(params: LoginParams) {
-    const { apiClient } = this.app
-    const tokens = await apiClient.action(LOGIN, params)
-    this.tokens = tokens
-    apiClient.invalidate('*', false)
-    this.setInterval()
-    return tokens
-  }
-
-  logout() {
-    this.tokens = null
-    const { cookies, apiClient } = this.app
-    cookies.remove('session_id')
-    apiClient.invalidate('*', false)
-    this.setInterval()
-  }
-
-  synchronize() {
-    const cached = this.sessionId
-    const current = this.getSessionId()
-    // tslint:disable-next-line: triple-equals
-    if (cached != current) {
-      // Session changed from other window
-      this.app.apiClient.invalidate('*', false)
-      document.location.reload()
-      return true
-    }
-
-    return false
-  }
-
-  async refresh(synchronize = true, persist = true) {
+  private async refresh(synchronize = true, persist = true) {
     if (synchronize && this.synchronize()) {
       throw new Error()
     }
 
     const sessionId = this.getSessionId()
     if (!sessionId) {
-      this.tokens = null
-      return
+      this.session = null
+      return null
     }
 
+    this.setInterval()
     try {
-      const tokens = await this.app.apiClient.action(TOKEN, { persist })
-      this.tokens = tokens
-      this.setInterval()
-      return tokens
+      const session = await this.app.apiClient.action(TOKEN, { persist })
+      if (session.session_id !== sessionId) {
+        throw new Error('Unexpected session change.')
+      }
+
+      this.session = session
+      return session
     } catch (error) {
       if (isErrorCode(401, error)) {
-        this.tokens = null
+        this.session = null
+        return null
       } else {
-        this.tokens = {
-          access_token: null,
-          session_id: sessionId,
-          persist
-        }
-
+        this.updateSession(sessionId)
         throw error
       }
     }
   }
 
+  constructor(state: any, app: App) {
+    this.app = app
+    this.session = null
+    this.setInterval()
+  }
+
+  initialize() {
+    const sessionId = this.sessionId
+    this.updateSession(sessionId)
+    this.getAccessToken().catch(console.error)
+  }
+
+  get authenticated() {
+    return !!this.session
+  }
+
+  get sessionId() {
+    return this.session ? this.session.session_id : null
+  }
+
+  private refreshTask: null | Promise<TokenResponse | null>
+  async getAccessToken(refresh = false): Promise<string | null> {
+    if (!this.session) {
+      return null
+    }
+
+    if (!refresh && this.session.access_token) {
+      return this.session.access_token
+    }
+
+    let session: TokenResponse | null
+    if (this.refreshTask) {
+      session = await this.refreshTask
+    } else {
+      const task = this.refresh()
+      this.refreshTask = task
+      try {
+        session = await task
+      } finally {
+        this.refreshTask = null
+      }
+    }
+
+    return session ? session.access_token : null
+  }
+
+  async login(params: LoginParams) {
+    const { apiClient } = this.app
+    const session = await apiClient.action(LOGIN, params)
+    this.session = session
+    apiClient.invalidate('*', false)
+    this.setInterval()
+    return session
+  }
+
+  logout() {
+    this.session = null
+    const { cookies, apiClient } = this.app
+    cookies.remove('session_id')
+    apiClient.invalidate('*', false)
+    this.setInterval()
+  }
+
   dispose() {
-    clearInterval(this.intervalId)
+    if (this.intervalId) {
+      clearInterval(this.intervalId)
+    }
+
     this.intervalId = null
   }
 }
