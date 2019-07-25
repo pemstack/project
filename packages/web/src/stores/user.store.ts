@@ -42,11 +42,17 @@ const TOKEN: Action<TokenParams, TokenResponse> = {
 
 const SYNCHRONIZE_INTERVAL = 10
 
+interface TokenState {
+  access_token: string | null
+  session_id: string
+  persist: boolean
+}
+
 export class UserStore {
   private readonly app: App
 
   private intervalId: any
-  private tokens: TokenResponse | null
+  private tokens: TokenState | null
 
   private setInterval() {
     if (this.intervalId) {
@@ -102,8 +108,8 @@ export class UserStore {
     const current = this.getSessionId()
     // tslint:disable-next-line: triple-equals
     if (cached != current) {
-      this.app.apiClient.invalidate('*', false)
       // Session changed from other window
+      this.app.apiClient.invalidate('*', false)
       document.location.reload()
       return true
     }
@@ -116,7 +122,8 @@ export class UserStore {
       throw new Error()
     }
 
-    if (!this.getSessionId()) {
+    const sessionId = this.getSessionId()
+    if (!sessionId) {
       this.tokens = null
       return
     }
@@ -130,6 +137,12 @@ export class UserStore {
       if (isErrorCode(401, error)) {
         this.tokens = null
       } else {
+        this.tokens = {
+          access_token: null,
+          session_id: sessionId,
+          persist
+        }
+
         throw error
       }
     }
