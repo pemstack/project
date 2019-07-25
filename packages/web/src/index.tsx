@@ -5,8 +5,14 @@ import ReactDOM from 'react-dom'
 let app = init((window as any || {}).__STATE__);
 (window as any).app = app
 
-function render(Component: any) {
+async function render(Component: any) {
   app.router.reload(true)
+  try {
+    await app.user.refresh(false)
+  } catch {
+    console.error('Could not synchronize session.')
+  }
+
   ReactDOM.render(<Component app={app} />, document.getElementById('root'))
 }
 
