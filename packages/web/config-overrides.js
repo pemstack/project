@@ -5,7 +5,7 @@ module.exports = override(
   fixBabelImports('antd', {
     libraryName: 'antd',
     libraryDirectory: 'es',
-    style: 'css',
+    style: 'css'
   }),
   fixBabelImports('yup', {
     libraryName: 'yup',
