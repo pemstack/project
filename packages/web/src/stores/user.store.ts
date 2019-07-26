@@ -152,7 +152,7 @@ export class UserStore {
     return this.session ? this.session.sessionId : null
   }
 
-  req = wretch()
+  request = wretch()
     .options({ credentials: 'omit' })
     .middlewares([next => async (url, opts) => {
       const token = await this.getAccessToken()

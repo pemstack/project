@@ -24,6 +24,12 @@ export default function init(state: JObject): App {
       apiClient: CachedApiClient,
       session: SessionStore
     })
+    .mixin({
+      req(url?: string) {
+        const request = this.user.request
+        return url ? request.url(url) : request
+      }
+    })
 
   return root
 }

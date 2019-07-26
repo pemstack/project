@@ -7,11 +7,12 @@ import {
   PickActionParams,
   OmitActionParams
 } from '@pema/router'
-import { ApiClient } from '@pema/state'
+import { ApiClient, Action as PemaAction, Query as PemaQuery } from '@pema/state'
 import { JValue } from '@pema/utils'
 import { DefaultLayoutProps } from 'app/layout/DefaultLayout'
 import { ComponentType } from 'react'
 import { UserStore, ProgressStore, CookiesStore, SessionStore } from 'stores'
+import { Wretcher } from 'wretch'
 
 export interface App extends AppNode {
   router: Router
@@ -20,6 +21,7 @@ export interface App extends AppNode {
   cookies: CookiesStore
   session: SessionStore
   apiClient: ApiClient
+  req(url: string): Wretcher
 }
 
 export
@@ -85,5 +87,11 @@ export interface WithState<TState extends { [TKey in keyof TState]: JValue | {} 
 export interface WithSession<TSession extends { [TKey in keyof TSession]: JValue | {} }> {
   readonly session: TSession
 }
+
+export interface Action<TParams, TResult = void, TApp = App>
+  extends PemaAction<TParams, TResult, TApp> { }
+
+export interface Query<TResult, TApp = App>
+  extends PemaQuery<TResult, TApp> { }
 
 export default 0

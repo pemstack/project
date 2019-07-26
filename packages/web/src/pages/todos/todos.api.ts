@@ -1,19 +1,19 @@
-import { Action, Query } from '@pema/state'
-import wretch from 'wretch'
+import { Action, Query } from 'app'
 import * as yup from 'yup'
 
-const api = wretch('/api/todos')
-
-export interface TodoResult {
+export interface Todo {
   title: string
   done: boolean
 }
 
-export const GET_TODOS: Query<TodoResult[]> = {
+export const GET_TODOS: Query<Todo[]> = {
   resource: 'todos',
   cache: true,
-  async fetch() {
-    return api.get().json()
+  async fetch(app) {
+    return app
+      .req('/api/todos')
+      .get()
+      .json()
   }
 }
 
@@ -26,15 +26,21 @@ type AddTodoParams = yup.InferType<typeof addTodoSchema>
 
 export const ADD_TODO: Action<AddTodoParams, void> = {
   schema: addTodoSchema,
-  perform(params: AddTodoParams) {
-    return api.post(params).res()
+  perform(params: AddTodoParams, app) {
+    return app
+      .req('/api/todos')
+      .post(params)
+      .res()
   },
   invalidates: ['todos']
 }
 
 export const CLEAR_TODOS: Action<void, void> = {
-  async perform() {
-    return api.delete().res()
+  async perform(_, app) {
+    return app
+      .req('/api/todos')
+      .delete()
+      .res()
   },
   invalidates: ['todos']
 }
