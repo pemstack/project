@@ -2,7 +2,7 @@ import { Breadcrumb, Layout, Menu } from 'antd'
 import { RouteParams } from 'app/types'
 import React, { FunctionComponent } from 'react'
 import './DefaultLayout.css'
-import Links from 'components/Links'
+import { Links } from 'components'
 
 export interface DefaultLayoutProps { }
 

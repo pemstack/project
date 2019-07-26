@@ -236,5 +236,24 @@
       "}",
       ""
     ]
+  },
+  "React Function Component": {
+    "scope": "typescriptreact",
+    "prefix": "rfc",
+    "body": [
+      "import React, { FunctionComponent } from 'react'",
+      "import './$1.css'",
+      "",
+      "interface $1Props { }",
+      "",
+      "export const $1: FunctionComponent<$1Props> = ({ }) => {",
+      "  return (",
+      "    <div className='$1'>",
+      "      $1 component",
+      "    </div>",
+      "  )",
+      "}",
+      ""
+    ]
   }
 }

@@ -1,7 +1,6 @@
 /* eslint-disable eqeqeq */
 
-import { Action } from '@pema/state'
-import { App, isErrorCode } from 'app'
+import { Action, App, isErrorCode } from 'app'
 import wretch from 'wretch'
 import * as yup from 'yup'
 
@@ -31,8 +30,17 @@ const LOGIN: Action<LoginParams, TokenResponse> = {
   async perform(params: LoginParams) {
     return await api
       .url('/login')
-      .post(params, { credentials: 'omit' })
+      .post(params, { credentials: 'same-origin' })
       .json()
+  }
+}
+
+const LOGOUT: Action = {
+  async perform() {
+    return await api
+      .url('/logout')
+      .post()
+      .res()
   }
 }
 
@@ -61,7 +69,7 @@ export class UserStore {
   private session: UserSession | null
 
   private getSessionId() {
-    return this.app.cookies.get('sessionId')
+    return this.app.cookies.get('session_id')
   }
 
   private updateSession(sessionId: string | null | undefined) {
@@ -81,10 +89,9 @@ export class UserStore {
     const current = this.getSessionId()
     // tslint:disable-next-line: triple-equals
     if (cached != current) {
-      // Session changed from other window
       this.updateSession(current)
-      this.app.apiClient.invalidate('*', false)
-      document.location.reload()
+      // Session changed from other window
+      this.app.reload()
       return true
     }
 
@@ -94,6 +101,10 @@ export class UserStore {
   private setInterval() {
     if (this.intervalId) {
       clearInterval(this.intervalId)
+    }
+
+    if (this.app.disposed) {
+      return
     }
 
     this.intervalId = setInterval(() => {
@@ -211,21 +222,32 @@ export class UserStore {
     return session ? session.accessToken : null
   }
 
-  async login(params: LoginParams) {
+  async login(params: LoginParams, reload = true) {
     const { apiClient } = this.app
     const session = await apiClient.action(LOGIN, params)
     this.session = session
-    apiClient.invalidate('*', false)
     this.setInterval()
+    if (reload) {
+      this.app.reload()
+    }
+
     return session
   }
 
-  logout() {
+  async logout(reload = true) {
     this.session = null
     const { cookies, apiClient } = this.app
-    cookies.remove('sessionId')
-    apiClient.invalidate('*', false)
+    cookies.remove('session_id')
+    try {
+      await apiClient.action(LOGOUT, undefined)
+    } catch {
+      // ignored
+    }
+
     this.setInterval()
+    if (reload) {
+      this.app.reload()
+    }
   }
 
   dispose() {

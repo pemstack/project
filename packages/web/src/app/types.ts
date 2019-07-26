@@ -21,6 +21,7 @@ export interface App extends AppNode {
   cookies: CookiesStore
   session: SessionStore
   apiClient: ApiClient
+  reload(): void
   req(url: string): Wretcher
 }
 
@@ -88,7 +89,7 @@ export interface WithSession<TSession extends { [TKey in keyof TSession]: JValue
   readonly session: TSession
 }
 
-export interface Action<TParams, TResult = void, TApp = App>
+export interface Action<TParams = void, TResult = void, TApp = App>
   extends PemaAction<TParams, TResult, TApp> { }
 
 export interface Query<TResult, TApp = App>

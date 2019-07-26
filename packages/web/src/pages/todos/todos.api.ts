@@ -8,6 +8,7 @@ export interface Todo {
 
 export const GET_TODOS: Query<Todo[]> = {
   resource: 'todos',
+  progress: true,
   cache: true,
   async fetch(app) {
     return app
@@ -26,6 +27,7 @@ type AddTodoParams = yup.InferType<typeof addTodoSchema>
 
 export const ADD_TODO: Action<AddTodoParams, void> = {
   schema: addTodoSchema,
+  progress: true,
   perform(params: AddTodoParams, app) {
     return app
       .req('/api/todos')
@@ -36,6 +38,7 @@ export const ADD_TODO: Action<AddTodoParams, void> = {
 }
 
 export const CLEAR_TODOS: Action<void, void> = {
+  progress: true,
   async perform(_, app) {
     return app
       .req('/api/todos')

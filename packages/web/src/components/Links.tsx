@@ -2,7 +2,7 @@ import { NavLink } from '@pema/router-react'
 import React, { FunctionComponent } from 'react'
 import './Links.css'
 
-const Links: FunctionComponent = () => {
+export const Links: FunctionComponent = () => {
   const paths = {
     '/': 'Home',
     '/login': 'Login',
@@ -24,5 +24,3 @@ const Links: FunctionComponent = () => {
     </ul>
   )
 }
-
-export default Links
