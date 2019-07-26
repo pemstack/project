@@ -29,14 +29,20 @@ export type TokenParams = yup.InferType<typeof tokenSchema>
 const LOGIN: Action<LoginParams, TokenResponse> = {
   schema: loginSchema,
   async perform(params: LoginParams) {
-    return await api.url('/login').post(params).json()
+    return await api
+      .url('/login')
+      .post(params, { credentials: 'omit' })
+      .json()
   }
 }
 
 const TOKEN: Action<TokenParams, TokenResponse> = {
   schema: tokenSchema,
   async perform(params: LoginParams) {
-    return await api.url('/token').post(params).json()
+    return await api
+      .url('/token')
+      .post(params, { credentials: 'same-origin' })
+      .json()
   }
 }
 
@@ -145,6 +151,39 @@ export class UserStore {
   get sessionId() {
     return this.session ? this.session.session_id : null
   }
+
+  req = wretch()
+    .options({ credentials: 'omit' })
+    .middlewares([next => async (url, opts) => {
+      const token = await this.getAccessToken()
+      if (token) {
+        return next(url, {
+          ...opts,
+          headers: {
+            ...opts.headers || {},
+            Authorization: 'Bearer ' + token
+          }
+        })
+      } else {
+        return next(url, opts)
+      }
+    }])
+    .catcher(401, async (error, request) => {
+      if (!this.authenticated) {
+        throw error
+      }
+
+      const token = await this.getAccessToken(true)
+      if (!token) {
+        throw error
+      }
+
+      return request
+        .auth('Bearer ' + token)
+        .replay()
+        .unauthorized(err => { throw err })
+        .json()
+    })
 
   private refreshTask: null | Promise<TokenResponse | null>
   async getAccessToken(refresh = false): Promise<string | null> {
