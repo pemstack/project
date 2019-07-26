@@ -133,7 +133,7 @@ export class UserStore {
   }
 
   initialize() {
-    const sessionId = this.sessionId
+    const sessionId = this.getSessionId()
     this.updateSession(sessionId)
     this.getAccessToken().catch(console.error)
   }
