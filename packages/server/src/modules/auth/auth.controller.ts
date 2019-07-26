@@ -33,8 +33,8 @@ export class AuthController {
     })
 
     res.status(200).json({
-      access_token: accessToken,
-      session_id: sessionId,
+      accessToken,
+      sessionId,
       persist
     })
   }

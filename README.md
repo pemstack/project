@@ -29,11 +29,11 @@
 
 ## Scripts
 
-- `npm run bootstrap` - Download ([and hoist](https://github.com/lerna/lerna/tree/master/commands/bootstrap)) dependencies for all packages.
-- `npm start` - Run in development. All packages are watched and will update accordingly on file changes.
-- `npm run build` - Create [production build](https://facebook.github.io/create-react-app/docs/production-build) for all packages.
-- `npm run commit` - Create a formatted commit using [commitizen](http://commitizen.github.io/cz-cli).
-- `npm run analyze` - Analyzes web bundles using [source-map-explorer](https://github.com/danvk/source-map-explorer). Shortcut for `analyze` script of `packages/web`.
+- `yarn bootstrap` - Download ([and hoist](https://github.com/lerna/lerna/tree/master/commands/bootstrap)) dependencies for all packages.
+- `yarn start` - Run in development. All packages are watched and will update accordingly on file changes.
+- `yarn build` - Create [production build](https://facebook.github.io/create-react-app/docs/production-build) for all packages.
+- `yarn commit` - Create a formatted commit using [commitizen](http://commitizen.github.io/cz-cli).
+- `yarn analyze` - Analyzes web bundles using [source-map-explorer](https://github.com/danvk/source-map-explorer). Shortcut for `analyze` script of `packages/web`.
 
 ## Dependencies (root package only)
 

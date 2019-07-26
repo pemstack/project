@@ -8,8 +8,8 @@ import * as yup from 'yup'
 const api = wretch('/api/auth')
 
 export interface TokenResponse {
-  access_token: string
-  session_id: string
+  accessToken: string
+  sessionId: string
   persist: boolean
 }
 
@@ -49,8 +49,8 @@ const TOKEN: Action<TokenParams, TokenResponse> = {
 const SYNCHRONIZE_INTERVAL = 10
 
 interface UserSession {
-  access_token: string | null
-  session_id: string
+  accessToken: string | null
+  sessionId: string
   persist: boolean
 }
 
@@ -61,14 +61,14 @@ export class UserStore {
   private session: UserSession | null
 
   private getSessionId() {
-    return this.app.cookies.get('session_id')
+    return this.app.cookies.get('sessionId')
   }
 
   private updateSession(sessionId: string | null | undefined) {
     if (sessionId) {
       this.session = {
-        access_token: null,
-        session_id: sessionId,
+        accessToken: null,
+        sessionId,
         persist: true
       }
     } else {
@@ -115,7 +115,7 @@ export class UserStore {
     this.setInterval()
     try {
       const session = await this.app.apiClient.action(TOKEN, { persist })
-      if (session.session_id !== sessionId) {
+      if (session.sessionId !== sessionId) {
         throw new Error('Unexpected session change.')
       }
 
@@ -149,7 +149,7 @@ export class UserStore {
   }
 
   get sessionId() {
-    return this.session ? this.session.session_id : null
+    return this.session ? this.session.sessionId : null
   }
 
   req = wretch()
@@ -191,8 +191,8 @@ export class UserStore {
       return null
     }
 
-    if (!refresh && this.session.access_token) {
-      return this.session.access_token
+    if (!refresh && this.session.accessToken) {
+      return this.session.accessToken
     }
 
     let session: TokenResponse | null
@@ -208,7 +208,7 @@ export class UserStore {
       }
     }
 
-    return session ? session.access_token : null
+    return session ? session.accessToken : null
   }
 
   async login(params: LoginParams) {
@@ -223,7 +223,7 @@ export class UserStore {
   logout() {
     this.session = null
     const { cookies, apiClient } = this.app
-    cookies.remove('session_id')
+    cookies.remove('sessionId')
     apiClient.invalidate('*', false)
     this.setInterval()
   }

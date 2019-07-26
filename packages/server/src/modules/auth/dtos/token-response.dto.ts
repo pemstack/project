@@ -2,12 +2,10 @@ import { ApiResponseModelProperty } from '@nestjs/swagger'
 
 export class TokenResponse {
   @ApiResponseModelProperty()
-  // tslint:disable-next-line: variable-name
-  access_token: string
+  accessToken: string
 
   @ApiResponseModelProperty()
-  // tslint:disable-next-line: variable-name
-  session_id: string
+  sessionId: string
 
   @ApiResponseModelProperty()
   persist: boolean
