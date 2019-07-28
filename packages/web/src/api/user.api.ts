@@ -23,6 +23,10 @@ export const ME: Query<UserInfo | null> = {
   resource: 'me',
   cache: true,
   async fetch(app) {
+    if (!app.user.authenticated) {
+      return null
+    }
+
     return app
       .req('/api/auth/me')
       .get()

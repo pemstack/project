@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, redirect, allow, useAction, stringParam } from 'app'
+import { View, redirect, allow, stringParam } from 'app'
 import { Button } from 'antd'
 
 export const LogoutView: View = ({
