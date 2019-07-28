@@ -17,16 +17,31 @@ render()
 
 let lastReload = Date.now()
 const RELOAD_MIN_MS = 1000
-function reload(): void {
+function reload(hardReload = false): void {
   const now = Date.now()
   if (lastReload + RELOAD_MIN_MS > now) {
     throw new Error('Possible reload loop detected')
   }
 
   lastReload = now
-  currentApp.dispose()
-  currentApp = currentInit({}, reload)
-  render()
+
+  if (hardReload) {
+    document.location.reload()
+    return
+  }
+
+  setTimeout(() => {
+    const root = document.getElementById('root')
+    if (root) {
+      ReactDOM.unmountComponentAtNode(root)
+    }
+
+    setTimeout(() => {
+      currentApp.dispose()
+      currentApp = currentInit({}, reload)
+      render()
+    }, 0)
+  }, 0)
 }
 
 if ((module as any).hot) {

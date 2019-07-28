@@ -8,7 +8,7 @@ interface AppRootProps {
   app: App
 }
 
-const AppRoot: FunctionComponent<AppRootProps> = ({ app }) => {
+export const AppRoot: FunctionComponent<AppRootProps> = ({ app }) => {
   return (
     <AppContext.Provider value={app}>
       <div className='AppRoot'>
@@ -17,5 +17,3 @@ const AppRoot: FunctionComponent<AppRootProps> = ({ app }) => {
     </AppContext.Provider>
   )
 }
-
-export default AppRoot

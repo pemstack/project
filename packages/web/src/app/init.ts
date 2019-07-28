@@ -10,7 +10,7 @@ import wretch from 'wretch'
 
 wretch().errorType('json')
 
-export default function init(state: JObject, reload: () => void): App {
+export function init(state: JObject, reload: (hardRefresh?: boolean) => void): App {
   const root = app(state)
     .extend(withRouter({
       createHistory: createBrowserHistory,
@@ -29,9 +29,9 @@ export default function init(state: JObject, reload: () => void): App {
         const request = this.user.request
         return url ? request.url(url) : request
       },
-      reload() {
+      reload(hardReload = true) {
         if (!this.disposed) {
-          reload()
+          reload(hardReload)
         }
       }
     })
