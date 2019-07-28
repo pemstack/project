@@ -19,7 +19,7 @@ export interface UserInfo {
   status: UserStatus
 }
 
-export const ME: Query<UserInfo> = {
+export const ME: Query<UserInfo | null> = {
   resource: 'me',
   cache: 600,
   async fetch(app) {
