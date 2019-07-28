@@ -7,7 +7,7 @@ import {
   PickActionParams,
   OmitActionParams
 } from '@pema/router'
-import { ApiClient, Action as PemaAction, Query as PemaQuery } from '@pema/state'
+import { ApiClient, Action as PemaAction, Query as PemaQuery, QueryOptions } from '@pema/state'
 import { JValue } from '@pema/utils'
 import { DefaultLayoutProps } from 'app/layout/DefaultLayout'
 import { ComponentType } from 'react'
@@ -23,6 +23,7 @@ export interface App extends AppNode {
   apiClient: ApiClient
   reload(hardReload?: boolean): void
   req(url: string): Wretcher
+  query<TResult>(query: Query<TResult>, options?: QueryOptions): Promise<TResult>
 }
 
 export

@@ -1,12 +1,12 @@
 import { app } from '@pema/app'
 import { withRouter } from '@pema/router'
-import { CachedApiClient } from '@pema/state'
+import { CachedApiClient, QueryOptions } from '@pema/state'
 import { JObject } from '@pema/utils'
-import { App } from 'app/types'
 import { createBrowserHistory } from 'history'
 import routes from 'routes'
 import { UserStore, ProgressStore, CookiesStore, SessionStore } from 'stores'
 import wretch from 'wretch'
+import { App, Query } from './types'
 
 wretch().errorType('json')
 
@@ -28,6 +28,9 @@ export function init(state: JObject, reload: (hardRefresh?: boolean) => void): A
       req(url?: string) {
         const request = this.user.request
         return url ? request.url(url) : request
+      },
+      query(query: Query<any>, options?: QueryOptions) {
+        return this.apiClient.query(query, options)
       },
       reload(hardReload = true) {
         if (!this.disposed) {
