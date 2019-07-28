@@ -7,6 +7,7 @@ const routes: RoutingTable = {
   '/home': redirect('/'),
   '/about': lazy(() => import('pages/about')),
   '/login': lazy(() => import('pages/login')),
+  '/logout': lazy(() => import('pages/logout')),
   '/counter': lazy(() => import('pages/counter')),
   '/todos': lazy(() => import('pages/todos')),
   '/todos-mobx': lazy(() => import('pages/todos-mobx'))
