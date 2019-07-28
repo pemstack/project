@@ -2,9 +2,13 @@ import { JObject } from '@pema/utils'
 
 /* eslint-disable eqeqeq */
 
+export function errorCode(error: any) {
+  return (error && error.statusCode) || (500)
+}
+
 export function isErrorCode(code: number | string, error: any): boolean {
   // tslint:disable-next-line: triple-equals
-  return error && error.json && error.json.statusCode == code
+  return errorCode(error) == code
 }
 
 export function stringParam<TDefault>

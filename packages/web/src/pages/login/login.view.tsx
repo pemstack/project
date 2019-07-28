@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Formik, Form, Input, Checkbox, SubmitButton, Icon, FormikActions } from 'forms'
-import { View, redirect, allow, stringParam } from 'app'
+import { View, redirect, allow, stringParam, errorCode } from 'app'
 import { LoginParams } from 'stores/user.store'
 
 export const LoginView: View = ({
@@ -15,9 +15,14 @@ export const LoginView: View = ({
       await user.login(values)
       const path = stringParam(location.query, 'redirect', '/')
       router.replace(path, true)
-    } catch {
+    } catch (e) {
+      if (errorCode(e) === 401) {
+        setError('Invalid username or password.')
+      } else {
+        setError('Could not log in.')
+      }
+
       actions.setFieldValue('password', '', false)
-      setError('Invalid username or password.')
     } finally {
       actions.setSubmitting(false)
     }
