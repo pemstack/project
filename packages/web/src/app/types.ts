@@ -21,7 +21,7 @@ export interface App extends AppNode {
   cookies: CookiesStore
   session: SessionStore
   apiClient: ApiClient
-  reload(): void
+  reload(hardReload?: boolean): void
   req(url: string): Wretcher
 }
 
