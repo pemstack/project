@@ -7,7 +7,6 @@ import {
   deny,
   FallbackView,
   lazy as pemaLazy,
-  Path,
   redirect,
   RouteAction,
   RoutingTable
@@ -35,8 +34,8 @@ export function delay<T, TParams extends RouteParams = RouteParams>
   return pemaDelay<T, TParams>(delayed, fallback)
 }
 
-export function hardRedirect(to: Path) {
-  return delay(({ app: { router } }) => router.navigate(to))
+export function hardRedirect(to: string) {
+  return pemaDelay(_ => window.location.href = to)
 }
 
 export interface AuthorizeOptions {
