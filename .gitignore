@@ -2,6 +2,9 @@
 build
 lib
 
+# Custom temp files
+*.ignore.*
+
 # Temporarily
 package-lock.json
 yarn.lock
