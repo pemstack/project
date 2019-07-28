@@ -9,7 +9,7 @@ export const LogoutView: View = ({
   async function logout() {
     await app.user.logout()
     const path = stringParam(location.query, 'redirect', '/')
-    app.router.navigate(path)
+    app.router.replace(path, true)
   }
 
   return (

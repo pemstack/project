@@ -14,7 +14,7 @@ export const LoginView: View = ({
     try {
       await user.login(values)
       const path = stringParam(location.query, 'redirect', '/')
-      router.navigate(path)
+      router.replace(path, true)
     } catch {
       actions.setFieldValue('password', '', false)
       setError('Invalid username or password.')

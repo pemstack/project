@@ -47,7 +47,7 @@ export interface AuthorizeOptions {
 
 export function authorize({
   roles,
-  loginPath = '/',
+  loginPath = '/login',
   action = allow()
 }: AuthorizeOptions = {}) {
   if (typeof roles === 'string') {
