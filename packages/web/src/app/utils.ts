@@ -1,4 +1,4 @@
-import { JObject } from '@pema/utils';
+import { JObject } from '@pema/utils'
 
 /* eslint-disable eqeqeq */
 
