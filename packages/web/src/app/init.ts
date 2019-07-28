@@ -1,5 +1,5 @@
 import { app } from '@pema/app'
-import { withRouter } from '@pema/router'
+import { withRouter, RoutingTable } from '@pema/router'
 import { CachedApiClient, QueryOptions } from '@pema/state'
 import { JObject } from '@pema/utils'
 import { createBrowserHistory } from 'history'
@@ -14,7 +14,7 @@ export function init(state: JObject, reload: (hardRefresh?: boolean) => void): A
   const root = app(state)
     .extend(withRouter({
       createHistory: createBrowserHistory,
-      routes,
+      routes: routes as RoutingTable,
       fallbackComputed: true
     }))
     .extend({
