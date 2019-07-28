@@ -21,7 +21,7 @@ export interface UserInfo {
 
 export const ME: Query<UserInfo | null> = {
   resource: 'me',
-  cache: 600,
+  cache: true,
   async fetch(app) {
     return app
       .req('/api/auth/me')

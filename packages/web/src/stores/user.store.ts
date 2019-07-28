@@ -12,13 +12,13 @@ export interface TokenResponse {
   persist: boolean
 }
 
-const loginSchema = yup.object({
+export const loginSchema = yup.object({
   username: yup.string().required(),
   password: yup.string().required(),
   persist: yup.boolean().notRequired()
 })
 
-const tokenSchema = yup.object({
+export const tokenSchema = yup.object({
   persist: yup.boolean().notRequired()
 })
 
@@ -26,6 +26,7 @@ export type LoginParams = yup.InferType<typeof loginSchema>
 export type TokenParams = yup.InferType<typeof tokenSchema>
 
 const LOGIN: Action<LoginParams, TokenResponse> = {
+  progress: true,
   schema: loginSchema,
   async perform(params: LoginParams) {
     return await api
@@ -36,6 +37,7 @@ const LOGIN: Action<LoginParams, TokenResponse> = {
 }
 
 const LOGOUT: Action = {
+  progress: true,
   async perform() {
     return await api
       .url('/logout')
@@ -222,19 +224,19 @@ export class UserStore {
     return session ? session.accessToken : null
   }
 
-  async login(params: LoginParams, reload = true) {
+  get loginSchema() {
+    return loginSchema
+  }
+
+  async login(params: LoginParams) {
     const { apiClient } = this.app
     const session = await apiClient.action(LOGIN, params)
     this.session = session
     this.setInterval()
-    if (reload) {
-      this.app.reload()
-    }
-
     return session
   }
 
-  async logout(reload = true) {
+  async logout() {
     this.session = null
     const { cookies, apiClient } = this.app
     cookies.remove('session_id')
@@ -245,9 +247,6 @@ export class UserStore {
     }
 
     this.setInterval()
-    if (reload) {
-      this.app.reload()
-    }
   }
 
   dispose() {

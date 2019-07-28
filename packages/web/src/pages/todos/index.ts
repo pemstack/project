@@ -1,4 +1,6 @@
-import { view } from 'app'
+import { authorize, view } from 'app'
 import { TodosView } from './todos.view'
 
-export default view(TodosView)
+export default authorize({
+  action: view(TodosView)
+})

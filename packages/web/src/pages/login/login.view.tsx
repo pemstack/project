@@ -1,16 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Input, Checkbox, SubmitButton, Icon, FormikActions } from 'forms'
-import { View } from 'app'
+import { View, redirect, allow, stringParam } from 'app'
+import { LoginParams } from 'stores/user.store'
 
-export const LoginView: View = () => {
-  function submit(values: any, actions: FormikActions<any>) {
-    console.log(values)
-    actions.setSubmitting(false)
+export const LoginView: View = ({
+  app: { user },
+  router,
+  location
+}) => {
+  const [error, setError] = useState<string | null>(null)
+
+  async function submit(values: LoginParams, actions: FormikActions<LoginParams>) {
+    try {
+      await user.login(values)
+      const path = stringParam(location.query, 'redirect', '/')
+      router.navigate(path)
+    } catch {
+      actions.setFieldValue('password', '', false)
+      setError('Invalid username or password.')
+    } finally {
+      actions.setSubmitting(false)
+    }
   }
 
   return (
     <div className='Login'>
       <Formik
+        validationSchema={user.loginSchema}
         onSubmit={submit}
         initialValues={{
           username: '',
@@ -19,6 +35,7 @@ export const LoginView: View = () => {
         }}
         render={() => (
           <Form>
+            {error && <div className='Login__error'>{error}</div>}
             <Form.Item name='username'>
               <Input
                 name='username'
@@ -43,4 +60,16 @@ export const LoginView: View = () => {
       />
     </div>
   )
+}
+
+LoginView.onEnter = ({
+  app: { user },
+  location: { query }
+}) => {
+  if (user.authenticated) {
+    const path = stringParam(query, 'redirect', '/')
+    return redirect(path)
+  }
+
+  return allow()
 }
