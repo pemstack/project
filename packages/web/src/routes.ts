@@ -1,4 +1,5 @@
 import { lazy, redirect, RoutingTable, hardRedirect } from 'app/routing'
+import userRoutes from 'pages/user'
 
 // tslint:disable: object-literal-sort-keys
 
@@ -6,8 +7,7 @@ const routes: RoutingTable = {
   '/': lazy(() => import('pages/home')),
   '/home': redirect('/'),
   '/about': lazy(() => import('pages/about')),
-  '/login': lazy(() => import('pages/login')),
-  '/logout': lazy(() => import('pages/logout')),
+  '/user': userRoutes,
   '/counter': lazy(() => import('pages/counter')),
   '/todos': lazy(() => import('pages/todos')),
   '/todos-mobx': lazy(() => import('pages/todos-mobx'))

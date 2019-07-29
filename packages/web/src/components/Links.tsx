@@ -5,8 +5,8 @@ import './Links.css'
 export const Links: FunctionComponent = () => {
   const paths = {
     '/': 'Home',
-    '/login': 'Login',
-    '/logout': 'Logout',
+    '/user/login': 'Login',
+    '/user/logout': 'Logout',
     '/counter': 'Controller Counter',
     '/todos': 'Todos',
     '/todos-mobx': 'MobX Todos'
