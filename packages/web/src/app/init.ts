@@ -4,7 +4,13 @@ import { CachedApiClient, QueryOptions } from '@pema/state'
 import { JObject } from '@pema/utils'
 import { createBrowserHistory } from 'history'
 import routes from 'routes'
-import { UserStore, ProgressStore, CookiesStore, SessionStore } from 'stores'
+import {
+  UserStore,
+  ProgressStore,
+  CookiesStore,
+  SessionStore,
+  RecaptchaStore
+} from 'stores'
 import wretch from 'wretch'
 import { App, Query } from './types'
 
@@ -22,7 +28,8 @@ export function init(state: JObject, reload: (hardRefresh?: boolean) => void): A
       user: UserStore,
       cookies: CookiesStore,
       apiClient: CachedApiClient,
-      session: SessionStore
+      session: SessionStore,
+      recaptcha: RecaptchaStore
     })
     .mixin({
       req(url?: string) {

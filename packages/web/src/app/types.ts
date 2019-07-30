@@ -11,7 +11,13 @@ import { ApiClient, Action as PemaAction, Query as PemaQuery, QueryOptions } fro
 import { JValue } from '@pema/utils'
 import { DefaultLayoutProps } from 'app/layout/DefaultLayout'
 import { ComponentType } from 'react'
-import { UserStore, ProgressStore, CookiesStore, SessionStore } from 'stores'
+import {
+  UserStore,
+  ProgressStore,
+  CookiesStore,
+  SessionStore,
+  RecaptchaStore
+} from 'stores'
 import { Wretcher } from 'wretch'
 
 export interface App extends AppNode {
@@ -21,6 +27,7 @@ export interface App extends AppNode {
   cookies: CookiesStore
   session: SessionStore
   apiClient: ApiClient
+  recaptcha: RecaptchaStore
   reload(hardReload?: boolean): void
   req(url: string): Wretcher
   query<TResult>(query: Query<TResult>, options?: QueryOptions): Promise<TResult>
