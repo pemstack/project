@@ -62,10 +62,14 @@ export class ProgressStore {
   }
 
   dispose() {
-    this.app.events.off('router.onEnter', this.onEnter)
-    this.app.events.off('router.onInterrupt', this.afterEnter)
-    this.app.events.off('router.onRedirect', this.afterEnter)
-    this.app.events.off('router.afterEnter', this.afterEnter)
-    this.handler.cancel()
+    if (this.handler) {
+      this.app.events.off('router.onEnter', this.onEnter)
+      this.app.events.off('router.onInterrupt', this.afterEnter)
+      this.app.events.off('router.onRedirect', this.afterEnter)
+      this.app.events.off('router.afterEnter', this.afterEnter)
+      this.handler.cancel()
+      this.handler = null as any
+      nprogress.done()
+    }
   }
 }
