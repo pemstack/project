@@ -33,8 +33,9 @@ export class ProgressStore {
     this.app = app
     this.count = 0
     app.events.on('router.onEnter', this.onEnter)
-    app.events.on('router.afterEnter', this.afterEnter)
+    app.events.on('router.onInterrupt', this.afterEnter)
     app.events.on('router.onRedirect', this.afterEnter)
+    app.events.on('router.afterEnter', this.afterEnter)
   }
 
   async track<T>(delayed: Promise<T> | (() => Promise<T>)): Promise<T> {
@@ -62,8 +63,9 @@ export class ProgressStore {
 
   dispose() {
     this.app.events.off('router.onEnter', this.onEnter)
-    this.app.events.off('router.afterEnter', this.afterEnter)
+    this.app.events.off('router.onInterrupt', this.afterEnter)
     this.app.events.off('router.onRedirect', this.afterEnter)
+    this.app.events.off('router.afterEnter', this.afterEnter)
     this.handler.cancel()
   }
 }
