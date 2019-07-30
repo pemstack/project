@@ -1,4 +1,5 @@
 import { useApp, useEvent } from '@pema/app-react'
+import { RouterView } from '@pema/router'
 import DefaultLayout from 'app/layout/DefaultLayout'
 import { App, LayoutPicker, RouteParams, View } from 'app/types'
 import React, { ComponentType, FunctionComponent } from 'react'
@@ -39,11 +40,48 @@ function deriveProps(view: View, params: RouteParams) {
   }
 }
 
+interface CatcherProps {
+  view: RouterView
+  params: RouteParams
+}
+
+interface CatcherState {
+  error: any
+}
+
+class Catcher extends React.Component<CatcherProps, CatcherState> {
+  static getDerivedStateFromError(error: any) {
+    return { error }
+  }
+
+  constructor(props: CatcherProps) {
+    super(props)
+    this.state = { error: null }
+  }
+
+  componentDidUpdate(prevProps: CatcherProps) {
+    if (this.state.error !== null && prevProps.view !== this.props.view) {
+      this.setState({ error: null })
+    }
+  }
+
+  render() {
+    const { error } = this.state
+    if (error) {
+      const { params } = this.props
+      return <Error {...params} code={500} error={error} />
+    }
+
+    return this.props.children
+  }
+}
+
 const Router: FunctionComponent = () => {
   const app = useApp<App>()
   useEvent('router.view')
   useEvent('render')
-  const router = app.router
+
+  const { router } = app
   const view = router.view
   const params: RouteParams = router.current as any
   if (!view) {
@@ -58,7 +96,9 @@ const Router: FunctionComponent = () => {
       const derivedProps = deriveProps(ViewComponent, params)
       return (
         <ViewLayout {...params} {...viewLayoutProps}>
-          <ViewComponent {...params} {...initialProps} {...derivedProps} />
+          <Catcher params={params} view={view}>
+            <ViewComponent {...params} {...initialProps} {...derivedProps} />
+          </Catcher>
         </ViewLayout>
       )
     case 'error':
