@@ -14,13 +14,13 @@ export interface FormProps extends $FormProps {
 
 export function Form(props: FormProps) {
   const { showCaptcha, ...rest } = props
-  const app = useApp<App>()
+  const { recaptcha } = useApp<App>()
   useEffect(() => {
     if (showCaptcha) {
-      app.recaptcha.show()
-      return () => app.recaptcha.hide()
+      recaptcha.show()
+      return () => recaptcha.hide()
     }
-  }, [showCaptcha])
+  }, [recaptcha, showCaptcha])
 
   return (
     <Field>
