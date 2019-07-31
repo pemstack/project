@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Post, Res, UseGuards, UnauthorizedException } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiBearerAuth, ApiUseTags, ApiResponse } from '@nestjs/swagger'
 import { ReqUser } from 'common/decorators'
@@ -8,6 +8,7 @@ import { AuthService } from './auth.service'
 import { Cookie } from './decorators'
 import { LoginRequest, TokenRequest, TokenResponse } from './dtos'
 import { AuthTokens } from './interfaces'
+import { RateLimit } from 'nestjs-rate-limiter'
 
 const persistAge = 7 * 24 * 60 * 60 * 1000
 
@@ -41,13 +42,16 @@ export class AuthController {
 
   @ApiResponse({ status: 200, type: TokenResponse })
   @ApiResponse({ status: 401 })
-  @UseGuards(AuthGuard('local'))
+  @RateLimit({ points: 3, duration: 1 })
   @Post('login')
   async login(
-    @ReqUser() user: User,
-    @Body() { persist = false }: LoginRequest,
+    @Body() { username, password, persist }: LoginRequest,
     @Res() res: Response) {
-    const tokens = await this.authService.createTokens(user, persist)
+    const tokens = await this.authService.login(username, password, persist)
+    if (!tokens) {
+      throw new UnauthorizedException()
+    }
+
     this.sendTokens(res, tokens)
   }
 

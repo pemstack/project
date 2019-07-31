@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common'
+import { APP_INTERCEPTOR } from '@nestjs/core'
 import { GraphQLModule } from '@nestjs/graphql'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { inProject, inSrc } from 'globals'
 import { AuthModule } from 'modules/auth'
 import { TodosModule } from 'modules/todos'
 import { ConfigModule, ConfigService } from 'nestjs-config'
+import { RateLimiterModule, RateLimiterInterceptor } from 'nestjs-rate-limiter'
 
 @Module({
   imports: [
@@ -15,6 +17,11 @@ import { ConfigModule, ConfigService } from 'nestjs-config'
         path: inProject()
       }
     ),
+    RateLimiterModule.register({
+      points: 50,
+      duration: 5,
+      type: 'Memory'
+    }),
     TypeOrmModule.forRootAsync({
       useFactory: (config: ConfigService) => config.get('database'),
       inject: [ConfigService],
@@ -25,6 +32,12 @@ import { ConfigModule, ConfigService } from 'nestjs-config'
     }),
     AuthModule,
     TodosModule
+  ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: RateLimiterInterceptor,
+    }
   ]
 })
 export class AppModule { }
