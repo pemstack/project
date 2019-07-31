@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common'
-import { APP_INTERCEPTOR } from '@nestjs/core'
+import { APP_INTERCEPTOR, APP_GUARD } from '@nestjs/core'
 import { GraphQLModule } from '@nestjs/graphql'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { inProject, inSrc } from 'globals'
 import { AuthModule } from 'modules/auth'
 import { TodosModule } from 'modules/todos'
+import { RecaptchaModule, RecaptchaGuard } from 'modules/recaptcha'
 import { ConfigModule, ConfigService } from 'nestjs-config'
 import { RateLimiterModule, RateLimiterInterceptor } from 'nestjs-rate-limiter'
 
@@ -30,6 +31,7 @@ import { RateLimiterModule, RateLimiterInterceptor } from 'nestjs-rate-limiter'
       context: ({ req }) => ({ req }),
       autoSchemaFile: inProject('schema.gql')
     }),
+    RecaptchaModule,
     AuthModule,
     TodosModule
   ],
@@ -37,6 +39,10 @@ import { RateLimiterModule, RateLimiterInterceptor } from 'nestjs-rate-limiter'
     {
       provide: APP_INTERCEPTOR,
       useClass: RateLimiterInterceptor,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RecaptchaGuard
     }
   ]
 })

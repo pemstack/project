@@ -1,5 +1,19 @@
 import path from 'path'
 
+function extendGlobal(values: {}) {
+  for (const [key, value] of Object.entries(values)) {
+    if (!(key in global)) {
+      global[key] = value
+    }
+  }
+}
+
+extendGlobal({
+  fetch: require('node-fetch'),
+  FormData: require('form-data'),
+  URLSearchParams: require('url').URLSearchParams
+})
+
 export const projectDirectory = path.resolve(__dirname, '..')
 export const srcDirectory = __dirname
 
