@@ -28,9 +28,11 @@ export type TokenParams = yup.InferType<typeof tokenSchema>
 const LOGIN: Action<LoginParams, TokenResponse> = {
   progress: true,
   schema: loginSchema,
-  async perform(params: LoginParams) {
+  async perform(params, app) {
+    const captchaToken = await app.recaptcha.token('login')
     return await api
       .url('/login')
+      .headers({ 'Captcha-Token': captchaToken })
       .post(params, { credentials: 'same-origin' })
       .json()
   }
@@ -164,39 +166,6 @@ export class UserStore {
   get sessionId() {
     return this.session ? this.session.sessionId : null
   }
-
-  request = wretch()
-    .options({ credentials: 'omit' })
-    .middlewares([next => async (url, opts) => {
-      const token = await this.getAccessToken()
-      if (token) {
-        return next(url, {
-          ...opts,
-          headers: {
-            ...opts.headers || {},
-            Authorization: 'Bearer ' + token
-          }
-        })
-      } else {
-        return next(url, opts)
-      }
-    }])
-    .catcher(401, async (error, request) => {
-      if (!this.authenticated) {
-        throw error
-      }
-
-      const token = await this.getAccessToken(true)
-      if (!token) {
-        throw error
-      }
-
-      return request
-        .auth('Bearer ' + token)
-        .replay()
-        .unauthorized(err => { throw err })
-        .json()
-    })
 
   private refreshTask: null | Promise<TokenResponse | null>
   async getAccessToken(refresh = false): Promise<string | null> {

@@ -12,7 +12,8 @@ import {
   RecaptchaStore
 } from 'stores'
 import wretch from 'wretch'
-import { App, Query } from './types'
+import { App, Query, RequestContext } from './types'
+import { baseWretcher } from './utils'
 
 wretch().errorType('json')
 
@@ -31,20 +32,22 @@ export function init(state: JObject, reload: (hardRefresh?: boolean) => void): A
       session: SessionStore,
       recaptcha: RecaptchaStore
     })
-    .mixin({
-      req(url?: string) {
-        const request = this.user.request
-        return url ? request.url(url) : request
-      },
-      query(query: Query<any>, options?: QueryOptions) {
-        return this.apiClient.query(query, options)
-      },
-      reload(hardReload = true) {
-        if (!this.disposed) {
-          reload(hardReload)
-        }
-      }
-    })
 
-  return root
+  const request = baseWretcher(root as any)
+  return root.mixin({
+    req(url: string, context: RequestContext = {}) {
+      return request
+        .url(url)
+        .options({ context })
+    },
+    query(query: Query<any>, options?: QueryOptions) {
+      return this.apiClient.query(query, options)
+    },
+    reload(hardReload = true) {
+      if (!this.disposed) {
+        reload(hardReload)
+      }
+    }
+  })
+
 }

@@ -39,7 +39,7 @@ export const LoginView: View = ({
           persist: false
         }}
         render={() => (
-          <Form>
+          <Form showCaptcha>
             {error && <div className='Login__error'>{error}</div>}
             <Form.Item name='username'>
               <Input

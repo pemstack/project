@@ -29,8 +29,13 @@ export interface App extends AppNode {
   apiClient: ApiClient
   recaptcha: RecaptchaStore
   reload(hardReload?: boolean): void
-  req(url: string): Wretcher
+  req(url: string, context?: RequestContext): Wretcher
   query<TResult>(query: Query<TResult>, options?: QueryOptions): Promise<TResult>
+}
+
+export interface RequestContext {
+  action?: string
+  auth?: boolean
 }
 
 export
