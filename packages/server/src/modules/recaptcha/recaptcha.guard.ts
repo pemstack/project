@@ -4,7 +4,7 @@ import recaptchaConfig from './recaptcha.config'
 import { RecaptchaService } from './recaptcha.service'
 import { Request } from 'express'
 
-const tokenExpiration = parseFloat(recaptchaConfig.tokenExpiration)
+const tokenExpiration = parseFloat(recaptchaConfig.tokenExpiration) * 1000
 
 @Injectable()
 export class RecaptchaGuard implements CanActivate {
