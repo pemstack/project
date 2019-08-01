@@ -1,4 +1,3 @@
-export { default as authConfig } from './auth.config'
 export * from './auth.controller'
 export * from './auth.module'
 export * from './auth.service'

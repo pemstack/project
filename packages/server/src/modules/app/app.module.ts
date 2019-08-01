@@ -14,8 +14,7 @@ import { RateLimiterModule, RateLimiterInterceptor } from 'nestjs-rate-limiter'
     ConfigModule.load(
       inSrc('**/!(*.d.ts).config.{ts,js}'),
       {
-        modifyConfigName: name => name.replace('.config', ''),
-        path: inProject()
+        modifyConfigName: name => name.replace('.config', '')
       }
     ),
     RateLimiterModule.register({

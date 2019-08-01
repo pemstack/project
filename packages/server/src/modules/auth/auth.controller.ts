@@ -1,14 +1,14 @@
-import { Body, Controller, Get, Post, Res, UseGuards, UnauthorizedException } from '@nestjs/common'
+import { Body, Controller, Get, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-import { ApiBearerAuth, ApiUseTags, ApiResponse } from '@nestjs/swagger'
-import { ReqUser } from 'common/decorators'
+import { ApiBearerAuth, ApiResponse, ApiUseTags } from '@nestjs/swagger'
+import { Recaptcha, RecaptchaResponse, ReqUser } from 'common/decorators'
 import { Response } from 'express'
 import { User } from 'modules/users'
+import { RateLimit } from 'nestjs-rate-limiter'
 import { AuthService } from './auth.service'
 import { Cookie } from './decorators'
 import { LoginRequest, TokenRequest, TokenResponse } from './dtos'
 import { AuthTokens } from './interfaces'
-import { RateLimit } from 'nestjs-rate-limiter'
 
 const persistAge = 7 * 24 * 60 * 60 * 1000
 
@@ -43,8 +43,10 @@ export class AuthController {
   @ApiResponse({ status: 200, type: TokenResponse })
   @ApiResponse({ status: 401 })
   @RateLimit({ points: 3, duration: 1 })
+  @Recaptcha('login')
   @Post('login')
   async login(
+    @RecaptchaResponse('score') score: number,
     @Body() { username, password, persist }: LoginRequest,
     @Res() res: Response) {
     const tokens = await this.authService.login(username, password, persist)

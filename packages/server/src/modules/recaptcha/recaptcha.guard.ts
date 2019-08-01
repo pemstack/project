@@ -1,17 +1,20 @@
-import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common'
+import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
-import recaptchaConfig from './recaptcha.config'
-import { RecaptchaService } from './recaptcha.service'
 import { Request } from 'express'
-
-const tokenExpiration = parseFloat(recaptchaConfig.tokenExpiration) * 1000
+import { ConfigService } from 'nestjs-config'
+import { RecaptchaService } from './recaptcha.service'
 
 @Injectable()
 export class RecaptchaGuard implements CanActivate {
+  private readonly tokenExpiration: number
+
   constructor(
     private readonly reflector: Reflector,
-    private readonly recaptchaService: RecaptchaService
-  ) { }
+    private readonly recaptchaService: RecaptchaService,
+    config: ConfigService
+  ) {
+    this.tokenExpiration = parseFloat(config.get('recaptcha.tokenExpiration')) * 1000
+  }
 
   async canActivate(context: ExecutionContext) {
     const action = this.reflector.get<string>('recaptcha-action', context.getHandler())
@@ -35,7 +38,7 @@ export class RecaptchaGuard implements CanActivate {
     }
 
     const now = Date.now()
-    if (Math.abs(now - verification.challengeTimestamp) > tokenExpiration) {
+    if (Math.abs(now - verification.challengeTimestamp) > this.tokenExpiration) {
       throw new ForbiddenException('Expired CAPTCHA token.')
     }
 

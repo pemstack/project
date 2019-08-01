@@ -1,4 +1,3 @@
-export { default as recaptchaConfig } from './recaptcha.config'
 export * from './recaptcha.guard'
 export * from './recaptcha.interface'
 export * from './recaptcha.module'

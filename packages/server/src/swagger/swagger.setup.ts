@@ -1,8 +1,9 @@
 import { INestApplication } from '@nestjs/common'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import swaggerConfig from './swagger.config'
+import { ConfigService } from 'nestjs-config'
 
 export function swaggerSetup(app: INestApplication) {
+  const swaggerConfig = app.get(ConfigService).get('swagger')
   const {
     title,
     description,
