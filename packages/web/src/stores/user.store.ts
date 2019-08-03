@@ -19,6 +19,7 @@ export const loginSchema = yup.object({
 })
 
 export const tokenSchema = yup.object({
+  sessionId: yup.string().required(),
   persist: yup.boolean().notRequired()
 })
 
@@ -50,7 +51,7 @@ const LOGOUT: Action = {
 
 const TOKEN: Action<TokenParams, TokenResponse> = {
   schema: tokenSchema,
-  async perform(params: LoginParams) {
+  async perform(params) {
     return await api
       .url('/token')
       .post(params, { credentials: 'same-origin' })
@@ -129,7 +130,7 @@ export class UserStore {
 
     this.setInterval()
     try {
-      const session = await this.app.apiClient.action(TOKEN, { persist })
+      const session = await this.app.apiClient.action(TOKEN, { sessionId, persist })
       if (session.sessionId !== sessionId) {
         throw new Error('Unexpected session change.')
       }

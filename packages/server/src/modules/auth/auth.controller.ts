@@ -61,10 +61,15 @@ export class AuthController {
   @ApiResponse({ status: 401 })
   @Post('token')
   async token(
+    // tslint:disable-next-line: variable-name
+    @Cookie('session_id') session_id: string,
     @Cookie('refresh_token') refreshToken: string,
-    @Cookie('session_id') sessionId: string,
-    @Body() { persist = true }: TokenRequest,
+    @Body() { sessionId, persist = true }: TokenRequest,
     @Res() res: Response) {
+    if (!sessionId || !session_id || sessionId !== session_id) {
+      throw new UnauthorizedException()
+    }
+
     const tokens = await this.authService.extendTokens(refreshToken, sessionId, persist)
     this.sendTokens(res, tokens)
   }
