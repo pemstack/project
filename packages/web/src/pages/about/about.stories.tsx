@@ -6,7 +6,7 @@ import DefaultLayout from 'app/layout/DefaultLayout';
 
 storiesOf('AboutView', module)
   .add('default', () => (
-    <AppProvider>
+    <AppProvider path='/about'>
       {(props) => (
         <DefaultLayout {...props}>
           <AboutView {...props} />
