@@ -5,7 +5,14 @@ module.exports = ({ config }) => {
       {
         loader: require.resolve('babel-loader'),
         options: {
-          presets: [require.resolve('babel-preset-react-app')]
+          presets: [require.resolve('babel-preset-react-app')],
+          plugins: [
+            ['import', {
+              libraryName: 'antd',
+              libraryDirectory: 'es',
+              style: 'css'
+            }]
+          ]
         }
       },
       require.resolve('react-docgen-typescript-loader')
