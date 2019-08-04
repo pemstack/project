@@ -259,5 +259,19 @@
       "}",
       ""
     ]
+  },
+  "Component Story": {
+    "scope": "typescriptreact",
+    "prefix": "story",
+    "body": [
+      "import React from 'react'",
+      "import { storiesOf } from '@storybook/react'",
+      "import { action } from '@storybook/addon-actions'",
+      "import { viewProps } from 'app/mock'",
+      "",
+      "storiesOf('$1', module)",
+      "  .add('default', () => <$1 {...viewProps()} />)",
+      ""
+    ]
   }
 }
