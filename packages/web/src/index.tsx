@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 let CurrentComponent = AppRoot
 let currentInit = init
-let currentApp = currentInit((window as any || {}).__STATE__, reload)
+let currentApp = currentInit((window as any || {}).__STATE__, { reload })
 
 async function render() {
   (window as any).app = currentApp
@@ -38,7 +38,7 @@ function reload(hardReload = false): void {
 
     setTimeout(() => {
       currentApp.dispose()
-      currentApp = currentInit({}, reload)
+      currentApp = currentInit({}, { reload })
       render()
     }, 0)
   }, 0)
@@ -51,7 +51,7 @@ if ((module as any).hot) {
     currentInit = newInit
     const state = currentApp.toJSON()
     currentApp.dispose()
-    currentApp = currentInit(state, reload)
+    currentApp = currentInit(state, { reload })
     render()
   })
 }

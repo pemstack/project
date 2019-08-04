@@ -2,7 +2,7 @@ import { app } from '@pema/app'
 import { withRouter, RoutingTable } from '@pema/router'
 import { CachedApiClient, QueryOptions } from '@pema/state'
 import { JObject } from '@pema/utils'
-import { createBrowserHistory } from 'history'
+import { createBrowserHistory, History } from 'history'
 import routes from 'routes'
 import {
   UserStore,
@@ -17,10 +17,18 @@ import { baseWretcher } from './utils'
 
 wretch().errorType('json')
 
-export function init(state: JObject, reload: (hardRefresh?: boolean) => void): App {
+interface InitOptions {
+  reload: (hardRefresh?: boolean) => void
+  createHistory?: () => History
+}
+
+export function init(state: JObject, {
+  reload,
+  createHistory
+}: InitOptions): App {
   const root = app(state)
     .extend(withRouter({
-      createHistory: createBrowserHistory,
+      createHistory: createHistory || createBrowserHistory,
       routes: routes as RoutingTable,
       fallbackComputed: true
     }))
@@ -49,5 +57,4 @@ export function init(state: JObject, reload: (hardRefresh?: boolean) => void): A
       }
     }
   })
-
 }
