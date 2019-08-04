@@ -6,6 +6,7 @@
   ],
   "scripts": {
     "analyze": "lerna run analyze --scope @my-app/web",
+    "storybook": "lerna run storybook --scope @my-app/web",
     "build": "lerna run build",
     "bootstrap": "lerna bootstrap --use-workspaces --force-local",
     "commit": "git-cz",
