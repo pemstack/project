@@ -1,5 +1,5 @@
-import { app } from '@pema/app'
-import { withRouter, RoutingTable } from '@pema/router'
+import { app, AppOptions } from '@pema/app'
+import { withRouter, RoutingTable, HistoryBuildOptions } from '@pema/router'
 import { CachedApiClient, QueryOptions } from '@pema/state'
 import { JObject } from '@pema/utils'
 import { createBrowserHistory, History } from 'history'
@@ -20,17 +20,20 @@ wretch().errorType('json')
 interface InitOptions {
   reload: (hardRefresh?: boolean) => void
   createHistory?: () => History
+  historyProps?: AppOptions<HistoryBuildOptions>
 }
 
 export function init(state: JObject, {
   reload,
-  createHistory
+  createHistory,
+  historyProps
 }: InitOptions): App {
   const root = app(state)
     .extend(withRouter({
       createHistory: createHistory || createBrowserHistory,
       routes: routes as RoutingTable,
-      fallbackComputed: true
+      fallbackComputed: true,
+      historyProps
     }))
     .extend({
       progress: ProgressStore,
