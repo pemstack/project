@@ -28,6 +28,13 @@
     "@ant-design/icons": "^2.1.1",
     "@my-app/presentation": "^0.1.0",
     "@my-app/shared": "^0.1.0",
+    "@pema/app": "^0.1.0-alpha.3",
+    "@pema/app-react": "^0.1.0-alpha.3",
+    "@pema/router": "^0.1.0-alpha.3",
+    "@pema/router-react": "^0.1.0-alpha.3",
+    "@pema/state": "^0.1.0-alpha.3",
+    "@pema/state-react": "^0.1.0-alpha.3",
+    "@pema/utils": "^0.1.0-alpha.3",
     "@types/history": "^4.7.2",
     "@types/jest": "^24.0.15",
     "@types/lodash": "^4.14.136",
@@ -67,7 +74,6 @@
     "@storybook/addon-links": "^5.1.10",
     "@storybook/react": "^5.1.10",
     "@types/storybook__react": "^4.0.2",
-    "babel-loader": "^8.0.6",
     "react-docgen-typescript-loader": "^3.1.0"
   }
 }
