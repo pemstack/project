@@ -2,7 +2,6 @@ import { Breadcrumb, Layout, Menu } from 'antd'
 import { RouteParams } from 'app/types'
 import React, { FunctionComponent } from 'react'
 import './DefaultLayout.css'
-import { Links } from 'components'
 
 export interface DefaultLayoutProps { }
 
@@ -32,7 +31,6 @@ const DefaultLayout: FunctionComponent<RouteParams & DefaultLayoutProps> = ({ ch
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
           <div className='DefaultLayout__children-wrapper'>
-            <Links />
             {children}
           </div>
         </div>
