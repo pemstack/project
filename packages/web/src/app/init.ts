@@ -1,6 +1,6 @@
 import { app, AppOptions } from '@pema/app'
 import { withRouter, RoutingTable, HistoryBuildOptions } from '@pema/router'
-import { CachedApiClient, QueryOptions } from '@pema/state'
+import { CachedApiClient, QueryOptions, ApiClient as IApiClient } from '@pema/state'
 import { JObject } from '@pema/utils'
 import { createBrowserHistory, History } from 'history'
 import routes from 'routes'
@@ -20,13 +20,15 @@ wretch().errorType('json')
 interface InitOptions {
   reload: (hardRefresh?: boolean) => void
   createHistory?: () => History
-  historyProps?: AppOptions<HistoryBuildOptions>
+  historyProps?: AppOptions<HistoryBuildOptions>,
+  ApiClient?: new (...args: any[]) => IApiClient
 }
 
 export function init(state: JObject, {
   reload,
   createHistory,
-  historyProps
+  historyProps,
+  ApiClient
 }: InitOptions): App {
   const root = app(state)
     .extend(withRouter({
@@ -39,7 +41,7 @@ export function init(state: JObject, {
       progress: ProgressStore,
       user: UserStore,
       cookies: CookiesStore,
-      apiClient: CachedApiClient,
+      apiClient: ApiClient || CachedApiClient,
       session: SessionStore,
       recaptcha: RecaptchaStore
     })

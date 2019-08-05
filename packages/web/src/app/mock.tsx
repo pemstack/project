@@ -1,9 +1,15 @@
 import React, { FunctionComponent, useState } from 'react'
 import { AppContext } from '@pema/app-react'
 import { Dictionary } from '@pema/utils'
+import { MockApiClient } from '@pema/state/lib/mock-api-client'
 import { createMemoryHistory } from 'history'
 import { init } from 'app'
 import { RouteParams } from './types'
+
+export interface MockApi {
+  withQuery: MockApiClient['withQuery']
+  withAction: MockApiClient['withAction']
+}
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Array<infer U>
@@ -41,6 +47,7 @@ function deepMerge(target: Dictionary, source?: Dictionary) {
 export interface AppProviderProps {
   path?: string
   overrides?: DeepPartial<RouteParams>
+  apiMocks?: (client: MockApi) => void
   render?: (props: RouteParams) => JSX.Element
   children?: (props: RouteParams) => JSX.Element
 }
@@ -48,6 +55,7 @@ export interface AppProviderProps {
 export const AppProvider: FunctionComponent<AppProviderProps> = ({
   path = '/',
   overrides,
+  apiMocks,
   render,
   children
 }) => {
@@ -65,8 +73,14 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
       createHistory: createMemoryHistory,
       historyProps: {
         initialEntries: [path]
-      }
-    });
+      },
+      ApiClient: MockApiClient
+    })
+
+    const client = root.apiClient as MockApiClient
+    if (typeof apiMocks === 'function') {
+      apiMocks(client)
+    }
 
     (root.router as any).locked = true
     return root
