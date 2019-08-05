@@ -1,11 +1,3 @@
 .NewsfeedPost {
-  max-width: 400px;
-  margin: 16px;
-  padding: 8px;
-  background: white;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-
-.NewsfeedPost__content {
-  margin: 0;
+  margin: 16px !important;
 }

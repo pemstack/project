@@ -1,21 +1,33 @@
 import React, { FunctionComponent } from 'react'
+import { Card, Avatar, Icon } from 'antd'
 import './NewsfeedPost.css'
 
-interface NewsfeedPostProps {
-  title: string
+export interface NewsfeedPostProps {
   author: string
   content: string
+  course: string
+  date: string
 }
 
 export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
-  title,
   author,
-  content
+  content,
+  course,
+  date
 }) => {
   return (
-    <div className='NewsfeedPost'>
-      <h3 className='NewsfeedPost__title'>{author}: {title}</h3>
-      <p className='NewsfeedPost__content'>{content}</p>
-    </div>
+    <Card
+      className='NewsfeedPost'
+      title={
+        <Card.Meta
+          avatar={<Avatar icon='user' />}
+          title={author}
+          description={date}
+        />
+      }
+      extra={<a href='/'>{course}</a>}
+    >
+      <div className='NewsfeedPost__content'>{content}</div>
+    </Card>
   )
 }
