@@ -270,7 +270,7 @@
       "import { AppProvider } from 'app/mock'",
       "",
       "storiesOf('$1', module)",
-      "  .add('default', () => <$1 {...viewProps()} />)",
+      "  .add('default', () => <$1 />)",
       ""
     ]
   }
