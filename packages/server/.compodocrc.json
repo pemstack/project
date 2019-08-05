@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/@compodoc/compodoc/src/config/schema.json",
+  "name": "@my-app/server",
+  "output": "./docs/",
+  "tsconfig": "./tsconfig.json",
+  "open": true,
+  "minimal": true
+}

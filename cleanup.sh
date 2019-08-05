@@ -1,0 +1,15 @@
+rimraf node_modules
+rimraf package-lock.json
+rimraf yarn.lock
+rimraf packages/server/node_modules
+rimraf packages/server/package-lock.json
+rimraf packages/server/yarn.lock
+rimraf packages/web/node_modules
+rimraf packages/web/package-lock.json
+rimraf packages/web/yarn.lock
+rimraf packages/presentation/node_modules
+rimraf packages/presentation/package-lock.json
+rimraf packages/presentation/yarn.lock
+rimraf packages/shared/node_modules
+rimraf packages/shared/package-lock.json
+rimraf packages/shared/yarn.lock

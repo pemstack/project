@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": false,
+    "outDir": "./build"
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./build/**/*",
+    "**/node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
+}

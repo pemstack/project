@@ -1,0 +1,29 @@
+{
+  "name": "@my-app/presentation",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "start": "tsc --watch",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@my-app/shared": "^0.1.0",
+    "@pema/app": "^0.1.0-alpha.3",
+    "@pema/app-react": "^0.1.0-alpha.3",
+    "@pema/router": "^0.1.0-alpha.3",
+    "@pema/router-react": "^0.1.0-alpha.3",
+    "@pema/state": "^0.1.0-alpha.3",
+    "@pema/state-react": "^0.1.0-alpha.3",
+    "@pema/utils": "^0.1.0-alpha.3",
+    "@types/node": "^12.6.0"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "analyze": "lerna run analyze --scope @my-app/web",
+    "storybook": "lerna run storybook --scope @my-app/web --stream",
+    "build": "lerna run build",
+    "bootstrap": "lerna bootstrap --use-workspaces --force-local",
+    "commit": "git-cz",
+    "start": "lerna run build --scope @my-app/shared && lerna run build --scope @my-app/presentation && lerna run start --parallel --stream"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@types/node": "^12.6.0",
+    "lerna": "^3.16.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "commitizen": "^3.1.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "rimraf": "^2.6.3",
+    "source-map-explorer": "^2.0.1",
+    "ts-node-dev": "^1.0.0-pre.40",
+    "tsconfig-paths": "^3.8.0",
+    "tslint": "^5.18.0",
+    "tslint-react": "^4.0.0",
+    "wait-on": "^3.2.0"
+  }
+}
