@@ -27,8 +27,6 @@ export type LoginParams = yup.InferType<typeof loginSchema>
 export type TokenParams = yup.InferType<typeof tokenSchema>
 
 const LOGIN: Action<LoginParams, TokenResponse> = {
-  progress: true,
-  schema: loginSchema,
   async perform(params, app) {
     const captchaToken = await app.recaptcha.token('login')
     return await api
@@ -40,7 +38,6 @@ const LOGIN: Action<LoginParams, TokenResponse> = {
 }
 
 const LOGOUT: Action = {
-  progress: true,
   async perform() {
     return await api
       .url('/logout')
@@ -192,10 +189,6 @@ export class UserStore {
     }
 
     return session ? session.accessToken : null
-  }
-
-  get loginSchema() {
-    return loginSchema
   }
 
   async login(params: LoginParams) {

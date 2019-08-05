@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { Formik, Form, Input, Checkbox, SubmitButton, Icon, FormikActions } from 'forms'
-import { View, redirect, allow, stringParam, errorCode } from 'app'
-import { LoginParams } from 'stores/user.store'
+import { View, redirect, allow, stringParam, errorCode, useAction } from 'app'
+import { LOGIN, LoginParams } from 'api/user.api'
 
 export const LoginView: View = ({
-  app: { user },
   router,
   location
 }) => {
+  const login = useAction(LOGIN)
   const [error, setError] = useState<string | null>(null)
 
   async function submit(values: LoginParams, actions: FormikActions<LoginParams>) {
     try {
-      await user.login(values)
+      await login(values)
       const path = stringParam(location.query, 'redirect', '/')
       router.replace(path, true)
     } catch (e) {
@@ -31,7 +31,7 @@ export const LoginView: View = ({
   return (
     <div className='Login'>
       <Formik
-        validationSchema={user.loginSchema}
+        validationSchema={login.schema}
         onSubmit={submit}
         initialValues={{
           username: '',

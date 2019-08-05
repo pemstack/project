@@ -1,4 +1,5 @@
-import { Query } from 'app'
+import { Query, Action } from 'app'
+import { LoginParams, TokenResponse, loginSchema } from 'stores/user.store'
 
 export enum UserRole {
   USER = 'user',
@@ -32,5 +33,23 @@ export const ME: Query<UserInfo | null> = {
       .get()
       .unauthorized(() => null)
       .json()
+  }
+}
+
+export type LoginParams = LoginParams
+export type TokenResponse = TokenResponse
+
+export const LOGIN: Action<LoginParams, TokenResponse> = {
+  progress: true,
+  schema: loginSchema,
+  async perform(params, app) {
+    return await app.user.login(params)
+  }
+}
+
+export const LOGOUT: Action = {
+  progress: true,
+  async perform(params, app) {
+    return await app.user.logout()
   }
 }

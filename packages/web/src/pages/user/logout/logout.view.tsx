@@ -1,15 +1,17 @@
 import React from 'react'
-import { View, redirect, allow, stringParam } from 'app'
+import { View, redirect, allow, stringParam, useAction } from 'app'
 import { Button } from 'antd'
+import { LOGOUT } from 'api/user.api'
 
 export const LogoutView: View = ({
-  app,
+  router,
   location
 }) => {
+  const logoutAction = useAction(LOGOUT)
   async function logout() {
-    await app.user.logout()
+    await logoutAction()
     const path = stringParam(location.query, 'redirect', '/')
-    app.router.replace(path, true)
+    router.replace(path, true)
   }
 
   return (
