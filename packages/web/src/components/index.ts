@@ -1,1 +1,1 @@
-export default 0 // temp
+export { NewsfeedPost } from './NewsfeedPost'
