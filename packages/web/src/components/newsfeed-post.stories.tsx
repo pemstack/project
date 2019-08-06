@@ -1,10 +1,19 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import { NewsfeedPost, NewsfeedPostProps } from './NewsfeedPost'
+import { NewsfeedPost, NewsfeedPostProps } from './newsfeed-post'
 
-const data: NewsfeedPostProps = {
-  author: 'Author',
-  content: `
+const posts: NewsfeedPostProps[] = [
+  {
+    author: 'Author 1',
+    course: 'Computer Networks',
+    date: '5 minutes ago',
+    content: `Some simple content.`
+  },
+  {
+    author: 'Author 2',
+    course: 'Data Security',
+    date: '3 hours ago',
+    content: `
 ## Project 1 deadline
 
 Project 1 deadline is set to **19/08/2019 23:59**.
@@ -13,15 +22,26 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Donec non arcu elit.
 Suspendisse volutpat nec nibh et malesuada.
 
+\`\`\`js
+function sayHello(name) {
+  console.log('Hello ' + name)
+}
+\`\`\`
+
 ### More info
 
 Fusce fermentum leo et metus egestas,
 hendrerit pellentesque lacus congue.
 Donec pulvinar et lorem at pellentesque.
-`,
-  course: 'Data Security',
-  date: '3 hours ago'
-}
+`
+  },
+  {
+    author: 'Author 3',
+    course: 'Computer Networks',
+    date: '2 days ago',
+    content: `Some simple content.`
+  },
+]
 
 function ClickHelp() {
   return (
@@ -50,17 +70,32 @@ storiesOf('NewsfeedPost', module)
       {story()}
     </div>
   ))
-  .add('single post', () => (
+  .add('single', () => (
     <>
       <ClickHelp />
-      <Loadable {...data} />
+      <Loadable
+        author='Post Author'
+        date='2 days ago'
+        course='Data Security'
+        content='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+      />
+    </>
+  ))
+  .add('loading', () => (
+    <>
+      <ClickHelp />
+      <Loadable
+        author='Post Author'
+        date='2 days ago'
+        course='Data Security'
+        content='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        loading
+      />
     </>
   ))
   .add('list of posts', () => (
     <>
       <ClickHelp />
-      <Loadable {...data} />
-      <Loadable {...data} loading />
-      <Loadable {...data} loading />
+      {posts.map((post, i) => <Loadable key={i} {...post} />)}
     </>
   ))

@@ -1,1 +1,1 @@
-export { NewsfeedPost } from './NewsfeedPost'
+export { NewsfeedPost } from './newsfeed-post'
