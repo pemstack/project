@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { NewsfeedPost, NewsfeedPostProps } from './NewsfeedPost'
 
-const props: NewsfeedPostProps = {
+const data: NewsfeedPostProps = {
   author: 'Author',
   content: `
 ## Project 1 deadline
@@ -23,11 +23,17 @@ Donec pulvinar et lorem at pellentesque.
   date: '3 hours ago'
 }
 
+function Loadable(props: NewsfeedPostProps) {
+  const [loading, setLoading] = useState(!!props.loading)
+  return (
+    <div onClick={() => setLoading(x => !x)}>
+      <NewsfeedPost {...props} loading={loading} />
+    </div>
+  )
+}
+
 storiesOf('NewsfeedPost', module)
-  .add('single post', () => (
-    <NewsfeedPost {...props} />
-  ))
-  .add('list of posts', () => (
+  .addDecorator(story => (
     <div
       style={{
         background: '#eee',
@@ -35,8 +41,16 @@ storiesOf('NewsfeedPost', module)
         paddingBottom: '32px'
       }}
     >
-      <NewsfeedPost {...props} />
-      <NewsfeedPost {...props} />
-      <NewsfeedPost {...props} />
+      {story()}
     </div>
+  ))
+  .add('single post', () => (
+    <NewsfeedPost {...data} />
+  ))
+  .add('list of posts', () => (
+    <>
+      <Loadable {...data} />
+      <Loadable {...data} loading />
+      <Loadable {...data} loading />
+    </>
   ))
