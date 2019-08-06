@@ -22,10 +22,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit \`sayHello('World')\`.
 Donec non arcu elit.  $y = 2x+3$
 Suspendisse volutpat nec nibh et malesuada.
 
-$$
-y = \\sum_{i=0}^{n}{(3i^2-5)}
-$$
-
 \`\`\`js
 function sayHello(name) {
   console.log('Hello ' + name)
@@ -56,6 +52,11 @@ Donec pulvinar et lorem at pellentesque.
 
 In aliquam scelerisque porttitor.
 Morbi ultrices efficitur porttitor.
+
+$$
+y = \\sum_{i=0}^{n}{(3i^2-5)}
+$$
+
 Phasellus id justo id turpis pulvinar cursus in vel erat.
 Sed consectetur ante odio, a vulputate felis malesuada vel.
 `
@@ -74,15 +75,6 @@ function ClickHelp() {
   )
 }
 
-function Loadable(props: NewsfeedPostProps) {
-  const [loading, setLoading] = useState(!!props.loading)
-  return (
-    <div onClick={() => setLoading(x => !x)}>
-      <NewsfeedPost {...props} loading={loading} />
-    </div>
-  )
-}
-
 storiesOf('NewsfeedPost', module)
   .addDecorator(story => (
     <div
@@ -97,8 +89,7 @@ storiesOf('NewsfeedPost', module)
   ))
   .add('single', () => (
     <>
-      <ClickHelp />
-      <Loadable
+      <NewsfeedPost
         author='Post Author'
         date='2 days ago'
         course='Data Security'
@@ -108,8 +99,7 @@ storiesOf('NewsfeedPost', module)
   ))
   .add('loading', () => (
     <>
-      <ClickHelp />
-      <Loadable
+      <NewsfeedPost
         author='Post Author'
         date='2 days ago'
         course='Data Security'
@@ -120,7 +110,6 @@ storiesOf('NewsfeedPost', module)
   ))
   .add('list of posts', () => (
     <>
-      <ClickHelp />
-      {posts.map((post, i) => <Loadable key={i} {...post} />)}
+      {posts.map((post, i) => <NewsfeedPost key={i} {...post} />)}
     </>
   ))

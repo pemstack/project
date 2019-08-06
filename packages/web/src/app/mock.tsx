@@ -48,8 +48,8 @@ export interface AppProviderProps {
   path?: string
   overrides?: DeepPartial<RouteParams>
   apiMocks?: (client: MockApi) => void
-  render?: (props: RouteParams) => JSX.Element
-  children?: (props: RouteParams) => JSX.Element
+  render?: (props: RouteParams) => React.ReactNode
+  children?: (props: RouteParams) => React.ReactNode
 }
 
 export const AppProvider: FunctionComponent<AppProviderProps> = ({

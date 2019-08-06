@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { Card, Avatar, Skeleton } from 'antd'
 import { Markdown } from './Markdown'
+import { ReadMore } from './ReadMore'
 import './NewsfeedPost.css'
 
 export interface NewsfeedPostProps {
@@ -45,7 +46,9 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
       extra={<a href='/'>{course}</a>}
     >
       <div className='NewsfeedPost__content'>
-        <Markdown>{content}</Markdown>
+        <ReadMore>
+          <Markdown>{content}</Markdown>
+        </ReadMore>
       </div>
     </Card>
   )
