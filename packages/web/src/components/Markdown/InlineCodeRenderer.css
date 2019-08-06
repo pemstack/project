@@ -1,0 +1,6 @@
+.InlineCodeRenderer {
+  border: 1px solid rgb(221, 221, 221);
+  background-color: #fdfdfd;
+  color: #000;
+  padding: .2em .2em;
+}

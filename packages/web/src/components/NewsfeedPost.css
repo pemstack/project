@@ -1,5 +1,6 @@
 .NewsfeedPost {
-  margin: 16px !important;
+  margin: 16px auto !important;
+  max-width: 800px;
 }
 
 .NewsfeedPost__content {
