@@ -30,7 +30,7 @@ function SimpleButton({ isOpen, toggle }: ToggleButtonProps) {
           type='down'
           style={{
             transform: `rotate( ${isOpen ? '180deg' : '0deg'})`,
-            transition: 'transform 0.5s',
+            transition: 'transform 0.4s',
           }}
         />
         {isOpen ? 'READ LESS' : 'READ MORE'}
