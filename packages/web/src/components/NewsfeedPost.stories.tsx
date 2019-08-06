@@ -41,6 +41,9 @@ function arraySum(array) {
 
 Fusce fermentum leo et metus egestas,
 hendrerit pellentesque lacus congue.
+
+---
+
 Donec pulvinar et lorem at pellentesque.
 
 \`\`\`xml

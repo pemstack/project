@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { Divider } from 'antd'
 import { LinkRenderer } from './LinkRenderer'
 import { CodeRenderer } from './CodeRenderer'
 import { InlineCodeRenderer } from './InlineCodeRenderer'
@@ -16,7 +17,8 @@ const renderers = {
   code: CodeRenderer,
   inlineCode: InlineCodeRenderer,
   math: MathRenderer,
-  inlineMath: InlineMathRenderer
+  inlineMath: InlineMathRenderer,
+  thematicBreak: Divider
 }
 
 export const Markdown: FunctionComponent<MarkdownProps> = ({
