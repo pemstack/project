@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
-import { Card, Avatar, Icon } from 'antd'
+import { Card, Avatar } from 'antd'
+import ReactMarkdown from 'react-markdown'
 import './NewsfeedPost.css'
 
 export interface NewsfeedPostProps {
@@ -27,7 +28,9 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
       }
       extra={<a href='/'>{course}</a>}
     >
-      <div className='NewsfeedPost__content'>{content}</div>
+      <div className='NewsfeedPost__content'>
+        <ReactMarkdown source={content} />
+      </div>
     </Card>
   )
 }

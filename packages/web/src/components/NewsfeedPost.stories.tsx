@@ -4,7 +4,21 @@ import { NewsfeedPost, NewsfeedPostProps } from './NewsfeedPost'
 
 const props: NewsfeedPostProps = {
   author: 'Author',
-  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet nibh volutpat, feugiat augue et, ultricies tortor. Nulla ut tincidunt orci, mattis euismod libero. Morbi interdum ipsum nec neque laoreet luctus.',
+  content: `
+## Project 1 deadline
+
+Project 1 deadline is set to **19/08/2019 23:59**.
+Source code must be published to [Github](https://github.com).
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Donec non arcu elit.
+Suspendisse volutpat nec nibh et malesuada.
+
+### More info
+
+Fusce fermentum leo et metus egestas,
+hendrerit pellentesque lacus congue.
+Donec pulvinar et lorem at pellentesque.
+`,
   course: 'Data Security',
   date: '3 hours ago'
 }
