@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { Card, Avatar, Skeleton } from 'antd'
+import { Card, Avatar, Skeleton, Tooltip } from 'antd'
 import { Markdown } from './Markdown'
 import { ReadMore } from './ReadMore'
 import './NewsfeedPost.css'
@@ -40,7 +40,7 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
         <Card.Meta
           avatar={<Avatar icon='user' />}
           title={author}
-          description={date}
+          description={<Tooltip title={date}>{date}</Tooltip>}
         />
       }
       extra={<a href='/'>{course}</a>}
