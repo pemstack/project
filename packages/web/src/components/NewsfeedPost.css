@@ -1,3 +1,7 @@
 .NewsfeedPost {
   margin: 16px !important;
 }
+
+.NewsfeedPost__content {
+  margin: 24px;
+}

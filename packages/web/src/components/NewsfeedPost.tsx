@@ -19,6 +19,7 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
   return (
     <Card
       className='NewsfeedPost'
+      bodyStyle={{ padding: 0 }}
       title={
         <Card.Meta
           avatar={<Avatar icon='user' />}
