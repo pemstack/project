@@ -19,8 +19,12 @@ const posts: NewsfeedPostProps[] = [
 Project 1 deadline is set to **19/08/2019 23:59**.
 Source code must be published to [Github](https://github.com).
 Lorem ipsum dolor sit amet, consectetur adipiscing elit \`sayHello('World')\`.
-Donec non arcu elit.
+Donec non arcu elit.  $y = 2x+3$
 Suspendisse volutpat nec nibh et malesuada.
+
+$$
+y = \\sum_{i=0}^{n}{(3i^2-5)}
+$$
 
 \`\`\`js
 function sayHello(name) {

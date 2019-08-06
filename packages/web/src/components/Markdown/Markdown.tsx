@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown'
 import { LinkRenderer } from './LinkRenderer'
 import { CodeRenderer } from './CodeRenderer'
 import { InlineCodeRenderer } from './InlineCodeRenderer'
+import { MathRenderer, InlineMathRenderer } from './MathRenderer'
+import RemarkMathPlugin from 'remark-math'
 import './Markdown.css'
 
 interface MarkdownProps {
@@ -12,7 +14,9 @@ interface MarkdownProps {
 const renderers = {
   link: LinkRenderer,
   code: CodeRenderer,
-  inlineCode: InlineCodeRenderer
+  inlineCode: InlineCodeRenderer,
+  math: MathRenderer,
+  inlineMath: InlineMathRenderer
 }
 
 export const Markdown: FunctionComponent<MarkdownProps> = ({
@@ -20,7 +24,11 @@ export const Markdown: FunctionComponent<MarkdownProps> = ({
 }) => {
   return (
     <div className='Markdown'>
-      <ReactMarkdown renderers={renderers} source={children} />
+      <ReactMarkdown
+        plugins={[RemarkMathPlugin]}
+        renderers={renderers}
+        source={children}
+      />
     </div>
   )
 }
