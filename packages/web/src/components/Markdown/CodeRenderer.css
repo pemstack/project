@@ -36,7 +36,7 @@
  }
  pre.prism-highlight>code.prism-highlight {
    position: relative;
-   border-left: 3px solid #358ccb;
+   border-left: 2px solid #358ccb;
    box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
    background-color: #fdfdfd;
  }
