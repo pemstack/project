@@ -23,6 +23,12 @@ Donec pulvinar et lorem at pellentesque.
   date: '3 hours ago'
 }
 
+function ClickHelp() {
+  return (
+    <div style={{ marginLeft: '24px' }}>Click on the card to toggle loading.</div>
+  )
+}
+
 function Loadable(props: NewsfeedPostProps) {
   const [loading, setLoading] = useState(!!props.loading)
   return (
@@ -45,10 +51,14 @@ storiesOf('NewsfeedPost', module)
     </div>
   ))
   .add('single post', () => (
-    <NewsfeedPost {...data} />
+    <>
+      <ClickHelp />
+      <Loadable {...data} />
+    </>
   ))
   .add('list of posts', () => (
     <>
+      <ClickHelp />
       <Loadable {...data} />
       <Loadable {...data} loading />
       <Loadable {...data} loading />
