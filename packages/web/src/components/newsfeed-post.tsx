@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { Card, Avatar, Skeleton } from 'antd'
 import ReactMarkdown from 'react-markdown'
-import './NewsfeedPost.css'
+import './newsfeed-post.css'
 
 export interface NewsfeedPostProps {
   author: string
