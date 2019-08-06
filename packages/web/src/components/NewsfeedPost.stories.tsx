@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import { NewsfeedPost, NewsfeedPostProps } from './newsfeed-post'
+import { NewsfeedPost, NewsfeedPostProps } from './NewsfeedPost'
 
 const posts: NewsfeedPostProps[] = [
   {
