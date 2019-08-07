@@ -30,7 +30,7 @@ export const ResizingContent: FunctionComponent = () => {
 
   useInterval(() => {
     setItems(maxItems.slice(0, Math.ceil(Math.random() * maxItems.length)))
-  }, 3000)
+  }, 2000)
 
   return (
     <div>

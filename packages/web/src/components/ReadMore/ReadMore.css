@@ -1,0 +1,32 @@
+.ReadMore__wrapper {
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+
+.ReadMore__container {
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.ReadMore__overhang {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.95));
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+.ReadMore__overhang--visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.ReadMore__overhang--hidden {
+  visibility: hidden;
+  opacity: 0;
+}
