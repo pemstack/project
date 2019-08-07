@@ -7,7 +7,11 @@ const posts: NewsfeedPostProps[] = [
     author: 'Author 1',
     course: 'Computer Networks',
     date: '5 minutes ago',
-    content: `Some simple content.`
+    content: `
+## Some title
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+`
   },
   {
     author: 'Author 2',
