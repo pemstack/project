@@ -51,7 +51,7 @@ export const DefaultLayout: FunctionComponent<RouteParams & DefaultLayoutProps> 
         </Menu>
       </Sider>
       <Layout className='DefaultLayout__main'>
-        <Header style={{ background: '#fff', padding: 0 }}>
+        <Header className='DefaultLayout__header'>
           <Icon
             className='DefaultLayout__trigger'
             type={collapsed ? 'menu-unfold' : 'menu-fold'}
