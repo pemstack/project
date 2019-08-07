@@ -406,7 +406,7 @@ export { default as LockOutline } from '@ant-design/icons/lib/outline/LockOutlin
 // export { default as ArrowUpOutline } from '@ant-design/icons/lib/outline/ArrowUpOutline'
 // export { default as ArrowsAltOutline } from '@ant-design/icons/lib/outline/ArrowsAltOutline'
 // export { default as AuditOutline } from '@ant-design/icons/lib/outline/AuditOutline'
-// export { default as BarsOutline } from '@ant-design/icons/lib/outline/BarsOutline'
+export { default as BarsOutline } from '@ant-design/icons/lib/outline/BarsOutline'
 // export { default as BehanceOutline } from '@ant-design/icons/lib/outline/BehanceOutline'
 // export { default as BarcodeOutline } from '@ant-design/icons/lib/outline/BarcodeOutline'
 // export { default as BoldOutline } from '@ant-design/icons/lib/outline/BoldOutline'
