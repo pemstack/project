@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common'
-import { APP_INTERCEPTOR, APP_GUARD } from '@nestjs/core'
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'
 import { GraphQLModule } from '@nestjs/graphql'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { inProject, inSrc } from 'globals'
+import { MailerModule } from 'mailer'
 import { AuthModule } from 'modules/auth'
+import { RecaptchaGuard, RecaptchaModule } from 'modules/recaptcha'
 import { TodosModule } from 'modules/todos'
-import { RecaptchaModule, RecaptchaGuard } from 'modules/recaptcha'
 import { ConfigModule, ConfigService } from 'nestjs-config'
-import { RateLimiterModule, RateLimiterInterceptor } from 'nestjs-rate-limiter'
+import { RateLimiterInterceptor, RateLimiterModule } from 'nestjs-rate-limiter'
 
 @Module({
   imports: [
@@ -24,12 +25,13 @@ import { RateLimiterModule, RateLimiterInterceptor } from 'nestjs-rate-limiter'
     }),
     TypeOrmModule.forRootAsync({
       useFactory: (config: ConfigService) => config.get('database'),
-      inject: [ConfigService],
+      inject: [ConfigService]
     }),
     GraphQLModule.forRoot({
       context: ({ req }) => ({ req }),
       autoSchemaFile: inProject('schema.gql')
     }),
+    MailerModule,
     RecaptchaModule,
     AuthModule,
     TodosModule
