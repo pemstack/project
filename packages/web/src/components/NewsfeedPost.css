@@ -6,3 +6,7 @@
 .NewsfeedPost__content {
   margin: 24px;
 }
+
+.NewsfeedPost .ReadMore--hidden .Markdown > :last-child {
+  margin-bottom: 0;
+}

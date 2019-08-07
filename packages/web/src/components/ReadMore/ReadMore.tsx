@@ -60,7 +60,7 @@ export const ReadMore: FunctionComponent<ReadMoreProps> = ({
   }
 
   return (
-    <div className='ReadMore'>
+    <div className={'ReadMore ReadMore--' + (isButtonVisible ? 'visible' : 'hidden')}>
       <div
         className='ReadMore__wrapper'
         style={{
