@@ -1,28 +1,33 @@
-import { Breadcrumb, Layout, Menu } from 'antd'
+import { Breadcrumb, Layout, Menu, Icon } from 'antd'
 import { RouteParams } from 'app/types'
 import React, { FunctionComponent } from 'react'
 import './DefaultLayout.css'
 
 export interface DefaultLayoutProps { }
 
-const DefaultLayout: FunctionComponent<RouteParams & DefaultLayoutProps> = ({ children }) => {
+export const DefaultLayout: FunctionComponent<RouteParams & DefaultLayoutProps> = ({ children }) => {
   return (
     <Layout className='DefaultLayout'>
-      <Layout.Header className='DefaultLayout__Header'>
-        <div className='content'>
-          <div className='DefaultLayout__logo' />
-          <Menu
-            className='DefaultLayout__Menu'
-            theme='dark'
-            mode='horizontal'
-            defaultSelectedKeys={['2']}
-          >
-            <Menu.Item key='1'>nav 1</Menu.Item>
-            <Menu.Item key='2'>nav 2</Menu.Item>
-            <Menu.Item key='3'>nav 3</Menu.Item>
-          </Menu>
-        </div>
-      </Layout.Header>
+      <Layout.Sider className='DefaultLayout__Sider'>
+        <Menu theme='dark' mode='inline' defaultSelectedKeys={['4']}>
+          <Menu.Item key='1'>
+            <Icon type='user' />
+            <span className='nav-text'>nav 1</span>
+          </Menu.Item>
+          <Menu.Item key='2'>
+            <Icon type='user' />
+            <span className='nav-text'>nav 2</span>
+          </Menu.Item>
+          <Menu.Item key='3'>
+            <Icon type='user' />
+            <span className='nav-text'>nav 3</span>
+          </Menu.Item>
+          <Menu.Item key='4'>
+            <Icon type='user' />
+            <span className='nav-text'>nav 4</span>
+          </Menu.Item>
+        </Menu>
+      </Layout.Sider>
       <Layout.Content className='DefaultLayout__Content'>
         <div className='content'>
           <Breadcrumb className='DefaultLayout__Breadcrumb'>
@@ -43,5 +48,3 @@ const DefaultLayout: FunctionComponent<RouteParams & DefaultLayoutProps> = ({ ch
     </Layout>
   )
 }
-
-export default DefaultLayout

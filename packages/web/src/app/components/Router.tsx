@@ -1,6 +1,6 @@
 import { useApp, useEvent } from '@pema/app-react'
 import { RouterView } from '@pema/router'
-import DefaultLayout from 'app/layout/DefaultLayout'
+import { DefaultLayout } from 'app/layout/DefaultLayout'
 import { App, LayoutPicker, RouteParams, View } from 'app/types'
 import React, { ComponentType, FunctionComponent } from 'react'
 import { Error } from './Error'
