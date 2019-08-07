@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Formik, Form, Input, Checkbox, SubmitButton, Icon, FormikActions } from 'forms'
 import { View, redirect, allow, stringParam, errorCode, useAction } from 'app'
 import { LOGIN, LoginParams } from 'api/user.api'
+import { Card } from 'antd'
+import './login.view.css'
 
 export const LoginView: View = ({
   router,
@@ -30,41 +32,56 @@ export const LoginView: View = ({
 
   return (
     <div className='Login'>
-      <Formik
-        validationSchema={login.schema}
-        onSubmit={submit}
-        initialValues={{
-          username: '',
-          password: '',
-          persist: false
-        }}
-        render={() => (
-          <Form showCaptcha>
-            {error && <div className='Login__error'>{error}</div>}
-            <Form.Item name='username'>
-              <Input
-                name='username'
-                prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder='Username'
-              />
-            </Form.Item>
-            <Form.Item name='password'>
-              <Input
-                name='password'
-                prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type='password'
-                placeholder='Password'
-              />
-            </Form.Item>
-            <Checkbox name='persist'>Remember me</Checkbox>
-            <SubmitButton>Log in</SubmitButton>
-            <a className='login-form-forgot' href='#'>Forgot password</a>
-            Or <a href='#'>register now!</a>
-          </Form>
-        )}
-      />
+      <Card className='Login__card'>
+        <h2>Log in</h2>
+        <Formik
+          validationSchema={login.schema}
+          onSubmit={submit}
+          initialValues={{
+            username: '',
+            password: '',
+            persist: false
+          }}
+          render={() => (
+            <Form showCaptcha>
+              {error && <div className='Login__error'>{error}</div>}
+              <Form.Item name='username'>
+                <Input
+                  name='username'
+                  prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder='Username'
+                />
+              </Form.Item>
+              <Form.Item name='password'>
+                <Input
+                  name='password'
+                  prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  type='password'
+                  placeholder='Password'
+                />
+              </Form.Item>
+              <Form.Item name='persist'>
+                <Checkbox name='persist'>Remember me</Checkbox>
+              </Form.Item>
+              <SubmitButton
+                preventDisabling
+                className='Login__submit'
+              >
+                Log in
+              </SubmitButton>
+              <br />
+              <a className='login-form-forgot' href='#'>Forgot password</a>
+              Or <a href='#'>register now!</a>
+            </Form>
+          )}
+        />
+      </Card>
     </div>
   )
+}
+
+LoginView.layout = {
+  type: 'none'
 }
 
 LoginView.onEnter = ({
