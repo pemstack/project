@@ -3,8 +3,8 @@ import { RouterView } from '@pema/router'
 import DefaultLayout from 'app/layout/DefaultLayout'
 import { App, LayoutPicker, RouteParams, View } from 'app/types'
 import React, { ComponentType, FunctionComponent } from 'react'
-import Error from './Error'
-import Loading from './Loading'
+import { Error } from './Error'
+import { Loading } from './Loading'
 
 const NoLayout: FunctionComponent<RouteParams> = ({ children }) => <>{children}</>
 
@@ -76,7 +76,7 @@ class Catcher extends React.Component<CatcherProps, CatcherState> {
   }
 }
 
-const Router: FunctionComponent = () => {
+export const Router: FunctionComponent = () => {
   const app = useApp<App>()
   useEvent('router.view')
   useEvent('render')
@@ -85,7 +85,7 @@ const Router: FunctionComponent = () => {
   const view = router.view
   const params: RouteParams = router.current as any
   if (!view) {
-    return <DefaultLayout {...params} />
+    return null
   }
 
   switch (view.type) {
@@ -127,5 +127,3 @@ const Router: FunctionComponent = () => {
       return null
   }
 }
-
-export default Router

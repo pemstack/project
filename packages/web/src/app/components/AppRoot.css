@@ -1,3 +1,7 @@
+.AppRoot {
+  overflow: hidden;
+}
+
 /* Make clicks pass-through */
 #nprogress {
   pointer-events: none;

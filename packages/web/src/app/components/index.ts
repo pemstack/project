@@ -1,3 +1,4 @@
-export { default as Error } from './Error'
-export { default as Loading } from './Loading'
-export { default as Router } from './Router'
+export { Error } from './Error'
+export { Loading } from './Loading'
+export { MinimalLoading } from './MinimalLoading'
+export { Router } from './Router'
