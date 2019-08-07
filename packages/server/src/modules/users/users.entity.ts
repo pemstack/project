@@ -37,10 +37,7 @@ export class User {
   @ArrayUnique()
   roles: UserRole[] = [UserRole.USER]
 
-  @Column({
-    type: 'simple-enum',
-    enum: UserStatus
-  })
+  @Column()
   @IsEnum(UserStatus)
   status: UserStatus = UserStatus.PENDING
 }
