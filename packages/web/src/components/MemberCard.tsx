@@ -7,26 +7,30 @@ export interface MemberCardProps {
   fullName: string
   role: string
   loading?: boolean
+  style?: React.CSSProperties
 }
 
 export const MemberCard: FunctionComponent<MemberCardProps> = ({
   avatar,
   fullName,
   role,
-  loading
+  loading,
+  style
 }) => {
   if (loading) {
     return (
       <Card
+        style={style}
         className='MemberCard'
       >
-        <Skeleton active avatar paragraph={{ rows: 1}} />
+        <Skeleton active avatar={{size: 'large'}} paragraph={{ rows: 1, width: 60}} />
       </Card>
     )
   }
 
   return (
     <Card
+      style={style}
       className='MemberCard'
       title={
         <Card.Meta

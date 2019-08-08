@@ -20,6 +20,11 @@ const users: MemberCardProps[] = [
   }
 ]
 
+const cardStyle = {
+  maxWidth: '400px',
+  margin: '0 auto'
+}
+
 storiesOf('MemberCard', module)
   .addDecorator(story => (
     <div
@@ -34,6 +39,7 @@ storiesOf('MemberCard', module)
   ))
   .add('single', () => (
     <MemberCard
+      style={cardStyle}
       avatar='www.image.com/someimage.png'
       fullName='Name Surname'
       role='Student'
@@ -41,6 +47,7 @@ storiesOf('MemberCard', module)
   ))
   .add('loading', () => (
     <MemberCard
+      style={cardStyle}
       avatar='www.image.com/someimage.png'
       fullName='Name Surname'
       role='Student'
@@ -49,6 +56,8 @@ storiesOf('MemberCard', module)
   ))
   .add('list of members', () => (
     <>
-      {users.map((user, i) => <MemberCard key={i} {...user} />)}
+      {users.map((user, i) => (
+        <MemberCard key={i} style={cardStyle} {...user} />
+      ))}
     </>
   ))

@@ -1,0 +1,47 @@
+.DefaultLayout {
+  min-height: 100vh;
+}
+
+@media only screen and (max-width: 576px) {
+  .DefaultLayout__main {
+    min-width: 100vw;
+  }
+}
+
+.DefaultLayout__sider {
+  box-shadow: 2px 0px 10px 0px rgba(0,0,0,0.25);
+}
+
+.DefaultLayout__header {
+  background: #fff;
+  padding: 0;
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
+}
+
+.DefaultLayout__content {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 32px 8px;
+}
+
+.DefaultLayout__footer {
+  text-align: center;
+}
+
+.DefaultLayout__logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.DefaultLayout__trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.DefaultLayout__trigger:hover {
+  color: #1890ff;
+}
