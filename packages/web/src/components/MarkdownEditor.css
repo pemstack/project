@@ -1,9 +1,15 @@
+.MarkdownEditor__wrapper {
+  margin: 16px;
+}
+
 .MarkdownEditor .MarkdownEditor__input {
-  min-height: 200px;
+  box-sizing: border-box;
+  height: 120px;
 }
 
 .MarkdownEditor__preview {
-  min-height: 200px;
+  box-sizing: border-box;
+  min-height: 120px;
 }
 
 .MarkdownEditor > .ant-tabs-card > .ant-tabs-content {
@@ -12,7 +18,7 @@
 
 .MarkdownEditor > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
   background: #fff;
-  padding: 16px;
+  overflow: hidden;
 }
 
 .MarkdownEditor > .ant-tabs-card > .ant-tabs-bar {

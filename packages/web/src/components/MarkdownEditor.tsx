@@ -43,7 +43,7 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
         defaultActiveKey='write'
       >
         <TabPane tab='Write' key='write'>
-          <div className='MarkdownEditor__write'>
+          <div className='MarkdownEditor__wrapper'>
             <TextArea
               className='MarkdownEditor__input'
               value={value}
@@ -52,8 +52,10 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
           </div>
         </TabPane>
         <TabPane tab='Preview' key='preview'>
-          <div className='MarkdownEditor__preview'>
-            <MemoMarkdown value={value || 'Nothing to preview'} shouldUpdate={currentTab === 'preview'} />
+          <div className='MarkdownEditor__wrapper'>
+            <div className='MarkdownEditor__preview'>
+              <MemoMarkdown value={value || 'Nothing to preview'} shouldUpdate={currentTab === 'preview'} />
+            </div>
           </div>
         </TabPane>
       </Tabs>
