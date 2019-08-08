@@ -1,0 +1,12 @@
+.Comment {
+  background-color: white;
+  padding: 0 16px;
+}
+
+.Comment .ant-comment-actions {
+  margin-bottom: 0;
+}
+
+.Comment__author {
+  color: #545657;
+}
