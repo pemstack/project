@@ -23,7 +23,22 @@ const comments: CommentProps[] = [{
   title: '1 hour ago',
   action: 'disliked',
   author: 'Dea Bytyqi',
-  content: 'Hello world!'
+  content: `
+Lorem ipsum dolor sit amet, **consectetur adipiscing elit**.
+Integer sit amet commodo ex, ut vehicula enim.
+
+$$
+y = 2x - 3
+$$
+
+Suspendisse pellentesque molestie nibh, volutpat maximus ipsum lacinia eu.
+
+\`\`\`js
+function sayHello(name) {
+  console.log('Hello ' + name)
+}
+\`\`\`
+`
 }]
 
 storiesOf('Comment', module)
