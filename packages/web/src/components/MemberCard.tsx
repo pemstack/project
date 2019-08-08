@@ -2,46 +2,44 @@ import React, { FunctionComponent } from 'react'
 import { Card, Avatar, Skeleton } from 'antd'
 import './MemberCard.css'
 
-export interface MemberCardProps {
+export interface MemberCardItem {
   avatar: string
   fullName: string
   role: string
+}
+
+export interface MemberCardProps {
+  item: MemberCardItem
   loading?: boolean
   style?: React.CSSProperties
 }
 
 export const MemberCard: FunctionComponent<MemberCardProps> = ({
-  avatar,
-  fullName,
-  role,
+  item: {
+    avatar,
+    fullName,
+    role
+  },
   loading,
   style
 }) => {
-  if (loading) {
-    return (
-      <Card
-        style={style}
-        className='MemberCard'
-      >
-        <Skeleton active avatar={{size: 'large'}} paragraph={{ rows: 1, width: 60}} />
-      </Card>
-    )
-  }
-
   return (
-    <Card
-      style={style}
-      className='MemberCard'
-      title={
-        <Card.Meta
-          avatar={<Avatar size={64} icon='user' />} // TODO: <Avatar src='x.png' />
-          title={fullName}
-          description={role}
-        />
-      }
-      extra={<a href='/'>View Profile</a>}
-      bodyStyle={{display: 'none'}}
-    >
+    <Card style={style} className='MemberCard'>
+      {loading
+        ? (
+          <Skeleton
+            active
+            avatar={{ size: 'large' }}
+            paragraph={{ rows: 1, width: 80 }}
+          />
+        )
+        : (
+          <Card.Meta
+            avatar={<Avatar size='large' icon='user' />}
+            title={fullName}
+            description={role}
+          />
+        )}
     </Card>
   )
 }

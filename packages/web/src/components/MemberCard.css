@@ -1,0 +1,12 @@
+.MemberCard .ant-skeleton-with-avatar .ant-skeleton-content .ant-skeleton-title {
+  margin-top: 0px;
+}
+
+.MemberCard .ant-skeleton-with-avatar .ant-skeleton-content .ant-skeleton-paragraph {
+  margin-top: 19px;
+  margin-bottom: 0px;
+}
+
+.MemberCard .ant-skeleton-with-avatar .ant-skeleton-content .ant-skeleton-paragraph li {
+  height: 10px;
+}

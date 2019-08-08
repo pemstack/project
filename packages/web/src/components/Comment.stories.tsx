@@ -1,9 +1,9 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Comment, CommentProps } from './Comment'
+import { Comment, CommentItem } from './Comment'
 import { Divider } from 'antd'
 
-const comments: CommentProps[] = [{
+const comments: CommentItem[] = [{
   likes: 1,
   dislikes: 2,
   title: '59 seconds ago',
@@ -53,18 +53,20 @@ storiesOf('Comment', module)
     </div>
   )).add('single', () => (
     <Comment
-      likes={1}
-      dislikes={2}
-      title='2 minutes ago'
-      action='liked'
-      author='Diellza Gashi'
-      content='Hello World!'
+      item={{
+        likes: 1,
+        dislikes: 2,
+        title: '2 minutes ago',
+        action: 'liked',
+        author: 'Diellza Gashi',
+        content: 'Hello World!'
+      }}
     />
   )).add('list of comments', () => (
     <>
       {comments.map((comment, i) => (
         <div key={i}>
-          <Comment {...comment} />
+          <Comment item={comment} />
           <Divider style={{ margin: 0 }} />
         </div>
       ))}

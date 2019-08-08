@@ -3,7 +3,7 @@ import { Comment as $Comment, Icon, Tooltip, Avatar } from 'antd'
 import { Markdown } from './Markdown'
 import './Comment.css'
 
-export interface CommentProps {
+export interface CommentItem {
   likes: number
   dislikes: number
   action: string
@@ -12,13 +12,19 @@ export interface CommentProps {
   content: string
 }
 
+export interface CommentProps {
+  item: CommentItem
+}
+
 export const Comment: FunctionComponent<CommentProps> = ({
-  likes,
-  dislikes,
-  action,
-  title,
-  author,
-  content
+  item: {
+    likes,
+    dislikes,
+    action,
+    title,
+    author,
+    content
+  }
 }) => {
   const actions = [
     (

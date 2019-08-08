@@ -40,7 +40,8 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
         onChange={setCurrentTab}
         type='card'
         className='MarkdownEditor__tabs'
-        defaultActiveKey='write'>
+        defaultActiveKey='write'
+      >
         <TabPane tab='Write' key='write'>
           <div className='MarkdownEditor__write'>
             <TextArea

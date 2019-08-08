@@ -4,19 +4,25 @@ import { Markdown } from './Markdown'
 import { ReadMore } from './ReadMore'
 import './NewsfeedPost.css'
 
-export interface NewsfeedPostProps {
+export interface NewsfeedPostItem {
   author: string
   content: string
   course: string
   date: string
+}
+
+export interface NewsfeedPostProps {
+  item: NewsfeedPostItem
   loading?: boolean
 }
 
 export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
-  author,
-  content,
-  course,
-  date,
+  item: {
+    author,
+    content,
+    course,
+    date
+  },
   loading
 }) => {
   if (loading) {

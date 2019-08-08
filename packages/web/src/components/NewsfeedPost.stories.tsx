@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { NewsfeedPost, NewsfeedPostProps } from './NewsfeedPost'
+import { NewsfeedPost, NewsfeedPostItem } from './NewsfeedPost'
 
-const posts: NewsfeedPostProps[] = [
+const posts: NewsfeedPostItem[] = [
   {
     author: 'Author 1',
     course: 'Computer Networks',
@@ -87,8 +87,7 @@ storiesOf('NewsfeedPost', module)
     <div
       style={{
         background: '#eee',
-        paddingTop: '32px',
-        paddingBottom: '32px'
+        padding: '32px'
       }}
     >
       {story()}
@@ -97,26 +96,34 @@ storiesOf('NewsfeedPost', module)
   .add('single', () => (
     <>
       <NewsfeedPost
-        author='Post Author'
-        date='2 days ago'
-        course='Data Security'
-        content='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        item={{
+          author: 'Post Author',
+          date: '2 days ago',
+          course: 'Data Security',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        }}
       />
     </>
   ))
   .add('loading', () => (
     <>
       <NewsfeedPost
-        author='Post Author'
-        date='2 days ago'
-        course='Data Security'
-        content='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        item={{
+          author: 'Post Author',
+          date: '2 days ago',
+          course: 'Data Security',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        }}
         loading
       />
     </>
   ))
   .add('list of posts', () => (
     <>
-      {posts.map((post, i) => <NewsfeedPost key={i} {...post} />)}
+      {posts.map((post, i) => (
+        <div key={i} style={{ marginTop: '24px', marginBottom: '24px' }}>
+          <NewsfeedPost item={post} />
+        </div>
+      ))}
     </>
   ))
