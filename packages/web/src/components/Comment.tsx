@@ -60,9 +60,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
         <Markdown>{content}</Markdown>
       }
       datetime={
-        <Tooltip title={title}>
-          <span style={{ fontSize: '1.17em' }}>{title}</span>
-        </Tooltip>
+        <Tooltip title={title}>{title}</Tooltip>
       }
     />
   )
