@@ -1,0 +1,30 @@
+.MarkdownEditor .MarkdownEditor__input {
+  min-height: 200px;
+}
+
+.MarkdownEditor__preview {
+  min-height: 200px;
+}
+
+.MarkdownEditor > .ant-tabs-card > .ant-tabs-content {
+  margin-top: -16px;
+}
+
+.MarkdownEditor > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+  background: #fff;
+  padding: 16px;
+}
+
+.MarkdownEditor > .ant-tabs-card > .ant-tabs-bar {
+  border-color: #fff;
+}
+
+.MarkdownEditor > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  border-color: transparent;
+  background: transparent;
+}
+
+.MarkdownEditor > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+  border-color: #fff;
+  background: #fff;
+}
