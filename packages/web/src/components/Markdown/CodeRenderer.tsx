@@ -43,7 +43,7 @@ export const CodeRenderer: FunctionComponent<CodeRendererProps> = ({
       CodeTag={Code}
       PreTag={Pre}
     >
-      {value}
+      {value || ''}
     </PrismAsyncLight>
   )
 }

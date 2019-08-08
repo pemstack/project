@@ -1,20 +1,35 @@
 import React, { useState, FunctionComponent } from 'react'
 import { Layout, Menu, Icon } from 'antd'
-import { RouteParams } from 'app/types'
 import './DefaultLayout.css'
 
 const { Header, Content, Footer, Sider } = Layout
 
-export interface DefaultLayoutProps { }
+export interface DefaultLayoutProps {
+  children: React.ReactNode
+  defaultMobile?: boolean
+  defaultCollapsed?: boolean
+}
 
 function getWidth() {
   return typeof window !== 'undefined' && window.innerWidth
 }
 
-export const DefaultLayout: FunctionComponent<RouteParams & DefaultLayoutProps> = ({ children }) => {
+function fallback(value: boolean | undefined, fallbackValue: boolean) {
+  if (typeof value === 'undefined') {
+    return value
+  } else {
+    return fallbackValue
+  }
+}
+
+export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
+  children,
+  defaultMobile,
+  defaultCollapsed
+}) => {
   const width = getWidth()
-  const [mobile, setMobile] = useState(width <= 576)
-  const [collapsed, setCollapsed] = useState(width <= 768)
+  const [mobile, setMobile] = useState(fallback(defaultMobile, width <= 576))
+  const [collapsed, setCollapsed] = useState(fallback(defaultCollapsed, width <= 768))
 
   function toggle() {
     setCollapsed(c => !c)
@@ -59,19 +74,7 @@ export const DefaultLayout: FunctionComponent<RouteParams & DefaultLayoutProps> 
           />
         </Header>
         <Content className='DefaultLayout__content'>
-          <div style={{ background: 'white' }}>
-            content
-            content
-            content
-            content
-            content
-            content
-            content
-            content
-            content
-            content
-            content
-          </div>
+          {children}
         </Content>
         <Footer className='DefaultLayout__footer'>
           Ant Design ©2018 Created by Ant UED
