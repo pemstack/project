@@ -14,11 +14,11 @@ function getWidth() {
   return typeof window !== 'undefined' && window.innerWidth
 }
 
-function fallback(value: boolean | undefined, fallback: boolean) {
+function fallback(value: boolean | undefined, fallbackValue: boolean) {
   if (typeof value === 'undefined') {
     return value
   } else {
-    return fallback
+    return fallbackValue
   }
 }
 
