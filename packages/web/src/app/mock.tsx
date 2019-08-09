@@ -49,7 +49,7 @@ export interface AppProviderProps {
   overrides?: DeepPartial<RouteParams>
   apiMocks?: (client: MockApi) => void
   render?: (props: RouteParams) => React.ReactNode
-  children?: (props: RouteParams) => React.ReactNode
+  children?: React.ReactNode | ((props: RouteParams) => React.ReactNode)
 }
 
 export const AppProvider: FunctionComponent<AppProviderProps> = ({
@@ -91,7 +91,7 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
     <AppContext.Provider value={app}>
       {children && typeof children !== 'function'
         ? children
-        : (render || children || noop)(params as RouteParams)}
+        : (render || (children as ((props: RouteParams) => React.ReactNode)) || noop)(params as RouteParams)}
     </AppContext.Provider>
   )
 }

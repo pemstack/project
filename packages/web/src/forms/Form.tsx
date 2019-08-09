@@ -32,3 +32,4 @@ export function Form(props: FormProps) {
 }
 
 Form.Item = FormItem
+Form.AntdItem = AntdForm.Item
