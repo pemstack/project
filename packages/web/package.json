@@ -10,7 +10,8 @@
     "test": "react-app-rewired test",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "storybook": "start-storybook -p 3001 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "i18n-extract": "cross-env NODE_ENV=development babel -f .babelrc 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "browserslist": {
     "development": [
@@ -80,6 +81,7 @@
     "**/*.css"
   ],
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@storybook/addon-actions": "^5.1.10",
     "@storybook/addon-info": "^5.1.10",
@@ -87,6 +89,7 @@
     "@storybook/react": "^5.1.10",
     "@types/storybook__react": "^4.0.2",
     "babel-loader": "8.0.5",
+    "babel-plugin-i18next-extract": "^0.2.3",
     "react-docgen-typescript-loader": "^3.1.0"
   }
 }

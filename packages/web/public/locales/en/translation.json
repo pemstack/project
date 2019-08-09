@@ -1,6 +1,11 @@
 {
+  "MarkdownEditor": {
+    "empty": "",
+    "preview": "",
+    "write": ""
+  },
   "button": {
-    "submit": "SUBMIT",
-    "cancel": "CANCEL"
+    "cancel": "CANCEL",
+    "submit": "SUBMIT"
   }
 }
