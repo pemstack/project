@@ -1,7 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { Comment, CommentItem } from './Comment'
-import { Divider } from 'antd'
+import { Divider, Button } from 'antd'
+import { MarkdownEditor } from './MarkdownEditor'
 
 const comments: CommentItem[] = [{
   likes: 1,
@@ -67,8 +68,16 @@ storiesOf('Comment', module)
       {comments.map((comment, i) => (
         <div key={i}>
           <Comment item={comment} />
-          <Divider style={{ margin: 0 }} />
         </div>
       ))}
+      <div style={{ marginTop: '16px' }} />
+      <MarkdownEditor
+        value=''
+        submit={
+          <div style={{ marginTop: '16px' }}>
+            <Button type='primary'>Submit</Button>
+          </div>
+        }
+      />
     </>
   ))
