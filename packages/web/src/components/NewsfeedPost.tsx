@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { Card, Avatar, Skeleton, Tooltip } from 'antd'
+import moment, { Moment } from 'moment'
 import { Markdown } from './Markdown'
 import { ReadMore } from './ReadMore'
 import './NewsfeedPost.css'
@@ -8,7 +9,7 @@ export interface NewsfeedPostItem {
   author: string
   content: string
   course: string
-  date: string
+  date: Date | Moment
 }
 
 export interface NewsfeedPostProps {
@@ -38,6 +39,8 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
     )
   }
 
+  const m = moment(date)
+
   return (
     <Card
       className='NewsfeedPost'
@@ -46,7 +49,7 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
         <Card.Meta
           avatar={<Avatar icon='user' />}
           title={author}
-          description={<Tooltip title={date}>{date}</Tooltip>}
+          description={<Tooltip title={m.format('DD/MM/YYYY HH:mm')}>{m.fromNow()}</Tooltip>}
         />
       }
       extra={<a href='/'>{course}</a>}

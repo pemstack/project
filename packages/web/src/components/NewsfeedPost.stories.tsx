@@ -1,13 +1,18 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { decorator } from 'app/mock'
+import moment from 'moment'
 import { NewsfeedPost, NewsfeedPostItem } from './NewsfeedPost'
+
+function randomDate() {
+  return moment().subtract(0.5 * Math.random(), 'hours')
+}
 
 const posts: NewsfeedPostItem[] = [
   {
     author: 'Author 1',
     course: 'Computer Networks',
-    date: '5 minutes ago',
+    date: randomDate(),
     content: `
 ## Some title
 
@@ -17,7 +22,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   {
     author: 'Author 2',
     course: 'Data Security',
-    date: '3 hours ago',
+    date: randomDate(),
     content: `
 ## Project 1 deadline
 
@@ -72,7 +77,7 @@ Sed consectetur ante odio, a vulputate felis malesuada vel.
   {
     author: 'Author 3',
     course: 'Computer Networks',
-    date: '2 days ago',
+    date: randomDate(),
     content: `Some simple content.`
   },
 ]
@@ -84,7 +89,7 @@ storiesOf('NewsfeedPost', module)
       <NewsfeedPost
         item={{
           author: 'Post Author',
-          date: '2 days ago',
+          date: randomDate(),
           course: 'Data Security',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         }}
@@ -96,7 +101,7 @@ storiesOf('NewsfeedPost', module)
       <NewsfeedPost
         item={{
           author: 'Post Author',
-          date: '2 days ago',
+          date: randomDate(),
           course: 'Data Security',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         }}
