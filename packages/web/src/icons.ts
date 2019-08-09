@@ -445,7 +445,7 @@ export { default as BarsOutline } from '@ant-design/icons/lib/outline/BarsOutlin
 // export { default as DollarOutline } from '@ant-design/icons/lib/outline/DollarOutline'
 // export { default as DotChartOutline } from '@ant-design/icons/lib/outline/DotChartOutline'
 // export { default as DoubleRightOutline } from '@ant-design/icons/lib/outline/DoubleRightOutline'
-// export { default as DownOutline } from '@ant-design/icons/lib/outline/DownOutline'
+export { default as DownOutline } from '@ant-design/icons/lib/outline/DownOutline'
 // export { default as DownloadOutline } from '@ant-design/icons/lib/outline/DownloadOutline'
 // export { default as DragOutline } from '@ant-design/icons/lib/outline/DragOutline'
 // export { default as DribbbleOutline } from '@ant-design/icons/lib/outline/DribbbleOutline'

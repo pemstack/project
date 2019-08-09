@@ -1,11 +1,13 @@
 import React, { useState, FunctionComponent } from 'react'
 import { Layout, Menu, Icon } from 'antd'
 import './DefaultLayout.css'
+import { LanguageSelector } from 'components/LanguageSelector/LanguageSelector';
+import { Loader } from 'components'
 
 const { Header, Content, Footer, Sider } = Layout
 
 export interface DefaultLayoutProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   defaultMobile?: boolean
   defaultCollapsed?: boolean
 }
@@ -72,6 +74,11 @@ export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
             type={collapsed ? 'menu-unfold' : 'menu-fold'}
             onClick={toggle}
           />
+          <span className='DefaultLayout__language-selector'>
+            <Loader>
+              <LanguageSelector />
+            </Loader>
+          </span>
         </Header>
         <Content className='DefaultLayout__content'>
           {children}

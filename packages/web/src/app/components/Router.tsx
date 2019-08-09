@@ -8,7 +8,7 @@ import { Loading } from './Loading'
 
 const NoLayout: FunctionComponent<RouteParams> = ({ children }) => <>{children}</>
 
-function getLayout(params: RouteParams, type: LayoutPicker = 'default'): [ComponentType<RouteParams>, {}] {
+function getLayout(params: RouteParams, type: LayoutPicker = 'default'): [ComponentType<any>, {}] {
   if (typeof type === 'function') {
     type = type(params)
   }

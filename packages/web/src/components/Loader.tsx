@@ -4,16 +4,16 @@ import './Loader.css'
 
 interface LoaderProps {
   children?: React.ReactNode
+  size?: 'small' | 'default' | 'large'
 }
 
-export const Loader: FunctionComponent<LoaderProps> = ({ children }) => {
+export const Loader: FunctionComponent<LoaderProps> = ({
+  children,
+  size
+}) => {
   return (
     <Suspense
-      fallback={
-        <div className='Loader'>
-          <Spin size='large' />
-        </div>
-      }
+      fallback={<Spin className='Loader' size={size} />}
     >
       {children}
     </Suspense>

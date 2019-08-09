@@ -45,3 +45,9 @@
 .DefaultLayout__trigger:hover {
   color: #1890ff;
 }
+
+.DefaultLayout__language-selector {
+  float: right;
+  line-height: 64px;
+  padding: 0 24px;
+}

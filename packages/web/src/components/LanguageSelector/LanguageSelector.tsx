@@ -18,10 +18,16 @@ export const LanguageSelector: FunctionComponent<LanguageSelectorProps> = ({
 
 }) => {
   const { i18n } = useTranslation()
+
+  function changeLanguage(lng: string) {
+    setTimeout(() => i18n.changeLanguage(lng), 0)
+  }
+
   return (
     <Select
-      defaultValue={i18n.language || 'en'}
-      onChange={(value: string) => i18n.changeLanguage(value)}
+      className='LanguageSelector'
+      value={i18n.language || 'en'}
+      onChange={changeLanguage}
       style={{ minWidth: '160px' }}
     >
       <Option value='sq'>
