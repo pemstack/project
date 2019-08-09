@@ -1,5 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { decorator } from 'app/mock'
 import { NewsfeedPost, NewsfeedPostItem } from './NewsfeedPost'
 
 const posts: NewsfeedPostItem[] = [
@@ -76,23 +77,8 @@ Sed consectetur ante odio, a vulputate felis malesuada vel.
   },
 ]
 
-function ClickHelp() {
-  return (
-    <div style={{ marginLeft: '24px' }}>Click on the card to toggle loading.</div>
-  )
-}
-
 storiesOf('NewsfeedPost', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        background: '#eee',
-        padding: '32px'
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(decorator())
   .add('single', () => (
     <>
       <NewsfeedPost

@@ -1,21 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { RegisterForm } from './RegisterForm'
-import { AppProvider } from 'app/mock';
+import { AppProvider, decorator } from 'app/mock'
 import { Formik } from 'forms'
+import { RegisterForm } from './RegisterForm'
 
 storiesOf('RegisterForm', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        background: '#eee',
-        padding: '32px'
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(decorator())
   .add('default', () => (
     <AppProvider>
       <Formik

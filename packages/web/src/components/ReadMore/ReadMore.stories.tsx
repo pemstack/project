@@ -1,5 +1,6 @@
 import React, { useState, FunctionComponent, useEffect, useRef } from 'react'
 import { storiesOf } from '@storybook/react'
+import { decorator } from 'app/mock'
 import { ReadMore } from './ReadMore'
 
 function useInterval(callback: () => void, delay: number) {
@@ -55,21 +56,15 @@ storiesOf('ReadMore', module)
   .addDecorator(story => (
     <div
       style={{
-        background: '#eee',
-        padding: '16px'
+        background: '#fff',
+        maxWidth: '600px',
+        margin: '0 auto'
       }}
     >
-      <div
-        style={{
-          background: '#fff',
-          maxWidth: '600px',
-          margin: '0 auto'
-        }}
-      >
-        {story()}
-      </div>
+      {story()}
     </div>
   ))
+  .addDecorator(decorator())
   .add('overflowing', () => (
     <ReadMore>
       <p>

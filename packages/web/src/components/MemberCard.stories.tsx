@@ -1,7 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { MemberCard, MemberCardItem } from './MemberCard'
 import { List } from 'antd'
+import { decorator } from 'app/mock'
+import { MemberCard, MemberCardItem } from './MemberCard'
 
 const users: MemberCardItem[] = [
   {
@@ -57,16 +58,7 @@ const cardStyle = {
 }
 
 storiesOf('MemberCard', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        background: '#eee',
-        padding: '32px'
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(decorator())
   .add('single', () => (
     <MemberCard
       style={cardStyle}

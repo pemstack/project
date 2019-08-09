@@ -267,9 +267,11 @@
       "import React from 'react'",
       "import { storiesOf } from '@storybook/react'",
       "import { action } from '@storybook/addon-actions'",
-      "import { AppProvider } from 'app/mock'",
+      "import { AppProvider, decorator } from 'app/mock'",
+      "import { $1 } from './$1'",
       "",
       "storiesOf('$1', module)",
+      "  .addDecorator(decorator())",
       "  .add('default', () => <$1 />)",
       ""
     ]

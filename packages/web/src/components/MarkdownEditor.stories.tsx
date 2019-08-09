@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import { MarkdownEditor } from './MarkdownEditor'
 import { Button } from 'antd'
+import { decorator } from 'app/mock'
+import { MarkdownEditor } from './MarkdownEditor'
 
 interface InputControllerProps {
   defaultValue?: string
@@ -101,16 +102,7 @@ Sed consectetur ante odio, a vulputate felis malesuada vel.
 `.trim()
 
 storiesOf('MarkdownEditor', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        background: '#eee',
-        padding: '32px'
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(decorator())
   .add('default', () => (
     <InputController />
   ))

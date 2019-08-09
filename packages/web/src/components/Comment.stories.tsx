@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import { storiesOf } from '@storybook/react'
+import { useTranslation } from 'react-i18next'
+import { Button } from 'antd'
+import { decorator } from 'app/mock'
 import { Comment, CommentItem } from './Comment'
-import { Divider, Button } from 'antd'
 import { MarkdownEditor } from './MarkdownEditor'
+import { Loader } from './Loader'
 
 const comments: CommentItem[] = [
   {
@@ -46,17 +49,23 @@ function sayHello(name) {
   }
 ]
 
+const EditorWithLocalization: FunctionComponent = () => {
+  const { t } = useTranslation()
+  return (
+    <MarkdownEditor
+      value=''
+      submit={
+        <div style={{ marginTop: '16px' }}>
+          <Button type='primary'>{t('button.submit')}</Button>
+        </div>
+      }
+    />
+  )
+}
+
 storiesOf('Comment', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        background: '#eee',
-        padding: '32px'
-      }}
-    >
-      {story()}
-    </div>
-  )).add('single', () => (
+  .addDecorator(decorator())
+  .add('single', () => (
     <Comment
       item={{
         likes: 1,
@@ -75,13 +84,6 @@ storiesOf('Comment', module)
         </div>
       ))}
       <div style={{ marginTop: '16px' }} />
-      <MarkdownEditor
-        value=''
-        submit={
-          <div style={{ marginTop: '16px' }}>
-            <Button type='primary'>Submit</Button>
-          </div>
-        }
-      />
+      <EditorWithLocalization />
     </>
   ))

@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { AppProvider } from 'app/mock'
+import { AppProvider, decorator } from 'app/mock'
 import { Formik } from 'forms'
 import { LoginForm } from './LoginForm'
 import * as yup from 'yup'
@@ -13,16 +13,7 @@ const loginSchema = yup.object({
 })
 
 storiesOf('LoginForm', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        background: '#eee',
-        padding: '32px'
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(decorator())
   .add('default', () => (
     <AppProvider>
       <Formik

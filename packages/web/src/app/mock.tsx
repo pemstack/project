@@ -4,6 +4,7 @@ import { Dictionary } from '@pema/utils'
 import { MockApiClient } from '@pema/state/lib/mock-api-client'
 import { createMemoryHistory } from 'history'
 import { init } from 'app'
+import { Loader } from 'components'
 import { RouteParams } from './types'
 
 export interface MockApi {
@@ -89,9 +90,26 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
   const params = deepMerge({ ...app.router.current }, overrides)
   return (
     <AppContext.Provider value={app}>
-      {children && typeof children !== 'function'
-        ? children
-        : (render || (children as ((props: RouteParams) => React.ReactNode)) || noop)(params as RouteParams)}
+      <Loader>
+        {children && typeof children !== 'function'
+          ? children
+          : (render || (children as ((props: RouteParams) => React.ReactNode)) || noop)(params as RouteParams)}
+      </Loader>
     </AppContext.Provider>
+  )
+}
+
+export function decorator() {
+  return (story: () => any) => (
+    <AppProvider>
+      <div
+        style={{
+          background: '#eee',
+          padding: '32px'
+        }}
+      >
+        {story()}
+      </div>
+    </AppProvider>
   )
 }
