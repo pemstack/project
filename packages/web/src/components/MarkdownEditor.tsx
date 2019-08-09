@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState } from 'react'
 import { Tabs, Input } from 'antd'
 import { Markdown } from './Markdown'
 import './MarkdownEditor.css'
+import { useTranslation } from 'react-i18next';
 
 const { TabPane } = Tabs
 const { TextArea } = Input
@@ -34,6 +35,7 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
   onChange,
   submit
 }) => {
+  const { t } = useTranslation()
   const [currentTab, setCurrentTab] = useState('write')
   return (
     <div className='MarkdownEditor'>
@@ -43,7 +45,7 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
         className='MarkdownEditor__tabs'
         defaultActiveKey='write'
       >
-        <TabPane tab='Write' key='write'>
+        <TabPane tab={t('MarkdownEditor.write')} key='write'>
           <div className='MarkdownEditor__wrapper'>
             <TextArea
               className='MarkdownEditor__input'
@@ -53,10 +55,10 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
             {submit}
           </div>
         </TabPane>
-        <TabPane tab='Preview' key='preview'>
+        <TabPane tab={t('MarkdownEditor.preview')} key='preview'>
           <div className='MarkdownEditor__wrapper'>
             <div className='MarkdownEditor__preview'>
-              <MemoMarkdown value={value || 'Nothing to preview'} shouldUpdate={currentTab === 'preview'} />
+              <MemoMarkdown value={value || t('MarkdownEditor.empty')} shouldUpdate={currentTab === 'preview'} />
             </div>
             {submit}
           </div>
