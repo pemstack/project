@@ -1,6 +1,7 @@
 import { AppRoot, init } from 'app'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './i18n'
 
 let CurrentComponent = AppRoot
 let currentInit = init
