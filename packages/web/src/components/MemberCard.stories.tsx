@@ -56,9 +56,6 @@ const cardStyle = {
   margin: '0 auto'
 }
 
-const cardGridStyle = {
-}
-
 storiesOf('MemberCard', module)
   .addDecorator(story => (
     <div
@@ -113,7 +110,7 @@ storiesOf('MemberCard', module)
       dataSource={users}
       renderItem={user => (
         <List.Item>
-          <MemberCard style={cardGridStyle} item={user} />
+          <MemberCard item={user} />
         </List.Item>
       )}
     />

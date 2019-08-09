@@ -1,19 +1,35 @@
 import React, { FunctionComponent, useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
-import { AppProvider } from 'app/mock'
 import { MarkdownEditor } from './MarkdownEditor'
+import { Button } from 'antd'
 
 interface InputControllerProps {
   defaultValue?: string
 }
 
-export const InputController: FunctionComponent<InputControllerProps> = ({
+const InputController: FunctionComponent<InputControllerProps> = ({
   defaultValue = ''
 }) => {
   const [markdown, setMarkdown] = useState(defaultValue)
   return (
     <MarkdownEditor value={markdown} onChange={e => setMarkdown(e.target.value)} />
+  )
+}
+
+const InputControllerSubmit: FunctionComponent<InputControllerProps> = ({
+  defaultValue = ''
+}) => {
+  const [markdown, setMarkdown] = useState(defaultValue)
+  return (
+    <MarkdownEditor
+      value={markdown}
+      onChange={e => setMarkdown(e.target.value)}
+      submit={
+        <div style={{ marginTop: '16px' }}>
+          <Button type='primary'>Submit</Button>
+        </div>
+      }
+    />
   )
 }
 
@@ -79,5 +95,12 @@ storiesOf('MarkdownEditor', module)
       {story()}
     </div>
   ))
-  .add('default', () => <InputController />)
-  .add('with default value', () => <InputController defaultValue={longMarkdown} />)
+  .add('default', () => (
+    <InputController />
+  ))
+  .add('with default value', () => (
+    <InputController defaultValue={longMarkdown} />
+  ))
+  .add('with submit button', () => (
+    <InputControllerSubmit />
+  ))

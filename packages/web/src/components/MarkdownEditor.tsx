@@ -6,11 +6,6 @@ import './MarkdownEditor.css'
 const { TabPane } = Tabs
 const { TextArea } = Input
 
-interface MarkdownEditorProps {
-  value: string
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>
-}
-
 interface MemoMarkdownProps {
   value: string
   shouldUpdate: boolean
@@ -22,16 +17,22 @@ class MemoMarkdown extends React.Component<MemoMarkdownProps> {
   }
 
   render() {
-    console.log('rerender md')
     return (
       <Markdown>{this.props.value}</Markdown>
     )
   }
 }
 
+interface MarkdownEditorProps {
+  value: string
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>
+  submit?: React.ReactNode
+}
+
 export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
   value,
-  onChange
+  onChange,
+  submit
 }) => {
   const [currentTab, setCurrentTab] = useState('write')
   return (
@@ -49,6 +50,7 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
               value={value}
               onChange={onChange}
             />
+            {submit}
           </div>
         </TabPane>
         <TabPane tab='Preview' key='preview'>
@@ -56,6 +58,7 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
             <div className='MarkdownEditor__preview'>
               <MemoMarkdown value={value || 'Nothing to preview'} shouldUpdate={currentTab === 'preview'} />
             </div>
+            {submit}
           </div>
         </TabPane>
       </Tabs>
