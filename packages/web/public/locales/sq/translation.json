@@ -1,8 +1,8 @@
 {
   "MarkdownEditor": {
-    "empty": "",
-    "preview": "",
-    "write": ""
+    "empty": "Nuk ka përmbajtje.",
+    "preview": "Shfaq",
+    "write": "Shkruaj"
   },
   "button": {
     "cancel": "ANULO",
