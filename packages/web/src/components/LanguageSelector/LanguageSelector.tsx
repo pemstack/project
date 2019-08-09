@@ -3,6 +3,7 @@ import { Select, Icon } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { ReactComponent as AlSvg } from './al.svg'
 import { ReactComponent as GbSvg } from './gb.svg'
+import './LanguageSelector.css'
 
 const { Option } = Select
 
@@ -28,7 +29,6 @@ export const LanguageSelector: FunctionComponent<LanguageSelectorProps> = ({
       className='LanguageSelector'
       value={i18n.language || 'en'}
       onChange={changeLanguage}
-      style={{ minWidth: '160px' }}
     >
       <Option value='sq'>
         <Icon component={AlSvg as FunctionComponent} />
