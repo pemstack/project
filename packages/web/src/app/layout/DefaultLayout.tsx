@@ -16,11 +16,9 @@ function getWidth() {
 }
 
 function fallback(value: boolean | undefined, fallbackValue: boolean) {
-  if (typeof value === 'undefined') {
-    return value
-  } else {
-    return fallbackValue
-  }
+  return typeof value === 'undefined'
+    ? fallbackValue
+    : value
 }
 
 export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
