@@ -4,26 +4,29 @@ import { action } from '@storybook/addon-actions'
 import { AppProvider, decorator } from 'app/mock'
 import { Formik } from 'forms'
 import { RegisterForm } from './RegisterForm'
+import { registerSchema, RegisterParams } from './register.api'
+
+const initial: RegisterParams = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
 
 storiesOf('RegisterForm', module)
   .addDecorator(decorator())
   .add('default', () => (
-    <AppProvider>
-      <Formik
-        onSubmit={(props, actions) => {
-          action('submit')()
-          actions.setSubmitting(false)
-        }}
-        initialValues={{
-          email: '',
-          username: '',
-          password: '',
-          confirmPassword: ''
-        }}
-      >
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <RegisterForm />
-        </div>
-      </Formik>
-    </AppProvider>
+    <Formik
+      validationSchema={registerSchema}
+      onSubmit={(props, actions) => {
+        action('submit')()
+        actions.setSubmitting(false)
+      }}
+      initialValues={initial}
+    >
+      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <RegisterForm />
+      </div>
+    </Formik>
   ))

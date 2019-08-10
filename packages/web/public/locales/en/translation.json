@@ -7,5 +7,28 @@
   "button": {
     "cancel": "CANCEL",
     "submit": "SUBMIT"
+  },
+  "register": {
+    "label": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password"
+    },
+    "error": {
+      "firstName": "First name is required.",
+      "lastName": "Last name is required.",
+      "email": {
+        "required": "Email is required.",
+        "invalid": "Invalid email."
+      },
+      "password": {
+        "required": "Password is required.",
+        "min": "Password must contain at least 6 characters.",
+        "invalid": "Password contains invalid characters."
+      },
+      "confirmPassword": "Passwords must match."
+    }
   }
 }

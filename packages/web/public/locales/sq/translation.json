@@ -7,5 +7,28 @@
   "button": {
     "cancel": "ANULO",
     "submit": "DËRGO"
+  },
+  "register": {
+    "label": {
+      "firstName": "Emri",
+      "lastName": "Mbiemri",
+      "email": "Email",
+      "password": "Fjalëkalimi",
+      "confirmPassword": "Konfirmo fjalëkalimin"
+    },
+    "error": {
+      "firstName": "Jepni emrin.",
+      "lastName": "Jepni mbiemrin.",
+      "email": {
+        "required": "Jepni email.",
+        "invalid": "Email adresë jo valide."
+      },
+      "password": {
+        "required": "Jepni fjalëkalimin.",
+        "min": "Fjalëkalimi duhet të ketë së paku 6 karaktere.",
+        "invalid": "Fjalëkalimi përmban karaktere jo valide."
+      },
+      "confirmPassword": "Fjalëkalimet duhet të përputhen."
+    }
   }
 }

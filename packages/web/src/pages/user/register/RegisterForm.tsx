@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { Form, Icon, Input, SubmitButton } from 'forms'
 import { Card, Tooltip } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 const formLabelCol = {
   xs: { span: 24 },
@@ -24,6 +25,8 @@ const tailWrapperCol = {
 }
 
 export const RegisterForm: FunctionComponent = () => {
+  const { t } = useTranslation()
+  const labelX = t('register.label.password2')
   return (
     <div className='RegisterForm'>
       <Card className='RegisterForm__card'>
@@ -34,44 +37,53 @@ export const RegisterForm: FunctionComponent = () => {
           wrapperCol={formWrapperCol}
         >
           <Form.Item
+            name='firstName'
+            label={t('register.label.firstName')}
+          >
+            <Input
+              name='firstName'
+              type='text'
+              spellCheck={false}
+            />
+          </Form.Item>
+          <Form.Item
+            name='lastName'
+            label={t('register.label.lastName')}
+          >
+            <Input
+              name='lastName'
+              type='text'
+              spellCheck={false}
+            />
+          </Form.Item>
+          <Form.Item
             name='email'
-            label={
-              <span>
-                Nickname&nbsp;
-                  <Tooltip title='What do you want others to call you?'>
-                  <Icon type='question-circle-o' />
-                </Tooltip>
-              </span>
-            }
+            label={t('register.label.email')}
           >
             <Input
               name='email'
-              prefix={<Icon type='email' style={{ color: 'rgba(0,0,0,.25)' }} />}
               type='text'
-              placeholder='Email'
+              spellCheck={false}
             />
           </Form.Item>
-          <Form.Item name='username'>
-            <Input
-              name='username'
-              type='text'
-              prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder='Username'
-            />
-          </Form.Item>
-          <Form.Item name='password'>
-            <Input
+          <Form.Item
+            name='password'
+            label={t('register.label.password')}
+          >
+            <Input.Password
               name='password'
-              prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
               type='password'
-              placeholder='Password'
+              spellCheck={false}
             />
           </Form.Item>
-          <Form.Item name='confirmPassword'>
-            <Input
+          <Form.Item
+            name='confirmPassword'
+            label={t('register.label.confirmPassword')}
+          >
+            <Input.Password
               name='confirmPassword'
-              prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
               type='password'
+              spellCheck={false}
             />
           </Form.Item>
           <Form.AntdItem wrapperCol={tailWrapperCol}>
@@ -80,7 +92,7 @@ export const RegisterForm: FunctionComponent = () => {
               className='RegisterForm__submit'
             >
               Register
-              </SubmitButton>
+            </SubmitButton>
           </Form.AntdItem>
         </Form>
       </Card>
