@@ -18,8 +18,11 @@ export const RegisterView: View = () => {
     <Formik
       validationSchema={registerSchema}
       onSubmit={async (values, actions) => {
-        await register(values)
-        actions.setSubmitting(false)
+        try {
+          await register(values)
+        } finally {
+          actions.setSubmitting(false)
+        }
       }}
       initialValues={initial}
     >

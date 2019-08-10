@@ -9,7 +9,7 @@ moment.locale('en')
 
 i18n.on('languageChanged', function (lng) {
   if (typeof document !== 'undefined') {
-    document.cookie = `lang=${lng}`
+    document.cookie = `lang=${lng}; path=/`
   }
 
   moment.locale(lng)
