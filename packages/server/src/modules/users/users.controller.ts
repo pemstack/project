@@ -7,7 +7,7 @@ import { User } from './users.entity'
 import { RegisterRequest } from './users.dto'
 import { UsersService } from './users.service'
 import { RateLimit } from 'nestjs-rate-limiter'
-import { subjects } from 'mailer'
+import { template, subjects } from 'mailer'
 
 @ApiUseTags('users')
 @Controller('users')
@@ -37,7 +37,7 @@ export class UsersController {
     await this.mailerService.sendMail({
       to: data.email,
       subject: subjects[lang].confirmEmail,
-      template: `${lang}/confirm-email`,
+      template: template('confirm-email', lang),
       context: {
         firstName: data.firstName,
         link: url + '/user/confirm?token=' + token
