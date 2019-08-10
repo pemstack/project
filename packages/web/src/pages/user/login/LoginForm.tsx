@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react'
+import { Link } from '@pema/router-react'
 import { Card } from 'antd'
 import { Form, Input, Icon, Checkbox, SubmitButton } from 'forms'
 import './LoginForm.css'
@@ -39,7 +40,7 @@ export const LoginForm: FunctionComponent<LoginFormProps> = ({
           >
             Log in
           </SubmitButton>
-          Or <a href='#'>register now!</a>
+          Or <Link to='/user/register'>register now!</Link>
         </Form.AntdItem>
       </Form>
     </Card>

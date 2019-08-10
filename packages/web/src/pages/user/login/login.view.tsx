@@ -50,7 +50,7 @@ export const LoginView: View = ({
 }
 
 LoginView.layout = {
-  type: 'none'
+  type: 'minimal'
 }
 
 LoginView.onEnter = ({
