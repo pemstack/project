@@ -7,11 +7,6 @@ module.exports = override(
     libraryDirectory: 'es',
     style: 'css'
   }),
-  fixBabelImports('yup', {
-    libraryName: 'yup',
-    libraryDirectory: 'lib',
-    camel2DashComponentName: false
-  }),
   function (config, env) {
     const alias = (config.resolve.alias || {})
     alias['@ant-design/icons/lib/dist$'] = path.resolve(__dirname, './src/icons.ts')
