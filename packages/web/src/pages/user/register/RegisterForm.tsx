@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
-import { Form, Icon, Input, SubmitButton } from 'forms'
-import { Card, Tooltip } from 'antd'
+import { Form, Input, SubmitButton } from 'forms'
+import { Card } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 const formLabelCol = {
@@ -26,7 +26,6 @@ const tailWrapperCol = {
 
 export const RegisterForm: FunctionComponent = () => {
   const { t } = useTranslation()
-  const labelX = t('register.label.password2')
   return (
     <div className='RegisterForm'>
       <Card className='RegisterForm__card'>

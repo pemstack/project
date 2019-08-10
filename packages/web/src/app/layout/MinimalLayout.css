@@ -1,0 +1,28 @@
+.MinimalLayout {
+  min-height: 100vh;
+}
+
+.MinimalLayout__header {
+  background: #fff;
+  padding: 0;
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
+}
+
+.MinimalLayout__title {
+  font-size: 1.25em;
+  padding: 0 24px;
+}
+
+.MinimalLayout__wrapper {
+  padding: 32px 8px;
+}
+
+.MinimalLayout__footer {
+  text-align: center;
+}
+
+.MinimalLayout__language-selector {
+  float: right;
+  line-height: 64px;
+  padding: 0 24px;
+}

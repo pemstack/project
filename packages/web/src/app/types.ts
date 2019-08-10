@@ -10,6 +10,7 @@ import {
 import { ApiClient, Action as PemaAction, Query as PemaQuery, QueryOptions } from '@pema/state'
 import { JValue } from '@pema/utils'
 import { DefaultLayoutProps } from 'app/layout/DefaultLayout'
+import { MinimalLayoutProps } from 'app/layout/MinimalLayout'
 import { ComponentType } from 'react'
 import {
   UserStore,
@@ -48,6 +49,7 @@ type StringOrProps<TType extends string, TProps extends {} = {}> =
 
 type LayoutType =
   | StringOrProps<'default', DefaultLayoutProps>
+  | StringOrProps<'minimal', MinimalLayoutProps>
   | StringOrProps<'none'>
   | null
 

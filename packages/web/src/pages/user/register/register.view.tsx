@@ -1,8 +1,9 @@
 import React from 'react'
 import { View, redirect, allow, useAction } from 'app'
-import { Formik, Form } from 'forms'
+import { Formik } from 'forms'
 import { RegisterForm } from './RegisterForm'
 import { REGISTER, registerSchema, RegisterParams } from './register.api'
+import './register.view.css'
 
 const initial: RegisterParams = {
   firstName: '',
@@ -15,20 +16,27 @@ const initial: RegisterParams = {
 export const RegisterView: View = () => {
   const register = useAction(REGISTER)
   return (
-    <Formik
-      validationSchema={registerSchema}
-      onSubmit={async (values, actions) => {
-        try {
-          await register(values)
-        } finally {
-          actions.setSubmitting(false)
-        }
-      }}
-      initialValues={initial}
-    >
-      <RegisterForm />
-    </Formik>
+    <div className='Register'>
+      <Formik
+        validationSchema={registerSchema}
+        onSubmit={async (values, actions) => {
+          try {
+            await register(values)
+            // todo
+          } finally {
+            actions.setSubmitting(false)
+          }
+        }}
+        initialValues={initial}
+      >
+        <RegisterForm />
+      </Formik>
+    </div>
   )
+}
+
+RegisterView.layout = {
+  type: 'minimal'
 }
 
 RegisterView.onEnter = ({

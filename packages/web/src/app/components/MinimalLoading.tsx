@@ -12,5 +12,5 @@ export const MinimalLoading: View = () => {
 }
 
 MinimalLoading.layout = {
-  type: 'none'
+  type: 'minimal'
 }

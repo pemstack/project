@@ -1,6 +1,7 @@
 import { useApp, useEvent } from '@pema/app-react'
 import { RouterView } from '@pema/router'
 import { DefaultLayout } from 'app/layout/DefaultLayout'
+import { MinimalLayout } from 'app/layout/MinimalLayout'
 import { App, LayoutPicker, RouteParams, View } from 'app/types'
 import React, { ComponentType, FunctionComponent } from 'react'
 import { Error } from './Error'
@@ -8,27 +9,37 @@ import { Loading } from './Loading'
 
 const NoLayout: FunctionComponent<RouteParams> = ({ children }) => <>{children}</>
 
+const picker: LayoutPicker = {
+  type: 'minimal'
+}
+
 function getLayout(params: RouteParams, type: LayoutPicker = 'default'): [ComponentType<any>, {}] {
   if (typeof type === 'function') {
     type = type(params)
   }
 
-  if (type === null || type === 'none') {
+  if (type === null) {
     return [NoLayout, {}]
   }
 
+  let key: string
+  let props: {}
   if (typeof type === 'string') {
-    type = { type }
+    key = type
+    props = {}
+  } else {
+    key = type.type
+    props = type
   }
-
-  const { type: key, ...layoutProps } = type
 
   switch (key) {
     case 'none':
-      return [NoLayout, {}]
+      return [NoLayout, props]
+    case 'minimal':
+      return [MinimalLayout, props]
     case 'default':
     default:
-      return [DefaultLayout, layoutProps]
+      return [DefaultLayout, props]
   }
 }
 
