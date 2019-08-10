@@ -1,12 +1,30 @@
 import React from 'react'
-import { View, redirect, allow } from 'app'
+import { View, redirect, allow, useAction } from 'app'
 import { Formik, Form } from 'forms'
+import { RegisterForm } from './RegisterForm'
+import { REGISTER, registerSchema, RegisterParams } from './register.api'
 
-export const RegisterView: View = ({ }) => {
+const initial: RegisterParams = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
+
+export const RegisterView: View = () => {
+  const register = useAction(REGISTER)
   return (
-    <div className='Register'>
-      Register page
-    </div>
+    <Formik
+      validationSchema={registerSchema}
+      onSubmit={async (values, actions) => {
+        await register(values)
+        actions.setSubmitting(false)
+      }}
+      initialValues={initial}
+    >
+      <RegisterForm />
+    </Formik>
   )
 }
 

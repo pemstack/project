@@ -31,11 +31,12 @@ export interface RegisterResponse {
 }
 
 export const REGISTER: Action<RegisterParams, RegisterResponse> = {
+  progress: true,
   schema: registerSchema,
   perform(params: RegisterParams, app) {
     return app
       .req('/api/users', { action: 'register' })
-      .post(params)
+      .post(params, { credentials: 'same-origin' })
       .json()
   }
 }
