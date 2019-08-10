@@ -25,7 +25,7 @@ export class UsersService {
       email: user.email
     }))
 
-    if (!exists) {
+    if (exists) {
       throw new BadRequestException('Email already exists.')
     }
 
