@@ -2,11 +2,16 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import Backend from 'i18next-xhr-backend'
 import moment from 'moment'
+import { CookiesStore } from 'stores'
 import 'moment/locale/sq'
 
 moment.locale('en')
 
 i18n.on('languageChanged', function (lng) {
+  if (typeof document !== 'undefined') {
+    document.cookie = `lang=${lng}`
+  }
+
   moment.locale(lng)
 })
 
@@ -25,8 +30,10 @@ i18n
     }
   })
 
-if (typeof window !== 'undefined') {
-  (window as any).i18n = i18n
+const cookies = new CookiesStore()
+const currentLang = cookies.get('lang')
+if (currentLang === 'sq' || currentLang === 'en') {
+  i18n.changeLanguage(currentLang)
 }
 
 export default i18n

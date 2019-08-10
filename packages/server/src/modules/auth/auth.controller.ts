@@ -1,12 +1,11 @@
 import { Body, Controller, Get, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiBearerAuth, ApiResponse, ApiUseTags } from '@nestjs/swagger'
-import { Recaptcha, RecaptchaResponse, ReqUser } from 'common/decorators'
+import { Recaptcha, RecaptchaResponse, ReqUser, Cookie } from 'common/decorators'
 import { Response } from 'express'
 import { User } from 'modules/users'
 import { RateLimit } from 'nestjs-rate-limiter'
 import { AuthService } from './auth.service'
-import { Cookie } from './decorators'
 import { LoginRequest, TokenRequest, TokenResponse } from './dtos'
 import { AuthTokens } from './interfaces'
 
