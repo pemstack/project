@@ -4,10 +4,12 @@ import * as yup from 'yup'
 export const registerSchema = yup.object({
   firstName: yup
     .string()
-    .required('register.error.firstName'),
+    .required('register.error.firstName.required')
+    .matches(/^[A-Za-z]+( [A-Za-z]+)*$/, 'register.error.firstName.invalid'),
   lastName: yup
     .string()
-    .required('register.error.lastName'),
+    .required('register.error.lastName.required')
+    .matches(/^[A-Za-z]+( [A-Za-z]+)*$/, 'register.error.lastName.invalid'),
   email: yup
     .string()
     .required('register.error.email.required')

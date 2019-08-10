@@ -17,8 +17,14 @@
       "confirmPassword": "Confirm password"
     },
     "error": {
-      "firstName": "First name is required.",
-      "lastName": "Last name is required.",
+      "firstName": {
+        "required": "First name is required.",
+        "invalid": "First name contains invalid characters."
+      },
+      "lastName":{
+        "required": "Last name is required.",
+        "invalid": "Last name contains invalid characters."
+      },
       "email": {
         "required": "Email is required.",
         "invalid": "Invalid email."

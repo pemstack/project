@@ -17,8 +17,14 @@
       "confirmPassword": "Konfirmo fjalëkalimin"
     },
     "error": {
-      "firstName": "Jepni emrin.",
-      "lastName": "Jepni mbiemrin.",
+      "firstName": {
+        "required": "Jepni emrin.",
+        "invalid": "Emri përmban karaktere jo valide."
+      },
+      "lastName":  {
+        "required": "Jepni mbiemrin.",
+        "invalid": "Mbiemri përmban karaktere jo valide."
+      },
       "email": {
         "required": "Jepni email.",
         "invalid": "Email adresë jo valide."
