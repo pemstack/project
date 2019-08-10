@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useState } from 'react'
-import { AppContext } from '@pema/app-react'
 import { Dictionary } from '@pema/utils'
 import { MockApiClient } from '@pema/state/lib/mock-api-client'
 import { createMemoryHistory } from 'history'
 import { init } from 'app'
 import { Loader } from 'components'
 import { RouteParams } from './types'
+import { AppRoot } from './components/AppRoot'
 
 export interface MockApi {
   withQuery: MockApiClient['withQuery']
@@ -89,13 +89,13 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
 
   const params = deepMerge({ ...app.router.current }, overrides)
   return (
-    <AppContext.Provider value={app}>
+    <AppRoot app={app}>
       <Loader>
         {children && typeof children !== 'function'
           ? children
           : (render || (children as ((props: RouteParams) => React.ReactNode)) || noop)(params as RouteParams)}
       </Loader>
-    </AppContext.Provider>
+    </AppRoot>
   )
 }
 

@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { Form, Input, SubmitButton } from 'forms'
 import { Card } from 'antd'
 import { useTranslation } from 'react-i18next'
+import './RegisterForm.css'
 
 const formLabelCol = {
   xs: { span: 24 },
@@ -27,74 +28,75 @@ const tailWrapperCol = {
 export const RegisterForm: FunctionComponent = () => {
   const { t } = useTranslation()
   return (
-    <div className='RegisterForm'>
-      <Card className='RegisterForm__card'>
-        <h2>Register</h2>
-        <Form
-          showCaptcha
-          labelCol={formLabelCol}
-          wrapperCol={formWrapperCol}
+    <Card
+      className='RegisterForm'
+      bodyStyle={{ padding: 0 }}
+    >
+      <Form
+        className='RegisterForm__form'
+        showCaptcha
+        labelCol={formLabelCol}
+        wrapperCol={formWrapperCol}
+      >
+        <Form.Item
+          name='firstName'
+          label={t('register.label.firstName')}
         >
-          <Form.Item
+          <Input
             name='firstName'
-            label={t('register.label.firstName')}
-          >
-            <Input
-              name='firstName'
-              type='text'
-              spellCheck={false}
-            />
-          </Form.Item>
-          <Form.Item
+            type='text'
+            spellCheck={false}
+          />
+        </Form.Item>
+        <Form.Item
+          name='lastName'
+          label={t('register.label.lastName')}
+        >
+          <Input
             name='lastName'
-            label={t('register.label.lastName')}
-          >
-            <Input
-              name='lastName'
-              type='text'
-              spellCheck={false}
-            />
-          </Form.Item>
-          <Form.Item
+            type='text'
+            spellCheck={false}
+          />
+        </Form.Item>
+        <Form.Item
+          name='email'
+          label={t('register.label.email')}
+        >
+          <Input
             name='email'
-            label={t('register.label.email')}
-          >
-            <Input
-              name='email'
-              type='text'
-              spellCheck={false}
-            />
-          </Form.Item>
-          <Form.Item
+            type='text'
+            spellCheck={false}
+          />
+        </Form.Item>
+        <Form.Item
+          name='password'
+          label={t('register.label.password')}
+        >
+          <Input.Password
             name='password'
-            label={t('register.label.password')}
-          >
-            <Input.Password
-              name='password'
-              type='password'
-              spellCheck={false}
-            />
-          </Form.Item>
-          <Form.Item
+            type='password'
+            spellCheck={false}
+          />
+        </Form.Item>
+        <Form.Item
+          name='confirmPassword'
+          label={t('register.label.confirmPassword')}
+        >
+          <Input.Password
             name='confirmPassword'
-            label={t('register.label.confirmPassword')}
+            type='password'
+            spellCheck={false}
+          />
+        </Form.Item>
+        <Form.AntdItem wrapperCol={tailWrapperCol}>
+          <SubmitButton
+            preventDisabling
+            className='RegisterForm__submit'
           >
-            <Input.Password
-              name='confirmPassword'
-              type='password'
-              spellCheck={false}
-            />
-          </Form.Item>
-          <Form.AntdItem wrapperCol={tailWrapperCol}>
-            <SubmitButton
-              preventDisabling
-              className='RegisterForm__submit'
-            >
-              Register
+            Register
             </SubmitButton>
-          </Form.AntdItem>
-        </Form>
-      </Card>
-    </div>
+        </Form.AntdItem>
+      </Form>
+    </Card>
   )
 }

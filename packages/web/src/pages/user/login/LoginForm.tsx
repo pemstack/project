@@ -12,8 +12,14 @@ export const LoginForm: FunctionComponent<LoginFormProps> = ({
   error
 }) => {
   return (
-    <Card className='LoginForm' bodyStyle={{ padding: 0 }}>
-      <Form className='LoginForm__form' showCaptcha>
+    <Card
+      className='LoginForm'
+      bodyStyle={{ padding: 0 }}
+    >
+      <Form
+        className='LoginForm__form'
+        showCaptcha
+      >
         <h2>Log in</h2>
         {error && <div className='LoginForm__error'>{error}</div>}
         <Form.Item name='username'>
