@@ -21,9 +21,17 @@ export class UsersService {
 
   public async create(user: User) {
     await ensureValid(user)
+    const exists = !!(await this.repository.findOne({
+      email: user.email
+    }))
+
+    if (!exists) {
+      throw new BadRequestException('Email already exists.')
+    }
+
     user.password = await bcrypt.hash(user.password, 10)
     try {
-      return await this.repository.insert(user)
+      await this.repository.insert(user)
     } catch (error) {
       throw new BadRequestException(error)
     }
