@@ -38,6 +38,7 @@
     "@pema/state-react": "^0.1.0-alpha.3",
     "@pema/utils": "^0.1.0-alpha.3",
     "@rehooks/component-size": "^1.0.3",
+    "@types/classnames": "^2.2.9",
     "@types/history": "^4.7.2",
     "@types/jest": "^24.0.15",
     "@types/lodash": "^4.14.136",

@@ -5,8 +5,9 @@
     "write": "Write"
   },
   "button": {
-    "cancel": "CANCEL",
-    "submit": "SUBMIT"
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "edit": "Edit"
   },
   "user": {
     "label": {

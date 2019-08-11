@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { Card, Descriptions } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { UserInfo } from 'api/user.api'
+import { LinkButton } from 'components'
 import './Profile.css'
 
 export interface ProfileItem {
@@ -9,7 +10,6 @@ export interface ProfileItem {
   firstName: string
   lastName: string
   email: string
-  roles: string[]
 }
 
 export interface ProfileProps {
@@ -21,8 +21,7 @@ export const Profile: FunctionComponent<ProfileProps> = ({
     id,
     firstName,
     lastName,
-    email,
-    roles
+    email
   }
 }) => {
   const { t } = useTranslation()
@@ -35,8 +34,8 @@ export const Profile: FunctionComponent<ProfileProps> = ({
       >
         <Descriptions.Item label={t('user.label.name')}>{firstName} {lastName}</Descriptions.Item>
         <Descriptions.Item label={t('user.label.email')}>{email}</Descriptions.Item>
-        <Descriptions.Item label={t('user.label.role')}>{roles.join(', ')}</Descriptions.Item>
       </Descriptions>
+      <LinkButton type='primary' to='/user/profile/edit'>{t('button.edit')}</LinkButton>
     </Card>
   )
 }

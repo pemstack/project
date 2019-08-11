@@ -5,8 +5,9 @@
     "write": "Shkruaj"
   },
   "button": {
-    "cancel": "ANULO",
-    "submit": "DËRGO"
+    "cancel": "Anulo",
+    "submit": "Dërgo",
+    "edit": "Ndrysho"
   },
   "user": {
     "label": {
