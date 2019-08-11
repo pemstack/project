@@ -2,10 +2,6 @@
   margin: 24px;
 }
 
-.LoginForm__submit {
-  width: 100%;
-}
-
 .LoginForm__forgot {
   float: right;
 }

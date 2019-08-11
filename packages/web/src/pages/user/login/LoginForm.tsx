@@ -42,6 +42,7 @@ export const LoginForm: FunctionComponent<LoginFormProps> = ({
           <a className='LoginForm__forgot' href='#'>Forgot password</a>
           <SubmitButton
             preventDisabling
+            block
             className='LoginForm__submit'
           >
             Log in

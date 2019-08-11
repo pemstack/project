@@ -8,13 +8,16 @@
     "cancel": "ANULO",
     "submit": "DËRGO"
   },
-  "RegisterForm": {
+  "user": {
     "label": {
+      "profile": "Profili",
       "firstName": "Emri",
       "lastName": "Mbiemri",
+      "name": "Emri",
       "email": "Email",
       "password": "Fjalëkalimi",
-      "confirmPassword": "Konfirmo fjalëkalimin"
+      "confirmPassword": "Konfirmo fjalëkalimin",
+      "role": "Roli"
     },
     "error": {
       "firstName": {
@@ -35,14 +38,6 @@
         "invalid": "Fjalëkalimi përmban karaktere jo valide."
       },
       "confirmPassword": "Fjalëkalimet duhet të përputhen."
-    }
-  },
-  "Profile": {
-    "label": {
-      "profile": "Profili",
-      "name": "Emri",
-      "email": "Email adresa",
-      "role": "Roli"
     }
   }
 }

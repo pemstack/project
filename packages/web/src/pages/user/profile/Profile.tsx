@@ -29,13 +29,13 @@ export const Profile: FunctionComponent<ProfileProps> = ({
   return (
     <Card className='Profile'>
       <Descriptions
-        title={t('Profile.label.profile')}
+        title={t('user.label.profile')}
         bordered
         column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
       >
-        <Descriptions.Item label={t('Profile.label.name')}>{firstName} {lastName}</Descriptions.Item>
-        <Descriptions.Item label={t('Profile.label.email')}>{email}</Descriptions.Item>
-        <Descriptions.Item label={t('Profile.label.role')}>{roles.join(', ')}</Descriptions.Item>
+        <Descriptions.Item label={t('user.label.name')}>{firstName} {lastName}</Descriptions.Item>
+        <Descriptions.Item label={t('user.label.email')}>{email}</Descriptions.Item>
+        <Descriptions.Item label={t('user.label.role')}>{roles.join(', ')}</Descriptions.Item>
       </Descriptions>
     </Card>
   )

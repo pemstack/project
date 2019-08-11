@@ -8,13 +8,16 @@
     "cancel": "CANCEL",
     "submit": "SUBMIT"
   },
-  "RegisterForm": {
+  "user": {
     "label": {
+      "profile": "Profile",
       "firstName": "First Name",
       "lastName": "Last Name",
+      "name": "Name",
       "email": "Email",
       "password": "Password",
-      "confirmPassword": "Confirm password"
+      "confirmPassword": "Confirm password",
+      "role": "Role"
     },
     "error": {
       "firstName": {
@@ -35,14 +38,6 @@
         "invalid": "Password contains invalid characters."
       },
       "confirmPassword": "Passwords must match."
-    }
-  },
-  "Profile": {
-    "label": {
-      "profile": "Profile",
-      "name": "Name",
-      "email": "Email",
-      "role": "Role"
     }
   }
 }
