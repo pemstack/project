@@ -6,13 +6,17 @@ import './AppRoot.css'
 
 interface AppRootProps {
   app: App
+  children?: React.ReactNode
 }
 
-export const AppRoot: FunctionComponent<AppRootProps> = ({ app }) => {
+export const AppRoot: FunctionComponent<AppRootProps> = ({
+  app,
+  children
+}) => {
   return (
     <AppContext.Provider value={app}>
       <div className='AppRoot'>
-        <Router />
+        {children || <Router />}
       </div>
     </AppContext.Provider>
   )
