@@ -16,7 +16,7 @@ const initial: RegisterParams = {
 export const RegisterView: View = () => {
   const register = useAction(REGISTER)
   return (
-    <div className='Register'>
+    <div className='RegisterView'>
       <Formik
         validationSchema={registerSchema}
         onSubmit={async (values, actions) => {

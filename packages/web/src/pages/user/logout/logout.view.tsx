@@ -15,7 +15,7 @@ export const LogoutView: View = ({
   }
 
   return (
-    <div className='Logout'>
+    <div className='LogoutView'>
       Click here to log out <Button type='danger' onClick={logout}>Log out</Button>
     </div>
   )

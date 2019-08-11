@@ -10,7 +10,7 @@
           "en",
           "sq"
         ],
-        "outputPath": "public/locales/{{locale}}/{{ns}}.json"
+        "outputPath": "generated/{{locale}}/{{ns}}.json"
       }
     ]
   ]

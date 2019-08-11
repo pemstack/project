@@ -40,7 +40,7 @@ export const RegisterForm: FunctionComponent = () => {
       >
         <Form.Item
           name='firstName'
-          label={t('register.label.firstName')}
+          label={t('RegisterForm.label.firstName')}
         >
           <Input
             name='firstName'
@@ -50,7 +50,7 @@ export const RegisterForm: FunctionComponent = () => {
         </Form.Item>
         <Form.Item
           name='lastName'
-          label={t('register.label.lastName')}
+          label={t('RegisterForm.label.lastName')}
         >
           <Input
             name='lastName'
@@ -60,7 +60,7 @@ export const RegisterForm: FunctionComponent = () => {
         </Form.Item>
         <Form.Item
           name='email'
-          label={t('register.label.email')}
+          label={t('RegisterForm.label.email')}
         >
           <Input
             name='email'
@@ -70,7 +70,7 @@ export const RegisterForm: FunctionComponent = () => {
         </Form.Item>
         <Form.Item
           name='password'
-          label={t('register.label.password')}
+          label={t('RegisterForm.label.password')}
         >
           <Input.Password
             name='password'
@@ -80,7 +80,7 @@ export const RegisterForm: FunctionComponent = () => {
         </Form.Item>
         <Form.Item
           name='confirmPassword'
-          label={t('register.label.confirmPassword')}
+          label={t('RegisterForm.label.confirmPassword')}
         >
           <Input.Password
             name='confirmPassword'

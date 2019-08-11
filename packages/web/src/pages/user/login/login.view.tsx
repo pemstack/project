@@ -32,7 +32,7 @@ export const LoginView: View = ({
   }
 
   return (
-    <div className='Login'>
+    <div className='LoginView'>
       <Formik
         validationSchema={login.schema}
         onSubmit={submit}

@@ -3,7 +3,7 @@ import { View } from 'app'
 
 export const HomeView: View = () => {
   return (
-    <div className='Home'>
+    <div className='HomeView'>
       Home page
     </div>
   )

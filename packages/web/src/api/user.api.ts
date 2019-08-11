@@ -14,8 +14,8 @@ export enum UserStatus {
 
 export interface UserInfo {
   id: string
-  firstname: string
-  lastname: string
+  firstName: string
+  lastName: string
   email: string
   roles: UserRole[]
   status: UserStatus

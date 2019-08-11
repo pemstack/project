@@ -8,7 +8,7 @@
     "cancel": "CANCEL",
     "submit": "SUBMIT"
   },
-  "register": {
+  "RegisterForm": {
     "label": {
       "firstName": "First Name",
       "lastName": "Last Name",
