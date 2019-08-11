@@ -7,18 +7,12 @@ export enum UserRole {
   ADMIN = 'admin'
 }
 
-export enum UserStatus {
-  PENDING = 'pending',
-  CONFIRMED = 'confirmed'
-}
-
 export interface UserInfo {
   id: string
   firstName: string
   lastName: string
   email: string
   roles: UserRole[]
-  status: UserStatus
 }
 
 export const ME: Query<UserInfo | null> = {
