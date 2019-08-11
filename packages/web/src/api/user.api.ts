@@ -1,5 +1,6 @@
 import { Query, Action } from 'app'
-import { LoginParams, TokenResponse, loginSchema } from 'stores/user.store'
+import { TokenResponse } from 'stores/user.store'
+import * as yup from 'yup'
 
 export enum UserRole {
   USER = 'user',
@@ -36,8 +37,13 @@ export const ME: Query<UserInfo | null> = {
   }
 }
 
-export type LoginParams = LoginParams
-export type TokenResponse = TokenResponse
+export const loginSchema = yup.object({
+  username: yup.string().required(),
+  password: yup.string().required(),
+  persist: yup.boolean().notRequired()
+})
+
+export type LoginParams = yup.InferType<typeof loginSchema>
 
 export const LOGIN: Action<LoginParams, TokenResponse> = {
   progress: true,

@@ -12,19 +12,28 @@ export interface TokenResponse {
   persist: boolean
 }
 
-export const loginSchema = yup.object({
-  username: yup.string().required(),
-  password: yup.string().required(),
-  persist: yup.boolean().notRequired()
-})
-
 export const tokenSchema = yup.object({
   sessionId: yup.string().required(),
   persist: yup.boolean().notRequired()
 })
 
-export type LoginParams = yup.InferType<typeof loginSchema>
 export type TokenParams = yup.InferType<typeof tokenSchema>
+
+const TOKEN: Action<TokenParams, TokenResponse> = {
+  schema: tokenSchema,
+  async perform(params) {
+    return await api
+      .url('/token')
+      .post(params, { credentials: 'same-origin' })
+      .json()
+  }
+}
+
+export type LoginParams = {
+  username: string
+  password: string
+  persist?: boolean
+}
 
 const LOGIN: Action<LoginParams, TokenResponse> = {
   async perform(params, app) {
@@ -43,16 +52,6 @@ const LOGOUT: Action = {
       .url('/logout')
       .post()
       .res()
-  }
-}
-
-const TOKEN: Action<TokenParams, TokenResponse> = {
-  schema: tokenSchema,
-  async perform(params) {
-    return await api
-      .url('/token')
-      .post(params, { credentials: 'same-origin' })
-      .json()
   }
 }
 
