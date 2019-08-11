@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { decorator } from 'app/mock'
+import { decorator, CenterContent } from 'app/mock'
 import { Profile, ProfileItem } from './Profile'
 
 const profile: ProfileItem = {
@@ -14,5 +14,7 @@ const profile: ProfileItem = {
 storiesOf('Profile', module)
   .addDecorator(decorator())
   .add('view only', () => (
-    <Profile item={profile} />
+    <CenterContent>
+      <Profile item={profile} />
+    </CenterContent>
   ))

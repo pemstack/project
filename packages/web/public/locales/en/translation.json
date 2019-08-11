@@ -36,5 +36,13 @@
       },
       "confirmPassword": "Passwords must match."
     }
+  },
+  "Profile": {
+    "label": {
+      "profile": "Profile",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role"
+    }
   }
 }

@@ -113,3 +113,24 @@ export function decorator() {
     </AppProvider>
   )
 }
+
+export interface CenterContentProps {
+  maxWidth?: number
+  children?: React.ReactNode
+}
+
+export const CenterContent: FunctionComponent<CenterContentProps> = ({
+  maxWidth = 640,
+  children
+}) => {
+  return (
+    <div
+      style={{
+        maxWidth: `${maxWidth}px`,
+        margin: '0 auto'
+      }}
+    >
+      {children}
+    </div>
+  )
+}

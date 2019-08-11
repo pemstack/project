@@ -8,7 +8,7 @@
     "cancel": "ANULO",
     "submit": "DËRGO"
   },
-  "register": {
+  "RegisterForm": {
     "label": {
       "firstName": "Emri",
       "lastName": "Mbiemri",
@@ -35,6 +35,14 @@
         "invalid": "Fjalëkalimi përmban karaktere jo valide."
       },
       "confirmPassword": "Fjalëkalimet duhet të përputhen."
+    }
+  },
+  "Profile": {
+    "label": {
+      "profile": "Profili",
+      "name": "Emri",
+      "email": "Email adresa",
+      "role": "Roli"
     }
   }
 }

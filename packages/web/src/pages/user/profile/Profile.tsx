@@ -27,7 +27,7 @@ export const Profile: FunctionComponent<ProfileProps> = ({
 }) => {
   const { t } = useTranslation()
   return (
-    <Card className='Profile' bodyStyle={{ padding: 0 }}>
+    <Card className='Profile'>
       <Descriptions
         title={t('Profile.label.profile')}
         bordered
