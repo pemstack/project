@@ -7,6 +7,7 @@ import { MailerModule } from 'mailer'
 import { AuthModule } from 'modules/auth'
 import { RecaptchaGuard, RecaptchaModule } from 'modules/recaptcha'
 import { TodosModule } from 'modules/todos'
+import { CoursesModule } from 'modules/courses'
 import { ConfigModule, ConfigService } from 'nestjs-config'
 import { RateLimiterInterceptor, RateLimiterModule } from 'nestjs-rate-limiter'
 
@@ -34,7 +35,8 @@ import { RateLimiterInterceptor, RateLimiterModule } from 'nestjs-rate-limiter'
     MailerModule,
     RecaptchaModule,
     AuthModule,
-    TodosModule
+    TodosModule,
+    CoursesModule
   ],
   providers: [
     {
