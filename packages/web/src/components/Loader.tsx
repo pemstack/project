@@ -9,7 +9,7 @@ interface LoaderProps {
 
 export const Loader: FunctionComponent<LoaderProps> = ({
   children,
-  size
+  size = 'small'
 }) => {
   return (
     <Suspense
