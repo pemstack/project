@@ -4,6 +4,12 @@
     "preview": "Pamja",
     "write": "Shkruaj"
   },
+  "Layout": {
+    "label": {
+      "newsfeed": "Ballina",
+      "courses": "Kurset"
+    }
+  },
   "button": {
     "cancel": "Anulo",
     "submit": "Dërgo",
@@ -18,7 +24,9 @@
       "email": "Email",
       "password": "Fjalëkalimi",
       "confirmPassword": "Konfirmo fjalëkalimin",
-      "role": "Roli"
+      "role": "Roli",
+      "settings": "Cilësimet e llogarisë",
+      "logout": "Shkyquni"
     },
     "error": {
       "firstName": {

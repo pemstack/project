@@ -6,7 +6,7 @@ interface ProfileDropdownProps { }
 export const ProfileDropdown: FunctionComponent<ProfileDropdownProps> = ({ }) => {
   return (
     <Dropdown overlay={ProfileMenu}>
-      <Avatar size="large" icon="user" />
+      <Avatar size='large' icon="user" />
     </Dropdown>
   )
 }
@@ -15,12 +15,13 @@ export const ProfileDropdown: FunctionComponent<ProfileDropdownProps> = ({ }) =>
 export const ProfileMenu: FunctionComponent = () => {
   return (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key='settings'>
         <a target="_blank" rel="noopener noreferrer" href="#">
           <Icon type="setting" /> Account Settings
         </a>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key='logout'>
         <a target="_blank" rel="noopener noreferrer" href="#">
           <Icon type="logout" /> Log Out
         </a>

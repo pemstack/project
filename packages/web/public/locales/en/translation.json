@@ -9,6 +9,12 @@
     "submit": "Submit",
     "edit": "Edit"
   },
+  "Layout": {
+    "label": {
+      "newsfeed": "Newsfeed",
+      "courses": "Courses"
+    }
+  },
   "user": {
     "label": {
       "profile": "Profile",
@@ -18,7 +24,9 @@
       "email": "Email",
       "password": "Password",
       "confirmPassword": "Confirm password",
-      "role": "Role"
+      "role": "Role",
+      "settings": "Account Settings",
+      "logout": "Log Out"
     },
     "error": {
       "firstName": {

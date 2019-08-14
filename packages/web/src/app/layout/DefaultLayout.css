@@ -53,3 +53,8 @@
   line-height: 64px;
   padding: 0 24px;
 }
+
+.DefaultLayout__profile-dropdown {
+  float: right;
+  padding: 0 24px 0 0;
+}

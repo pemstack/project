@@ -1,7 +1,8 @@
 import React, { useState, FunctionComponent } from 'react'
 import { Layout, Menu, Icon } from 'antd'
-import { LanguageSelector, Loader } from 'components'
+import { LanguageSelector, Loader, ProfileDropdown } from 'components'
 import './DefaultLayout.css'
+import { useTranslation } from 'react-i18next'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -26,6 +27,7 @@ export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
   defaultMobile,
   defaultCollapsed
 }) => {
+  const { t } = useTranslation()
   const width = getWidth()
   const [mobile, setMobile] = useState(fallback(defaultMobile, width <= 576))
   const [collapsed, setCollapsed] = useState(fallback(defaultCollapsed, width <= 768))
@@ -47,12 +49,12 @@ export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
         <div className='DefaultLayout__logo' />
         <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
           <Menu.Item key='1'>
-            <Icon type='user' />
-            <span className='nav-text'>nav 1</span>
+            <Icon type='read' />
+            <span className='nav-text'>{t('Layout.label.newsfeed')}</span>
           </Menu.Item>
           <Menu.Item key='2'>
-            <Icon type='user' />
-            <span className='nav-text'>nav 2</span>
+            <Icon type='book' />
+            <span className='nav-text'>{t('Layout.label.courses')}</span>
           </Menu.Item>
           <Menu.Item key='3'>
             <Icon type='user' />
@@ -72,6 +74,9 @@ export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
             onClick={toggle}
           />
           <span className='DefaultLayout__title'>Project name</span>
+          <span className='DefaultLayout__profile-dropdown'>
+            <ProfileDropdown />
+          </span>
           <span className='DefaultLayout__language-selector'>
             <Loader>
               <LanguageSelector />
