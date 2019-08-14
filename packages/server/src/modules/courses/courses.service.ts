@@ -4,17 +4,25 @@ import { Course, CoursePage, CourseAccess, AccessLevel } from './courses.entity'
 import { EntityManager } from 'typeorm'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
+import { unionBy } from 'lodash'
 
-interface CreateCourseParams {
+export interface CreateCourseParams {
   ownerId: string
   title: string
 }
 
-interface CreateCoursePageParams {
+export interface CreateCoursePageParams {
   courseId: string
   userId: string
   title: string
   content?: string
+}
+
+export interface CourseInfo {
+  id: string
+  title: string
+  access: AccessLevel
+  owner: boolean
 }
 
 @Injectable()
@@ -40,18 +48,12 @@ export class CoursesService {
     title,
     content = ''
   }: CreateCoursePageParams) {
-    const { entities } = this
-    const [course] = await entities.find(Course, {
-      where: { id: courseId },
-      relations: ['access']
-    })
-
-    if (!course) {
+    const access = await this.getAccess(courseId, userId)
+    if (!access) {
       throw new NotFoundException()
     }
 
-    if (course.ownerId !== userId
-      || course.access.some(a => a.userId === userId && a.access === AccessLevel.Write)) {
+    if (access.accessLevel !== AccessLevel.Write) {
       throw new ForbiddenException()
     }
 
@@ -70,5 +72,59 @@ export class CoursesService {
       title,
       content
     })
+  }
+
+  async getCourses(userId: string): Promise<CourseInfo[]> {
+    const courses = await this.entities.find(Course, {
+      where: { ownerId: userId }
+    })
+
+    const access = await this.entities.find(CourseAccess, {
+      where: { userId },
+      relations: ['course']
+    })
+
+    const ownCourses = courses.map(c => ({
+      id: c.id,
+      title: c.title,
+      access: AccessLevel.Write,
+      owner: true
+    }))
+
+    const otherCourses = access.map(a => ({
+      id: a.courseId,
+      title: a.course.title,
+      access: a.accessLevel,
+      owner: false
+    }))
+
+    return unionBy(ownCourses, otherCourses, c => c.id)
+  }
+
+  async getAccess(courseId: string, userId: string) {
+    const course = await this.entities.findOne(Course, {
+      id: courseId
+    })
+
+    if (!course) {
+      return null
+    }
+
+    if (course.ownerId === userId) {
+      return {
+        course,
+        accessLevel: AccessLevel.Write
+      }
+    }
+
+    const access = await this.entities.findOne(CourseAccess, {
+      courseId,
+      userId
+    })
+
+    return {
+      course,
+      accessLevel: access ? access.accessLevel : AccessLevel.None
+    }
   }
 }

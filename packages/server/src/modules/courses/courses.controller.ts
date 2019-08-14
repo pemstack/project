@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, NotFoundException } from '@nestjs/common'
 import { ApiResponse, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger'
 import { CoursesService } from './courses.service'
 import { CreateCourseRequest, CreatePageRequest } from './courses.dto'
@@ -24,7 +24,30 @@ export class CoursesController {
     })
   }
 
-  // POST webi.com/api/courses/abc/pages
+  @ApiBearerAuth()
+  @Authorize()
+  @Get(':id/access')
+  async getAccess(
+    @Param('id') id: string,
+    @ReqUser('id') userId: string
+  ) {
+    const result = await this.courses.getAccess(id, userId)
+    if (!result) {
+      throw new NotFoundException()
+    }
+
+    return {
+      accessLevel: result.accessLevel
+    }
+  }
+
+  @ApiBearerAuth()
+  @Authorize()
+  @Get()
+  async getCourses(@ReqUser('id') userId: string) {
+    return await this.courses.getCourses(userId)
+  }
+
   @ApiBearerAuth()
   @Authorize()
   @Post(':id/pages')

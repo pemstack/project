@@ -60,7 +60,7 @@ export class CourseAccess {
 
   @IsEnum(AccessLevel)
   @Column()
-  access: AccessLevel
+  accessLevel: AccessLevel
 }
 
 @Entity()

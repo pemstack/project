@@ -41,6 +41,7 @@
     "graphql": "^14.4.2",
     "graphql-tools": "^4.0.5",
     "helmet": "^3.20.0",
+    "lodash": "^4.17.15",
     "nestjs-config": "^1.4.2",
     "nestjs-rate-limiter": "^1.0.1",
     "node-fetch": "^2.6.0",
