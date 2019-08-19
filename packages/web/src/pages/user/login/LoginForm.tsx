@@ -39,7 +39,7 @@ export const LoginForm: FunctionComponent<LoginFormProps> = ({
         </Form.Item>
         <Form.AntdItem>
           <Checkbox name='persist'>Remember me</Checkbox>
-          <a className='LoginForm__forgot' href='#'>Forgot password</a>
+          <Link className='LoginForm__forgot' to='/user/register'>Forgot password</Link>
           <SubmitButton
             preventDisabling
             block

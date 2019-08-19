@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { Card, Avatar, Skeleton, Button, Dropdown, Menu, Icon } from 'antd'
+import { Card, Avatar, Skeleton, Dropdown, Menu, Icon } from 'antd'
 import './MemberCard.css'
 
 export interface MemberCardItem {
@@ -32,7 +32,7 @@ export const MemberCard: FunctionComponent<MemberCardProps> = ({
           overlay={
             <Menu>
               <Menu.Item>
-                <Icon type="user-delete" />Kick from class
+                <Icon type='user-delete' /> Remove from class
               </Menu.Item>
             </Menu>
           }

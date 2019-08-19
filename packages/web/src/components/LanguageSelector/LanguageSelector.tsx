@@ -7,17 +7,11 @@ import './LanguageSelector.css'
 
 const { Option } = Select
 
-interface LanguageSelectorProps {
-
-}
-
 const textStyle = {
   paddingLeft: '8px'
 }
 
-export const LanguageSelector: FunctionComponent<LanguageSelectorProps> = ({
-
-}) => {
+export const LanguageSelector: FunctionComponent = () => {
   const { i18n } = useTranslation()
 
   function changeLanguage(lng: string) {

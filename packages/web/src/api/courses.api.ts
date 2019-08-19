@@ -14,7 +14,7 @@ export interface Course {
   owner: boolean
 }
 
-export const GET_MY_COURSES: Query<Course[]> = {
+export const GET_COURSES: Query<Course[]> = {
   resource: 'courses',
   cache: true,
   async fetch(app) {

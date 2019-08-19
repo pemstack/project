@@ -11,7 +11,7 @@ export const LinkRenderer: FunctionComponent<LinkRendererProps> = ({
 }) => {
   if (href.match(/^(https?:)?\/\//)) {
     return (
-      <a href={href} target='_blank'>
+      <a href={href} target='_blank' rel='noopener noreferrer'>
         {children}<sup>☁</sup>
       </a>
     )

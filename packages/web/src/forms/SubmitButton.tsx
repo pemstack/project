@@ -20,7 +20,7 @@ export const SubmitButton = ({
       {({ form: { isSubmitting, isValid } }: FieldProps) => (
         <Button
           loading={isSubmitting}
-          disabled={!preventDisabling && !isValid || isSubmitting}
+          disabled={(!preventDisabling && !isValid) || isSubmitting}
           type='primary'
           htmlType='submit'
           {...restProps}

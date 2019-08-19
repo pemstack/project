@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { AppProvider, decorator, CenterContent, MockApi, delay } from 'app/mock'
 import { Profile, ProfileItem } from './Profile'
 import { ProfileView } from './profile.view'
-import { ME, UserRole } from 'api/user.api'
+import { GET_CURRENT_USER } from 'api/user.api'
 
 const profile: ProfileItem = {
   id: '123',
@@ -13,14 +13,13 @@ const profile: ProfileItem = {
 }
 
 function mocks(api: MockApi) {
-  api.withQuery(ME, async () => {
-    await delay(5000)
+  api.withQuery(GET_CURRENT_USER, async () => {
+    await delay(3000)
     return {
       id: '123',
       firstName: 'Filan',
       lastName: 'Fisteku',
-      email: 'filan@example.com',
-      roles: [UserRole.ADMIN]
+      email: 'filan@example.com'
     }
   })
 }

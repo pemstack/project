@@ -10,12 +10,13 @@ interface ComponentSize {
 let loaded = supportsResizeObserver()
 
 export function useComponentSize<T = any>(ref: RefObject<T>): ComponentSize {
-  const [tick, setTick] = useState(0)
+  const [, setTick] = useState(0)
   const localRef = useRef<null | T>(loaded ? ref.current : null)
   const size = useSize(localRef)
+  const { current } = ref
   useLayoutEffect(() => {
     if (loaded) {
-      localRef.current = ref.current
+      localRef.current = current
       setTick(t => 1 - t)
       return
     }
@@ -25,13 +26,13 @@ export function useComponentSize<T = any>(ref: RefObject<T>): ComponentSize {
       await polyfill()
       loaded = true
       if (!cancelled) {
-        localRef.current = ref.current
+        localRef.current = current
       }
     }
 
     load()
     return () => { cancelled = true }
-  }, [ref.current])
+  }, [current])
 
   return size
 }

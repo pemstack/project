@@ -9,8 +9,8 @@ export interface UserInfo {
   email: string
 }
 
-export const ME: Query<UserInfo | null> = {
-  resource: 'me',
+export const GET_CURRENT_USER: Query<UserInfo | null> = {
+  resource: 'users/me',
   cache: true,
   async fetch(app) {
     if (!app.user.authenticated) {
@@ -18,7 +18,7 @@ export const ME: Query<UserInfo | null> = {
     }
 
     return app
-      .req('/api/auth/me')
+      .req('/api/users/me')
       .get()
       .unauthorized(() => null)
       .json()
@@ -38,12 +38,14 @@ export const LOGIN: Action<LoginParams, TokenResponse> = {
   schema: loginSchema,
   async perform(params, app) {
     return await app.user.login(params)
-  }
+  },
+  invalidates: ['users/me']
 }
 
 export const LOGOUT: Action = {
   progress: true,
   async perform(params, app) {
     return await app.user.logout()
-  }
+  },
+  invalidates: ['users/me']
 }

@@ -82,13 +82,4 @@ export class AuthController {
       .status(200)
       .end()
   }
-
-  @ApiBearerAuth()
-  @ApiResponse({ status: 200 })
-  @ApiResponse({ status: 401 })
-  @UseGuards(AuthGuard('jwt'))
-  @Get('me')
-  getProfile(@ReqUser() user: User) {
-    return user
-  }
 }

@@ -12,7 +12,7 @@ import {
   RoutingTable
 } from '@pema/router'
 import { mapLazy } from '@pema/utils'
-import { ME, UserRole } from 'api/user.api'
+import { GET_CURRENT_USER } from 'api/user.api'
 import { RouteParams } from './types'
 
 export { allow, controller, deny, error, redirect, view } from '@pema/router'
@@ -70,13 +70,13 @@ export function authorize({
       return action
     }
 
-    const userInfo = await apiClient.query(ME)
+    const userInfo = await apiClient.query(GET_CURRENT_USER)
     if (!userInfo) {
       return deny()
     }
 
-    const userRoles = userInfo.roles || []
-    if ((roles as string[]).some(r => userRoles.includes(r as UserRole))) {
+    const userRoles: string[] = (userInfo as any).roles || []
+    if ((roles as string[]).some(r => userRoles.includes(r))) {
       return action
     } else {
       return deny()

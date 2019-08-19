@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res, UnauthorizedException, UseGuards, BadRequestException } from '@nestjs/common'
+import { Body, Controller, Get, Post, UseGuards, BadRequestException } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiBearerAuth, ApiResponse, ApiUseTags } from '@nestjs/swagger'
 import { MailerService } from '@nest-modules/mailer'
@@ -43,5 +43,14 @@ export class UsersController {
         link: url + '/user/confirm?token=' + token
       }
     })
+  }
+
+  @ApiBearerAuth()
+  @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 401 })
+  @UseGuards(AuthGuard('jwt'))
+  @Get('me')
+  getProfile(@ReqUser() user: User) {
+    return user
   }
 }

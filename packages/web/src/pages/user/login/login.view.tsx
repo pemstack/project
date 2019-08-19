@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { Formik, Form, Input, Checkbox, SubmitButton, Icon, FormikActions } from 'forms'
+import { Formik, FormikActions } from 'forms'
 import { View, redirect, allow, stringParam, errorCode, useAction } from 'app'
 import { LOGIN, LoginParams } from 'api/user.api'
-import { Card } from 'antd'
 import './login.view.css'
 import { LoginForm } from './LoginForm'
 
