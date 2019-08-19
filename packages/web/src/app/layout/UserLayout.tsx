@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from 'react'
 import { Layout, Menu, Icon } from 'antd'
-import { LanguageSelector, Loader, ProfileDropdownConnector } from 'components'
+import { LanguageSelector, ProfileDropdownConnector } from 'components'
 import { useTranslation } from 'react-i18next'
 import { Link } from '@pema/router-react'
 import './UserLayout.css'

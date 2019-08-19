@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { Layout } from 'antd'
 import { LanguageSelector } from 'components'
-import './AnonymousLayout.css'
 import { Link } from '@pema/router-react'
+import './AnonymousLayout.css'
 
 const { Header, Content, Footer } = Layout
 
