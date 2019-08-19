@@ -5,7 +5,6 @@ import { Button } from 'antd'
 import { decorator } from 'app/mock'
 import { Comment, CommentItem } from './Comment'
 import { MarkdownEditor } from './MarkdownEditor'
-import { Loader } from './Loader'
 
 const comments: CommentItem[] = [
   {

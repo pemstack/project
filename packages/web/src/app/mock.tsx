@@ -3,7 +3,6 @@ import { Dictionary } from '@pema/utils'
 import { MockApiClient } from '@pema/state/lib/mock-api-client'
 import { createMemoryHistory } from 'history'
 import { init } from 'app'
-import { Loader } from 'components'
 import { RouteParams } from './types'
 import { AppRoot } from './components/AppRoot'
 
