@@ -90,11 +90,9 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
   const params = deepMerge({ ...app.router.current }, overrides)
   return (
     <AppRoot app={app}>
-      <Loader>
-        {children && typeof children !== 'function'
-          ? children
-          : (render || (children as ((props: RouteParams) => React.ReactNode)) || noop)(params as RouteParams)}
-      </Loader>
+      {children && typeof children !== 'function'
+        ? children
+        : (render || (children as ((props: RouteParams) => React.ReactNode)) || noop)(params as RouteParams)}
     </AppRoot>
   )
 }
