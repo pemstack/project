@@ -27,19 +27,24 @@ export const MemberCard: FunctionComponent<MemberCardProps> = ({
 }) => {
   return (
     <Card style={style} className='MemberCard'>
-      {kickable &&
-        <Dropdown
-          overlay={
-            <Menu>
-              <Menu.Item>
-                <Icon type='user-delete' /> Remove from class
+      {kickable
+        ? (
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item>
+                  <Icon type='user-delete' /> Remove from class
               </Menu.Item>
-            </Menu>
-          }
-          className='MemberCard__settings'
-        >
-          <Icon type='setting' />
-        </Dropdown>
+              </Menu>
+            }
+            className='MemberCard__settings'
+          >
+            <Icon type='setting' />
+          </Dropdown>
+        )
+        : (
+          <div className='MemberCard__settings' />
+        )
       }
       {loading
         ? (
