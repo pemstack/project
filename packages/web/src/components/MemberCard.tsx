@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { Card, Avatar, Skeleton } from 'antd'
+import { Card, Avatar, Skeleton, Button, Dropdown, Menu, Icon } from 'antd'
 import './MemberCard.css'
 
 export interface MemberCardItem {
@@ -12,6 +12,7 @@ export interface MemberCardProps {
   item: MemberCardItem
   loading?: boolean
   style?: React.CSSProperties
+  kickable?: boolean
 }
 
 export const MemberCard: FunctionComponent<MemberCardProps> = ({
@@ -21,10 +22,25 @@ export const MemberCard: FunctionComponent<MemberCardProps> = ({
     role
   },
   loading,
-  style
+  style,
+  kickable
 }) => {
   return (
     <Card style={style} className='MemberCard'>
+      {kickable &&
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item>
+                <Icon type="user-delete" />Kick from class
+              </Menu.Item>
+            </Menu>
+          }
+          className='MemberCard__settings'
+        >
+          <Icon type='setting' />
+        </Dropdown>
+      }
       {loading
         ? (
           <Skeleton
@@ -40,6 +56,7 @@ export const MemberCard: FunctionComponent<MemberCardProps> = ({
             description={role}
           />
         )}
+
     </Card>
   )
 }

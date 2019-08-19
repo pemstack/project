@@ -10,3 +10,7 @@
 .MemberCard .ant-skeleton-with-avatar .ant-skeleton-content .ant-skeleton-paragraph li {
   height: 10px;
 }
+
+.MemberCard__settings {
+  float: right
+}

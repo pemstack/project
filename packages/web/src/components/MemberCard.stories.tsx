@@ -69,6 +69,17 @@ storiesOf('MemberCard', module)
       }}
     />
   ))
+  .add('kickable', () => (
+    <MemberCard
+      style={cardStyle}
+      item={{
+        avatar: 'www.image.com/someimage.png',
+        fullName: 'Name Surname',
+        role: 'Student'
+      }}
+      kickable
+    />
+  ))
   .add('loading', () => (
     <MemberCard
       loading
