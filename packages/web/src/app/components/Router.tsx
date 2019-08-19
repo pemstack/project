@@ -1,11 +1,12 @@
 import { useApp, useEvent } from '@pema/app-react'
 import { RouterView } from '@pema/router'
-import { DefaultLayout } from 'app/layout/DefaultLayout'
-import { MinimalLayout } from 'app/layout/MinimalLayout'
+import { UserLayout } from 'app/layout/UserLayout'
+import { AnonymousLayout } from 'app/layout/AnonymousLayout'
 import { App, LayoutPicker, RouteParams, View } from 'app/types'
-import React, { ComponentType, FunctionComponent } from 'react'
+import React, { ComponentType, FunctionComponent, Suspense } from 'react'
 import { Error } from './Error'
 import { Loading } from './Loading'
+import { Spin } from 'antd'
 
 const NoLayout: FunctionComponent<RouteParams> = ({ children }) => <>{children}</>
 
@@ -15,7 +16,7 @@ function getLayout(params: RouteParams, type?: LayoutPicker): [ComponentType<any
   }
 
   if (typeof type === 'undefined') {
-    type = params.app.user.authenticated ? 'default' : 'minimal'
+    type = params.app.user.authenticated ? 'user' : 'anonymous'
   }
 
   if (type === null) {
@@ -35,11 +36,11 @@ function getLayout(params: RouteParams, type?: LayoutPicker): [ComponentType<any
   switch (key) {
     case 'none':
       return [NoLayout, props]
-    case 'minimal':
-      return [MinimalLayout, props]
-    case 'default':
+    case 'anonymous':
+      return [AnonymousLayout, props]
+    case 'user':
     default:
-      return [DefaultLayout, props]
+      return [UserLayout, props]
   }
 }
 
@@ -99,7 +100,7 @@ export const Router: FunctionComponent = () => {
     return null
   }
 
-  const Layout = app.user.authenticated ? DefaultLayout : MinimalLayout
+  const Layout = app.user.authenticated ? UserLayout : AnonymousLayout
   switch (view.type) {
     case 'view':
       const ViewComponent = view.view as View
@@ -109,7 +110,15 @@ export const Router: FunctionComponent = () => {
       return (
         <ViewLayout {...params} {...viewLayoutProps}>
           <Catcher params={params} view={view}>
-            <ViewComponent {...params} {...initialProps} {...derivedProps} />
+            <Suspense
+              fallback={
+                <div className='Router__loading'>
+                  <Spin size='large' />
+                </div>
+              }
+            >
+              <ViewComponent {...params} {...initialProps} {...derivedProps} />
+            </Suspense>
           </Catcher>
         </ViewLayout>
       )

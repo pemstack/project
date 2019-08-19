@@ -1,12 +1,12 @@
 import React, { useState, FunctionComponent } from 'react'
 import { Layout, Menu, Icon } from 'antd'
 import { LanguageSelector, Loader, ProfileDropdown } from 'components'
-import './DefaultLayout.css'
+import './UserLayout.css'
 import { useTranslation } from 'react-i18next'
 
 const { Header, Content, Footer, Sider } = Layout
 
-export interface DefaultLayoutProps {
+export interface UserLayoutProps {
   children?: React.ReactNode
   defaultMobile?: boolean
   defaultCollapsed?: boolean
@@ -22,7 +22,7 @@ function fallback(value: boolean | undefined, fallbackValue: boolean) {
     : value
 }
 
-export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
+export const UserLayout: FunctionComponent<UserLayoutProps> = ({
   children,
   defaultMobile,
   defaultCollapsed
@@ -37,16 +37,16 @@ export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
   }
 
   return (
-    <Layout className='DefaultLayout'>
+    <Layout className='UserLayout'>
       <Sider
-        className='DefaultLayout__sider'
+        className='UserLayout__sider'
         trigger={null}
         collapsed={collapsed}
         collapsedWidth={mobile ? 0 : undefined}
         breakpoint='sm'
         onBreakpoint={broken => setMobile(broken)}
       >
-        <div className='DefaultLayout__logo' />
+        <div className='UserLayout__logo' />
         <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
           <Menu.Item key='1'>
             <Icon type='read' />
@@ -66,27 +66,27 @@ export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
           </Menu.Item>
         </Menu>
       </Sider>
-      <Layout className='DefaultLayout__main'>
-        <Header className='DefaultLayout__header'>
+      <Layout className='UserLayout__main'>
+        <Header className='UserLayout__header'>
           <Icon
-            className='DefaultLayout__trigger'
+            className='UserLayout__trigger'
             type={collapsed ? 'menu-unfold' : 'menu-fold'}
             onClick={toggle}
           />
-          <span className='DefaultLayout__title'>Project name</span>
-          <span className='DefaultLayout__profile-dropdown'>
+          <span className='UserLayout__title'>Project name</span>
+          <span className='UserLayout__profile-dropdown'>
             <ProfileDropdown />
           </span>
-          <span className='DefaultLayout__language-selector'>
+          <span className='UserLayout__language-selector'>
             <LanguageSelector />
           </span>
         </Header>
-        <Content className='DefaultLayout__content'>
-          <div className='DefaultLayout__wrapper'>
+        <Content className='UserLayout__content'>
+          <div className='UserLayout__wrapper'>
             {children}
           </div>
         </Content>
-        <Footer className='DefaultLayout__footer'>
+        <Footer className='UserLayout__footer'>
           Ant Design ©2018 Created by Ant UED
         </Footer>
       </Layout>

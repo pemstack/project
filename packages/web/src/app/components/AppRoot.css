@@ -2,7 +2,7 @@
   overflow: hidden;
 }
 
-.AppRoot__loader {
+.AppRoot__loading {
   padding: 48px 0;
   text-align: center;
 }

@@ -35,10 +35,6 @@ export const RegisterView: View = () => {
   )
 }
 
-RegisterView.layout = {
-  type: 'minimal'
-}
-
 RegisterView.onEnter = ({
   app: { user }
 }) => {

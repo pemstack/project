@@ -19,7 +19,7 @@ export const AppRoot: FunctionComponent<AppRootProps> = ({
       <div className='AppRoot'>
         <Suspense
           fallback={
-            <div className='AppRoot__loader'>
+            <div className='AppRoot__loading'>
               <Spin size='large' />
             </div>
           }

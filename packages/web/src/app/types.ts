@@ -9,8 +9,8 @@ import {
 } from '@pema/router'
 import { ApiClient, Action as PemaAction, Query as PemaQuery, QueryOptions } from '@pema/state'
 import { JValue } from '@pema/utils'
-import { DefaultLayoutProps } from 'app/layout/DefaultLayout'
-import { MinimalLayoutProps } from 'app/layout/MinimalLayout'
+import { UserLayoutProps } from 'app/layout/UserLayout'
+import { AnonymousLayoutProps } from 'app/layout/AnonymousLayout'
 import { ComponentType } from 'react'
 import {
   UserStore,
@@ -48,8 +48,8 @@ type StringOrProps<TType extends string, TProps extends {} = {}> =
   | TProps & { type: TType }
 
 type LayoutType =
-  | StringOrProps<'default', DefaultLayoutProps>
-  | StringOrProps<'minimal', MinimalLayoutProps>
+  | StringOrProps<'user', UserLayoutProps>
+  | StringOrProps<'anonymous', AnonymousLayoutProps>
   | StringOrProps<'none'>
   | null
 

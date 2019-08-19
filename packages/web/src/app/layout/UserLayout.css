@@ -1,42 +1,42 @@
-.DefaultLayout {
+.UserLayout {
   min-height: 100vh;
 }
 
 @media only screen and (max-width: 576px) {
-  .DefaultLayout__main {
+  .UserLayout__main {
     min-width: 100vw;
   }
 }
 
-.DefaultLayout__sider {
+.UserLayout__sider {
   box-shadow: 2px 0px 10px 0px rgba(0,0,0,0.25);
 }
 
-.DefaultLayout__header {
+.UserLayout__header {
   background: #fff;
   padding: 0;
   box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
 }
 
-.DefaultLayout__title {
+.UserLayout__title {
   font-size: 1.25em;
 }
 
-.DefaultLayout__wrapper {
+.UserLayout__wrapper {
   padding: 24px 8px;
 }
 
-.DefaultLayout__footer {
+.UserLayout__footer {
   text-align: center;
 }
 
-.DefaultLayout__logo {
+.UserLayout__logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
 
-.DefaultLayout__trigger {
+.UserLayout__trigger {
   font-size: 18px;
   line-height: 64px;
   padding: 0 24px;
@@ -44,17 +44,17 @@
   transition: color 0.3s;
 }
 
-.DefaultLayout__trigger:hover {
+.UserLayout__trigger:hover {
   color: #1890ff;
 }
 
-.DefaultLayout__language-selector {
+.UserLayout__language-selector {
   float: right;
   line-height: 64px;
   padding: 0 24px;
 }
 
-.DefaultLayout__profile-dropdown {
+.UserLayout__profile-dropdown {
   float: right;
   padding: 0 24px 0 0;
 }

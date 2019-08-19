@@ -10,7 +10,3 @@ export const Loading: View = () => {
     </div>
   )
 }
-
-Loading.layout = {
-  type: 'default'
-}

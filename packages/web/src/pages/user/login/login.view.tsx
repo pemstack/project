@@ -48,10 +48,6 @@ export const LoginView: View = ({
   )
 }
 
-LoginView.layout = {
-  type: 'minimal'
-}
-
 LoginView.onEnter = ({
   app: { user },
   location: { query }

@@ -1,33 +1,33 @@
-.MinimalLayout {
+.AnonymousLayout {
   min-height: 100vh;
 }
 
-.MinimalLayout__header {
+.AnonymousLayout__header {
   background: #fff;
   padding: 0;
   box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
 }
 
-.MinimalLayout__title {
+.AnonymousLayout__title {
   font-size: 1.25em;
   padding: 0 24px;
 }
 
-.MinimalLayout__wrapper {
+.AnonymousLayout__wrapper {
   padding: 24px 8px;
 }
 
-.MinimalLayout__footer {
+.AnonymousLayout__footer {
   text-align: center;
 }
 
-.MinimalLayout__language-selector {
+.AnonymousLayout__language-selector {
   float: right;
   line-height: 64px;
   padding: 0 0 0 24px;
 }
 
-.MinimalLayout__login {
+.AnonymousLayout__login {
   float: right;
   line-height: 64px;
   padding: 0 24px;
