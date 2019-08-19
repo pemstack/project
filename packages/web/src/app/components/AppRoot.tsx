@@ -1,6 +1,6 @@
 import { AppContext } from '@pema/app-react'
 import React, { FunctionComponent, Suspense } from 'react'
-import { Router, Loading } from 'app/components'
+import { Router, DelayedLoading } from 'app/components'
 import { App } from 'app/types'
 import './AppRoot.css'
 
@@ -16,7 +16,7 @@ export const AppRoot: FunctionComponent<AppRootProps> = ({
   return (
     <AppContext.Provider value={app}>
       <div className='AppRoot'>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<DelayedLoading />}>
           {children || <Router />}
         </Suspense>
       </div>

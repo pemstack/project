@@ -4,7 +4,7 @@ import { Delay } from 'components'
 
 export const DelayedLoading: FunctionComponent = () => {
   return (
-    <Delay ms={100}>
+    <Delay ms={50}>
       <Loading />
     </Delay>
   )
