@@ -20,6 +20,7 @@
 
 .UserLayout__title {
   font-size: 1.25em;
+  line-height: 64px;
 }
 
 .UserLayout__wrapper {
@@ -48,13 +49,8 @@
   color: #1890ff;
 }
 
-.UserLayout__language-selector {
+.UserLayout__header-right {
   float: right;
+  padding: 0 12px 0 0;
   line-height: 64px;
-  padding: 0 24px;
-}
-
-.UserLayout__profile-dropdown {
-  float: right;
-  padding: 0 24px 0 0;
 }

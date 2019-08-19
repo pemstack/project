@@ -11,6 +11,7 @@
 .AnonymousLayout__title {
   font-size: 1.25em;
   padding: 0 24px;
+  line-height: 64px;
 }
 
 .AnonymousLayout__wrapper {
@@ -24,11 +25,12 @@
 .AnonymousLayout__language-selector {
   float: right;
   line-height: 64px;
-  padding: 0 0 0 24px;
+  padding: 0 12px;
 }
 
 .AnonymousLayout__login {
   float: right;
   line-height: 64px;
-  padding: 0 24px;
+  padding: 0 12px;
+  margin-right: 12px;
 }

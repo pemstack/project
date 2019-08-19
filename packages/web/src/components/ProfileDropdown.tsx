@@ -1,16 +1,20 @@
 import React, { FunctionComponent } from 'react'
-import { Dropdown, Menu, Icon, Avatar } from 'antd'
+import { Dropdown, Menu, Icon, Avatar, Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Link } from '@pema/router-react'
 import { useAction } from 'app'
 import { LOGOUT } from 'api/user.api'
+import './ProfileDropdown.css'
 
 interface ProfileDropdownProps { }
 
 export const ProfileDropdown: FunctionComponent<ProfileDropdownProps> = () => {
   return (
     <Dropdown overlay={<ProfileMenu />}>
-      <Avatar size='large' icon='user' />
+      <div className='ProfileDropdown__trigger'>
+        <Avatar className='ProfileDropdown__avatar' size='small' icon='user' />
+        <span className='ProfileDropdown__name' >Very long name</span>
+      </div>
     </Dropdown>
   )
 }

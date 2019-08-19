@@ -1,0 +1,18 @@
+.ProfileDropdown__trigger {
+  line-height: 64px;
+  padding: 0 12px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.ProfileDropdown__trigger:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.ProfileDropdown__avatar {
+  margin-right: 8px;
+}
+
+.ProfileDropdown__name {
+  padding: 0;
+}
