@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { UsersService, User, UserRole, UserStatus, UsersModule } from 'modules/users'
+import { UsersService, User, UsersModule } from 'modules/users'
 
 export const imports = [UsersModule]
 
@@ -13,12 +13,10 @@ export default class AddAdminTask {
     console.log('Adding admin user...')
     console.log('Args:', args)
     await this.usersService.create(new User({
-      firstname: 'First',
-      lastname: 'Last',
+      firstName: 'First',
+      lastName: 'Last',
       email: 'admin@example.com',
-      password: '123456',
-      roles: [UserRole.ADMIN, UserRole.USER],
-      status: UserStatus.CONFIRMED
+      password: '123456'
     }))
 
     console.log('User added!')

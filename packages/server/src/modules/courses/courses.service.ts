@@ -1,6 +1,12 @@
-import { Injectable, BadRequestException, NotFoundException, ForbiddenException } from '@nestjs/common'
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+  ForbiddenException,
+  UnauthorizedException
+} from '@nestjs/common'
 import { InjectEntityManager } from '@nestjs/typeorm'
-import { Course, CoursePage, CourseAccess, AccessLevel } from './courses.entity'
+import { Course, CoursePage, CourseAccess, CourseAccessLevel } from './courses.entity'
 import { EntityManager } from 'typeorm'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -9,6 +15,7 @@ import { unionBy } from 'lodash'
 export interface CreateCourseParams {
   ownerId: string
   title: string
+  isPublic?: boolean
 }
 
 export interface CreateCoursePageParams {
@@ -16,12 +23,13 @@ export interface CreateCoursePageParams {
   userId: string
   title: string
   content?: string
+  isPublic?: boolean
 }
 
 export interface CourseInfo {
   id: string
   title: string
-  access: AccessLevel
+  access: CourseAccessLevel
   owner: boolean
 }
 
@@ -31,12 +39,17 @@ export class CoursesService {
     @InjectEntityManager() readonly entities: EntityManager
   ) { }
 
-  async createCourse({ ownerId, title }: CreateCourseParams) {
+  async createCourse({
+    ownerId,
+    title,
+    isPublic = false
+  }: CreateCourseParams): Promise<string> {
     const id = uniqid()
     await this.entities.insert(Course, {
       id,
       ownerId,
-      title
+      title,
+      isPublic
     })
 
     return id
@@ -46,14 +59,15 @@ export class CoursesService {
     courseId,
     userId,
     title,
-    content = ''
-  }: CreateCoursePageParams) {
-    const access = await this.getAccess(courseId, userId)
+    content = '',
+    isPublic = false
+  }: CreateCoursePageParams): Promise<string> {
+    const access = await this.tryGetAccess(courseId, userId)
     if (!access) {
       throw new NotFoundException()
     }
 
-    if (access.accessLevel !== AccessLevel.Write) {
+    if (access.accessLevel !== CourseAccessLevel.Write) {
       throw new ForbiddenException()
     }
 
@@ -70,8 +84,11 @@ export class CoursesService {
       courseId,
       pageId,
       title,
-      content
+      content,
+      isPublic
     })
+
+    return pageId
   }
 
   async getCourses(userId: string): Promise<CourseInfo[]> {
@@ -87,7 +104,7 @@ export class CoursesService {
     const ownCourses = courses.map(c => ({
       id: c.id,
       title: c.title,
-      access: AccessLevel.Write,
+      access: CourseAccessLevel.Write,
       owner: true
     }))
 
@@ -101,7 +118,40 @@ export class CoursesService {
     return unionBy(ownCourses, otherCourses, c => c.id)
   }
 
-  async getAccess(courseId: string, userId: string) {
+  async getCoursePage(userId: string | null, courseId: string, pageId: string): Promise<CoursePage> {
+    const access = await this.tryGetAccess(courseId, userId)
+    if (!access) {
+      throw new NotFoundException()
+    }
+
+    if (access.accessLevel === CourseAccessLevel.None) {
+      if (userId) {
+        throw new ForbiddenException()
+      } else {
+        throw new UnauthorizedException()
+      }
+    }
+
+    const page = await this.entities.findOne(CoursePage, {
+      pageId,
+      courseId
+    })
+
+    if (!page) {
+      throw new NotFoundException()
+    }
+
+    if (!userId && !page.isPublic) {
+      throw new UnauthorizedException()
+    }
+
+    return page
+  }
+
+  async tryGetAccess(courseId: string, userId: string | null): Promise<null | {
+    course: Course
+    accessLevel: CourseAccessLevel
+  }> {
     const course = await this.entities.findOne(Course, {
       id: courseId
     })
@@ -110,10 +160,17 @@ export class CoursesService {
       return null
     }
 
-    if (course.ownerId === userId) {
+    if (userId && course.ownerId === userId) {
       return {
         course,
-        accessLevel: AccessLevel.Write
+        accessLevel: CourseAccessLevel.Write
+      }
+    }
+
+    if (!userId) {
+      return {
+        course,
+        accessLevel: course.isPublic ? CourseAccessLevel.Read : CourseAccessLevel.None
       }
     }
 
@@ -124,7 +181,7 @@ export class CoursesService {
 
     return {
       course,
-      accessLevel: access ? access.accessLevel : AccessLevel.None
+      accessLevel: access ? access.accessLevel : CourseAccessLevel.None
     }
   }
 }

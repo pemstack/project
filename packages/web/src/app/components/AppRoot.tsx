@@ -2,8 +2,8 @@ import { AppContext } from '@pema/app-react'
 import React, { FunctionComponent, Suspense } from 'react'
 import { Router } from 'app/components'
 import { App } from 'app/types'
-import './AppRoot.css'
 import { Spin } from 'antd'
+import './AppRoot.css'
 
 interface AppRootProps {
   app: App

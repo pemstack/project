@@ -7,7 +7,7 @@ import { UsersModule } from 'modules/users'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
 import { RolesGuard } from './guards'
-import { JwtStrategy, LocalStrategy } from './strategies'
+import { JwtStrategy, LocalStrategy, AnonymousStrategy } from './strategies'
 import { ConfigService } from 'nestjs-config'
 
 @Module({
@@ -27,8 +27,9 @@ import { ConfigService } from 'nestjs-config'
   ],
   providers: [
     AuthService,
-    LocalStrategy,
+    AnonymousStrategy,
     JwtStrategy,
+    LocalStrategy,
     {
       provide: APP_GUARD,
       useClass: RolesGuard,

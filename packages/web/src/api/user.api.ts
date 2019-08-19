@@ -2,17 +2,11 @@ import { Query, Action } from 'app'
 import { TokenResponse } from 'stores/user.store'
 import * as yup from 'yup'
 
-export enum UserRole {
-  USER = 'user',
-  ADMIN = 'admin'
-}
-
 export interface UserInfo {
   id: string
   firstName: string
   lastName: string
   email: string
-  roles: UserRole[]
 }
 
 export const ME: Query<UserInfo | null> = {

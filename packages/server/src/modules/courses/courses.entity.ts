@@ -20,6 +20,9 @@ export class Course {
   })
   owner: User
 
+  @Column()
+  isPublic: boolean
+
   @OneToMany(type => CoursePage, coursePage => coursePage.course)
   pages: CoursePage[]
 
@@ -27,7 +30,7 @@ export class Course {
   access: CourseAccess[]
 }
 
-export enum AccessLevel {
+export enum CourseAccessLevel {
   None = 'none',
   Read = 'read',
   Write = 'write'
@@ -58,9 +61,9 @@ export class CourseAccess {
   @Column()
   role: string
 
-  @IsEnum(AccessLevel)
+  @IsEnum(CourseAccessLevel)
   @Column()
-  accessLevel: AccessLevel
+  accessLevel: CourseAccessLevel
 }
 
 @Entity()
@@ -83,4 +86,7 @@ export class CoursePage {
 
   @Column({ type: 'text' })
   content: string
+
+  @Column()
+  isPublic: boolean
 }

@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, NotFoundException } from '@nestjs/common'
-import { ApiResponse, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger'
+import { Body, Controller, Get, Param, Post, NotFoundException } from '@nestjs/common'
+import { ApiUseTags, ApiBearerAuth } from '@nestjs/swagger'
 import { CoursesService } from './courses.service'
 import { CreateCourseRequest, CreatePageRequest } from './courses.dto'
 import { ReqUser, Authorize } from 'common/decorators'
@@ -16,22 +16,25 @@ export class CoursesController {
   @Post()
   async createCourse(
     @ReqUser('id') userId: string,
-    @Body() { title }: CreateCourseRequest
+    @Body() { title, isPublic }: CreateCourseRequest
   ) {
-    await this.courses.createCourse({
+    const id = await this.courses.createCourse({
       ownerId: userId,
-      title
+      title,
+      isPublic
     })
+
+    return { id }
   }
 
   @ApiBearerAuth()
   @Authorize()
-  @Get(':id/access')
+  @Get(':courseid/access')
   async getAccess(
-    @Param('id') id: string,
+    @Param('courseid') courseId: string,
     @ReqUser('id') userId: string
   ) {
-    const result = await this.courses.getAccess(id, userId)
+    const result = await this.courses.tryGetAccess(courseId, userId)
     if (!result) {
       throw new NotFoundException()
     }
@@ -39,6 +42,17 @@ export class CoursesController {
     return {
       accessLevel: result.accessLevel
     }
+  }
+
+  @ApiBearerAuth()
+  @Authorize(['jwt', 'anonymous'])
+  @Get(':courseid/pages/:pageid')
+  async getCoursePage(
+    @ReqUser('id') userId: string | null,
+    @Param('courseid') courseId: string,
+    @Param('pageid') pageId: string
+  ) {
+    return await this.courses.getCoursePage(userId, courseId, pageId)
   }
 
   @ApiBearerAuth()
@@ -50,17 +64,20 @@ export class CoursesController {
 
   @ApiBearerAuth()
   @Authorize()
-  @Post(':id/pages')
+  @Post(':courseid/pages')
   async createCoursePage(
-    @Param('id') id: string,
+    @Param('courseid') courseId: string,
     @ReqUser('id') userId: string,
-    @Body() { title, content }: CreatePageRequest
+    @Body() { title, content, isPublic }: CreatePageRequest
   ) {
-    await this.courses.createCoursePage({
-      courseId: id,
+    const id = await this.courses.createCoursePage({
+      courseId,
       userId,
       title,
-      content
+      content,
+      isPublic
     })
+
+    return { id }
   }
 }
