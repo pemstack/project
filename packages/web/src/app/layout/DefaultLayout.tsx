@@ -78,9 +78,7 @@ export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
             <ProfileDropdown />
           </span>
           <span className='DefaultLayout__language-selector'>
-            <Loader>
-              <LanguageSelector />
-            </Loader>
+            <LanguageSelector />
           </span>
         </Header>
         <Content className='DefaultLayout__content'>

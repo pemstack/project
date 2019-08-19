@@ -24,5 +24,11 @@
 .MinimalLayout__language-selector {
   float: right;
   line-height: 64px;
+  padding: 0 0 0 24px;
+}
+
+.MinimalLayout__login {
+  float: right;
+  line-height: 64px;
   padding: 0 24px;
 }

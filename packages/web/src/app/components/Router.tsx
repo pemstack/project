@@ -9,9 +9,13 @@ import { Loading } from './Loading'
 
 const NoLayout: FunctionComponent<RouteParams> = ({ children }) => <>{children}</>
 
-function getLayout(params: RouteParams, type: LayoutPicker = 'default'): [ComponentType<any>, {}] {
+function getLayout(params: RouteParams, type?: LayoutPicker): [ComponentType<any>, {}] {
   if (typeof type === 'function') {
     type = type(params)
+  }
+
+  if (typeof type === 'undefined') {
+    type = params.app.user.authenticated ? 'default' : 'minimal'
   }
 
   if (type === null) {
@@ -95,6 +99,7 @@ export const Router: FunctionComponent = () => {
     return null
   }
 
+  const Layout = app.user.authenticated ? DefaultLayout : MinimalLayout
   switch (view.type) {
     case 'view':
       const ViewComponent = view.view as View
@@ -110,16 +115,16 @@ export const Router: FunctionComponent = () => {
       )
     case 'error':
       return (
-        <DefaultLayout {...params}>
+        <Layout {...params}>
           <Error {...params} code={view.code} error={view.error} />
-        </DefaultLayout>
+        </Layout>
       )
     case 'fallback':
       if (typeof view.fallback === 'string') {
         return (
-          <DefaultLayout {...params}>
+          <Layout {...params}>
             {view.fallback}
-          </DefaultLayout>
+          </Layout>
         )
       }
 
