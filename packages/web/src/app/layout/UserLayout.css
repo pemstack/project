@@ -49,8 +49,14 @@
   color: #1890ff;
 }
 
-.UserLayout__header-right {
+.UserLayout__header-language {
   float: right;
   padding: 0 8px 0 0;
+  line-height: 64px;
+}
+
+.UserLayout__header-profile {
+  float: right;
+  padding: 0 12px 0 0;
   line-height: 64px;
 }

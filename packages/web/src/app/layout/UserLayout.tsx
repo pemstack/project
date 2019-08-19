@@ -75,10 +75,10 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
             onClick={toggle}
           />
           <Link to='/' className='UserLayout__title'>Project name</Link>
-          <span className='UserLayout__header-right'>
+          <span className='UserLayout__header-profile'>
             <ProfileDropdownConnector />
           </span>
-          <span className='UserLayout__header-right'>
+          <span className='UserLayout__header-language'>
             <LanguageSelector />
           </span>
         </Header>
