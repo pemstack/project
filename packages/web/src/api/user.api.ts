@@ -42,10 +42,11 @@ export const LOGIN: Action<LoginParams, TokenResponse> = {
   invalidates: ['users/me']
 }
 
-export const LOGOUT: Action = {
+export const LOGOUT: Action<string | undefined> = {
   progress: true,
-  async perform(params, app) {
-    return await app.user.logout()
+  async perform(params = '/', app) {
+    await app.user.logout()
+    app.router.replace(params, true)
   },
   invalidates: ['users/me']
 }

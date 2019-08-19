@@ -1,0 +1,12 @@
+.LogoutView {
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.LogoutView__text {
+  line-height: 32px;
+}
+
+.LogoutView__button {
+  float: right;
+}

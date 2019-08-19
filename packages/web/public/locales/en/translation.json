@@ -15,6 +15,9 @@
       "courses": "Courses"
     }
   },
+  "text": {
+    "confirm": "Are you sure?"
+  },
   "user": {
     "label": {
       "profile": "Profile",

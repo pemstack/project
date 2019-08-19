@@ -1,8 +1,9 @@
 import React, { useState, FunctionComponent } from 'react'
 import { Layout, Menu, Icon } from 'antd'
 import { LanguageSelector, Loader, ProfileDropdown } from 'components'
-import './UserLayout.css'
 import { useTranslation } from 'react-i18next'
+import { Link } from '@pema/router-react'
+import './UserLayout.css'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -73,7 +74,7 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
             type={collapsed ? 'menu-unfold' : 'menu-fold'}
             onClick={toggle}
           />
-          <span className='UserLayout__title'>Project name</span>
+          <Link to='/' className='UserLayout__title'>Project name</Link>
           <span className='UserLayout__profile-dropdown'>
             <ProfileDropdown />
           </span>

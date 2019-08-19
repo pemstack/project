@@ -9,7 +9,7 @@ export interface LinkButtonProps extends LinkProps {
 }
 
 export const LinkButton: FunctionComponent<LinkButtonProps> = ({
-  type = 'default',
+  type = 'link',
   children,
   className,
   ...props

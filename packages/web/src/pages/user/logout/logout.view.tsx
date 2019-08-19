@@ -1,22 +1,34 @@
 import React from 'react'
 import { View, redirect, allow, stringParam, useAction } from 'app'
-import { Button } from 'antd'
+import { Button, Card } from 'antd'
 import { LOGOUT } from 'api/user.api'
+import { useTranslation } from 'react-i18next'
+import './logout.view.css'
 
 export const LogoutView: View = ({
-  router,
   location
 }) => {
+  const { t } = useTranslation()
   const logoutAction = useAction(LOGOUT)
   async function logout() {
-    await logoutAction()
     const path = stringParam(location.query, 'redirect', '/')
-    router.replace(path, true)
+    await logoutAction(path)
   }
 
   return (
     <div className='LogoutView'>
-      Click here to log out <Button type='danger' onClick={logout}>Log out</Button>
+      <Card>
+        <span className='LogoutView__text'>
+          {t('text.confirm')}
+        </span>
+        <Button
+          className='LogoutView__button'
+          type='danger'
+          onClick={logout}
+        >
+          {t('user.label.logout')}
+        </Button>
+      </Card>
     </div>
   )
 }

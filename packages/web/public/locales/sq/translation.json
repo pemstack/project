@@ -15,6 +15,9 @@
     "submit": "Dërgo",
     "edit": "Ndrysho"
   },
+  "text": {
+    "confirm": "A jeni të sigurt?"
+  },
   "user": {
     "label": {
       "profile": "Profili",
