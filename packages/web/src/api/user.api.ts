@@ -38,8 +38,7 @@ export const LOGIN: Action<LoginParams, TokenResponse> = {
   schema: loginSchema,
   async perform(params, app) {
     return await app.user.login(params)
-  },
-  invalidates: ['users/me']
+  }
 }
 
 export const LOGOUT: Action<string | undefined> = {
@@ -47,6 +46,5 @@ export const LOGOUT: Action<string | undefined> = {
   async perform(params = '/', app) {
     await app.user.logout()
     app.router.replace(params, true)
-  },
-  invalidates: ['users/me']
+  }
 }

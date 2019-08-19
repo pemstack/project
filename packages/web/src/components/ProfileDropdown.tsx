@@ -1,19 +1,38 @@
 import React, { FunctionComponent } from 'react'
-import { Dropdown, Menu, Icon, Avatar, Button } from 'antd'
+import { Dropdown, Menu, Icon, Avatar, Spin } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Link } from '@pema/router-react'
-import { useAction } from 'app'
-import { LOGOUT } from 'api/user.api'
+import { useAction, useQuery } from 'app'
+import { LOGOUT, GET_CURRENT_USER } from 'api/user.api'
 import './ProfileDropdown.css'
 
-interface ProfileDropdownProps { }
+export const ProfileDropdownConnector: FunctionComponent = () => {
+  const { data: user, loading, error } = useQuery(GET_CURRENT_USER)
+  if (loading) {
+    return <Spin size='small' />
+  }
 
-export const ProfileDropdown: FunctionComponent<ProfileDropdownProps> = () => {
+  if (!user || error) {
+    return null
+  }
+
+  return (
+    <ProfileDropdown name={user.firstName + ' ' + user.lastName} />
+  )
+}
+
+interface ProfileDropdownProps {
+  name: string
+}
+
+export const ProfileDropdown: FunctionComponent<ProfileDropdownProps> = ({
+  name
+}) => {
   return (
     <Dropdown overlay={<ProfileMenu />}>
       <div className='ProfileDropdown__trigger'>
         <Avatar className='ProfileDropdown__avatar' size='small' icon='user' />
-        <span className='ProfileDropdown__name' >Very long name</span>
+        <span className='ProfileDropdown__name'>{name}</span>
       </div>
     </Dropdown>
   )

@@ -9,10 +9,12 @@
   background: rgba(0, 0, 0, 0.05);
 }
 
-.ProfileDropdown__avatar {
-  margin-right: 8px;
+.ProfileDropdown__name {
+  margin-left: 8px;
 }
 
-.ProfileDropdown__name {
-  padding: 0;
+@media screen and (max-width: 576px) {
+  .ProfileDropdown__name {
+    display: none;
+  }
 }

@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from 'react'
 import { Layout, Menu, Icon } from 'antd'
-import { LanguageSelector, Loader, ProfileDropdown } from 'components'
+import { LanguageSelector, Loader, ProfileDropdownConnector } from 'components'
 import { useTranslation } from 'react-i18next'
 import { Link } from '@pema/router-react'
 import './UserLayout.css'
@@ -76,7 +76,7 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
           />
           <Link to='/' className='UserLayout__title'>Project name</Link>
           <span className='UserLayout__header-right'>
-            <ProfileDropdown />
+            <ProfileDropdownConnector />
           </span>
           <span className='UserLayout__header-right'>
             <LanguageSelector />
