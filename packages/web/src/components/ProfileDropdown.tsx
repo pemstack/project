@@ -24,7 +24,7 @@ export const ProfileMenu: FunctionComponent = () => {
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key='logout'>
-        <Link to='/user/profile'>
+        <Link to='/user/logout'>
           <Icon type='logout' /> {t('user.label.logout')}
         </Link>
       </Menu.Item>
