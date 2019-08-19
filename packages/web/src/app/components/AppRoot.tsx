@@ -1,8 +1,7 @@
 import { AppContext } from '@pema/app-react'
 import React, { FunctionComponent, Suspense } from 'react'
-import { Router } from 'app/components'
+import { Router, Loading } from 'app/components'
 import { App } from 'app/types'
-import { Spin } from 'antd'
 import './AppRoot.css'
 
 interface AppRootProps {
@@ -17,13 +16,7 @@ export const AppRoot: FunctionComponent<AppRootProps> = ({
   return (
     <AppContext.Provider value={app}>
       <div className='AppRoot'>
-        <Suspense
-          fallback={
-            <div className='AppRoot__loading'>
-              <Spin size='large' />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           {children || <Router />}
         </Suspense>
       </div>

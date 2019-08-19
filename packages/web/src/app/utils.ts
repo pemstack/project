@@ -13,10 +13,6 @@ export function isErrorCode(code: number | string, error: any): boolean {
   return errorCode(error) == code
 }
 
-export function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
-
 export function stringParam<TDefault>
   (obj: JObject, key: string, defaultValue: TDefault): string | TDefault {
   const val = obj[key]

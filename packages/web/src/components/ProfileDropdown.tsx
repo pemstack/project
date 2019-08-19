@@ -5,11 +5,14 @@ import { Link } from '@pema/router-react'
 import { useAction, useQuery } from 'app'
 import { LOGOUT, GET_CURRENT_USER } from 'api/user.api'
 import './ProfileDropdown.css'
+import { Placeholder } from 'components'
 
 export const ProfileDropdownConnector: FunctionComponent = () => {
   const { data: user, loading, error } = useQuery(GET_CURRENT_USER)
   if (loading) {
-    return <Spin size='small' />
+    return (
+      <Placeholder />
+    )
   }
 
   if (!user || error) {

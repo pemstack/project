@@ -135,8 +135,6 @@ export const CenterContent: FunctionComponent<CenterContentProps> = ({
   )
 }
 
-export function delay(ms = 2000) {
-  return new Promise(resolve => {
-    setTimeout(resolve, ms)
-  })
+export function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms))
 }

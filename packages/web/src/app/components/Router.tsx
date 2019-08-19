@@ -6,6 +6,7 @@ import { App, LayoutPicker, RouteParams, View } from 'app/types'
 import React, { ComponentType, FunctionComponent, Suspense } from 'react'
 import { Error } from './Error'
 import { Loading } from './Loading'
+import { DelayedLoading } from './DelayedLoading'
 import { Spin } from 'antd'
 
 const NoLayout: FunctionComponent<RouteParams> = ({ children }) => <>{children}</>
@@ -97,7 +98,7 @@ export const Router: FunctionComponent = () => {
   const view = router.view
   const params: RouteParams = router.current as any
   if (!view) {
-    return null
+    return <DelayedLoading />
   }
 
   const Layout = app.user.authenticated ? UserLayout : AnonymousLayout

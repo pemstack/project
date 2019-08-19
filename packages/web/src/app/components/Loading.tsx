@@ -1,9 +1,8 @@
-import React from 'react'
-import { View } from 'app'
+import React, { FunctionComponent } from 'react'
 import { Spin } from 'antd'
 import './Loading.css'
 
-export const Loading: View = () => {
+export const Loading: FunctionComponent = () => {
   return (
     <div className='Loading'>
       <Spin size='large' />
