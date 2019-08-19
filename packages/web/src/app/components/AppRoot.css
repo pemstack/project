@@ -2,6 +2,11 @@
   overflow: hidden;
 }
 
+.AppRoot__loader {
+  padding: 48px 0;
+  text-align: center;
+}
+
 /* Make clicks pass-through */
 #nprogress {
   pointer-events: none;

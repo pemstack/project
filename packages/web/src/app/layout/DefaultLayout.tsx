@@ -50,11 +50,11 @@ export const DefaultLayout: FunctionComponent<DefaultLayoutProps> = ({
         <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
           <Menu.Item key='1'>
             <Icon type='read' />
-            <span className='nav-text'>{t('Layout.label.newsfeed')}</span>
+            <span className='nav-text'><Loader>{t('Layout.label.newsfeed')}</Loader></span>
           </Menu.Item>
           <Menu.Item key='2'>
             <Icon type='book' />
-            <span className='nav-text'>{t('Layout.label.courses')}</span>
+            <span className='nav-text'><Loader>{t('Layout.label.courses')}</Loader></span>
           </Menu.Item>
           <Menu.Item key='3'>
             <Icon type='user' />
