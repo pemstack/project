@@ -30,6 +30,17 @@ export class CoursePageResponse {
   pageId: string
 
   @ApiResponseModelProperty()
+  title: string
+
+  @ApiResponseModelProperty()
+  isPublic: boolean
+}
+
+export class CoursePageDetailsResponse {
+  @ApiResponseModelProperty()
+  pageId: string
+
+  @ApiResponseModelProperty()
   courseId: string
 
   @ApiResponseModelProperty()

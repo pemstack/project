@@ -118,6 +118,23 @@ export class CoursesService {
     return unionBy(ownCourses, otherCourses, c => c.id)
   }
 
+  async getCoursePages(userId: string | null, courseId: string):
+    Promise<Array<{ pageId: string, title: string, isPublic: boolean }>> {
+    const access = await this.tryGetAccess(courseId, userId)
+    if (!access) {
+      throw new NotFoundException()
+    }
+
+    if (access.accessLevel === CourseAccessLevel.None) {
+      throw new ForbiddenException()
+    }
+
+    return await this.entities.find(CoursePage, {
+      select: ['pageId', 'title', 'isPublic'],
+      where: { courseId }
+    })
+  }
+
   async getCoursePage(userId: string | null, courseId: string, pageId: string): Promise<CoursePage> {
     const access = await this.tryGetAccess(courseId, userId)
     if (!access) {

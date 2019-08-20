@@ -96,9 +96,9 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
   )
 }
 
-export function decorator() {
+export function decorator(props: AppProviderProps = {}) {
   return (story: () => any) => (
-    <AppProvider>
+    <AppProvider {...props}>
       <div
         style={{
           background: '#eee',

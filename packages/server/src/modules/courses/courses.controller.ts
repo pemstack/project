@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Param, Post, NotFoundException } from '@nestjs/common'
-import { ApiUseTags, ApiBearerAuth } from '@nestjs/swagger'
+import { ApiUseTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger'
 import { CoursesService } from './courses.service'
-import { CreateCourseRequest, CreatePageRequest } from './courses.dto'
+import { CreateCourseRequest, CreatePageRequest, CoursePageResponse, CoursePageDetailsResponse } from './courses.dto'
 import { ReqUser, Authorize } from 'common/decorators'
+import { plainToClass } from 'class-transformer'
 
 @ApiUseTags('courses')
 @Controller('courses')
@@ -10,6 +11,13 @@ export class CoursesController {
   constructor(
     private readonly courses: CoursesService
   ) { }
+
+  @ApiBearerAuth()
+  @Authorize()
+  @Get()
+  async getCourses(@ReqUser('id') userId: string) {
+    return await this.courses.getCourses(userId)
+  }
 
   @ApiBearerAuth()
   @Authorize()
@@ -46,22 +54,16 @@ export class CoursesController {
 
   @ApiBearerAuth()
   @Authorize(['jwt', 'anonymous'])
-  @Get(':courseid/pages/:pageid')
-  async getCoursePage(
-    @ReqUser('id') userId: string | null,
+  @Get(':courseid/pages')
+  async getPages(
     @Param('courseid') courseId: string,
-    @Param('pageid') pageId: string
+    @ReqUser('id') userId: string
   ) {
-    return await this.courses.getCoursePage(userId, courseId, pageId)
+    const pages = await this.courses.getCoursePages(userId, courseId)
+    return pages.map(page => plainToClass(CoursePageResponse, page))
   }
 
-  @ApiBearerAuth()
-  @Authorize()
-  @Get()
-  async getCourses(@ReqUser('id') userId: string) {
-    return await this.courses.getCourses(userId)
-  }
-
+  @ApiResponse({ status: 200, type: [CoursePageResponse] })
   @ApiBearerAuth()
   @Authorize()
   @Post(':courseid/pages')
@@ -79,5 +81,18 @@ export class CoursesController {
     })
 
     return { id }
+  }
+
+  @ApiResponse({ status: 200, type: CoursePageDetailsResponse })
+  @ApiBearerAuth()
+  @Authorize(['jwt', 'anonymous'])
+  @Get(':courseid/pages/:pageid')
+  async getCoursePage(
+    @ReqUser('id') userId: string | null,
+    @Param('courseid') courseId: string,
+    @Param('pageid') pageId: string
+  ) {
+    const coursePage = await this.courses.getCoursePage(userId, courseId, pageId)
+    return plainToClass(CoursePageDetailsResponse, coursePage)
   }
 }

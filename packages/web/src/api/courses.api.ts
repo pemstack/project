@@ -24,3 +24,28 @@ export const GET_COURSES: Query<Course[]> = {
       .json()
   }
 }
+
+export interface CoursePage {
+  id: string
+  title: string
+  isPublic: boolean
+}
+
+export interface GetCoursePagesParams {
+  id: string
+}
+
+export function GET_COURSE_PAGES({ id }: GetCoursePagesParams): Query<CoursePage[]> {
+  return {
+    factory: GET_COURSE_PAGES,
+    resource: `courses/${id}/pages`,
+    cache: true,
+    params: { id },
+    async fetch(app) {
+      return await app
+        .req(`/api/courses/${id}/pages`)
+        .get()
+        .json()
+    }
+  }
+}

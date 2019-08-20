@@ -34,15 +34,14 @@ export const MemberCard: FunctionComponent<MemberCardProps> = ({
               <Menu>
                 <Menu.Item>
                   <Icon type='user-delete' /> Remove from class
-              </Menu.Item>
+                </Menu.Item>
               </Menu>
             }
             className='MemberCard__settings'
           >
             <Icon type='setting' />
           </Dropdown>
-        )
-        : (
+        ) : (
           <div className='MemberCard__settings' />
         )
       }
