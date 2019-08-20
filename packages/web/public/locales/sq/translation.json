@@ -51,5 +51,8 @@
       },
       "confirmPassword": "Fjalëkalimet duhet të përputhen."
     }
+  },
+  "error": {
+    "general": "Ka pasur një gabim."
   }
 }

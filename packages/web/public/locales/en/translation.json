@@ -51,5 +51,8 @@
       },
       "confirmPassword": "Passwords must match."
     }
+  },
+  "error": {
+    "general": "There has been an error."
   }
 }

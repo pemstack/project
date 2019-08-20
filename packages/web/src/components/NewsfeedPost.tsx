@@ -56,7 +56,7 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
     >
       <div className='NewsfeedPost__content'>
         <ReadMore>
-          <Markdown>{content}</Markdown>
+          <Markdown source={content} />
         </ReadMore>
       </div>
     </Card>

@@ -1,5 +1,6 @@
 import { Action, Query } from 'app'
 import * as yup from 'yup'
+import i18n from 'i18next'
 
 export enum CourseAccessLevel {
   None = 'none',
@@ -14,6 +15,7 @@ export interface Course {
   owner: boolean
 }
 
+// GET /api/courses
 export const GET_COURSES: Query<Course[]> = {
   resource: 'courses',
   cache: true,
@@ -38,6 +40,7 @@ export interface CoursePageDetails {
   isPublic: boolean
 }
 
+// GET /api/courses/:courseid/pages/
 export function GET_COURSE_PAGE({ courseId, pageId }: GetCoursePageParams): Query<CoursePageDetails> {
   return {
     factory: GET_COURSE_PAGE,
@@ -72,6 +75,29 @@ export function GET_COURSE_PAGES({ id }: GetCoursePagesParams): Query<CoursePage
     async fetch(app) {
       return await app
         .req(`/api/courses/${id}/pages`)
+        .get()
+        .json()
+    }
+  }
+}
+
+export interface GetCourseAccessParams {
+  id: string
+}
+
+export interface CourseAccess {
+  accessLevel: 'none' | 'read' | 'write'
+}
+
+export function GET_COURSE_ACCESS({ id }: GetCourseAccessParams): Query<CourseAccess> {
+  return {
+    factory: GET_COURSE_ACCESS,
+    resource: `courses/${id}/access`,
+    cache: true,
+    params: { id },
+    async fetch(app) {
+      return await app
+        .req(`/api/courses/${id}/access`)
         .get()
         .json()
     }

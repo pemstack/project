@@ -1,0 +1,7 @@
+.CollapseCard > .ant-card-body {
+  padding: 0px;
+}
+
+.CollapseCard__wrapper {
+  margin: 24px;
+}

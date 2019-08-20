@@ -1,0 +1,26 @@
+.Course > .ant-tabs-card > .ant-tabs-content {
+  margin-top: -16px;
+}
+
+.Course > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+  background: #fff;
+  overflow: hidden;
+}
+
+.Course > .ant-tabs-card > .ant-tabs-bar {
+  border-color: #fff;
+}
+
+.Course > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  border-color: transparent;
+  background: transparent;
+}
+
+.Course > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+  border-color: #fff;
+  background: #fff;
+}
+
+.Course__page {
+  margin: 24px;
+}

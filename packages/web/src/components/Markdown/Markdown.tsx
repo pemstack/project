@@ -9,7 +9,7 @@ import RemarkMathPlugin from 'remark-math'
 import './Markdown.css'
 
 interface MarkdownProps {
-  children: string
+  source: string
 }
 
 const renderers = {
@@ -21,16 +21,16 @@ const renderers = {
   thematicBreak: Divider
 }
 
-export const Markdown: FunctionComponent<MarkdownProps> = ({
-  children
+export const Markdown: FunctionComponent<MarkdownProps> = React.memo(({
+  source
 }) => {
   return (
     <div className='Markdown'>
       <ReactMarkdown
         plugins={[RemarkMathPlugin]}
         renderers={renderers}
-        source={children}
+        source={source}
       />
     </div>
   )
-}
+})

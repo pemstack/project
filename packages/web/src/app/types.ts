@@ -17,7 +17,8 @@ import {
   ProgressStore,
   CookiesStore,
   SessionStore,
-  RecaptchaStore
+  RecaptchaStore,
+  MessagesStore
 } from 'stores'
 import { Wretcher } from 'wretch'
 
@@ -29,6 +30,7 @@ export interface App extends AppNode {
   session: SessionStore
   apiClient: ApiClient
   recaptcha: RecaptchaStore
+  messages: MessagesStore
   reload(hardReload?: boolean): void
   req(url: string, context?: RequestContext): Wretcher
   query<TResult>(query: Query<TResult>, options?: QueryOptions): Promise<TResult>

@@ -63,7 +63,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
       author={<h3 className='Comment__author'>{author}</h3>}
       avatar={<Avatar icon='user' />}
       content={
-        <Markdown>{content}</Markdown>
+        <Markdown source={content} />
       }
       datetime={
         <Tooltip title={title}>{title}</Tooltip>

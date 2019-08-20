@@ -19,7 +19,7 @@ class MemoMarkdown extends React.Component<MemoMarkdownProps> {
 
   render() {
     return (
-      <Markdown>{this.props.value}</Markdown>
+      <Markdown source={this.props.value} />
     )
   }
 }

@@ -1,3 +1,8 @@
-.Placeholder {
+.Placeholder--inline {
   padding: 0 12px;
+}
+
+.Placeholder--block {
+  padding: 24px 12px;
+  text-align: center;
 }

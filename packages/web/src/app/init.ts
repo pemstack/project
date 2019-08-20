@@ -9,7 +9,8 @@ import {
   ProgressStore,
   CookiesStore,
   SessionStore,
-  RecaptchaStore
+  RecaptchaStore,
+  MessagesStore
 } from 'stores'
 import wretch from 'wretch'
 import { App, Query, RequestContext } from './types'
@@ -43,7 +44,8 @@ export function init(state: JObject, {
       cookies: CookiesStore,
       apiClient: ApiClient || CachedApiClient,
       session: SessionStore,
-      recaptcha: RecaptchaStore
+      recaptcha: RecaptchaStore,
+      messages: MessagesStore
     })
 
   const request = baseWretcher(root as any)
