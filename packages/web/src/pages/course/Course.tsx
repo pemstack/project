@@ -12,9 +12,6 @@ export const Course: FunctionComponent<CourseProps> = ({
   id
 }) => {
   const { data: pages, loading, error } = useQuery(GET_COURSE_PAGES({ id }))
-  console.log('Rendering with data', {
-    pages, loading, error
-  })
 
   if (loading) {
     return <Placeholder />
