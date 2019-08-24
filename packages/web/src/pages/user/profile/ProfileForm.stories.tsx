@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { AppProvider, decorator } from 'app/mock'
+import { decorator } from 'app/mock'
 import { ProfileForm } from './ProfileForm'
 import { Formik } from 'forms'
 

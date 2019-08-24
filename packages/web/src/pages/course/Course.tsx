@@ -16,17 +16,17 @@ interface CourseProps {
 export const Course: FunctionComponent<CourseProps> = ({
   id
 }) => {
-  const { data, loading, error } = useQuery(GET_COURSE_PAGES({ id }))
+  const data = useQuery(GET_COURSE_PAGES, { id }).read()
   const { t } = useTranslation()
   // const { data: access } = useQuery(GET_COURSE_ACCESS({ id }))
 
-  if (loading) {
-    return <Placeholder block />
-  }
+  // if (loading) {
+  //   return <Placeholder block />
+  // }
 
-  if (error) {
-    return <div>Error...</div>
-  }
+  // if (error) {
+  //   return <div>Error...</div>
+  // }
 
   const pageTabs = data.map(p => (
     <TabPane tab={p.title} key={p.id}>

@@ -1,6 +1,4 @@
-import { Action, Query } from 'app'
-import * as yup from 'yup'
-import i18n from 'i18next'
+import { Query } from 'app'
 
 export enum CourseAccessLevel {
   None = 'none',
@@ -18,8 +16,7 @@ export interface Course {
 // GET /api/courses
 export const GET_COURSES: Query<Course[]> = {
   resource: 'courses',
-  cache: true,
-  async fetch(app) {
+  async fetch(_, app) {
     return app
       .req('/api/courses')
       .get()
@@ -40,19 +37,14 @@ export interface CoursePageDetails {
   isPublic: boolean
 }
 
-// GET /api/courses/:courseid/pages/
-export function GET_COURSE_PAGE({ courseId, pageId }: GetCoursePageParams): Query<CoursePageDetails> {
-  return {
-    factory: GET_COURSE_PAGE,
-    resource: `courses/${courseId}/pages/${pageId}`,
-    cache: true,
-    params: { courseId, pageId },
-    async fetch(app) {
-      return await app
-        .req(`/api/courses/${courseId}/pages/${pageId}`)
-        .get()
-        .json()
-    }
+// GET /api/courses/:courseid/pages/:pageid
+export const GET_COURSE_PAGE: Query<CoursePageDetails, GetCoursePageParams> = {
+  resource: ({ courseId, pageId }) => `courses/${courseId}/pages/${pageId}`,
+  async fetch({ courseId, pageId }, app) {
+    return await app
+      .req(`/api/courses/${courseId}/pages/${pageId}`)
+      .get()
+      .json()
   }
 }
 
@@ -66,18 +58,14 @@ export interface CoursePage {
   isPublic: boolean
 }
 
-export function GET_COURSE_PAGES({ id }: GetCoursePagesParams): Query<CoursePage[]> {
-  return {
-    factory: GET_COURSE_PAGES,
-    resource: `courses/${id}/pages`,
-    cache: true,
-    params: { id },
-    async fetch(app) {
-      return await app
-        .req(`/api/courses/${id}/pages`)
-        .get()
-        .json()
-    }
+// GET /api/courses/:courseid/pages
+export const GET_COURSE_PAGES: Query<CoursePage[], GetCoursePagesParams> = {
+  resource: ({ id }) => `courses/${id}/pages`,
+  async fetch({ id }, app) {
+    return await app
+      .req(`/api/courses/${id}/pages`)
+      .get()
+      .json()
   }
 }
 
@@ -89,17 +77,13 @@ export interface CourseAccess {
   accessLevel: 'none' | 'read' | 'write'
 }
 
-export function GET_COURSE_ACCESS({ id }: GetCourseAccessParams): Query<CourseAccess> {
-  return {
-    factory: GET_COURSE_ACCESS,
-    resource: `courses/${id}/access`,
-    cache: true,
-    params: { id },
-    async fetch(app) {
-      return await app
-        .req(`/api/courses/${id}/access`)
-        .get()
-        .json()
-    }
+// GET /api/courses/:courseid/access
+export const GET_COURSE_ACCESS: Query<CourseAccess, GetCourseAccessParams> = {
+  resource: ({ id }) => `courses/${id}/access`,
+  async fetch({ id }, app) {
+    return await app
+      .req(`/api/courses/${id}/access`)
+      .get()
+      .json()
   }
 }

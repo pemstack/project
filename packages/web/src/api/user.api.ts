@@ -12,7 +12,7 @@ export interface UserInfo {
 export const GET_CURRENT_USER: Query<UserInfo | null> = {
   resource: 'users/me',
   cache: true,
-  async fetch(app) {
+  async fetch(_, app) {
     if (!app.user.authenticated) {
       return null
     }

@@ -14,7 +14,7 @@ export const WithInput: FunctionComponent<WithInputProps> = ({
   const [text, setText] = useState('siguria')
   return (
     <div className='WithInput'>
-      Course id:&nbsp;<input type='text' value={text} onChange={e => setText(e.target.value)} />
+      Course id: <input type='text' value={text} onChange={e => setText(e.target.value)} />
       <div style={{ paddingTop: '16px' }}>
         {children && children(text)}
       </div>

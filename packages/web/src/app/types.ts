@@ -109,7 +109,7 @@ export interface WithSession<TSession extends { [TKey in keyof TSession]: JValue
 export interface Action<TParams = void, TResult = void, TApp = App>
   extends PemaAction<TParams, TResult, TApp> { }
 
-export interface Query<TResult, TApp = App>
-  extends PemaQuery<TResult, TApp> { }
+export interface Query<TResult, TParams = void, TApp = App>
+  extends PemaQuery<TResult, TParams, TApp> { }
 
 export default 0
