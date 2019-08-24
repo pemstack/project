@@ -17,13 +17,13 @@
   },
   "dependencies": {
     "@my-app/shared": "^0.1.0",
-    "@pema/app": "^0.1.0-alpha.3",
-    "@pema/app-react": "^0.1.0-alpha.3",
-    "@pema/router": "^0.1.0-alpha.3",
-    "@pema/router-react": "^0.1.0-alpha.3",
-    "@pema/state": "^0.1.0-alpha.3",
-    "@pema/state-react": "^0.1.0-alpha.3",
-    "@pema/utils": "^0.1.0-alpha.3",
+    "@pema/app": "^0.1.0-alpha.4",
+    "@pema/app-react": "^0.1.0-alpha.4",
+    "@pema/router": "^0.1.0-alpha.4",
+    "@pema/router-react": "^0.1.0-alpha.4",
+    "@pema/state": "^0.1.0-alpha.4",
+    "@pema/state-react": "^0.1.0-alpha.4",
+    "@pema/utils": "^0.1.0-alpha.4",
     "@types/node": "^12.6.0"
   }
 }
