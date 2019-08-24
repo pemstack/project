@@ -18,21 +18,21 @@
     }
   },
   "dependencies": {
-    "@types/node": "^12.6.0",
-    "lerna": "^3.16.1",
+    "@types/node": "^12.7.2",
+    "lerna": "^3.16.4",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   },
   "devDependencies": {
-    "commitizen": "^3.1.1",
+    "commitizen": "^4.0.3",
     "cross-env": "^5.2.0",
-    "cz-conventional-changelog": "^2.1.0",
-    "rimraf": "^2.6.3",
+    "cz-conventional-changelog": "^3.0.2",
+    "rimraf": "^3.0.0",
     "source-map-explorer": "^2.0.1",
-    "ts-node-dev": "^1.0.0-pre.40",
+    "ts-node-dev": "^1.0.0-pre.42",
     "tsconfig-paths": "^3.8.0",
-    "tslint": "^5.18.0",
+    "tslint": "^5.19.0",
     "tslint-react": "^4.0.0",
-    "wait-on": "^3.2.0"
+    "wait-on": "^3.3.0"
   }
 }

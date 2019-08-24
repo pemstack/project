@@ -24,6 +24,6 @@
     "@pema/state": "^0.1.0-alpha.4",
     "@pema/state-react": "^0.1.0-alpha.4",
     "@pema/utils": "^0.1.0-alpha.4",
-    "@types/node": "^12.6.0"
+    "@types/node": "^12.7.2"
   }
 }
