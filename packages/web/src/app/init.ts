@@ -1,6 +1,6 @@
 import { app, AppOptions } from '@pema/app'
 import { withRouter, RoutingTable, HistoryBuildOptions } from '@pema/router'
-import { CachedApiClient, QueryOptions, ApiClient as IApiClient } from '@pema/state'
+import { CachedApiClient, ApiClient as IApiClient } from '@pema/state'
 import { JObject } from '@pema/utils'
 import { createBrowserHistory, History } from 'history'
 import routes from 'routes'
@@ -13,7 +13,7 @@ import {
   MessagesStore
 } from 'stores'
 import wretch from 'wretch'
-import { App, Query, RequestContext } from './types'
+import { App, RequestContext } from './types'
 import { baseWretcher } from './utils'
 
 wretch().errorType('json')
@@ -54,9 +54,6 @@ export function init(state: JObject, {
       return request
         .url(url)
         .options({ context })
-    },
-    query(query: Query<any>, options?: QueryOptions) {
-      return this.apiClient.query(query, options)
     },
     reload(hardReload = true) {
       if (!this.disposed) {

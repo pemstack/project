@@ -15,7 +15,7 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
   pageId,
   className
 }) => {
-  const data = useQuery(GET_COURSE_PAGE, { courseId, pageId }).read()
+  const page = useQuery(GET_COURSE_PAGE, { courseId, pageId }).read()
   // if (loading) {
   //   return (
   //     <div className={classNames('CoursePage', 'CoursePage--loading', className)}>
@@ -34,7 +34,7 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
 
   return (
     <div className={classNames('CoursePage', 'CoursePage--content', className)}>
-      <Markdown source={data.content} />
+      <Markdown source={page.content} />
     </div>
   )
 }

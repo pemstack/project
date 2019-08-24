@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { Dropdown, Menu, Icon, Avatar, Spin } from 'antd'
+import { Dropdown, Menu, Icon, Avatar } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Link } from '@pema/router-react'
 import { useAction, useQuery } from 'app'

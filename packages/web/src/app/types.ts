@@ -7,7 +7,7 @@ import {
   PickActionParams,
   OmitActionParams
 } from '@pema/router'
-import { ApiClient, Action as PemaAction, Query as PemaQuery, QueryOptions } from '@pema/state'
+import { ApiClient, Action as PemaAction, Query as PemaQuery } from '@pema/state'
 import { JValue } from '@pema/utils'
 import { UserLayoutProps } from 'app/layout/UserLayout'
 import { AnonymousLayoutProps } from 'app/layout/AnonymousLayout'
@@ -33,7 +33,6 @@ export interface App extends AppNode {
   messages: MessagesStore
   reload(hardReload?: boolean): void
   req(url: string, context?: RequestContext): Wretcher
-  query<TResult>(query: Query<TResult>, options?: QueryOptions): Promise<TResult>
 }
 
 export interface RequestContext {
