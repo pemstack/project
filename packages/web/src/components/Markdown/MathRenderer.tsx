@@ -12,9 +12,7 @@ export const InlineMathRenderer: FunctionComponent<MathRendererProps> = ({ value
   return (
     <Suspense
       fallback={
-        <span className='InlineMathRenderer--loading'>
-          <Spin size='small' />
-        </span>
+        <span className='InlineMathRenderer--loading' />
       }
     >
       <TeX math={value} />
