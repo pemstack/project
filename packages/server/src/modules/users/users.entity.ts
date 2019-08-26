@@ -31,6 +31,9 @@ export class User {
   @Matches(/^[A-Za-z0-9.,!@#$^&*()_-]+$/)
   password: string
 
+  @Column({ type: 'simple-array' })
+  roles: string[]
+
   @OneToMany(type => CourseAccess, access => access.user)
   access: CourseAccess[]
 
