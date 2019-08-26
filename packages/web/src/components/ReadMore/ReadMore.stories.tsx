@@ -52,7 +52,7 @@ export const ResizingContent: FunctionComponent = () => {
   )
 }
 
-storiesOf('ReadMore', module)
+storiesOf('components/ReadMore', module)
   .addDecorator(story => (
     <div
       style={{

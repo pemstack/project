@@ -62,7 +62,7 @@ const EditorWithLocalization: FunctionComponent = () => {
   )
 }
 
-storiesOf('Comment', module)
+storiesOf('data-display/Comment', module)
   .addDecorator(decorator())
   .add('single', () => (
     <Comment

@@ -35,7 +35,7 @@ function LocalesStory() {
   )
 }
 
-storiesOf('LanguageSelector', module)
+storiesOf('data-input/LanguageSelector', module)
   .addDecorator(decorator())
   .add('default', () => (
     <LocalesStory />

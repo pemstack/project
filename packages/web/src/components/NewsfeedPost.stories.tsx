@@ -82,7 +82,7 @@ Sed consectetur ante odio, a vulputate felis malesuada vel.
   },
 ]
 
-storiesOf('NewsfeedPost', module)
+storiesOf('data-display/NewsfeedPost', module)
   .addDecorator(decorator())
   .add('single', () => (
     <>

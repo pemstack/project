@@ -57,7 +57,7 @@ const cardStyle = {
   margin: '0 auto'
 }
 
-storiesOf('MemberCard', module)
+storiesOf('data-display/MemberCard', module)
   .addDecorator(decorator())
   .add('single', () => (
     <MemberCard

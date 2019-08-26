@@ -101,7 +101,7 @@ Phasellus id justo id turpis pulvinar cursus in vel erat.
 Sed consectetur ante odio, a vulputate felis malesuada vel.
 `.trim()
 
-storiesOf('MarkdownEditor', module)
+storiesOf('data-input/MarkdownEditor', module)
   .addDecorator(decorator())
   .add('default', () => (
     <InputController />

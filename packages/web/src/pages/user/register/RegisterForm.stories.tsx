@@ -14,7 +14,7 @@ const initial: RegisterParams = {
   confirmPassword: ''
 }
 
-storiesOf('RegisterForm', module)
+storiesOf('user/register/RegisterForm', module)
   .addDecorator(decorator())
   .add('default', () => (
     <Formik

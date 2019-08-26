@@ -22,7 +22,7 @@ export const WithInput: FunctionComponent<WithInputProps> = ({
   )
 }
 
-storiesOf('Course', module)
+storiesOf('courses/Course', module)
   .addDecorator(decorator({ apiMocks: mockCourses }))
   .add('With backend', () => (
     <WithInput>

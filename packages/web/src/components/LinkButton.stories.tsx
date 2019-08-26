@@ -1,12 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
-import { AppProvider, decorator } from 'app/mock'
+import { decorator } from 'app/mock'
 import { LinkButton } from './LinkButton'
 
 const Separator = () => (<div style={{ marginTop: '24px' }} />)
 
-storiesOf('LinkButton', module)
+storiesOf('components/LinkButton', module)
   .addDecorator(decorator())
   .add('default', () => (
     <div style={{ background: 'white', padding: '24px' }}>
