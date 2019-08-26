@@ -12,7 +12,7 @@ const loginSchema = yup.object({
   persist: yup.boolean().notRequired()
 })
 
-storiesOf('LoginForm', module)
+storiesOf('user/login/LoginForm', module)
   .addDecorator(decorator())
   .add('default', () => (
     <AppProvider>

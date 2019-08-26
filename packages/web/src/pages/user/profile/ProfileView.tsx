@@ -1,30 +1,29 @@
 import React, { FunctionComponent } from 'react'
 import { Card, Descriptions, Spin } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { UserInfo } from 'api/user.api'
 import { LinkButton } from 'components'
-import './Profile.css'
+import './ProfileView.css'
 
-export interface ProfileItem {
+export interface ProfileViewItem {
   id: string
   firstName: string
   lastName: string
   email: string
 }
 
-export interface ProfileProps {
-  item: ProfileItem | null
+export interface ProfileViewProps {
+  item: ProfileViewItem | null
   loading?: boolean
 }
 
-export const Profile: FunctionComponent<ProfileProps> = ({
+export const ProfileView: FunctionComponent<ProfileViewProps> = ({
   item,
   loading
 }) => {
   const { t } = useTranslation()
   const loader = (!item || loading) ? <Spin /> : null
   return (
-    <Card className='Profile'>
+    <Card className='ProfileView'>
       <Descriptions
         title={t('user.label.profile')}
         bordered

@@ -5,7 +5,7 @@ import { decorator } from 'app/mock'
 import { ProfileForm } from './ProfileForm'
 import { Formik } from 'forms'
 
-storiesOf('ProfileForm', module)
+storiesOf('user/profile/ProfileForm', module)
   .addDecorator(decorator())
   .add('default', () => (
     <Formik
@@ -19,7 +19,6 @@ storiesOf('ProfileForm', module)
     >
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
         <ProfileForm />
-
       </div>
     </Formik>
   ))

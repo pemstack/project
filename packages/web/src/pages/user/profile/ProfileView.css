@@ -1,0 +1,7 @@
+.ProfileView .ant-descriptions table {
+  table-layout: fixed;
+}
+
+.ProfileView .ant-descriptions th {
+  width: 30%;
+}
