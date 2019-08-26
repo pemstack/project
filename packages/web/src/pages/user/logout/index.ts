@@ -1,4 +1,4 @@
 import { view } from 'app'
-import { LogoutView } from './logout.view'
+import { LogoutRoute } from './LogoutRoute'
 
-export default view(LogoutView)
+export default view(LogoutRoute)

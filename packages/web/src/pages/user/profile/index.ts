@@ -1,6 +1,6 @@
 import { authorize, view } from 'app'
-import { ProfileView } from './profile.view'
+import { ProfileRoute } from './ProfileRoute'
 
 export default authorize({
-  action: view(ProfileView)
+  action: view(ProfileRoute)
 })

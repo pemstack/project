@@ -19,10 +19,7 @@ const profileSchema = yup.object({
   uniId: yup.string().required()
 })
 
-export interface ProfileProps {
-}
-
-export const ProfileForm: FunctionComponent<ProfileProps> = ({
+export const ProfileForm: FunctionComponent = ({
 }) => {
   const { t } = useTranslation()
   return (
@@ -56,6 +53,7 @@ export const ProfileForm: FunctionComponent<ProfileProps> = ({
             </Form.Item>
           </Descriptions.Item>
           <Descriptions.Item label={t('user.label.email')}>
+            Todo
           </Descriptions.Item>
         </Descriptions>
       </Form>

@@ -1,4 +1,4 @@
 import { view } from 'app'
-import { RegisterView } from './register.view'
+import { RegisterRoute } from './RegisterRoute'
 
-export default view(RegisterView)
+export default view(RegisterRoute)

@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Formik, FormikActions } from 'forms'
 import { View, redirect, allow, stringParam, errorCode, useAction } from 'app'
 import { LOGIN, LoginParams } from 'api/user.api'
-import './login.view.css'
 import { LoginForm } from './LoginForm'
+import './LoginRoute.css'
 
-export const LoginView: View = ({
+export const LoginRoute: View = ({
   router,
   location
 }) => {
@@ -31,7 +31,7 @@ export const LoginView: View = ({
   }
 
   return (
-    <div className='LoginView'>
+    <div className='LoginRoute'>
       <Formik
         validationSchema={login.schema}
         onSubmit={submit}
@@ -48,7 +48,7 @@ export const LoginView: View = ({
   )
 }
 
-LoginView.onEnter = ({
+LoginRoute.onEnter = ({
   app: { user },
   location: { query }
 }) => {

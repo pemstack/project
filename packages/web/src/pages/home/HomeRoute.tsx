@@ -1,9 +1,9 @@
 import React from 'react'
 import { View } from 'app'
 
-export const HomeView: View = () => {
+export const HomeRoute: View = () => {
   return (
-    <div className='HomeView'>
+    <div className='HomeRoute'>
       Home page
     </div>
   )

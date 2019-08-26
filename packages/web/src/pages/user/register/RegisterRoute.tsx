@@ -3,7 +3,7 @@ import { View, redirect, allow, useAction } from 'app'
 import { Formik } from 'forms'
 import { RegisterForm } from './RegisterForm'
 import { REGISTER, registerSchema, RegisterParams } from './register.api'
-import './register.view.css'
+import './RegisterRoute.css'
 
 const initial: RegisterParams = {
   firstName: '',
@@ -13,10 +13,10 @@ const initial: RegisterParams = {
   confirmPassword: ''
 }
 
-export const RegisterView: View = () => {
+export const RegisterRoute: View = () => {
   const register = useAction(REGISTER)
   return (
-    <div className='RegisterView'>
+    <div className='RegisterRoute'>
       <Formik
         validationSchema={registerSchema}
         onSubmit={async (values, actions) => {
@@ -35,7 +35,7 @@ export const RegisterView: View = () => {
   )
 }
 
-RegisterView.onEnter = ({
+RegisterRoute.onEnter = ({
   app: { user }
 }) => {
   if (user.authenticated) {

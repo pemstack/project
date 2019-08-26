@@ -1,4 +1,4 @@
 import { view } from 'app'
-import { HomeView } from './home.view'
+import { HomeRoute } from './HomeRoute'
 
-export default view(HomeView)
+export default view(HomeRoute)

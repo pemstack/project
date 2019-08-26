@@ -3,9 +3,9 @@ import { View, redirect, allow, stringParam, useAction } from 'app'
 import { Button, Card } from 'antd'
 import { LOGOUT } from 'api/user.api'
 import { useTranslation } from 'react-i18next'
-import './logout.view.css'
+import './LogoutRoute.css'
 
-export const LogoutView: View = ({
+export const LogoutRoute: View = ({
   location
 }) => {
   const { t } = useTranslation()
@@ -33,7 +33,7 @@ export const LogoutView: View = ({
   )
 }
 
-LogoutView.onEnter = ({
+LogoutRoute.onEnter = ({
   app: { user },
   location: { query }
 }) => {

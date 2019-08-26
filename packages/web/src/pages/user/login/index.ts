@@ -1,4 +1,4 @@
 import { view } from 'app'
-import { LoginView } from './login.view'
+import { LoginRoute } from './LoginRoute'
 
-export default view(LoginView)
+export default view(LoginRoute)

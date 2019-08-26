@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { AppProvider, decorator, CenterContent, MockApi, delay } from 'app/mock'
 import { Profile, ProfileItem } from './Profile'
-import { ProfileView } from './profile.view'
+import { ProfileRoute } from './ProfileRoute'
 import { GET_CURRENT_USER } from 'api/user.api'
 
 const profile: ProfileItem = {
@@ -35,7 +35,7 @@ storiesOf('Profile', module)
     <AppProvider path='/user/profile' apiMocks={mocks}>
       {props => (
         <CenterContent>
-          <ProfileView {...props} />
+          <ProfileRoute {...props} />
         </CenterContent>
       )}
     </AppProvider>
