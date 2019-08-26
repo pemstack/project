@@ -15,6 +15,9 @@
       "courses": "Courses"
     }
   },
+  "RouteError": {
+    "back": "Back Home"
+  },
   "text": {
     "confirm": "Are you sure?"
   },
@@ -53,6 +56,8 @@
     }
   },
   "error": {
-    "general": "There has been an error."
+    "general": "There has been an error",
+    "403": "Not authorized",
+    "404": "404: Not found"
   }
 }

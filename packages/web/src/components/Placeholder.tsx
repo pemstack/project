@@ -22,6 +22,7 @@ export const Placeholder: FunctionComponent<PlaceholderProps> = ({
       </div>
     )
   }
+
   return (
     <span className='Placeholder Placeholder--inline'>
       <Spin size={size} />

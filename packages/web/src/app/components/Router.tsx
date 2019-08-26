@@ -4,10 +4,9 @@ import { UserLayout } from 'app/layout/UserLayout'
 import { AnonymousLayout } from 'app/layout/AnonymousLayout'
 import { App, LayoutPicker, RouteParams, View } from 'app/types'
 import React, { ComponentType, FunctionComponent, Suspense } from 'react'
-import { Error } from './Error'
+import { RouteError } from './RouteError'
 import { Loading } from './Loading'
 import { DelayedLoading } from './DelayedLoading'
-import { Spin } from 'antd'
 
 const NoLayout: FunctionComponent<RouteParams> = ({ children }) => <>{children}</>
 
@@ -81,8 +80,9 @@ class Catcher extends React.Component<CatcherProps, CatcherState> {
   render() {
     const { error } = this.state
     if (error) {
-      const { params } = this.props
-      return <Error {...params} code={500} error={error} />
+      return (
+        <RouteError error={error} />
+      )
     }
 
     return this.props.children
@@ -110,23 +110,17 @@ export const Router: FunctionComponent = () => {
       const derivedProps = deriveProps(ViewComponent, params)
       return (
         <ViewLayout {...params} {...viewLayoutProps}>
-          <Catcher params={params} view={view}>
-            <Suspense
-              fallback={
-                <div className='Router__loading'>
-                  <Spin size='large' />
-                </div>
-              }
-            >
+          <Suspense fallback={<Loading />}>
+            <Catcher params={params} view={view}>
               <ViewComponent {...params} {...initialProps} {...derivedProps} />
-            </Suspense>
-          </Catcher>
+            </Catcher>
+          </Suspense>
         </ViewLayout>
       )
     case 'error':
       return (
         <Layout {...params}>
-          <Error {...params} code={view.code} error={view.error} />
+          <RouteError code={view.code} error={view.error} />
         </Layout>
       )
     case 'fallback':
