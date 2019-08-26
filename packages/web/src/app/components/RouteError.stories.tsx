@@ -5,7 +5,7 @@ import { RouteError } from './RouteError'
 import { UserLayout } from 'app/layout/UserLayout'
 import { AnonymousLayout } from 'app/layout/AnonymousLayout'
 
-storiesOf('RouteError', module)
+storiesOf('app/RouteError', module)
   .addDecorator(decorator())
   .add('404', () => <RouteError code={404} />)
   .add('403', () => <RouteError code={403} />)

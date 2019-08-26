@@ -1,12 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { decorator } from 'app/mock'
-import { UserLayout } from './UserLayout'
+import { AnonymousLayout } from './AnonymousLayout'
 
-storiesOf('app/UserLayout', module)
+storiesOf('app/AnonymousLayout', module)
   .addDecorator(decorator())
   .add('desktop layout', () => (
-    <UserLayout>
+    <AnonymousLayout>
       Hello World!
-    </UserLayout>
+    </AnonymousLayout>
   ))
