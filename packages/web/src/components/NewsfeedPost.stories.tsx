@@ -1,8 +1,9 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { decorator } from 'app/mock'
+import { decorator, CenterContent } from 'app/mock'
 import moment from 'moment'
 import { NewsfeedPost, NewsfeedPostItem } from './NewsfeedPost'
+import { UserLayout } from 'app/layout/UserLayout'
 
 function randomDate() {
   return moment().subtract(0.5 * Math.random(), 'hours')
@@ -110,11 +111,13 @@ storiesOf('data-display/NewsfeedPost', module)
     </>
   ))
   .add('list of posts', () => (
-    <>
-      {posts.map((post, i) => (
-        <div key={i} style={{ marginTop: '24px', marginBottom: '24px' }}>
-          <NewsfeedPost item={post} />
-        </div>
-      ))}
-    </>
+    <UserLayout>
+      <CenterContent>
+        {posts.map((post, i) => (
+          <div key={i} style={{ marginTop: '24px', marginBottom: '24px' }}>
+            <NewsfeedPost item={post} />
+          </div>
+        ))}
+      </CenterContent>
+    </UserLayout>
   ))

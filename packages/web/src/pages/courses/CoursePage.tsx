@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { useQuery } from 'app'
 import { GET_COURSE_PAGE } from 'api/courses.api'
-import { Placeholder, Markdown } from 'components'
+import { Markdown, CollapseCard } from 'components'
 import classNames from 'classnames'
 
 export interface CoursePageProps {
@@ -18,7 +18,9 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
   const page = useQuery(GET_COURSE_PAGE, { courseId, pageId }).read()
   return (
     <div className={classNames('CoursePage', 'CoursePage--content', className)}>
-      <Markdown source={page.content} />
+      <CollapseCard>
+        <Markdown source={page.content} />
+      </CollapseCard>
     </div>
   )
 }

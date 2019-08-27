@@ -117,7 +117,7 @@ export interface CenterContentProps {
 }
 
 export const CenterContent: FunctionComponent<CenterContentProps> = ({
-  maxWidth = 640,
+  maxWidth = 768,
   children
 }) => {
   return (
