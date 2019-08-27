@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { useQuery } from 'app'
-import { GET_COURSE_PAGE } from 'api/courses.api'
 import { Markdown, CollapseCard } from 'components'
 import classNames from 'classnames'
+import { GET_COURSE_PAGE } from './courses.api'
 
 export interface CoursePageProps {
   courseId: string

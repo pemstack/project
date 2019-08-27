@@ -2,9 +2,9 @@ import React, { FunctionComponent, useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { decorator, CenterContent } from 'app/mock'
 import { CourseView } from './CourseView'
-import { mockCourses } from 'mocks'
 import { AnonymousLayout } from 'app/layout/AnonymousLayout'
 import { UserLayout } from 'app/layout/UserLayout'
+import { mockCourses } from './courses.mocks'
 
 interface WithInputProps {
   children?: (text: string) => React.ReactNode

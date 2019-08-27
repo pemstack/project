@@ -32,7 +32,7 @@ export class CoursesController {
       isPublic
     })
 
-    return { id }
+    return { id, title }
   }
 
   @ApiBearerAuth()

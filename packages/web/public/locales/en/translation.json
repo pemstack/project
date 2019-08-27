@@ -1,4 +1,14 @@
 {
+  "CourseCreateForm": {
+    "label": {
+      "access": "Access level",
+      "title": "Course name"
+    },
+    "option": {
+      "private": "Private",
+      "public": "Public"
+    }
+  },
   "MarkdownEditor": {
     "empty": "No content to display.",
     "preview": "Preview",
@@ -7,7 +17,13 @@
   "button": {
     "cancel": "Cancel",
     "submit": "Submit",
+    "create": "Create",
     "edit": "Edit"
+  },
+  "course": {
+    "error": {
+      "title": "Enter course name."
+    }
   },
   "Layout": {
     "label": {

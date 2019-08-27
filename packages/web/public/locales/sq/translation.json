@@ -1,4 +1,14 @@
 {
+  "CourseCreateForm": {
+    "label": {
+      "access": "Qasja",
+      "title": "Emri i kursit"
+    },
+    "option": {
+      "private": "Privat",
+      "public": "Publik"
+    }
+  },
   "MarkdownEditor": {
     "empty": "Nuk ka përmbajtje.",
     "preview": "Pamja",
@@ -13,6 +23,7 @@
   "button": {
     "cancel": "Anulo",
     "submit": "Dërgo",
+    "create": "Krijo",
     "edit": "Ndrysho"
   },
   "text": {

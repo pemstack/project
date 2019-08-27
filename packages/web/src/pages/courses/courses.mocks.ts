@@ -1,5 +1,5 @@
 import { MockApi, delay } from 'app/mock'
-import { GET_COURSE_PAGES, GET_COURSE_PAGE, GET_COURSE_ACCESS, GET_COURSES, CourseAccessLevel } from 'api/courses.api'
+import { GET_COURSE_PAGES, GET_COURSE_PAGE, GET_COURSE_ACCESS, GET_COURSES, CourseAccessLevel } from 'pages/courses/courses.api'
 
 const longMarkdown = `
 ## Project 1 deadline

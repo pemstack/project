@@ -1,4 +1,5 @@
-import { Query } from 'app'
+import { Query, Action } from 'app'
+import * as yup from 'yup'
 
 export enum CourseAccessLevel {
   None = 'none',
@@ -84,6 +85,28 @@ export const GET_COURSE_ACCESS: Query<CourseAccess, GetCourseAccessParams> = {
     return await app
       .req(`/api/courses/${id}/access`)
       .get()
+      .json()
+  }
+}
+
+export const createCourseSchema = yup.object({
+  title: yup.string().required(),
+  isPublic: yup.boolean()
+})
+
+export type CreateCourseParams = yup.InferType<typeof createCourseSchema>
+
+export interface CreateCourseResponse {
+  id: string
+  title: string
+}
+
+export const CREATE_COURSE: Action<CreateCourseParams, CreateCourseResponse> = {
+  progress: true,
+  async perform(params, app) {
+    return await app
+      .req('/api/courses', { action: 'create' })
+      .post(params)
       .json()
   }
 }

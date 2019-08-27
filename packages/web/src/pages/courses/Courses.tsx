@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react'
 import { useQuery } from 'app'
-import { GET_COURSES } from 'api/courses.api'
 import { Link } from '@pema/router-react'
 import slugify from 'slugify'
 import { List } from 'antd'
 import { CollapseCard } from 'components'
+import { GET_COURSES } from './courses.api'
 
 export const Courses: FunctionComponent = () => {
   const courses = useQuery(GET_COURSES).read()

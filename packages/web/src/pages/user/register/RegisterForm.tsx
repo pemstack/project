@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { Form, Input, SubmitButton } from 'forms'
-import { Card } from 'antd'
+import { CollapseCard } from 'components'
 import { useTranslation } from 'react-i18next'
 import './RegisterForm.css'
 
@@ -28,9 +28,8 @@ const tailWrapperCol = {
 export const RegisterForm: FunctionComponent = () => {
   const { t } = useTranslation()
   return (
-    <Card
+    <CollapseCard
       className='RegisterForm'
-      bodyStyle={{ padding: 0 }}
     >
       <Form
         className='RegisterForm__form'
@@ -97,6 +96,6 @@ export const RegisterForm: FunctionComponent = () => {
           </SubmitButton>
         </Form.AntdItem>
       </Form>
-    </Card>
+    </CollapseCard>
   )
 }

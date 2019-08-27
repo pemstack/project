@@ -1,8 +1,8 @@
 import React, { FunctionComponent, Suspense } from 'react'
 import { useQuery } from 'app'
 import { Tabs } from 'antd'
-import { GET_COURSE_PAGES } from 'api/courses.api'
 import { Loading } from 'app/components'
+import { GET_COURSE_PAGES } from './courses.api'
 import { CoursePage } from './CoursePage'
 import './CourseView.css'
 
