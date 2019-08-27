@@ -94,7 +94,7 @@ export const RegisterForm: FunctionComponent = () => {
             className='RegisterForm__submit'
           >
             Register
-            </SubmitButton>
+          </SubmitButton>
         </Form.AntdItem>
       </Form>
     </Card>

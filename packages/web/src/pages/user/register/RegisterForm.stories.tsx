@@ -1,10 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { AppProvider, decorator } from 'app/mock'
+import { decorator, CenterContent } from 'app/mock'
 import { Formik } from 'forms'
 import { RegisterForm } from './RegisterForm'
 import { registerSchema, RegisterParams } from './register.api'
+import { AnonymousLayout } from 'app/layout/AnonymousLayout'
 
 const initial: RegisterParams = {
   firstName: '',
@@ -25,8 +26,24 @@ storiesOf('user/register/RegisterForm', module)
       }}
       initialValues={initial}
     >
-      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+      <CenterContent maxWidth={600}>
         <RegisterForm />
-      </div>
+      </CenterContent>
     </Formik>
+  ))
+  .add('with anonymous layout', () => (
+    <AnonymousLayout>
+      <Formik
+        validationSchema={registerSchema}
+        onSubmit={(props, actions) => {
+          action('submit')()
+          actions.setSubmitting(false)
+        }}
+        initialValues={initial}
+      >
+        <CenterContent maxWidth={600}>
+          <RegisterForm />
+        </CenterContent>
+      </Formik>
+    </AnonymousLayout>
   ))

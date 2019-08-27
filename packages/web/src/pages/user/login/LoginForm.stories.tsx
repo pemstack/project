@@ -1,10 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { AppProvider, decorator } from 'app/mock'
+import { decorator, CenterContent } from 'app/mock'
 import { Formik } from 'forms'
 import { LoginForm } from './LoginForm'
 import * as yup from 'yup'
+import { AnonymousLayout } from 'app/layout/AnonymousLayout';
 
 const loginSchema = yup.object({
   username: yup.string().required(),
@@ -15,7 +16,25 @@ const loginSchema = yup.object({
 storiesOf('user/login/LoginForm', module)
   .addDecorator(decorator())
   .add('default', () => (
-    <AppProvider>
+    <Formik
+      validationSchema={loginSchema}
+      onSubmit={(props, actions) => {
+        action('submit')()
+        actions.setSubmitting(false)
+      }}
+      initialValues={{
+        username: '',
+        password: '',
+        persist: false
+      }}
+    >
+      <CenterContent maxWidth={360}>
+        <LoginForm />
+      </CenterContent>
+    </Formik>
+  ))
+  .add('with anonymous layout', () => (
+    <AnonymousLayout>
       <Formik
         validationSchema={loginSchema}
         onSubmit={(props, actions) => {
@@ -28,9 +47,9 @@ storiesOf('user/login/LoginForm', module)
           persist: false
         }}
       >
-        <div style={{ maxWidth: '360px', margin: '0 auto' }}>
+        <CenterContent maxWidth={360}>
           <LoginForm />
-        </div>
+        </CenterContent>
       </Formik>
-    </AppProvider>
+    </AnonymousLayout>
   ))
