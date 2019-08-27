@@ -1,6 +1,5 @@
 import React from 'react'
 import { view, viewInvariant, View } from 'app'
-import { Button } from 'antd'
 import { CourseView } from './CourseView'
 
 export const CourseViewRoute: View = ({

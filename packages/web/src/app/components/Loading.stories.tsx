@@ -2,8 +2,8 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { decorator } from 'app/mock'
 import { Loading } from './Loading'
-import { UserLayout } from 'app/layout/UserLayout';
-import { AnonymousLayout } from 'app/layout/AnonymousLayout';
+import { UserLayout } from 'app/layout/UserLayout'
+import { AnonymousLayout } from 'app/layout/AnonymousLayout'
 
 storiesOf('app/Loading', module)
   .addDecorator(decorator())

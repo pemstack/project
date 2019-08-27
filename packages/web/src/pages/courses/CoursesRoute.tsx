@@ -1,12 +1,11 @@
 import React from 'react'
-import { View, useQuery, authorize, view } from 'app'
-import { Button } from 'antd'
+import { View, authorize, view } from 'app'
+import { Courses } from './Courses'
 
-export const CoursesRoute: View = ({ }) => {
-  const courses = useQuery(GET_COURSES).read()
+export const CoursesRoute: View = () => {
   return (
-    <div>
-      courses list
+    <div className='CoursesRoute'>
+      <Courses />
     </div>
   )
 }

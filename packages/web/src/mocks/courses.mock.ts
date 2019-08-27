@@ -1,5 +1,5 @@
 import { MockApi, delay } from 'app/mock'
-import { GET_COURSE_PAGES, GET_COURSE_PAGE, GET_COURSE_ACCESS } from 'api/courses.api'
+import { GET_COURSE_PAGES, GET_COURSE_PAGE, GET_COURSE_ACCESS, GET_COURSES, CourseAccessLevel } from 'api/courses.api'
 
 const longMarkdown = `
 ## Project 1 deadline
@@ -68,6 +68,19 @@ Phasellus id justo id turpis pulvinar cursus in vel erat.
 Sed consectetur ante odio, a vulputate felis malesuada vel.
 `.trim()
 
+function mockCourseList(api: MockApi) {
+  api.withQuery(GET_COURSES, async () => {
+    await delay(1000)
+    return [
+      { id: '123456', title: 'Siguria e te dhenave', access: CourseAccessLevel.Read, owner: false },
+      { id: '234567', title: 'Sinjale', access: CourseAccessLevel.Read, owner: false },
+      { id: '345678', title: 'Interneti', access: CourseAccessLevel.Read, owner: false },
+      { id: '456789', title: 'Programimi ne internet', access: CourseAccessLevel.Read, owner: false },
+      { id: '567890', title: 'OOP', access: CourseAccessLevel.Read, owner: false }
+    ]
+  })
+}
+
 function mockCoursePages(api: MockApi) {
   api.withQuery(GET_COURSE_PAGES, async ({ id }) => {
     await delay(1000)
@@ -135,6 +148,7 @@ function mockCourseAccess(api: MockApi) {
 }
 
 export function mockCourses(api: MockApi) {
+  mockCourseList(api)
   mockCoursePages(api)
   mockCoursePage(api)
   mockCourseAccess(api)

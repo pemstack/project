@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import { decorator } from 'app/mock'
+import { decorator, CenterContent } from 'app/mock'
 import { CourseView } from './CourseView'
 import { mockCourses } from 'mocks'
+import { AnonymousLayout } from 'app/layout/AnonymousLayout'
+import { UserLayout } from 'app/layout/UserLayout'
 
 interface WithInputProps {
   children?: (text: string) => React.ReactNode
@@ -22,9 +24,9 @@ export const WithInput: FunctionComponent<WithInputProps> = ({
   )
 }
 
-storiesOf('courses/Course', module)
+storiesOf('courses/CourseView', module)
   .addDecorator(decorator({ apiMocks: mockCourses }))
-  .add('With backend', () => (
+  .add('with id', () => (
     <WithInput>
       {id => {
         if (id) {
@@ -34,4 +36,18 @@ storiesOf('courses/Course', module)
         }
       }}
     </WithInput>
+  ))
+  .add('with user layout', () => (
+    <UserLayout>
+      <CenterContent maxWidth={1024}>
+        <CourseView id='siguria' />
+      </CenterContent>
+    </UserLayout>
+  ))
+  .add('with anonymous layout', () => (
+    <AnonymousLayout>
+      <CenterContent maxWidth={1024}>
+        <CourseView id='siguria' />
+      </CenterContent>
+    </AnonymousLayout>
   ))

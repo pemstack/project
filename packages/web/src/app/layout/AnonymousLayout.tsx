@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from 'react'
+import React, { Suspense, FunctionComponent } from 'react'
 import { Layout } from 'antd'
 import { LanguageSelector } from 'components'
+import { Loading } from 'app/components'
 import { Link } from '@pema/router-react'
 import './AnonymousLayout.css'
 
@@ -24,7 +25,9 @@ export const AnonymousLayout: FunctionComponent<AnonymousLayoutProps> = ({
       </Header>
       <Content className='AnonymousLayout__content'>
         <div className='AnonymousLayout__wrapper'>
-          {children}
+          <Suspense fallback={<Loading />}>
+            {children}
+          </Suspense>
         </div>
       </Content>
       <Footer className='AnonymousLayout__footer'>

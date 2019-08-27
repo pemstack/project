@@ -1,8 +1,9 @@
-import React, { useState, FunctionComponent } from 'react'
+import React, { useState, FunctionComponent, Suspense } from 'react'
+import { Link } from '@pema/router-react'
 import { Layout, Menu, Icon } from 'antd'
 import { LanguageSelector, ProfileDropdownConnector } from 'components'
+import { Loading } from 'app/components'
 import { useTranslation } from 'react-i18next'
-import { Link } from '@pema/router-react'
 import './UserLayout.css'
 
 const { Header, Content, Footer, Sider } = Layout
@@ -84,7 +85,9 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
         </Header>
         <Content className='UserLayout__content'>
           <div className='UserLayout__wrapper'>
-            {children}
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
           </div>
         </Content>
         <Footer className='UserLayout__footer'>

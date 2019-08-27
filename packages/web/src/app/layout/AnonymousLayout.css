@@ -15,7 +15,7 @@
 }
 
 .AnonymousLayout__wrapper {
-  padding: 24px 8px;
+  padding: 24px 16px;
 }
 
 .AnonymousLayout__footer {
@@ -32,4 +32,10 @@
   float: right;
   line-height: 64px;
   padding: 0 24px 0 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .AnonymousLayout__wrapper {
+    padding: 24px 8px;
+  }
 }
