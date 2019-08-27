@@ -23,6 +23,14 @@ export function stringParam<TDefault>
   }
 }
 
+export function viewInvariant(condition: any, code: number, message?: string) {
+  if (!condition) {
+    const error = new Error(message);
+    (error as any).statusCode = code
+    throw error
+  }
+}
+
 export function baseWretcher(app: App) {
   return wretch()
     .options({ credentials: 'omit' })

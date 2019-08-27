@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { decorator } from 'app/mock'
-import { Course } from './Course'
+import { CourseView } from './CourseView'
 import { mockCourses } from 'mocks'
 
 interface WithInputProps {
@@ -28,7 +28,7 @@ storiesOf('courses/Course', module)
     <WithInput>
       {id => {
         if (id) {
-          return <Course id={id} />
+          return <CourseView id={id} />
         } else {
           return <div>Enter id...</div>
         }
