@@ -7,8 +7,9 @@ export class CreateCourseRequest {
   @MinLength(1)
   title: string
 
-  @ApiModelProperty({ required: false })
-  isPublic?: boolean = false
+  @ApiModelProperty({ enum: ['private', 'public'] })
+  @IsString()
+  access: 'private' | 'public' = 'private'
 }
 
 export class CreatePageRequest {

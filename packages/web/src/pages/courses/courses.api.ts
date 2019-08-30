@@ -91,7 +91,7 @@ export const GET_COURSE_ACCESS: Query<CourseAccess, GetCourseAccessParams> = {
 
 export const createCourseSchema = yup.object({
   title: yup.string().required(),
-  isPublic: yup.boolean()
+  access: yup.string().oneOf(['private', 'public']).required()
 })
 
 export type CreateCourseParams = yup.InferType<typeof createCourseSchema>

@@ -24,12 +24,12 @@ export class CoursesController {
   @Post()
   async createCourse(
     @ReqUser('id') userId: string,
-    @Body() { title, isPublic }: CreateCourseRequest
+    @Body() { title, access }: CreateCourseRequest
   ) {
     const id = await this.courses.createCourse({
       ownerId: userId,
       title,
-      isPublic
+      access
     })
 
     return { id, title }

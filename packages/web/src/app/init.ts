@@ -3,7 +3,7 @@ import { withRouter, RoutingTable, HistoryBuildOptions } from '@pema/router'
 import { CachedApiClient, ApiClient as IApiClient } from '@pema/state'
 import { JObject } from '@pema/utils'
 import { createBrowserHistory, History } from 'history'
-import routes from 'routes'
+import routes from 'pages'
 import {
   UserStore,
   ProgressStore,

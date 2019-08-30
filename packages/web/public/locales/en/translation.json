@@ -1,5 +1,6 @@
 {
   "CourseCreateForm": {
+    "title": "Create course",
     "label": {
       "access": "Access level",
       "title": "Course name"

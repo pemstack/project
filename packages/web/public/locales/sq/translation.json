@@ -1,5 +1,6 @@
 {
   "CourseCreateForm": {
+    "title": "Krijo kurs",
     "label": {
       "access": "Qasja",
       "title": "Emri i kursit"

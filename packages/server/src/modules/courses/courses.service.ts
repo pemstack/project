@@ -15,7 +15,7 @@ import { unionBy } from 'lodash'
 export interface CreateCourseParams {
   ownerId: string
   title: string
-  isPublic?: boolean
+  access: 'private' | 'public'
 }
 
 export interface CreateCoursePageParams {
@@ -42,14 +42,14 @@ export class CoursesService {
   async createCourse({
     ownerId,
     title,
-    isPublic = false
+    access = 'private'
   }: CreateCourseParams): Promise<string> {
     const id = uniqid()
     await this.entities.insert(Course, {
       id,
       ownerId,
       title,
-      isPublic
+      isPublic: access === 'public'
     })
 
     return id
