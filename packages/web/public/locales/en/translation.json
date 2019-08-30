@@ -10,6 +10,19 @@
       "public": "Public"
     }
   },
+  "ManageCourse": {
+    "tab": {
+      "pages": "Pages",
+      "students": "Students"
+    },
+    "title": {
+      "pages": "Manage pages",
+      "students": "Manage students"
+    },
+    "button": {
+      "addPage": "Add page"
+    }
+  },
   "MarkdownEditor": {
     "empty": "No content to display.",
     "preview": "Preview",

@@ -13,6 +13,7 @@ export const Courses: FunctionComponent = () => {
       <h2>My courses</h2>
       <List
         dataSource={courses}
+        rowKey='id'
         renderItem={course => (
           <List.Item key={course.id}>
             <Link

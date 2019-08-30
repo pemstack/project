@@ -10,6 +10,19 @@
       "public": "Publik"
     }
   },
+  "ManageCourse": {
+    "tab": {
+      "pages": "Faqet",
+      "students": "Studentët"
+    },
+    "title": {
+      "pages": "Menaxho faqet",
+      "students": "Menaxho studentët"
+    },
+    "button": {
+      "addPage": "Shto faqe"
+    }
+  },
   "MarkdownEditor": {
     "empty": "Nuk ka përmbajtje.",
     "preview": "Pamja",
