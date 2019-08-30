@@ -20,7 +20,7 @@ function deriveError(
   error?: ErrorLike
 ): DerivedError {
   if (typeof code === 'undefined' && error) {
-    code = (error as any).statusCode as number
+    code = (error as any).statusCode || (error as any).status as number
   }
 
   if (code == 401 || code == 403) {
