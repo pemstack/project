@@ -2,7 +2,15 @@ import { message } from 'antd'
 import i18n from 'i18next'
 
 export class MessagesStore {
-  showError(error?: string) {
+  successKey(key: string) {
+    message.success(i18n.t(key))
+  }
+
+  successText(text: string) {
+    message.success(text)
+  }
+
+  error(error?: string) {
     message.error(error || i18n.t('error.general'))
   }
 }

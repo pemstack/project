@@ -22,8 +22,12 @@
     "edit": "Edit"
   },
   "course": {
+    "message": {
+      "create": "Course has been created."
+    },
     "error": {
-      "title": "Enter course name."
+      "title": "Enter course name.",
+      "access": "Specify course access."
     }
   },
   "Layout": {

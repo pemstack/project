@@ -27,6 +27,15 @@
     "create": "Krijo",
     "edit": "Ndrysho"
   },
+  "course": {
+    "message": {
+      "create": "Kursi është krijuar."
+    },
+    "error": {
+      "title": "Shënoni emrin e kursit.",
+      "access": "Jepni nivelin e qasjes."
+    }
+  },
   "text": {
     "confirm": "A jeni të sigurt?"
   },
@@ -48,7 +57,7 @@
         "required": "Jepni emrin.",
         "invalid": "Emri përmban karaktere jo valide."
       },
-      "lastName":  {
+      "lastName": {
         "required": "Jepni mbiemrin.",
         "invalid": "Mbiemri përmban karaktere jo valide."
       },

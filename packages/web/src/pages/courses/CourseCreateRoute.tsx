@@ -3,8 +3,9 @@ import { View, useAction, authorize, view } from 'app'
 import { CourseCreateForm } from './CourseCreateForm'
 import { Formik } from 'forms'
 import { CREATE_COURSE } from './courses.api'
+import slugify from 'slugify'
 
-export const CourseCreateRoute: View = () => {
+export const CourseCreateRoute: View = ({ app }) => {
   const createCourse = useAction(CREATE_COURSE)
   return (
     <Formik
@@ -14,7 +15,9 @@ export const CourseCreateRoute: View = () => {
       }}
       onSubmit={async (values, actions) => {
         try {
-          await createCourse(values)
+          const { id, title } = await createCourse(values)
+          app.messages.successKey('course.message.create')
+          app.router.push(`/courses/${id}/${slugify(title)}`)
         } finally {
           actions.setSubmitting(false)
         }

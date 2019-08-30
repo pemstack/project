@@ -90,8 +90,8 @@ export const GET_COURSE_ACCESS: Query<CourseAccess, GetCourseAccessParams> = {
 }
 
 export const createCourseSchema = yup.object({
-  title: yup.string().required(),
-  access: yup.string().oneOf(['private', 'public']).required()
+  title: yup.string().required('course.error.title'),
+  access: yup.string().oneOf(['private', 'public']).required('course.error.access')
 })
 
 export type CreateCourseParams = yup.InferType<typeof createCourseSchema>
@@ -102,6 +102,7 @@ export interface CreateCourseResponse {
 }
 
 export const CREATE_COURSE: Action<CreateCourseParams, CreateCourseResponse> = {
+  schema: createCourseSchema,
   progress: true,
   async perform(params, app) {
     return await app
