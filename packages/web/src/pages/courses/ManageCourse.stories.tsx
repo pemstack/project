@@ -3,13 +3,13 @@ import { storiesOf } from '@storybook/react'
 import { decorator } from 'app/mock'
 import { ManageCourse } from './ManageCourse'
 import { CoursePage } from './courses.api'
-import slugify from 'slugify';
+import slugify from 'slugify'
 
 function makePage(title: string, isPublic: boolean): CoursePage {
   return {
     id: slugify(title),
     title,
-    isPublic
+    access: isPublic ? 'public' : 'private'
   }
 }
 

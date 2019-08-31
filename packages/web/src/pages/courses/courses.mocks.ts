@@ -1,5 +1,5 @@
 import { MockApi, delay } from 'app/mock'
-import { GET_COURSE_PAGES, GET_COURSE_PAGE, GET_COURSE_ACCESS, GET_COURSES, CourseAccessLevel } from 'pages/courses/courses.api'
+import { GET_COURSE_PAGES, GET_COURSE_PAGE, GET_COURSE_PERMISSION, GET_COURSES, CoursePermission } from 'pages/courses/courses.api'
 
 const longMarkdown = `
 ## Project 1 deadline
@@ -72,11 +72,11 @@ function mockCourseList(api: MockApi) {
   api.withQuery(GET_COURSES, async () => {
     await delay(1000)
     return [
-      { id: '123456', title: 'Siguria e te dhenave', access: CourseAccessLevel.Read, owner: false },
-      { id: '234567', title: 'Sinjale', access: CourseAccessLevel.Read, owner: false },
-      { id: '345678', title: 'Interneti', access: CourseAccessLevel.Read, owner: false },
-      { id: '456789', title: 'Programimi ne internet', access: CourseAccessLevel.Read, owner: false },
-      { id: '567890', title: 'OOP', access: CourseAccessLevel.Read, owner: false }
+      { id: '123456', title: 'Siguria e te dhenave', permission: 'read', owner: false },
+      { id: '234567', title: 'Sinjale', permission: 'read', owner: false },
+      { id: '345678', title: 'Interneti', permission: 'read', owner: false },
+      { id: '456789', title: 'Programimi ne internet', permission: 'read', owner: false },
+      { id: '567890', title: 'OOP', permission: 'read', owner: false }
     ]
   })
 }
@@ -87,9 +87,9 @@ function mockCoursePages(api: MockApi) {
     switch (id) {
       case 'siguria':
         return [
-          { id: 'info', title: 'Info', isPublic: true },
-          { id: 'assignments', title: 'Assignments', isPublic: false },
-          { id: 'newsfeed', title: 'Newsfeed', isPublic: true }
+          { id: 'info', title: 'Info', access: 'public' },
+          { id: 'assignments', title: 'Assignments', access: 'private' },
+          { id: 'newsfeed', title: 'Newsfeed', access: 'public' }
         ]
       default:
         throw new Error('Course does not exist.')
@@ -109,7 +109,7 @@ function mockCoursePage(api: MockApi) {
               courseId,
               title: 'Info',
               content: longMarkdown,
-              isPublic: true
+              access: 'public'
             }
           case 'assignments':
             return {
@@ -117,7 +117,7 @@ function mockCoursePage(api: MockApi) {
               courseId,
               title: 'Info',
               content: 'Assignments page content...',
-              isPublic: false
+              access: 'private'
             }
           case 'newsfeed':
             return {
@@ -125,7 +125,7 @@ function mockCoursePage(api: MockApi) {
               courseId,
               title: 'Newsfeed',
               content: '',
-              isPublic: true
+              access: 'public'
             }
           default:
             throw new Error('Page does not exist.')
@@ -137,10 +137,10 @@ function mockCoursePage(api: MockApi) {
 }
 
 function mockCourseAccess(api: MockApi) {
-  api.withQuery(GET_COURSE_ACCESS, async ({ id }) => {
+  api.withQuery(GET_COURSE_PERMISSION, async ({ id }) => {
     switch (id) {
       case 'siguria':
-        return { accessLevel: 'write' }
+        return { permission: 'write' }
       default:
         throw new Error('Course does not exist.')
     }

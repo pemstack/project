@@ -1,5 +1,6 @@
 import { ApiModelProperty, ApiResponseModelProperty } from '@nestjs/swagger'
 import { IsString, MinLength } from 'class-validator'
+import { CourseAccess, PageAccess } from './courses.entity'
 
 export class CreateCourseRequest {
   @ApiModelProperty({ minLength: 1 })
@@ -7,9 +8,9 @@ export class CreateCourseRequest {
   @MinLength(1)
   title: string
 
-  @ApiModelProperty({ enum: ['private', 'public'] })
+  @ApiModelProperty({ enum: Object.values(CourseAccess) })
   @IsString()
-  access: 'private' | 'public' = 'private'
+  access: CourseAccess = CourseAccess.Private
 }
 
 export class CreatePageRequest {
@@ -22,8 +23,9 @@ export class CreatePageRequest {
   @IsString()
   content?: string
 
-  @ApiModelProperty({ required: false })
-  isPublic?: boolean = false
+  @ApiModelProperty({ enum: Object.values(PageAccess) })
+  @IsString()
+  access: PageAccess = PageAccess.Private
 }
 
 export class CoursePageResponse {
@@ -34,7 +36,7 @@ export class CoursePageResponse {
   title: string
 
   @ApiResponseModelProperty()
-  isPublic: boolean
+  access: PageAccess
 }
 
 export class CoursePageDetailsResponse {
@@ -51,5 +53,5 @@ export class CoursePageDetailsResponse {
   content: string
 
   @ApiResponseModelProperty()
-  isPublic: boolean
+  access: PageAccess
 }

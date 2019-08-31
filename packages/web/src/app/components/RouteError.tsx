@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react'
 import { Result } from 'antd'
 import { ResultStatusType } from 'antd/lib/result'
 import { useTranslation } from 'react-i18next'
-import { LinkButton } from 'components';
+import { LinkButton } from 'components'
 
 interface DerivedError {
   status: ResultStatusType
@@ -11,8 +11,8 @@ interface DerivedError {
   message?: string
 }
 
-// tslint:disable: triple-equals
-// eslint:disable: eqeqeq
+// tslint:disable triple-equals
+/* eslint-disable eqeqeq */
 
 function deriveError(
   t: (key: string) => string,
@@ -45,6 +45,8 @@ function deriveError(
     }
   }
 }
+
+/* eslint-enable eqeqeq */
 
 export interface RouteErrorProps {
   code?: number

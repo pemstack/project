@@ -1,16 +1,12 @@
 import { Query, Action } from 'app'
 import * as yup from 'yup'
 
-export enum CourseAccessLevel {
-  None = 'none',
-  Read = 'read',
-  Write = 'write'
-}
+export type CoursePermission = 'none' | 'read' | 'write'
 
 export interface Course {
   id: string
   title: string
-  access: CourseAccessLevel
+  permission: CoursePermission
   owner: boolean
 }
 
@@ -30,12 +26,14 @@ export interface GetCoursePageParams {
   pageId: string
 }
 
+export type PageAccess = 'private' | 'public' | 'unlisted'
+
 export interface CoursePageDetails {
   pageId: string
   courseId: string
   title: string
   content: string
-  isPublic: boolean
+  access: PageAccess
 }
 
 // GET /api/courses/:courseid/pages/:pageid
@@ -56,7 +54,7 @@ export interface GetCoursePagesParams {
 export interface CoursePage {
   id: string
   title: string
-  isPublic: boolean
+  access: PageAccess
 }
 
 // GET /api/courses/:courseid/pages
@@ -70,20 +68,20 @@ export const GET_COURSE_PAGES: Query<CoursePage[], GetCoursePagesParams> = {
   }
 }
 
-export interface GetCourseAccessParams {
+export interface GetCoursePermissionParams {
   id: string
 }
 
-export interface CourseAccess {
-  accessLevel: 'none' | 'read' | 'write'
+export interface GetCoursePermissionResponse {
+  permission: CoursePermission
 }
 
-// GET /api/courses/:courseid/access
-export const GET_COURSE_ACCESS: Query<CourseAccess, GetCourseAccessParams> = {
-  resource: ({ id }) => `courses/${id}/access`,
+// GET /api/courses/:courseid/permission
+export const GET_COURSE_PERMISSION: Query<GetCoursePermissionResponse, GetCoursePermissionParams> = {
+  resource: ({ id }) => `courses/${id}/permission`,
   async fetch({ id }, app) {
     return await app
-      .req(`/api/courses/${id}/access`)
+      .req(`/api/courses/${id}/permission`)
       .get()
       .json()
   }
@@ -101,6 +99,7 @@ export interface CreateCourseResponse {
   title: string
 }
 
+// POST /api/courses
 export const CREATE_COURSE: Action<CreateCourseParams, CreateCourseResponse> = {
   schema: createCourseSchema,
   progress: true,

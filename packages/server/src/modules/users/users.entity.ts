@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 import { IsEmail, IsString, Matches, MinLength } from 'class-validator'
-import { CourseAccess, Course } from 'modules/courses'
+import { CoursePermission, Course } from 'modules/courses'
 
 @Entity()
 export class User {
@@ -34,8 +34,8 @@ export class User {
   @Column({ type: 'simple-array', nullable: true })
   roles?: string[]
 
-  @OneToMany(type => CourseAccess, access => access.user)
-  access: CourseAccess[]
+  @OneToMany(type => CoursePermission, permission => permission.user)
+  permissions: CoursePermission[]
 
   @OneToMany(type => Course, course => course.owner)
   ownedCourses: Course[]

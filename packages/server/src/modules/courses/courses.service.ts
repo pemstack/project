@@ -6,7 +6,14 @@ import {
   UnauthorizedException
 } from '@nestjs/common'
 import { InjectEntityManager } from '@nestjs/typeorm'
-import { Course, CoursePage, CourseAccess, CourseAccessLevel } from './courses.entity'
+import {
+  Course,
+  CoursePage,
+  CoursePermission,
+  CoursePermissionLevel,
+  CourseAccess,
+  PageAccess
+} from './courses.entity'
 import { EntityManager } from 'typeorm'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -15,7 +22,7 @@ import { unionBy } from 'lodash'
 export interface CreateCourseParams {
   ownerId: string
   title: string
-  access: 'private' | 'public'
+  access: CourseAccess
 }
 
 export interface CreateCoursePageParams {
@@ -23,13 +30,13 @@ export interface CreateCoursePageParams {
   userId: string
   title: string
   content?: string
-  isPublic?: boolean
+  access: PageAccess
 }
 
 export interface CourseInfo {
   id: string
   title: string
-  access: CourseAccessLevel
+  permission: CoursePermissionLevel
   owner: boolean
 }
 
@@ -42,14 +49,14 @@ export class CoursesService {
   async createCourse({
     ownerId,
     title,
-    access = 'private'
+    access = CourseAccess.Private
   }: CreateCourseParams): Promise<string> {
     const id = uniqid()
     await this.entities.insert(Course, {
       id,
       ownerId,
       title,
-      isPublic: access === 'public'
+      access
     })
 
     return id
@@ -60,14 +67,14 @@ export class CoursesService {
     userId,
     title,
     content = '',
-    isPublic = false
+    access = PageAccess.Private
   }: CreateCoursePageParams): Promise<string> {
-    const access = await this.tryGetAccess(courseId, userId)
-    if (!access) {
+    const coursePermission = await this.tryGetPermission(courseId, userId)
+    if (!coursePermission) {
       throw new NotFoundException()
     }
 
-    if (access.accessLevel !== CourseAccessLevel.Write) {
+    if (coursePermission.permissionLevel !== CoursePermissionLevel.Write) {
       throw new ForbiddenException()
     }
 
@@ -85,7 +92,7 @@ export class CoursesService {
       pageId,
       title,
       content,
-      isPublic
+      access
     })
 
     return pageId
@@ -96,7 +103,7 @@ export class CoursesService {
       where: { ownerId: userId }
     })
 
-    const access = await this.entities.find(CourseAccess, {
+    const permission = await this.entities.find(CoursePermission, {
       where: { userId },
       relations: ['course']
     })
@@ -104,14 +111,14 @@ export class CoursesService {
     const ownCourses = courses.map(c => ({
       id: c.id,
       title: c.title,
-      access: CourseAccessLevel.Write,
+      permission: CoursePermissionLevel.Write,
       owner: true
     }))
 
-    const otherCourses = access.map(a => ({
+    const otherCourses = permission.map(a => ({
       id: a.courseId,
       title: a.course.title,
-      access: a.accessLevel,
+      permission: a.permissionLevel,
       owner: false
     }))
 
@@ -119,29 +126,29 @@ export class CoursesService {
   }
 
   async getCoursePages(userId: string | null, courseId: string):
-    Promise<Array<{ pageId: string, title: string, isPublic: boolean }>> {
-    const access = await this.tryGetAccess(courseId, userId)
-    if (!access) {
+    Promise<Array<{ pageId: string, title: string, access: PageAccess }>> {
+    const permission = await this.tryGetPermission(courseId, userId)
+    if (!permission) {
       throw new NotFoundException()
     }
 
-    if (access.accessLevel === CourseAccessLevel.None) {
+    if (permission.permissionLevel === CoursePermissionLevel.None) {
       throw new ForbiddenException()
     }
 
     return await this.entities.find(CoursePage, {
-      select: ['pageId', 'title', 'isPublic'],
+      select: ['pageId', 'title', 'access'],
       where: { courseId }
     })
   }
 
   async getCoursePage(userId: string | null, courseId: string, pageId: string): Promise<CoursePage> {
-    const access = await this.tryGetAccess(courseId, userId)
-    if (!access) {
+    const permission = await this.tryGetPermission(courseId, userId)
+    if (!permission) {
       throw new NotFoundException()
     }
 
-    if (access.accessLevel === CourseAccessLevel.None) {
+    if (permission.permissionLevel === CoursePermissionLevel.None) {
       if (userId) {
         throw new ForbiddenException()
       } else {
@@ -158,16 +165,16 @@ export class CoursesService {
       throw new NotFoundException()
     }
 
-    if (!userId && !page.isPublic) {
+    if (!userId && page.access !== PageAccess.Public) {
       throw new UnauthorizedException()
     }
 
     return page
   }
 
-  async tryGetAccess(courseId: string, userId: string | null): Promise<null | {
+  async tryGetPermission(courseId: string, userId: string | null): Promise<null | {
     course: Course
-    accessLevel: CourseAccessLevel
+    permissionLevel: CoursePermissionLevel
   }> {
     const course = await this.entities.findOne(Course, {
       id: courseId
@@ -180,25 +187,29 @@ export class CoursesService {
     if (userId && course.ownerId === userId) {
       return {
         course,
-        accessLevel: CourseAccessLevel.Write
+        permissionLevel: CoursePermissionLevel.Write
       }
     }
 
     if (!userId) {
       return {
         course,
-        accessLevel: course.isPublic ? CourseAccessLevel.Read : CourseAccessLevel.None
+        permissionLevel: course.access === CourseAccess.Public
+          ? CoursePermissionLevel.Read
+          : CoursePermissionLevel.None
       }
     }
 
-    const access = await this.entities.findOne(CourseAccess, {
+    const permission = await this.entities.findOne(CoursePermission, {
       courseId,
       userId
     })
 
     return {
       course,
-      accessLevel: access ? access.accessLevel : CourseAccessLevel.None
+      permissionLevel: permission
+        ? permission.permissionLevel
+        : CoursePermissionLevel.None
     }
   }
 }

@@ -2,6 +2,11 @@ import { PrimaryColumn, Column, ManyToOne, OneToMany, Entity } from 'typeorm'
 import { User } from 'modules/users'
 import { IsEnum } from 'class-validator'
 
+export enum CourseAccess {
+  Private = 'private',
+  Public = 'public'
+}
+
 @Entity()
 export class Course {
   @PrimaryColumn()
@@ -20,24 +25,25 @@ export class Course {
   })
   owner: User
 
+  @IsEnum(CourseAccess)
   @Column()
-  isPublic: boolean
+  access: CourseAccess
 
   @OneToMany(type => CoursePage, coursePage => coursePage.course)
   pages: CoursePage[]
 
-  @OneToMany(type => CourseAccess, courseAccess => courseAccess.course)
-  access: CourseAccess[]
+  @OneToMany(type => CoursePermission, coursePermission => coursePermission.course)
+  permission: CoursePermission[]
 }
 
-export enum CourseAccessLevel {
+export enum CoursePermissionLevel {
   None = 'none',
   Read = 'read',
   Write = 'write'
 }
 
 @Entity()
-export class CourseAccess {
+export class CoursePermission {
   @PrimaryColumn()
   userId: string
 
@@ -51,7 +57,7 @@ export class CourseAccess {
   @PrimaryColumn()
   courseId: string
 
-  @ManyToOne(type => Course, course => course.access, {
+  @ManyToOne(type => Course, course => course.permission, {
     primary: true,
     nullable: false,
     onDelete: 'CASCADE'
@@ -61,9 +67,15 @@ export class CourseAccess {
   @Column()
   role: string
 
-  @IsEnum(CourseAccessLevel)
+  @IsEnum(CoursePermissionLevel)
   @Column()
-  accessLevel: CourseAccessLevel
+  permissionLevel: CoursePermissionLevel
+}
+
+export enum PageAccess {
+  Private = 'private',
+  Public = 'public',
+  Unlisted = 'unlisted'
 }
 
 @Entity()
@@ -87,6 +99,7 @@ export class CoursePage {
   @Column({ type: 'text' })
   content: string
 
+  @IsEnum(PageAccess)
   @Column()
-  isPublic: boolean
+  access: PageAccess
 }
