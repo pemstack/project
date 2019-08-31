@@ -84,3 +84,7 @@
 .grecaptcha-badge {
   visibility: hidden;
 }
+
+.color-danger {
+  color: #ff4d4f;
+}

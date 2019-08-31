@@ -2,7 +2,8 @@ import React, { FunctionComponent } from 'react'
 import { Tabs, Button, List } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { CoursePage } from './courses.api'
-import { CollapseCard } from 'components'
+import { CollapseCard, Flex, LinkButton } from 'components'
+import './ManageCourse.css'
 
 const { TabPane } = Tabs
 
@@ -19,15 +20,26 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({
       <Tabs tabPosition='left' >
         <TabPane tab={t('ManageCourse.tab.pages')} key='pages'>
           <CollapseCard>
-            <h3>{t('ManageCourse.title.pages')}</h3>
             <List
               dataSource={pages}
+              size='large'
+              header={
+                <Flex justifyContent='space-between' alignItems='center'>
+                  <h2 className='ManageCourse__title'>{t('ManageCourse.title.pages')}</h2>
+                  <LinkButton
+                    to='/courses/create'
+                    type='primary'
+                    icon='plus'
+                  >
+                    {t('button.create')}
+                  </LinkButton>
+                </Flex>
+              }
               renderItem={page => (
                 <List.Item
-                  style={{ paddingTop: '24px', paddingBottom: '24px' }}
                   actions={[
-                    <Button key='edit' icon='edit' style={{ color: 'blue' }} />,
-                    <Button key='delete' icon='delete' style={{ color: 'red' }} />
+                    <Button type='link' key='edit' icon='edit' />,
+                    <Button type='link' key='delete' icon='delete' className='color-danger'/>
                   ]}
                   key={page.id}
                 >
@@ -35,7 +47,6 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({
                 </List.Item>
               )}
             />
-            <Button type='primary' icon='plus'>{t('ManageCourse.button.addPage')}</Button>
           </CollapseCard>
         </TabPane>
         <TabPane tab={t('ManageCourse.tab.students')} key='students'>
