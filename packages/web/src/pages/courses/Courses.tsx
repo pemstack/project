@@ -2,9 +2,10 @@ import React, { FunctionComponent } from 'react'
 import { useQuery } from 'app'
 import { Link } from '@pema/router-react'
 import slugify from 'slugify'
-import { List, Icon, Button } from 'antd'
+import { List } from 'antd'
 import { CollapseCard, LinkButton } from 'components'
 import { GET_COURSES } from './courses.api'
+import Flexbox from 'flexbox-react'
 
 export const Courses: FunctionComponent = () => {
   const courses = useQuery(GET_COURSES).read()
@@ -17,8 +18,11 @@ export const Courses: FunctionComponent = () => {
           pageSize: 10
         }}
         header={
-          <div>
-            <h2>My courses</h2>
+          <Flexbox
+            alignItems='center'
+            justifyContent='space-between'
+          >
+            <h1>My courses</h1>
             <LinkButton
               to='/courses/create'
               type='primary'
@@ -26,7 +30,7 @@ export const Courses: FunctionComponent = () => {
             >
               Create new
             </LinkButton>
-          </div>
+          </Flexbox>
         }
         renderItem={course => (
           <List.Item key={course.id}>

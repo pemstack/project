@@ -1,11 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { decorator, CenterContent } from 'app/mock'
+import { decorator } from 'app/mock'
 import { Formik } from 'forms'
 import { LoginForm } from './LoginForm'
 import * as yup from 'yup'
-import { AnonymousLayout } from 'app/layout/AnonymousLayout';
+import { AnonymousLayout } from 'app/layout/AnonymousLayout'
+import { CenterContent } from 'components'
 
 const loginSchema = yup.object({
   username: yup.string().required(),
@@ -28,7 +29,7 @@ storiesOf('user/login/LoginForm', module)
         persist: false
       }}
     >
-      <CenterContent maxWidth={360}>
+      <CenterContent width='small'>
         <LoginForm />
       </CenterContent>
     </Formik>
@@ -47,7 +48,7 @@ storiesOf('user/login/LoginForm', module)
           persist: false
         }}
       >
-        <CenterContent maxWidth={360}>
+        <CenterContent width='small'>
           <LoginForm />
         </CenterContent>
       </Formik>

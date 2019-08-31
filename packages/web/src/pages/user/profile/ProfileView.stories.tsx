@@ -1,7 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { decorator, CenterContent } from 'app/mock'
+import { decorator } from 'app/mock'
 import { ProfileView, ProfileViewItem } from './ProfileView'
+import { CenterContent } from 'components'
 
 const profile: ProfileViewItem = {
   id: '123',

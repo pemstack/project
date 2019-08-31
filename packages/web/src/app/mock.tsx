@@ -116,22 +116,6 @@ export interface CenterContentProps {
   children?: React.ReactNode
 }
 
-export const CenterContent: FunctionComponent<CenterContentProps> = ({
-  maxWidth = 768,
-  children
-}) => {
-  return (
-    <div
-      style={{
-        maxWidth: `${maxWidth}px`,
-        margin: '0 auto'
-      }}
-    >
-      {children}
-    </div>
-  )
-}
-
 export function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }

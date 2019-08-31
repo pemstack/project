@@ -1,0 +1,15 @@
+.CenterContent {
+  margin: 0 auto;
+}
+
+.CenterContent--default {
+  max-width: 768px;
+}
+
+.CenterContent--small {
+  max-width: 400px;
+}
+
+.CenterContent--large {
+  max-width: 1024px;
+}

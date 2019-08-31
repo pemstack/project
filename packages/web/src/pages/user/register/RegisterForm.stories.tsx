@@ -1,11 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { decorator, CenterContent } from 'app/mock'
+import { decorator } from 'app/mock'
 import { Formik } from 'forms'
 import { RegisterForm } from './RegisterForm'
 import { registerSchema, RegisterParams } from './register.api'
 import { AnonymousLayout } from 'app/layout/AnonymousLayout'
+import { CenterContent } from 'components'
 
 const initial: RegisterParams = {
   firstName: '',
@@ -26,7 +27,7 @@ storiesOf('user/register/RegisterForm', module)
       }}
       initialValues={initial}
     >
-      <CenterContent maxWidth={600}>
+      <CenterContent>
         <RegisterForm />
       </CenterContent>
     </Formik>
@@ -41,7 +42,7 @@ storiesOf('user/register/RegisterForm', module)
         }}
         initialValues={initial}
       >
-        <CenterContent maxWidth={600}>
+        <CenterContent>
           <RegisterForm />
         </CenterContent>
       </Formik>

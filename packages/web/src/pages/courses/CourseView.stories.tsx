@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import { decorator, CenterContent } from 'app/mock'
+import { decorator } from 'app/mock'
 import { CourseView } from './CourseView'
 import { AnonymousLayout } from 'app/layout/AnonymousLayout'
 import { UserLayout } from 'app/layout/UserLayout'
 import { mockCourses } from './courses.mocks'
+import { CenterContent } from 'components';
 
 interface WithInputProps {
   children?: (text: string) => React.ReactNode
@@ -39,14 +40,14 @@ storiesOf('courses/CourseView', module)
   ))
   .add('with user layout', () => (
     <UserLayout>
-      <CenterContent maxWidth={1024}>
+      <CenterContent width='large'>
         <CourseView id='siguria' />
       </CenterContent>
     </UserLayout>
   ))
   .add('with anonymous layout', () => (
     <AnonymousLayout>
-      <CenterContent maxWidth={1024}>
+      <CenterContent width='large'>
         <CourseView id='siguria' />
       </CenterContent>
     </AnonymousLayout>

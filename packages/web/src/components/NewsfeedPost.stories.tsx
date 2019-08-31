@@ -1,9 +1,10 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { decorator, CenterContent } from 'app/mock'
+import { decorator } from 'app/mock'
 import moment from 'moment'
 import { NewsfeedPost, NewsfeedPostItem } from './NewsfeedPost'
 import { UserLayout } from 'app/layout/UserLayout'
+import { CenterContent } from 'components'
 
 function randomDate() {
   return moment().subtract(0.5 * Math.random(), 'hours')
