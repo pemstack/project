@@ -1,20 +1,25 @@
 import React, { FunctionComponent } from 'react'
-import { Tabs, Button, List } from 'antd'
+import { Modal, Tabs, Button, List } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { CoursePage } from './courses.api'
+import { GET_COURSE_PAGES, DELETE_COURSE_PAGE } from './courses.api'
 import { CollapseCard, Flex, LinkButton } from 'components'
+import { useQuery, useAction } from 'app'
 import './ManageCourse.css'
 
+const { confirm } = Modal
 const { TabPane } = Tabs
 
 interface ManageCourseProps {
-  pages: CoursePage[]
+  id: string
 }
 
 export const ManageCourse: FunctionComponent<ManageCourseProps> = ({
-  pages
+  id
 }) => {
   const { t } = useTranslation()
+  const pages = useQuery(GET_COURSE_PAGES, { id }).read()
+  const deleteCoursePage = useAction(DELETE_COURSE_PAGE)
+
   return (
     <div className='ManageCourse'>
       <Tabs tabPosition='left' >
@@ -39,7 +44,26 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({
                 <List.Item
                   actions={[
                     <Button type='link' key='edit' icon='edit' />,
-                    <Button type='link' key='delete' icon='delete' className='color-danger'/>
+                    <Button
+                      type='link'
+                      key='delete'
+                      icon='delete'
+                      className='color-danger'
+                      onClick={() => {
+                        confirm({
+                          title: 'Are you sure delete this page?',
+                          content: 'Once deleted, you can\'t bring it back',
+                          okText: 'Yes',
+                          okType: 'danger',
+                          cancelText: 'No',
+                          onOk() {
+                            deleteCoursePage({ courseId: id, pageId: page.id })
+                          },
+                          onCancel() {
+                          }
+                        })
+                      }}
+                    />
                   ]}
                   key={page.id}
                 >

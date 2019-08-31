@@ -98,6 +98,29 @@ export class CoursesService {
     return pageId
   }
 
+  async deleteCoursePage(userId: string, courseId: string, pageId: string) {
+    if (!userId) {
+      throw new UnauthorizedException()
+    }
+
+    const coursePermission = await this.tryGetPermission(courseId, userId)
+    if (!coursePermission) {
+      throw new NotFoundException()
+    }
+
+    if (coursePermission.permissionLevel !== CoursePermissionLevel.Write) {
+      throw new ForbiddenException()
+    }
+
+    const result = await this.entities.delete(CoursePage, {
+      where: { courseId, pageId }
+    })
+
+    // if (result.affected === 0) {
+    //   throw new NotFoundException()
+    // }
+  }
+
   async getCourses(userId: string): Promise<CourseInfo[]> {
     const courses = await this.entities.find(Course, {
       where: { ownerId: userId }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, NotFoundException } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, NotFoundException, Delete } from '@nestjs/common'
 import { ApiUseTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger'
 import { CoursesService } from './courses.service'
 import { CreateCourseRequest, CreatePageRequest, CoursePageResponse, CoursePageDetailsResponse } from './courses.dto'
@@ -98,5 +98,17 @@ export class CoursesController {
     })
 
     return { id }
+  }
+
+  @ApiResponse({ status: 200 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Delete(':courseid/pages/:pageid')
+  async deleteCoursePage(
+    @ReqUser('id') userId: string,
+    @Param('courseid') courseId: string,
+    @Param('pageid') pageId: string
+  ) {
+    await this.courses.deleteCoursePage(userId, courseId, pageId)
   }
 }

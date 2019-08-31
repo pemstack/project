@@ -1,5 +1,16 @@
 import { MockApi, delay } from 'app/mock'
-import { GET_COURSE_PAGES, GET_COURSE_PAGE, GET_COURSE_PERMISSION, GET_COURSES, CoursePermission } from 'pages/courses/courses.api'
+import {
+  GET_COURSE_PAGES,
+  GET_COURSE_PAGE,
+  GET_COURSE_PERMISSION,
+  GET_COURSES,
+  CoursePage,
+  Course,
+  CoursePermission,
+  CoursePageDetails,
+  DELETE_COURSE_PAGE
+} from 'pages/courses/courses.api'
+import slugify from 'slugify'
 
 const longMarkdown = `
 ## Project 1 deadline
@@ -68,88 +79,136 @@ Phasellus id justo id turpis pulvinar cursus in vel erat.
 Sed consectetur ante odio, a vulputate felis malesuada vel.
 `.trim()
 
-function mockCourseList(api: MockApi) {
+class MockCourse implements Course {
+  id: string
+  title: string
+  permission: CoursePermission
+  owner: boolean
+  pages: Array<CoursePage & CoursePageDetails>
+
+  constructor(data: Partial<MockCourse>) {
+    Object.assign(this, data)
+  }
+
+  findPage(id: string) {
+    const page = this.pages.find(p => p.id === id)
+    if (!page) {
+      throw makeError(404)
+    }
+
+    return page
+  }
+
+  addPage(page: CoursePage & CoursePageDetails) {
+    this.pages.push(page)
+  }
+
+  deletePage(pageId: string) {
+    this.pages = this.pages.filter(page => page.pageId !== pageId)
+  }
+}
+
+interface PageData {
+  title: string
+}
+
+function makePage(courseId: string, {
+  title
+}: PageData): CoursePage & CoursePageDetails {
+  const id = slugify(title, { lower: true })
+  return {
+    title,
+    id,
+    pageId: id,
+    access: 'public',
+    content: longMarkdown,
+    courseId
+  }
+}
+
+function makeError(status: number) {
+  const error = new Error();
+  (error as any).status = status
+  return error
+}
+
+class MockCourses {
+  private courses: MockCourse[]
+
+  constructor() {
+    this.courses = [
+      new MockCourse({
+        id: 'siguria',
+        title: 'Siguria e te dhenave',
+        permission: 'write',
+        owner: true,
+        pages: [
+          makePage('siguria', { title: 'Info' }),
+          makePage('siguria', { title: 'Projects' }),
+          makePage('siguria', { title: 'Resources' })
+        ]
+      })
+    ]
+  }
+
+  list() {
+    return this.courses
+  }
+
+  findCourse(id: string) {
+    const course = this.courses.find(c => c.id === id)
+    if (!course) {
+      throw makeError(404)
+    }
+
+    return course
+  }
+}
+
+function mockCourseList(api: MockApi, courses: MockCourses) {
   api.withQuery(GET_COURSES, async () => {
     await delay(1000)
-    return [
-      { id: '123456', title: 'Siguria e te dhenave', permission: 'read', owner: false },
-      { id: '234567', title: 'Sinjale', permission: 'read', owner: false },
-      { id: '345678', title: 'Interneti', permission: 'read', owner: false },
-      { id: '456789', title: 'Programimi ne internet', permission: 'read', owner: false },
-      { id: '567890', title: 'OOP', permission: 'read', owner: false }
-    ]
+    return courses.list()
   })
 }
 
-function mockCoursePages(api: MockApi) {
+function mockCoursePages(api: MockApi, courses: MockCourses) {
   api.withQuery(GET_COURSE_PAGES, async ({ id }) => {
     await delay(1000)
-    switch (id) {
-      case 'siguria':
-        return [
-          { id: 'info', title: 'Info', access: 'public' },
-          { id: 'assignments', title: 'Assignments', access: 'private' },
-          { id: 'newsfeed', title: 'Newsfeed', access: 'public' }
-        ]
-      default:
-        throw new Error('Course does not exist.')
-    }
+    return courses.findCourse(id).pages
   })
 }
 
-function mockCoursePage(api: MockApi) {
+function mockDeleteCoursePage(api: MockApi, courses: MockCourses) {
+  api.withAction(DELETE_COURSE_PAGE, async ({ courseId, pageId }) => {
+    await delay(1000)
+    courses.findCourse(courseId).deletePage(pageId)
+    console.log({ courseId, pageId, pages: courses.findCourse(courseId).pages })
+  })
+}
+
+function mockCoursePage(api: MockApi, courses: MockCourses) {
   api.withQuery(GET_COURSE_PAGE, async ({ courseId, pageId }) => {
     await delay(1000)
-    switch (courseId) {
-      case 'siguria':
-        switch (pageId) {
-          case 'info':
-            return {
-              pageId,
-              courseId,
-              title: 'Info',
-              content: longMarkdown,
-              access: 'public'
-            }
-          case 'assignments':
-            return {
-              pageId,
-              courseId,
-              title: 'Info',
-              content: 'Assignments page content...',
-              access: 'private'
-            }
-          case 'newsfeed':
-            return {
-              pageId,
-              courseId,
-              title: 'Newsfeed',
-              content: '',
-              access: 'public'
-            }
-          default:
-            throw new Error('Page does not exist.')
-        }
-      default:
-        throw new Error('Course does not exist.')
+    return courses.findCourse(courseId).findPage(pageId)
+  })
+}
+
+function mockCoursePermission(api: MockApi, courses: MockCourses) {
+  api.withQuery(GET_COURSE_PERMISSION, async ({ id }) => {
+    await delay(1000)
+    return {
+      permission: courses.findCourse(id).permission
     }
   })
 }
 
-function mockCourseAccess(api: MockApi) {
-  api.withQuery(GET_COURSE_PERMISSION, async ({ id }) => {
-    switch (id) {
-      case 'siguria':
-        return { permission: 'write' }
-      default:
-        throw new Error('Course does not exist.')
-    }
-  })
-}
+const courses = new MockCourses()
 
 export function mockCourses(api: MockApi) {
-  mockCourseList(api)
-  mockCoursePages(api)
-  mockCoursePage(api)
-  mockCourseAccess(api)
+  mockCourseList(api, courses)
+  mockCoursePages(api, courses)
+  mockCoursePage(api, courses)
+  mockCoursePermission(api, courses)
+  mockDeleteCoursePage(api, courses)
 }
