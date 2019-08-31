@@ -1,100 +1,101 @@
 {
-  "CourseCreateForm": {
-    "title": "Create course",
-    "label": {
-      "access": "Access level",
-      "title": "Course name"
-    },
-    "option": {
-      "private": "Private",
-      "public": "Public"
-    }
-  },
-  "Courses": {
-    "title": "My courses"
-  },
-  "ManageCourse": {
-    "tab": {
-      "pages": "Pages",
-      "students": "Students"
-    },
-    "title": {
-      "pages": "Manage pages",
-      "students": "Manage students"
-    },
-    "button": {
-      "addPage": "Add page"
-    }
-  },
-  "MarkdownEditor": {
-    "empty": "No content to display.",
-    "preview": "Preview",
-    "write": "Write"
-  },
-  "button": {
-    "cancel": "Cancel",
-    "submit": "Submit",
-    "create": "Create",
-    "edit": "Edit"
-  },
-  "course": {
-    "message": {
-      "create": "Course has been created."
-    },
-    "error": {
-      "title": "Enter course name.",
-      "access": "Specify course access."
-    }
-  },
-  "Layout": {
-    "label": {
-      "newsfeed": "Newsfeed",
-      "courses": "Courses"
-    }
-  },
-  "RouteError": {
-    "back": "Back Home"
-  },
-  "text": {
-    "confirm": "Are you sure?"
-  },
-  "user": {
-    "label": {
-      "profile": "Profile",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "name": "Name",
-      "email": "Email",
-      "password": "Password",
-      "confirmPassword": "Confirm password",
-      "role": "Role",
-      "settings": "Account Settings",
-      "logout": "Log Out"
-    },
-    "error": {
-      "firstName": {
-        "required": "First name is required.",
-        "invalid": "First name contains invalid characters."
-      },
-      "lastName":{
-        "required": "Last name is required.",
-        "invalid": "Last name contains invalid characters."
-      },
-      "email": {
-        "required": "Email is required.",
-        "invalid": "Invalid email."
-      },
-      "password": {
-        "required": "Password is required.",
-        "min": "Password must contain at least 6 characters.",
-        "invalid": "Password contains invalid characters."
-      },
-      "confirmPassword": "Passwords must match."
-    }
-  },
-  "error": {
-    "general": "There has been an error",
-    "403": "Not authorized",
-    "404": "404: Not found"
-  }
+	"CourseCreateForm": {
+		"title": "Create course",
+		"label": {
+			"access": "Access level",
+			"title": "Course name"
+		},
+		"option": {
+			"private": "Private",
+			"public": "Public"
+		},
+		"tooltip": "A private course can only be seen by its members. A public course can be seen by anyone, but it may have private pages that are only accessible to members."
+	},
+	"Courses": {
+		"title": "My courses"
+	},
+	"ManageCourse": {
+		"tab": {
+			"pages": "Pages",
+			"students": "Students"
+		},
+		"title": {
+			"pages": "Manage pages",
+			"students": "Manage students"
+		},
+		"button": {
+			"addPage": "Add page"
+		}
+	},
+	"MarkdownEditor": {
+		"empty": "No content to display.",
+		"preview": "Preview",
+		"write": "Write"
+	},
+	"button": {
+		"cancel": "Cancel",
+		"submit": "Submit",
+		"create": "Create",
+		"edit": "Edit"
+	},
+	"course": {
+		"message": {
+			"create": "Course has been created."
+		},
+		"error": {
+			"title": "Enter course name.",
+			"access": "Specify course access."
+		}
+	},
+	"Layout": {
+		"label": {
+			"newsfeed": "Newsfeed",
+			"courses": "Courses"
+		}
+	},
+	"RouteError": {
+		"back": "Back Home"
+	},
+	"text": {
+		"confirm": "Are you sure?"
+	},
+	"user": {
+		"label": {
+			"profile": "Profile",
+			"firstName": "First Name",
+			"lastName": "Last Name",
+			"name": "Name",
+			"email": "Email",
+			"password": "Password",
+			"confirmPassword": "Confirm password",
+			"role": "Role",
+			"settings": "Account Settings",
+			"logout": "Log Out"
+		},
+		"error": {
+			"firstName": {
+				"required": "First name is required.",
+				"invalid": "First name contains invalid characters."
+			},
+			"lastName": {
+				"required": "Last name is required.",
+				"invalid": "Last name contains invalid characters."
+			},
+			"email": {
+				"required": "Email is required.",
+				"invalid": "Invalid email."
+			},
+			"password": {
+				"required": "Password is required.",
+				"min": "Password must contain at least 6 characters.",
+				"invalid": "Password contains invalid characters."
+			},
+			"confirmPassword": "Passwords must match."
+		}
+	},
+	"error": {
+		"general": "There has been an error",
+		"403": "Not authorized",
+		"404": "404: Not found"
+	}
 }

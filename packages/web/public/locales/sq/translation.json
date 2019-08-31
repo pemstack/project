@@ -1,95 +1,96 @@
 {
-  "CourseCreateForm": {
-    "title": "Krijo kurs",
-    "label": {
-      "access": "Qasja",
-      "title": "Emri i kursit"
-    },
-    "option": {
-      "private": "Privat",
-      "public": "Publik"
-    }
-  },
-  "Courses": {
-    "title": "Kurset"
-  },
-  "ManageCourse": {
-    "tab": {
-      "pages": "Faqet",
-      "students": "Studentët"
-    },
-    "title": {
-      "pages": "Menaxho faqet",
-      "students": "Menaxho studentët"
-    },
-    "button": {
-      "addPage": "Shto faqe"
-    }
-  },
-  "MarkdownEditor": {
-    "empty": "Nuk ka përmbajtje.",
-    "preview": "Pamja",
-    "write": "Shkruaj"
-  },
-  "Layout": {
-    "label": {
-      "newsfeed": "Ballina",
-      "courses": "Kurset"
-    }
-  },
-  "button": {
-    "cancel": "Anulo",
-    "submit": "Dërgo",
-    "create": "Krijo",
-    "edit": "Ndrysho"
-  },
-  "course": {
-    "message": {
-      "create": "Kursi është krijuar."
-    },
-    "error": {
-      "title": "Shënoni emrin e kursit.",
-      "access": "Jepni nivelin e qasjes."
-    }
-  },
-  "text": {
-    "confirm": "A jeni të sigurt?"
-  },
-  "user": {
-    "label": {
-      "profile": "Profili",
-      "firstName": "Emri",
-      "lastName": "Mbiemri",
-      "name": "Emri",
-      "email": "Email",
-      "password": "Fjalëkalimi",
-      "confirmPassword": "Konfirmo fjalëkalimin",
-      "role": "Roli",
-      "settings": "Cilësimet e llogarisë",
-      "logout": "Shkyquni"
-    },
-    "error": {
-      "firstName": {
-        "required": "Jepni emrin.",
-        "invalid": "Emri përmban karaktere jo valide."
-      },
-      "lastName": {
-        "required": "Jepni mbiemrin.",
-        "invalid": "Mbiemri përmban karaktere jo valide."
-      },
-      "email": {
-        "required": "Jepni email.",
-        "invalid": "Email adresë jo valide."
-      },
-      "password": {
-        "required": "Jepni fjalëkalimin.",
-        "min": "Fjalëkalimi duhet të ketë së paku 6 karaktere.",
-        "invalid": "Fjalëkalimi përmban karaktere jo valide."
-      },
-      "confirmPassword": "Fjalëkalimet duhet të përputhen."
-    }
-  },
-  "error": {
-    "general": "Ka pasur një gabim."
-  }
+	"CourseCreateForm": {
+		"title": "Krijo kurs",
+		"label": {
+			"access": "Qasja",
+			"title": "Emri i kursit"
+		},
+		"option": {
+			"private": "Privat",
+			"public": "Publik"
+		},
+		"tooltip": "Një kurs privat mund të shihet vetëm nga anëtarët e kursit. Një kurs publik mund të shihet nga kushdo, por mund të ketë faqe private që janë të qasshme vetëm nga anëtarët."
+	},
+	"Courses": {
+		"title": "Kurset"
+	},
+	"ManageCourse": {
+		"tab": {
+			"pages": "Faqet",
+			"students": "Studentët"
+		},
+		"title": {
+			"pages": "Menaxho faqet",
+			"students": "Menaxho studentët"
+		},
+		"button": {
+			"addPage": "Shto faqe"
+		}
+	},
+	"MarkdownEditor": {
+		"empty": "Nuk ka përmbajtje.",
+		"preview": "Pamja",
+		"write": "Shkruaj"
+	},
+	"Layout": {
+		"label": {
+			"newsfeed": "Ballina",
+			"courses": "Kurset"
+		}
+	},
+	"button": {
+		"cancel": "Anulo",
+		"submit": "Dërgo",
+		"create": "Krijo",
+		"edit": "Ndrysho"
+	},
+	"course": {
+		"message": {
+			"create": "Kursi është krijuar."
+		},
+		"error": {
+			"title": "Shënoni emrin e kursit.",
+			"access": "Jepni nivelin e qasjes."
+		}
+	},
+	"text": {
+		"confirm": "A jeni të sigurt?"
+	},
+	"user": {
+		"label": {
+			"profile": "Profili",
+			"firstName": "Emri",
+			"lastName": "Mbiemri",
+			"name": "Emri",
+			"email": "Email",
+			"password": "Fjalëkalimi",
+			"confirmPassword": "Konfirmo fjalëkalimin",
+			"role": "Roli",
+			"settings": "Cilësimet e llogarisë",
+			"logout": "Shkyquni"
+		},
+		"error": {
+			"firstName": {
+				"required": "Jepni emrin.",
+				"invalid": "Emri përmban karaktere jo valide."
+			},
+			"lastName": {
+				"required": "Jepni mbiemrin.",
+				"invalid": "Mbiemri përmban karaktere jo valide."
+			},
+			"email": {
+				"required": "Jepni email.",
+				"invalid": "Email adresë jo valide."
+			},
+			"password": {
+				"required": "Jepni fjalëkalimin.",
+				"min": "Fjalëkalimi duhet të ketë së paku 6 karaktere.",
+				"invalid": "Fjalëkalimi përmban karaktere jo valide."
+			},
+			"confirmPassword": "Fjalëkalimet duhet të përputhen."
+		}
+	},
+	"error": {
+		"general": "Ka pasur një gabim."
+	}
 }
