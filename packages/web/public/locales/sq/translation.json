@@ -10,6 +10,9 @@
       "public": "Publik"
     }
   },
+  "Courses": {
+    "title": "Kurset"
+  },
   "ManageCourse": {
     "tab": {
       "pages": "Faqet",

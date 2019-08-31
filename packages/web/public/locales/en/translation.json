@@ -10,6 +10,9 @@
       "public": "Public"
     }
   },
+  "Courses": {
+    "title": "My courses"
+  },
   "ManageCourse": {
     "tab": {
       "pages": "Pages",

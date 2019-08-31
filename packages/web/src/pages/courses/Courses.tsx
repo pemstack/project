@@ -2,12 +2,14 @@ import React, { FunctionComponent } from 'react'
 import { useQuery } from 'app'
 import { Link } from '@pema/router-react'
 import slugify from 'slugify'
-import { List } from 'antd'
-import { CollapseCard, LinkButton } from 'components'
+import { List, Icon } from 'antd'
+import { CollapseCard, Flex, LinkButton } from 'components'
 import { GET_COURSES } from './courses.api'
-import Flexbox from 'flexbox-react'
+import { useTranslation } from 'react-i18next'
+import './Courses.css'
 
 export const Courses: FunctionComponent = () => {
+  const { t } = useTranslation()
   const courses = useQuery(GET_COURSES).read()
   return (
     <CollapseCard className='Courses'>
@@ -18,29 +20,45 @@ export const Courses: FunctionComponent = () => {
           pageSize: 10
         }}
         header={
-          <Flexbox
-            alignItems='center'
-            justifyContent='space-between'
-          >
-            <h1>My courses</h1>
+          <Flex justifyContent='space-between' alignItems='center'>
+            <h2 className='Courses__title'>{t('Courses.title')}</h2>
             <LinkButton
               to='/courses/create'
               type='primary'
               icon='plus'
             >
-              Create new
+              {t('button.create')}
             </LinkButton>
-          </Flexbox>
+          </Flex>
         }
-        renderItem={course => (
-          <List.Item key={course.id}>
-            <Link
-              to={`/courses/${course.id}/${slugify(course.title, { lower: true })}`}
+        renderItem={course => {
+          const title = slugify(course.title, { lower: true })
+          return (
+            <List.Item
+              key={course.id}
+              actions={
+                course.permission === 'write'
+                  ? [
+                    <Link
+                      key='manage'
+                      to={`/courses/manage/${course.id}/${title}`}
+                    >
+                      <Icon type='setting' />
+                    </Link>
+                  ]
+                  : undefined
+              }
             >
-              {course.title}
-            </Link>
-          </List.Item>
-        )}
+              <span className='Courses__item-content'>
+                <Link
+                  to={`/courses/${course.id}/${title}`}
+                >
+                  {course.title}
+                </Link>
+              </span>
+            </List.Item>
+          )
+        }}
       />
     </CollapseCard>
   )

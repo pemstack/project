@@ -1,0 +1,7 @@
+.Courses__title {
+  margin: 0;
+}
+
+.Courses__item-content {
+  flex-grow: 1;
+}
