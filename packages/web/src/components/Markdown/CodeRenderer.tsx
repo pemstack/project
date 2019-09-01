@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { PrismAsyncLight } from 'react-syntax-highlighter'
 import './CodeRenderer.css'
+import { TimelineRenderer } from './TimelineRenderer';
 
 const Pre: FunctionComponent = ({ children }) => {
   return (
@@ -27,23 +28,34 @@ export const CodeRenderer: FunctionComponent<CodeRendererProps> = ({
   value,
   language
 }) => {
-  return (
-    <PrismAsyncLight
-      className='CodeRenderer'
-      showLineNumbers
-      lineNumberContainerStyle={{
-        float: 'left',
-        paddingRight: '6px',
-        color: '#555',
-        textAlign: 'right'
-      }}
-      language={language || 'text'}
-      lineNumberStyle={{ fontSize: '0.8em' }}
-      useInlineStyles={false}
-      CodeTag={Code}
-      PreTag={Pre}
-    >
-      {value || ''}
-    </PrismAsyncLight>
-  )
+  switch (language) {
+    case 'timeline':
+      return (
+        <TimelineRenderer timeline={value} />
+      )
+    case 'timeline-alt':
+      return (
+        <TimelineRenderer alternate timeline={value} />
+      )
+    default:
+      return (
+        <PrismAsyncLight
+          className='CodeRenderer'
+          showLineNumbers
+          lineNumberContainerStyle={{
+            float: 'left',
+            paddingRight: '6px',
+            color: '#555',
+            textAlign: 'right'
+          }}
+          language={language || 'text'}
+          lineNumberStyle={{ fontSize: '0.8em' }}
+          useInlineStyles={false}
+          CodeTag={Code}
+          PreTag={Pre}
+        >
+          {value || ''}
+        </PrismAsyncLight>
+      )
+  }
 }
