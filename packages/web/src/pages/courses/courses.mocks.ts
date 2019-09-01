@@ -8,7 +8,8 @@ import {
   Course,
   CoursePermission,
   CoursePageDetails,
-  DELETE_COURSE_PAGE
+  DELETE_COURSE_PAGE,
+  UPDATE_COURSE_PAGE_ACCESS
 } from 'pages/courses/courses.api'
 import slugify from 'slugify'
 
@@ -165,50 +166,42 @@ class MockCourses {
   }
 }
 
-function mockCourseList(api: MockApi, courses: MockCourses) {
+let courses = new MockCourses()
+
+export function mockCourses(api: MockApi) {
   api.withQuery(GET_COURSES, async () => {
-    await delay(1000)
+    await delay(500)
     return courses.list()
   })
-}
 
-function mockCoursePages(api: MockApi, courses: MockCourses) {
   api.withQuery(GET_COURSE_PAGES, async ({ id }) => {
-    await delay(1000)
+    await delay(500)
     return courses.findCourse(id).pages
   })
-}
 
-function mockDeleteCoursePage(api: MockApi, courses: MockCourses) {
-  api.withAction(DELETE_COURSE_PAGE, async ({ courseId, pageId }) => {
-    await delay(1000)
-    courses.findCourse(courseId).deletePage(pageId)
-    console.log({ courseId, pageId, pages: courses.findCourse(courseId).pages })
-  })
-}
-
-function mockCoursePage(api: MockApi, courses: MockCourses) {
   api.withQuery(GET_COURSE_PAGE, async ({ courseId, pageId }) => {
-    await delay(1000)
+    await delay(500)
     return courses.findCourse(courseId).findPage(pageId)
   })
-}
 
-function mockCoursePermission(api: MockApi, courses: MockCourses) {
+  api.withAction(DELETE_COURSE_PAGE, async ({ courseId, pageId }) => {
+    await delay(500)
+    courses.findCourse(courseId).deletePage(pageId)
+  })
+
+  api.withAction(UPDATE_COURSE_PAGE_ACCESS, async ({ courseId, pageId, access }) => {
+    await delay(500)
+    courses.findCourse(courseId).findPage(pageId).access = access
+  })
+
   api.withQuery(GET_COURSE_PERMISSION, async ({ id }) => {
-    await delay(1000)
+    await delay(500)
     return {
       permission: courses.findCourse(id).permission
     }
   })
 }
 
-const courses = new MockCourses()
-
-export function mockCourses(api: MockApi) {
-  mockCourseList(api, courses)
-  mockCoursePages(api, courses)
-  mockCoursePage(api, courses)
-  mockCoursePermission(api, courses)
-  mockDeleteCoursePage(api, courses)
+export function reloadCourses() {
+  courses = new MockCourses()
 }

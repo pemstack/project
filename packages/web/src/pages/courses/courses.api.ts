@@ -1,5 +1,6 @@
 import { Query, Action } from 'app'
 import * as yup from 'yup'
+import { Schema } from '@pema/state'
 
 export type CoursePermission = 'none' | 'read' | 'write'
 
@@ -121,17 +122,32 @@ export type DeleteCoursePageParams = yup.InferType<typeof deleteCoursePageSchema
 // DELETE /api/courses/:courseid/pages/:pageid
 export const DELETE_COURSE_PAGE: Action<DeleteCoursePageParams> = {
   schema: deleteCoursePageSchema,
-  progress: true,
   async perform({ courseId, pageId }, app) {
     return await app
       .req(`/api/courses/${courseId}/pages/${pageId}`, { action: 'deleteCoursePage' })
       .delete()
   },
-  invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`],
-  optimistic: ({ params: { courseId, pageId } }) => ({
-    [`courses/${courseId}/pages/`]: ({ value }) => {
-      const pages = value as CoursePage[]
-      return pages.filter(page => page.id !== pageId)
-    }
-  })
+  invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
+}
+
+export const updateCoursePageAccessSchema = yup.object({
+  courseId: yup.string().required(),
+  pageId: yup.string().required(),
+  access: yup.string().oneOf(['private', 'public', 'unlisted']).required()
+})
+
+export interface UpdateCoursePageParams {
+  courseId: string
+  pageId: string
+  access: PageAccess
+}
+
+export const UPDATE_COURSE_PAGE_ACCESS: Action<UpdateCoursePageParams> = {
+  schema: updateCoursePageAccessSchema as Schema<UpdateCoursePageParams>,
+  async perform({ courseId, pageId, access }, app) {
+    // todo
+  },
+  invalidates: ({ params: { courseId } }) => [
+    `courses/${courseId}/pages`
+  ]
 }

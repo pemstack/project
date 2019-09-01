@@ -25,6 +25,12 @@
 		},
 		"button": {
 			"addPage": "Add page"
+		},
+		"label": {
+			"private": "Private",
+			"public": "Public",
+			"unlisted": "Unlisted",
+			"noPages": "No Pages"
 		}
 	},
 	"MarkdownEditor": {

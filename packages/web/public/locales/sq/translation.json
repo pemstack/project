@@ -25,6 +25,12 @@
 		},
 		"button": {
 			"addPage": "Shto faqe"
+		},
+		"label": {
+			"private": "Private",
+			"public": "Publike",
+			"unlisted": "E palistuar",
+			"noPages": "Nuk ka faqe"
 		}
 	},
 	"MarkdownEditor": {

@@ -1,3 +1,8 @@
 .ManageCourse__title {
   margin: 0;
 }
+
+.ManageCourse .ant-select-selection {
+  border: none;
+  min-width: 100px;
+}
