@@ -245,7 +245,7 @@ export { default as BookOutline } from '@ant-design/icons/lib/outline/BookOutlin
 // export { default as ChromeOutline } from '@ant-design/icons/lib/outline/ChromeOutline'
 export { default as CheckCircleOutline } from '@ant-design/icons/lib/outline/CheckCircleOutline'
 // export { default as CloseSquareOutline } from '@ant-design/icons/lib/outline/CloseSquareOutline'
-// export { default as ClockCircleOutline } from '@ant-design/icons/lib/outline/ClockCircleOutline'
+export { default as ClockCircleOutline } from '@ant-design/icons/lib/outline/ClockCircleOutline'
 export { default as CloseCircleOutline } from '@ant-design/icons/lib/outline/CloseCircleOutline'
 // export { default as CloudOutline } from '@ant-design/icons/lib/outline/CloudOutline'
 // export { default as CodepenCircleOutline } from '@ant-design/icons/lib/outline/CodepenCircleOutline'

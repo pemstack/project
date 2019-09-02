@@ -1,23 +1,55 @@
 import React, { FunctionComponent } from 'react'
 import ReactMarkdown from 'react-markdown'
+import RemarkMathPlugin from 'remark-math'
+import { parseProps } from './parse-props'
+import './Markdown.css'
+
+// Eagerly loaded components
 import { Divider } from 'antd'
 import { LinkRenderer } from './LinkRenderer'
-import { CodeRenderer } from './CodeRenderer'
 import { InlineCodeRenderer } from './InlineCodeRenderer'
-import { MathRenderer, InlineMathRenderer } from './MathRenderer'
-import RemarkMathPlugin from 'remark-math'
-import './Markdown.css'
+
+// Lazily loaded components
+const MathRenderer = React.lazy(() => import('./MathRenderer'))
+const CodeRenderer = React.lazy(() => import('./CodeRenderer'))
+const TimelineRenderer = React.lazy(() => import('./TimelineRenderer'))
 
 interface MarkdownProps {
   source: string
 }
 
+interface CodeDispatcherProps {
+  value: string
+  language: string
+}
+
+export const CodeDispatcher: FunctionComponent<CodeDispatcherProps> = ({
+  value,
+  language
+}) => {
+  const [props, lang] = parseProps(language)
+  switch (lang) {
+    case 'timeline':
+      return (
+        <TimelineRenderer {...props} timeline={value} />
+      )
+    default:
+      return (
+        <CodeRenderer language={lang} value={value} />
+      )
+  }
+}
+
+interface MathProps {
+  value: string
+}
+
 const renderers = {
   link: LinkRenderer,
-  code: CodeRenderer,
+  code: CodeDispatcher,
   inlineCode: InlineCodeRenderer,
-  math: MathRenderer,
-  inlineMath: InlineMathRenderer,
+  math: ({ value }: MathProps) => <MathRenderer block value={value} />,
+  inlineMath: ({ value }: MathProps) => <MathRenderer value={value} />,
   thematicBreak: Divider
 }
 

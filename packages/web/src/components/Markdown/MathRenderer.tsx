@@ -1,35 +1,19 @@
-import React, { Suspense, FunctionComponent } from 'react'
-import { Spin } from 'antd'
-import './MathRenderer.css'
-
-const TeX = React.lazy(() => import('./TeX'))
+import React, { FunctionComponent } from 'react'
+import TeX from '@matejmazur/react-katex'
+import 'katex/dist/katex.min.css'
 
 export interface MathRendererProps {
   value: string
+  block?: boolean
 }
 
-export const InlineMathRenderer: FunctionComponent<MathRendererProps> = ({ value }) => {
+export const MathRenderer: FunctionComponent<MathRendererProps> = ({
+  value,
+  block
+}) => {
   return (
-    <Suspense
-      fallback={
-        <span className='InlineMathRenderer--loading' />
-      }
-    >
-      <TeX math={value} />
-    </Suspense>
+    <TeX math={value} block={block} />
   )
 }
 
-export const MathRenderer: FunctionComponent<MathRendererProps> = ({ value }) => {
-  return (
-    <Suspense
-      fallback={
-        <div className='MathRenderer--loading'>
-          <Spin />
-        </div>
-      }
-    >
-      <TeX math={value} block />
-    </Suspense>
-  )
-}
+export default MathRenderer

@@ -1,11 +1,13 @@
 import React, { FunctionComponent, useState } from 'react'
 import { Tabs, Input } from 'antd'
-import { Markdown } from './Markdown'
+import { useTranslation } from 'react-i18next'
+import { Suspense } from 'react'
+import { Placeholder } from './Placeholder'
 import './MarkdownEditor.css'
-import { useTranslation } from 'react-i18next';
 
 const { TabPane } = Tabs
 const { TextArea } = Input
+const Markdown = React.lazy(() => import('components/Markdown'))
 
 interface MemoMarkdownProps {
   value: string
@@ -58,7 +60,12 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
         <TabPane tab={t('MarkdownEditor.preview')} key='preview'>
           <div className='MarkdownEditor__wrapper'>
             <div className='MarkdownEditor__preview'>
-              <MemoMarkdown value={value || t('MarkdownEditor.empty')} shouldUpdate={currentTab === 'preview'} />
+              <Suspense fallback={<Placeholder size='large' push block />}>
+                <MemoMarkdown
+                  value={value || t('MarkdownEditor.empty')}
+                  shouldUpdate={currentTab === 'preview'}
+                />
+              </Suspense>
             </div>
             {submit}
           </div>

@@ -23,7 +23,7 @@ function parseObj(str: string): ParsedProps {
 }
 
 export function parseProps(str: string): [ParsedProps, string] {
-  str = str.trim()
+  str = (str || '').trim()
   if (str[0] === '<') {
     const index = str.indexOf('>')
     if (index > 0) {
