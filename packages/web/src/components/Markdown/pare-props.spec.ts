@@ -12,6 +12,12 @@ describe('parseProps', () => {
     })
   })
 
+  test('with single flag', () => {
+    const [props, str] = parseProps('<answer> 42!')
+    expect(str).toBe('42!')
+    expect(props).toEqual({ answer: true })
+  })
+
   test('plain string', () => {
     const [props, str] = parseProps(' hello; <world>! ')
     expect(str).toBe('hello; <world>!')
