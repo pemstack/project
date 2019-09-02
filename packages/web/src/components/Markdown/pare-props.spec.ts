@@ -35,6 +35,17 @@ describe('parseProps', () => {
     expect(props).toEqual({ answer: true })
   })
 
+  test('props only', () => {
+    const [props, str] = parseProps(' <color: green; numbers: 1, 2, 3; flag; x:abc> ')
+    expect(str).toBe('')
+    expect(props).toEqual({
+      color: 'green',
+      numbers: ['1', '2', '3'],
+      flag: true,
+      x: 'abc'
+    })
+  })
+
   test('flag only', () => {
     const [props, str] = parseProps(' <answer> ')
     expect(str).toBe('')
