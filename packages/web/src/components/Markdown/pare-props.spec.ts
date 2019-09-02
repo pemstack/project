@@ -12,9 +12,32 @@ describe('parseProps', () => {
     })
   })
 
-  test('with single flag', () => {
-    const [props, str] = parseProps('<answer> 42!')
+  test('with flag', () => {
+    const [props, str] = parseProps(' <answer> 42! ')
     expect(str).toBe('42!')
+    expect(props).toEqual({ answer: true })
+  })
+
+  test('reverse with props', () => {
+    const [props, str] = parseProps(' Hello world! <color: green; numbers: 1, 2, 3; flag; x:abc> ')
+    expect(str).toBe('Hello world!')
+    expect(props).toEqual({
+      color: 'green',
+      numbers: ['1', '2', '3'],
+      flag: true,
+      x: 'abc'
+    })
+  })
+
+  test('reverse with flag', () => {
+    const [props, str] = parseProps(' 42! <answer> ')
+    expect(str).toBe('42!')
+    expect(props).toEqual({ answer: true })
+  })
+
+  test('flag only', () => {
+    const [props, str] = parseProps(' <answer> ')
+    expect(str).toBe('')
     expect(props).toEqual({ answer: true })
   })
 
