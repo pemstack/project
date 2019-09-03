@@ -1,0 +1,7 @@
+.Poll h3{
+    color:#24354f;
+}
+@keyframes voted {
+    0%   {width: 0px;}
+    25%  {width: 25px;}
+  }

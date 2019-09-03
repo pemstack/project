@@ -21,3 +21,14 @@ storiesOf('Poll', module)
       </CollapseCard>
     </CenterContent>
   ))
+  .add('submitted', () => (
+    <CenterContent width='small'>
+      <CollapseCard>
+        <Poll
+          title='Do you like this component?'
+          items={items}
+          Submitted
+        />
+      </CollapseCard>
+    </CenterContent>
+  ))
