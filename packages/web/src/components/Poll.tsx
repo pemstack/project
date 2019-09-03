@@ -53,7 +53,7 @@ export const PollItem: FunctionComponent<PollItemProps> = ({
         <div style={{ float: 'right' }}>
           {item.votes}
         </div>
-        <div style={{position:'absolute',zIndex:'1'}}>{item.label}</div>
+        <div style={{position:'absolute',zIndex:1}}>{item.label}</div>
       </Card>
     )
   }
