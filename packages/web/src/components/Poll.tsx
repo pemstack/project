@@ -35,6 +35,7 @@ export const PollItem: FunctionComponent<PollItemProps> = ({
   if(!hidden){
     return (
       <Card
+        className='Card'
         bodyStyle={{ padding: '4px 8px' }}
         hoverable
       >
@@ -58,6 +59,7 @@ export const PollItem: FunctionComponent<PollItemProps> = ({
   }
   return(
     <Card
+        className='Card'
         bodyStyle={{ padding: '4px 8px'}}
         hoverable
       >

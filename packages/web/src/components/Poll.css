@@ -1,7 +1,10 @@
 .Poll h3{
     color:#24354f;
+    margin-bottom:10px;
 }
-@keyframes voted {
-    0%   {width: 0px;}
-    25%  {width: 25px;}
-  }
+.Card{
+    margin-bottom:5px;
+}
+.Card:hover{
+    border-color:#a6c8e3;
+}
