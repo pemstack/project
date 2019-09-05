@@ -1,10 +1,6 @@
 import React, { FunctionComponent } from 'react'
-import { CollapseCard } from 'components'
 import { Card } from 'antd'
 import './Poll.css'
-import styled, { keyframes } from 'styled-components'
-
-
 
 export interface PollItem {
   label: string
@@ -22,56 +18,46 @@ export const PollItem: FunctionComponent<PollItemProps> = ({
   total,
   hidden
 }) => {
-  
-  const percentage = keyframes`
-    0% {width:0}
-    ${100 * item.votes / total}% {width:${100 * item.votes / total}%}
-  `
-
-  const Bar = styled.div`
-    animation: ${percentage} 1.2s ease-in-out;
-  `
-
-  if(!hidden){
+  if (!hidden) {
     return (
       <Card
         className='Card'
         bodyStyle={{ padding: '4px 8px' }}
         hoverable
       >
-        <Bar
+        <div
           style={{
             position: 'absolute',
-            background: '#a6c8e3',
+            background: '#c0e0f0',
             left: 0,
             top: 0,
             width: `${100 * item.votes / total}%`,
             height: '100%',
-            zIndex:'1',
+            zIndex: '1'
           }}
         />
         <div style={{ float: 'right' }}>
           {item.votes}
         </div>
-        <div style={{position:'absolute',zIndex:1}}>{item.label}</div>
+        <div style={{ position: 'absolute', zIndex: 1 }}>{item.label}</div>
       </Card>
     )
   }
-  return(
+  return (
     <Card
-        className='Card'
-        bodyStyle={{ padding: '4px 8px'}}
-        hoverable
-      >
+      className='Card'
+      bodyStyle={{ padding: '4px 8px' }}
+      hoverable
+    >
       <div>{item.label}</div>
-      </Card>
+    </Card>
   )
 }
 
 export interface PollProps {
   title?: string
   items: PollItem[]
-  Submitted?:boolean
+  Submitted?: boolean
 }
 
 export const Poll: FunctionComponent<PollProps> = ({
@@ -80,12 +66,12 @@ export const Poll: FunctionComponent<PollProps> = ({
   Submitted
 }) => {
   const total = items.reduce((sum, current) => sum + current.votes, 0)
-  if(Submitted){
+  if (Submitted) {
     return (
       <div className='Poll'>
         {title && <h3>{title}</h3>}
         {items.map((item, index) => (
-            <PollItem key={index} item={item} total={total}/>
+          <PollItem key={index} item={item} total={total} />
         ))}
       </div>
     )
@@ -94,7 +80,7 @@ export const Poll: FunctionComponent<PollProps> = ({
     <div className='Poll'>
       {title && <h3>{title}</h3>}
       {items.map((item, index) => (
-          <PollItem key={index} item={item} total={total} hidden/>
+        <PollItem key={index} item={item} total={total} hidden />
       ))}
     </div>
   )

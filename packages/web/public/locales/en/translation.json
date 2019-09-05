@@ -76,6 +76,7 @@
 			"confirmPassword": "Confirm password",
 			"role": "Role",
 			"settings": "Account Settings",
+			"login": "Log In",
 			"logout": "Log Out"
 		},
 		"error": {
@@ -95,8 +96,7 @@
 				"required": "Password is required.",
 				"min": "Password must contain at least 6 characters.",
 				"invalid": "Password contains invalid characters."
-			},
-			"confirmPassword": "Passwords must match."
+			}
 		}
 	},
 	"error": {

@@ -5,7 +5,7 @@ import { CourseView } from './CourseView'
 import { AnonymousLayout } from 'app/layout/AnonymousLayout'
 import { UserLayout } from 'app/layout/UserLayout'
 import { mockCourses } from './courses.mocks'
-import { CenterContent } from 'components';
+import { CenterContent } from 'components'
 
 interface WithInputProps {
   children?: (text: string) => React.ReactNode
@@ -40,14 +40,14 @@ storiesOf('courses/CourseView', module)
   ))
   .add('with user layout', () => (
     <UserLayout>
-      <CenterContent width='large'>
+      <CenterContent>
         <CourseView id='siguria' />
       </CenterContent>
     </UserLayout>
   ))
   .add('with anonymous layout', () => (
     <AnonymousLayout>
-      <CenterContent width='large'>
+      <CenterContent>
         <CourseView id='siguria' />
       </CenterContent>
     </AnonymousLayout>

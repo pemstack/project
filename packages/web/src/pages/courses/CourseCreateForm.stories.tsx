@@ -16,7 +16,7 @@ const initial = {
 storiesOf('courses/CourseCreateForm', module)
   .addDecorator(decorator())
   .add('default', () => (
-    <CenterContent>
+    <CenterContent width='small'>
       <Formik
         validationSchema={createCourseSchema}
         onSubmit={(props, actions) => {
@@ -31,7 +31,7 @@ storiesOf('courses/CourseCreateForm', module)
   ))
   .add('with user layout', () => (
     <UserLayout>
-      <CenterContent>
+      <CenterContent width='small'>
         <Formik
           validationSchema={createCourseSchema}
           onSubmit={(props, actions) => {

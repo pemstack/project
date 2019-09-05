@@ -13,7 +13,7 @@ storiesOf('courses/ManageCourse', module)
   ))
   .add('with user layout', () => (
     <UserLayout>
-      <CenterContent width='large'>
+      <CenterContent>
         <ManageCourse id='siguria' />
       </CenterContent>
     </UserLayout>

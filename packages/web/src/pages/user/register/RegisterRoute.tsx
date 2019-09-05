@@ -3,20 +3,19 @@ import { View, redirect, allow, useAction } from 'app'
 import { Formik } from 'forms'
 import { RegisterForm } from './RegisterForm'
 import { REGISTER, registerSchema, RegisterParams } from './register.api'
-import './RegisterRoute.css'
+import { CenterContent } from 'components'
 
 const initial: RegisterParams = {
   firstName: '',
   lastName: '',
   email: '',
-  password: '',
-  confirmPassword: ''
+  password: ''
 }
 
 export const RegisterRoute: View = () => {
   const register = useAction(REGISTER)
   return (
-    <div className='RegisterRoute'>
+    <CenterContent width='small'>
       <Formik
         validationSchema={registerSchema}
         onSubmit={async (values, actions) => {
@@ -31,7 +30,7 @@ export const RegisterRoute: View = () => {
       >
         <RegisterForm />
       </Formik>
-    </div>
+    </CenterContent>
   )
 }
 

@@ -4,24 +4,21 @@ import * as yup from 'yup'
 export const registerSchema = yup.object({
   firstName: yup
     .string()
-    .required('register.error.firstName.required')
-    .matches(/^[A-Za-z]+( [A-Za-z]+)*$/, 'register.error.firstName.invalid'),
+    .required('user.error.firstName.required')
+    .matches(/^[A-Za-z]+( [A-Za-z]+)*$/, 'user.error.firstName.invalid'),
   lastName: yup
     .string()
-    .required('register.error.lastName.required')
-    .matches(/^[A-Za-z]+( [A-Za-z]+)*$/, 'register.error.lastName.invalid'),
+    .required('user.error.lastName.required')
+    .matches(/^[A-Za-z]+( [A-Za-z]+)*$/, 'user.error.lastName.invalid'),
   email: yup
     .string()
-    .required('register.error.email.required')
+    .required('user.error.email.required')
     .email('register.error.email.invalid'),
   password: yup
     .string()
-    .required('register.error.password.required')
-    .min(6, 'register.error.password.min')
-    .matches(/^[A-Za-z0-9.,!@#$^&*()_-]+$/, 'register.error.password.invalid'),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref('password'), null as any], 'register.error.confirmPassword')
+    .required('user.error.password.required')
+    .min(6, 'user.error.password.min')
+    .matches(/^[A-Za-z0-9.,!@#$^&*()_-]+$/, 'user.error.password.invalid')
 })
 
 export type RegisterParams = yup.InferType<typeof registerSchema>

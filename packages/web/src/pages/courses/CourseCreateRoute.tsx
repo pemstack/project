@@ -4,12 +4,12 @@ import { CourseCreateForm } from './CourseCreateForm'
 import { Formik } from 'forms'
 import { CREATE_COURSE } from './courses.api'
 import slugify from 'slugify'
-import { CenterContent } from 'components';
+import { CenterContent } from 'components'
 
 export const CourseCreateRoute: View = ({ app }) => {
   const createCourse = useAction(CREATE_COURSE)
   return (
-    <CenterContent>
+    <CenterContent width='small'>
       <Formik
         initialValues={{
           title: '',

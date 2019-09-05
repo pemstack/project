@@ -12,8 +12,7 @@ const initial: RegisterParams = {
   firstName: '',
   lastName: '',
   email: '',
-  password: '',
-  confirmPassword: ''
+  password: ''
 }
 
 storiesOf('user/register/RegisterForm', module)
@@ -27,7 +26,7 @@ storiesOf('user/register/RegisterForm', module)
       }}
       initialValues={initial}
     >
-      <CenterContent>
+      <CenterContent width='small'>
         <RegisterForm />
       </CenterContent>
     </Formik>
@@ -42,7 +41,7 @@ storiesOf('user/register/RegisterForm', module)
         }}
         initialValues={initial}
       >
-        <CenterContent>
+        <CenterContent width='small'>
           <RegisterForm />
         </CenterContent>
       </Formik>

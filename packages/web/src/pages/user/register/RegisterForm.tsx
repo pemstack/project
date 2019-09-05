@@ -2,28 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { Form, Input, SubmitButton } from 'forms'
 import { CollapseCard } from 'components'
 import { useTranslation } from 'react-i18next'
-import './RegisterForm.css'
-
-const formLabelCol = {
-  xs: { span: 24 },
-  sm: { span: 8 }
-}
-
-const formWrapperCol = {
-  xs: { span: 24 },
-  sm: { span: 16 }
-}
-
-const tailWrapperCol = {
-  xs: {
-    span: 24,
-    offset: 0,
-  },
-  sm: {
-    span: 16,
-    offset: 8,
-  }
-}
+import { Link } from '@pema/router-react'
 
 export const RegisterForm: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -32,11 +11,16 @@ export const RegisterForm: FunctionComponent = () => {
       className='RegisterForm'
     >
       <Form
+        layout='vertical'
         className='RegisterForm__form'
         showCaptcha
-        labelCol={formLabelCol}
-        wrapperCol={formWrapperCol}
       >
+        <Form.AntdItem>
+          <h2>{t('register.title')}</h2>
+          <div>
+            Already have an account? {t('register.label.existingAccount')} <Link to='/user/login'> Log in</Link>
+          </div>
+        </Form.AntdItem>
         <Form.Item
           name='firstName'
           label={t('user.label.firstName')}
@@ -77,19 +61,10 @@ export const RegisterForm: FunctionComponent = () => {
             spellCheck={false}
           />
         </Form.Item>
-        <Form.Item
-          name='confirmPassword'
-          label={t('user.label.confirmPassword')}
-        >
-          <Input.Password
-            name='confirmPassword'
-            type='password'
-            spellCheck={false}
-          />
-        </Form.Item>
-        <Form.AntdItem wrapperCol={tailWrapperCol}>
+        <Form.AntdItem>
           <SubmitButton
             preventDisabling
+            style={{width: '100%'}}
             className='RegisterForm__submit'
           >
             Register

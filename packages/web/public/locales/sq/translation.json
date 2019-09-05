@@ -73,7 +73,10 @@
 			"confirmPassword": "Konfirmo fjalëkalimin",
 			"role": "Roli",
 			"settings": "Cilësimet e llogarisë",
-			"logout": "Shkyquni"
+			"login": "Kyçuni",
+			"logout": "Shkyçuni",
+			"register": "Regjistrohuni",
+			"existingAccount": "Keni llogari aktive?"
 		},
 		"error": {
 			"firstName": {
@@ -92,8 +95,7 @@
 				"required": "Jepni fjalëkalimin.",
 				"min": "Fjalëkalimi duhet të ketë së paku 6 karaktere.",
 				"invalid": "Fjalëkalimi përmban karaktere jo valide."
-			},
-			"confirmPassword": "Fjalëkalimet duhet të përputhen."
+			}
 		}
 	},
 	"error": {
