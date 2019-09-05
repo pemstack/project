@@ -27,10 +27,6 @@ export class UsersController {
     @ReqLang() lang: string,
     @Body() data: RegisterRequest
   ) {
-    if (data.password !== data.confirmPassword) {
-      throw new BadRequestException()
-    }
-
     const user = new User(data)
     await this.usersService.create(user)
     const token = 'TODO'

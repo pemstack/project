@@ -21,8 +21,4 @@ export class RegisterRequest {
   @MinLength(6)
   @Matches(/^[A-Za-z0-9.,!@#$^&*()_-]+$/)
   password: string
-
-  @ApiModelProperty()
-  @IsString()
-  confirmPassword: string
 }
