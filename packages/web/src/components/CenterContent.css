@@ -2,14 +2,18 @@
   margin: 0 auto;
 }
 
-.CenterContent--default {
-  max-width: 768px;
-}
-
 .CenterContent--small {
   max-width: 400px;
 }
 
+.CenterContent--medium {
+  max-width: 576px;
+}
+
+.CenterContent--default {
+  max-width: 768px;
+}
+
 .CenterContent--large {
-  max-width: 1024px;
+  max-width: 992px;
 }
