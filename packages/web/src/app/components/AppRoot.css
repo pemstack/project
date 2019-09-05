@@ -7,10 +7,6 @@
   text-align: center;
 }
 
-.AppRoot .ant-form-vertical .ant-form-item {
-  padding-bottom: 0;
-}
-
 /* Make clicks pass-through */
 #nprogress {
   pointer-events: none;
