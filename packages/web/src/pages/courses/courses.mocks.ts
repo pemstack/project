@@ -1,15 +1,16 @@
 import { MockApi, delay } from 'app/mock'
 import {
-  GET_COURSE_PAGES,
-  GET_COURSE_PAGE,
-  GET_COURSE_PERMISSION,
-  GET_COURSES,
-  CoursePage,
-  Course,
-  CoursePermission,
-  CoursePageDetails,
-  DELETE_COURSE_PAGE,
-  UPDATE_COURSE_PAGE_ACCESS
+	GET_COURSE_PAGES,
+	GET_COURSE_PAGE,
+	GET_COURSE_PERMISSION,
+	GET_COURSES,
+	CoursePage,
+	Course,
+	CoursePermission,
+	CoursePageDetails,
+	DELETE_COURSE_PAGE,
+	UPDATE_COURSE_PAGE_ACCESS,
+	CREATE_COURSE_PAGE
 } from 'pages/courses/courses.api'
 import slugify from 'slugify'
 
@@ -81,127 +82,147 @@ Sed consectetur ante odio, a vulputate felis malesuada vel.
 `.trim()
 
 class MockCourse implements Course {
-  id: string
-  title: string
-  permission: CoursePermission
-  owner: boolean
-  pages: Array<CoursePage & CoursePageDetails>
+	id: string
+	title: string
+	permission: CoursePermission
+	owner: boolean
+	pages: Array<CoursePage & CoursePageDetails>
 
-  constructor(data: Partial<MockCourse>) {
-    Object.assign(this, data)
-  }
+	constructor(data: Partial<MockCourse>) {
+		Object.assign(this, data)
+	}
 
-  findPage(id: string) {
-    const page = this.pages.find(p => p.id === id)
-    if (!page) {
-      throw makeError(404)
-    }
+	findPage(id: string) {
+		const page = this.pages.find(p => p.id === id)
+		if (!page) {
+			throw makeError(404)
+		}
 
-    return page
-  }
+		return page
+	}
 
-  addPage(page: CoursePage & CoursePageDetails) {
-    this.pages.push(page)
-  }
+	addPage(page: string | CoursePage & CoursePageDetails) {
+		if (typeof page === 'string') {
+			this.pages.push({
+				id: slugify(page),
+				access: 'private',
+				pageId: slugify(page),
+				courseId: this.id,
+				title: page,
+				content: ''
+			})
+		} else {
+			this.pages.push(page)
+		}
+	}
 
-  deletePage(pageId: string) {
-    this.pages = this.pages.filter(page => page.pageId !== pageId)
-  }
+	deletePage(pageId: string) {
+		this.pages = this.pages.filter(page => page.pageId !== pageId)
+	}
 }
 
 interface PageData {
-  title: string
+	title: string
 }
 
-function makePage(courseId: string, {
-  title
-}: PageData): CoursePage & CoursePageDetails {
-  const id = slugify(title, { lower: true })
-  return {
-    title,
-    id,
-    pageId: id,
-    access: 'public',
-    content: longMarkdown,
-    courseId
-  }
+function makePage(
+	courseId: string,
+	{ title }: PageData
+): CoursePage & CoursePageDetails {
+	const id = slugify(title, { lower: true })
+	return {
+		title,
+		id,
+		pageId: id,
+		access: 'public',
+		content: longMarkdown,
+		courseId
+	}
 }
 
 function makeError(status: number) {
-  const error = new Error();
-  (error as any).status = status
-  return error
+	const error = new Error()
+	;(error as any).status = status
+	return error
 }
 
 class MockCourses {
-  private courses: MockCourse[]
+	private courses: MockCourse[]
 
-  constructor() {
-    this.courses = [
-      new MockCourse({
-        id: 'siguria',
-        title: 'Siguria e te dhenave',
-        permission: 'write',
-        owner: true,
-        pages: [
-          makePage('siguria', { title: 'Info' }),
-          makePage('siguria', { title: 'Projects' }),
-          makePage('siguria', { title: 'Resources' })
-        ]
-      })
-    ]
-  }
+	constructor() {
+		this.courses = [
+			new MockCourse({
+				id: 'siguria',
+				title: 'Siguria e te dhenave',
+				permission: 'write',
+				owner: true,
+				pages: [
+					makePage('siguria', { title: 'Info' }),
+					makePage('siguria', { title: 'Projects' }),
+					makePage('siguria', { title: 'Resources' })
+				]
+			})
+		]
+	}
 
-  list() {
-    return this.courses
-  }
+	list() {
+		return this.courses
+	}
 
-  findCourse(id: string) {
-    const course = this.courses.find(c => c.id === id)
-    if (!course) {
-      throw makeError(404)
-    }
+	findCourse(id: string) {
+		const course = this.courses.find(c => c.id === id)
+		if (!course) {
+			throw makeError(404)
+		}
 
-    return course
-  }
+		return course
+	}
 }
 
 let courses = new MockCourses()
 
 export function mockCourses(api: MockApi) {
-  api.withQuery(GET_COURSES, async () => {
-    await delay(500)
-    return courses.list()
-  })
+	api.withQuery(GET_COURSES, async () => {
+		await delay(500)
+		return courses.list()
+	})
 
-  api.withQuery(GET_COURSE_PAGES, async ({ id }) => {
-    await delay(500)
-    return courses.findCourse(id).pages
-  })
+	api.withQuery(GET_COURSE_PAGES, async ({ id }) => {
+		await delay(500)
+		return courses.findCourse(id).pages
+	})
 
-  api.withQuery(GET_COURSE_PAGE, async ({ courseId, pageId }) => {
-    await delay(500)
-    return courses.findCourse(courseId).findPage(pageId)
-  })
+	api.withQuery(GET_COURSE_PAGE, async ({ courseId, pageId }) => {
+		await delay(500)
+		return courses.findCourse(courseId).findPage(pageId)
+	})
 
-  api.withAction(DELETE_COURSE_PAGE, async ({ courseId, pageId }) => {
-    await delay(500)
-    courses.findCourse(courseId).deletePage(pageId)
-  })
+	api.withAction(DELETE_COURSE_PAGE, async ({ courseId, pageId }) => {
+		await delay(500)
+		courses.findCourse(courseId).deletePage(pageId)
+	})
 
-  api.withAction(UPDATE_COURSE_PAGE_ACCESS, async ({ courseId, pageId, access }) => {
-    await delay(500)
-    courses.findCourse(courseId).findPage(pageId).access = access
-  })
+	api.withAction(
+		UPDATE_COURSE_PAGE_ACCESS,
+		async ({ courseId, pageId, access }) => {
+			await delay(500)
+			courses.findCourse(courseId).findPage(pageId).access = access
+		}
+	)
 
-  api.withQuery(GET_COURSE_PERMISSION, async ({ id }) => {
-    await delay(500)
-    return {
-      permission: courses.findCourse(id).permission
-    }
-  })
+	api.withQuery(GET_COURSE_PERMISSION, async ({ id }) => {
+		await delay(500)
+		return {
+			permission: courses.findCourse(id).permission
+		}
+	})
+
+	api.withAction(CREATE_COURSE_PAGE, async ({ courseId, title }) => {
+		await delay(500)
+		courses.findCourse(courseId).addPage(title)
+	})
 }
 
 export function reloadCourses() {
-  courses = new MockCourses()
+	courses = new MockCourses()
 }
