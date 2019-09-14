@@ -7,7 +7,7 @@ export const ManageCourseRoute: View = ({ match }) => {
   const { id } = match.params
   viewInvariant(id && typeof id === 'string', 404)
   return (
-    <CenterContent width='medium'>
+    <CenterContent width='large'>
       <ManageCourse id={id} />
     </CenterContent>
   )
