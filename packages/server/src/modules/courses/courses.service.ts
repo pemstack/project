@@ -18,6 +18,7 @@ import { EntityManager } from 'typeorm'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
 import { unionBy } from 'lodash'
+import { reduceObject } from 'common/utils'
 
 export interface CreateCourseParams {
 	ownerId: string
@@ -31,6 +32,15 @@ export interface CreateCoursePageParams {
 	title: string
 	content?: string
 	access: PageAccess
+}
+
+export interface EditCoursePageParams {
+	courseId: string
+	pageId: string
+	userId: string
+	title?: string
+	content?: string
+	access?: PageAccess
 }
 
 export interface CourseInfo {
@@ -102,6 +112,53 @@ export class CoursesService {
 		})
 
 		return pageId
+	}
+
+	async editCoursePage({
+		courseId,
+		pageId,
+		userId,
+		title,
+		content,
+		access
+	}: EditCoursePageParams): Promise<string> {
+		const coursePermission = await this.tryGetPermission(courseId, userId)
+		if (!coursePermission) {
+			throw new NotFoundException()
+		}
+
+		if (coursePermission.permissionLevel !== CoursePermissionLevel.Write) {
+			throw new ForbiddenException()
+		}
+
+		const newPageId = title ? slugify(title, { lower: true }) : pageId
+
+		if (pageId !== newPageId) {
+			if (
+				await this.entities.findOne(CoursePage, {
+					courseId,
+					pageId: newPageId
+				})
+			) {
+				throw new BadRequestException('Page name already exists.')
+			}
+		}
+
+		await this.entities.update(
+			CoursePage,
+			{
+				courseId,
+				pageId
+			},
+			reduceObject({
+				pageId: newPageId,
+				title,
+				content,
+				access
+			})
+		)
+
+		return newPageId
 	}
 
 	async deleteCoursePage(userId: string, courseId: string, pageId: string) {

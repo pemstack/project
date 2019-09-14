@@ -1,57 +1,75 @@
 import { ApiModelProperty, ApiResponseModelProperty } from '@nestjs/swagger'
-import { IsString, MinLength } from 'class-validator'
+import { IsString, MinLength, IsOptional } from 'class-validator'
 import { CourseAccess, PageAccess } from './courses.entity'
 
 export class CreateCourseRequest {
-  @ApiModelProperty({ minLength: 1 })
-  @IsString()
-  @MinLength(1)
-  title: string
+	@ApiModelProperty({ minLength: 1 })
+	@IsString()
+	@MinLength(1)
+	title: string
 
-  @ApiModelProperty({ enum: Object.values(CourseAccess) })
-  @IsString()
-  access: CourseAccess = CourseAccess.Private
+	@ApiModelProperty({ enum: Object.values(CourseAccess) })
+	@IsString()
+	access: CourseAccess = CourseAccess.Private
 }
 
 export class CreatePageRequest {
-  @ApiModelProperty({ minLength: 1 })
-  @IsString()
-  @MinLength(1)
-  title: string
+	@ApiModelProperty({ minLength: 1 })
+	@IsString()
+	@MinLength(1)
+	title: string
 
-  @ApiModelProperty({ required: false })
-  @IsString()
-  content?: string
+	@ApiModelProperty({ required: false })
+	@IsString()
+	content?: string
 
-  @ApiModelProperty({ enum: Object.values(PageAccess) })
-  @IsString()
-  access: PageAccess = PageAccess.Private
+	@ApiModelProperty({ enum: Object.values(PageAccess) })
+	@IsString()
+	access: PageAccess = PageAccess.Private
+}
+
+export class EditPageRequest {
+	@ApiModelProperty({ minLength: 1 })
+	@IsOptional()
+	@IsString()
+	@MinLength(1)
+	title?: string
+
+	@ApiModelProperty({ required: false })
+	@IsOptional()
+	@IsString()
+	content?: string
+
+	@ApiModelProperty({ enum: Object.values(PageAccess) })
+	@IsOptional()
+	@IsString()
+	access?: PageAccess
 }
 
 export class CoursePageResponse {
-  @ApiResponseModelProperty()
-  pageId: string
+	@ApiResponseModelProperty()
+	pageId: string
 
-  @ApiResponseModelProperty()
-  title: string
+	@ApiResponseModelProperty()
+	title: string
 
-  @ApiResponseModelProperty()
-  access: PageAccess
+	@ApiResponseModelProperty()
+	access: PageAccess
 }
 
 export class CoursePageDetailsResponse {
-  @ApiResponseModelProperty()
-  pageId: string
+	@ApiResponseModelProperty()
+	pageId: string
 
-  @ApiResponseModelProperty()
-  courseId: string
+	@ApiResponseModelProperty()
+	courseId: string
 
-  @ApiResponseModelProperty()
-  title: string
+	@ApiResponseModelProperty()
+	title: string
 
-  @ApiResponseModelProperty()
-  content: string
+	@ApiResponseModelProperty()
+	content: string
 
-  @ApiResponseModelProperty()
-  access: PageAccess
+	@ApiResponseModelProperty()
+	access: PageAccess
 }
