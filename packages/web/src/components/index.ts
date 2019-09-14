@@ -1,6 +1,7 @@
 export { NewsfeedPost } from './NewsfeedPost'
 export { MemberCard } from './MemberCard'
 export { Markdown } from './Markdown'
+export { MarkdownEditor } from './MarkdownEditor'
 export { ReadMore } from './ReadMore'
 export { LanguageSelector } from './LanguageSelector'
 export { LinkButton } from './LinkButton'

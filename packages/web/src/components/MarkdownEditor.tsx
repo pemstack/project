@@ -20,22 +20,23 @@ class MemoMarkdown extends React.Component<MemoMarkdownProps> {
   }
 
   render() {
-    return (
-      <Markdown source={this.props.value} />
-    )
+    return <Markdown source={this.props.value} />
   }
 }
 
 interface MarkdownEditorProps {
   value: string
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>
+  onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void
+  name?: string
   submit?: React.ReactNode
 }
 
 export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
   value,
   onChange,
-  submit
+  submit,
+  name
 }) => {
   const { t } = useTranslation()
   const [currentTab, setCurrentTab] = useState('write')
@@ -50,6 +51,7 @@ export const MarkdownEditor: FunctionComponent<MarkdownEditorProps> = ({
         <TabPane tab={t('MarkdownEditor.write')} key='write'>
           <div className='MarkdownEditor__wrapper'>
             <TextArea
+              name={name}
               className='MarkdownEditor__input'
               value={value}
               onChange={onChange}
