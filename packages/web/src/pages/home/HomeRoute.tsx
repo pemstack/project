@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View } from 'app'
 import { useEffect } from 'react'
-import { Markdown } from 'components'
+import { Markdown, CenterContent, CollapseCard } from 'components'
 import { Button } from 'antd'
 
 export const HomeRoute: View = ({
@@ -33,14 +33,18 @@ ${accessToken || '<no token>'}
 
   return (
     <div className='HomeRoute'>
-      <Markdown source={source} />
-      {accessToken && <Button
-        icon='copy'
-        type='primary'
-        onClick={() => navigator.clipboard.writeText(accessToken)}
-      >
-        Copy
-      </Button>}
+      <CenterContent>
+        <CollapseCard>
+          <Markdown source={source} />
+          {accessToken && <Button
+            icon='copy'
+            type='primary'
+            onClick={() => navigator.clipboard.writeText(accessToken)}
+          >
+            Copy
+        </Button>}
+        </CollapseCard>
+      </CenterContent>
     </div>
   )
 }
