@@ -253,7 +253,7 @@ export { default as CloseCircleOutline } from '@ant-design/icons/lib/outline/Clo
 // export { default as CompassOutline } from '@ant-design/icons/lib/outline/CompassOutline'
 // export { default as ContainerOutline } from '@ant-design/icons/lib/outline/ContainerOutline'
 // export { default as ContactsOutline } from '@ant-design/icons/lib/outline/ContactsOutline'
-// export { default as CopyOutline } from '@ant-design/icons/lib/outline/CopyOutline'
+export { default as CopyOutline } from '@ant-design/icons/lib/outline/CopyOutline'
 // export { default as CreditCardOutline } from '@ant-design/icons/lib/outline/CreditCardOutline'
 // export { default as CrownOutline } from '@ant-design/icons/lib/outline/CrownOutline'
 // export { default as CustomerServiceOutline } from '@ant-design/icons/lib/outline/CustomerServiceOutline'
