@@ -34,7 +34,7 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
 		fallback(defaultCollapsed, width <= 768)
 	)
 	const router = useRouter()
-	const match = router.current.match
+	const { match } = router.current
 
 	function toggle() {
 		setCollapsed(c => !c)
