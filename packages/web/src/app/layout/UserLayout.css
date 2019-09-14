@@ -64,3 +64,9 @@
     padding: 16px 8px;
   }
 }
+
+.ant-menu-inline-collapsed > .ant-menu-item .anticon + a {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+}
