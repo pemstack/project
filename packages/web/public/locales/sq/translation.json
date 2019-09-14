@@ -33,6 +33,13 @@
 			"noPages": "Nuk ka faqe"
 		}
 	},
+	"EditPageForm": {
+		"title": "Ndrysho faqen",
+		"label": {
+			"title": "Emri i faqes",
+			"content": "Përmbajtja"
+		}
+	},
 	"MarkdownEditor": {
 		"empty": "Nuk ka përmbajtje.",
 		"preview": "Pamja",
@@ -48,7 +55,8 @@
 		"cancel": "Anulo",
 		"submit": "Dërgo",
 		"create": "Krijo",
-		"edit": "Ndrysho"
+		"edit": "Ndrysho",
+		"update": "Azhurno"
 	},
 	"course": {
 		"message": {

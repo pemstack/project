@@ -33,6 +33,13 @@
 			"noPages": "No Pages"
 		}
 	},
+	"EditPageForm": {
+		"title": "Edit page",
+		"label": {
+			"title": "Page name",
+			"content": "Content"
+		}
+	},
 	"MarkdownEditor": {
 		"empty": "No content to display.",
 		"preview": "Preview",
@@ -42,7 +49,8 @@
 		"cancel": "Cancel",
 		"submit": "Submit",
 		"create": "Create",
-		"edit": "Edit"
+		"edit": "Edit",
+		"update": "Update"
 	},
 	"course": {
 		"message": {
