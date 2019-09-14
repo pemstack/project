@@ -93,7 +93,7 @@ class MockCourse implements Course {
   }
 
   findPage(id: string) {
-    const page = this.pages.find(p => p.id === id)
+    const page = this.pages.find(p => p.pageId === id)
     if (!page) {
       throw makeError(404)
     }
@@ -104,7 +104,6 @@ class MockCourse implements Course {
   addPage(page: string | CoursePage & CoursePageDetails) {
     if (typeof page === 'string') {
       this.pages.push({
-        id: slugify(page),
         access: 'private',
         pageId: slugify(page),
         courseId: this.id,
@@ -132,7 +131,6 @@ function makePage(
   const id = slugify(title, { lower: true })
   return {
     title,
-    id,
     pageId: id,
     access: 'public',
     content: longMarkdown,

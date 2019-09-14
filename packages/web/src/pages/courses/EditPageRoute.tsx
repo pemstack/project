@@ -4,12 +4,12 @@ import { CenterContent } from 'components'
 import { EditPage } from './EditPage'
 
 export const EditPageRoute: View = ({ match }) => {
-  const { courseId, pageId } = match.params
-  viewInvariant(courseId && typeof courseId === 'string', 404)
-  viewInvariant(pageId && typeof pageId === 'string', 404)
+  const { id, page } = match.params
+  viewInvariant(id && typeof id === 'string', 404)
+  viewInvariant(page && typeof page === 'string', 404)
   return (
     <CenterContent width='medium'>
-      <EditPage courseId={courseId} pageId={pageId} />
+      <EditPage courseId={id} pageId={page} />
     </CenterContent>
   )
 }

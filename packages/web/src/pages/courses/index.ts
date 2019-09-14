@@ -7,7 +7,8 @@ const routes: RoutingTable = {
   '/:id/:display/:page?': {
     onEnter: lazy(() => import('./ViewCourseRoute')),
     order: 1
-  }
+  },
+  '/:id/:page/edit': lazy(() => import('./EditPageRoute'))
 }
 
 export default { routes }
