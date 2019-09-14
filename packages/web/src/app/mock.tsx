@@ -5,6 +5,7 @@ import { createMemoryHistory } from 'history'
 import { init } from 'app'
 import { RouteParams } from './types'
 import { AppRoot } from './components/AppRoot'
+import { mockCourses } from 'pages/courses/courses.mocks'
 
 export interface MockApi {
   withQuery: MockApiClient['withQuery']
@@ -13,10 +14,10 @@ export interface MockApi {
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T[P] extends ReadonlyArray<infer UChild>
-  ? ReadonlyArray<DeepPartial<UChild>>
-  : DeepPartial<T[P]>
+    ? Array<DeepPartial<U>>
+    : T[P] extends ReadonlyArray<infer UChild>
+    ? ReadonlyArray<DeepPartial<UChild>>
+    : DeepPartial<T[P]>
 }
 
 function deepMerge(target: Dictionary, source?: Dictionary) {
@@ -66,23 +67,27 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
   }
 
   function createApp() {
-    const root = init({}, {
-      reload: () => {
-        setApp(createApp())
-      },
-      createHistory: createMemoryHistory,
-      historyProps: {
-        initialEntries: [path]
-      },
-      ApiClient: MockApiClient
-    })
+    const root = init(
+      {},
+      {
+        reload: () => {
+          setApp(createApp())
+        },
+        createHistory: createMemoryHistory,
+        historyProps: {
+          initialEntries: [path]
+        },
+        ApiClient: MockApiClient
+      }
+    )
 
     const client = root.apiClient as MockApiClient
+    mockCourses(client)
     if (typeof apiMocks === 'function') {
       apiMocks(client)
     }
 
-    (root.router as any).locked = true
+    ;(root.router as any).locked = true
     return root
   }
 
@@ -91,7 +96,9 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
     <AppRoot app={app}>
       {children && typeof children !== 'function'
         ? children
-        : (render || (children as ((props: RouteParams) => React.ReactNode)) || noop)(params as RouteParams)}
+        : (render ||
+            (children as ((props: RouteParams) => React.ReactNode)) ||
+            noop)(params as RouteParams)}
     </AppRoot>
   )
 }

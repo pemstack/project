@@ -1,5 +1,5 @@
 import { app, AppOptions } from '@pema/app'
-import { withRouter, RoutingTable, HistoryBuildOptions } from '@pema/router'
+import { withRouter, HistoryBuildOptions } from '@pema/router'
 import { CachedApiClient, ApiClient as IApiClient } from '@pema/state'
 import { JObject } from '@pema/utils'
 import { createBrowserHistory, History } from 'history'
@@ -21,23 +21,23 @@ wretch().errorType('json')
 interface InitOptions {
   reload: (hardRefresh?: boolean) => void
   createHistory?: () => History
-  historyProps?: AppOptions<HistoryBuildOptions>,
+  historyProps?: AppOptions<HistoryBuildOptions>
   ApiClient?: new (...args: any[]) => IApiClient
 }
 
-export function init(state: JObject, {
-  reload,
-  createHistory,
-  historyProps,
-  ApiClient
-}: InitOptions): App {
+export function init(
+  state: JObject,
+  { reload, createHistory, historyProps, ApiClient }: InitOptions
+): App {
   const root = app(state)
-    .extend(withRouter({
-      createHistory: createHistory || createBrowserHistory,
-      routes: routes as RoutingTable,
-      fallbackComputed: true,
-      historyProps
-    }))
+    .extend(
+      withRouter({
+        createHistory: createHistory || createBrowserHistory,
+        routes: routes as any,
+        fallbackComputed: true,
+        historyProps
+      })
+    )
     .extend({
       progress: ProgressStore,
       user: UserStore,
@@ -51,9 +51,7 @@ export function init(state: JObject, {
   const request = baseWretcher(root as any)
   return root.mixin({
     req(url: string, context: RequestContext = {}) {
-      return request
-        .url(url)
-        .options({ context })
+      return request.url(url).options({ context })
     },
     reload(hardReload = true) {
       if (!this.disposed) {

@@ -1,12 +1,13 @@
-import { lazy } from 'app'
+import { lazy, RoutingTable } from 'app'
 
-export default {
-	routes: {
-		'/': lazy(() => import('./CoursesRoute')),
-		'/create': lazy(() => import('./CreateCourseRoute')),
-		'/manage/:id': lazy(() => import('./ManageCourseRoute')),
-		'/:id/:display/:page?': lazy(() => import('./ViewCourseRoute'))
-	}
+const routes: RoutingTable = {
+  '/': lazy(() => import('./CoursesRoute')),
+  '/create': lazy(() => import('./CreateCourseRoute')),
+  '/manage/:id/:display': lazy(() => import('./ManageCourseRoute')),
+  '/:id/:display/:page?': {
+    onEnter: lazy(() => import('./ViewCourseRoute')),
+    order: 1
+  }
 }
 
-// /manage/siguria123/pages/info
+export default { routes }

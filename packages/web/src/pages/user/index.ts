@@ -1,9 +1,9 @@
-import { lazy } from 'app'
+import { lazy, RoutingTable } from 'app'
 
-export default {
-  routes: {
-    '/login': lazy(() => import('./login')),
-    '/logout': lazy(() => import('./logout')),
-    '/register': lazy(() => import('./register'))
-  }
+const routes: RoutingTable = {
+  '/login': lazy(() => import('./login')),
+  '/logout': lazy(() => import('./logout')),
+  '/register': lazy(() => import('./register'))
 }
+
+export default { routes }
