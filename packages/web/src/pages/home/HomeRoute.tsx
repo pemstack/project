@@ -42,7 +42,7 @@ ${accessToken || '<no token>'}
             onClick={() => navigator.clipboard.writeText(accessToken)}
           >
             Copy
-        </Button>}
+          </Button>}
         </CollapseCard>
       </CenterContent>
     </div>
