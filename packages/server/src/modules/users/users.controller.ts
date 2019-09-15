@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards, BadRequestException } from '@nestjs/common'
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiBearerAuth, ApiResponse, ApiUseTags } from '@nestjs/swagger'
 import { MailerService } from '@nest-modules/mailer'

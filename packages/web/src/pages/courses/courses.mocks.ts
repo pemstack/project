@@ -1,16 +1,16 @@
 import { MockApi, delay } from 'app/mock'
+import { Dictionary } from '@pema/utils'
 import {
   GET_COURSE_PAGES,
   GET_COURSE_PAGE,
   GET_COURSE_PERMISSION,
   GET_COURSES,
-  CoursePage,
-  Course,
   CoursePermission,
-  CoursePageDetails,
+  GetCoursePageResult,
   DELETE_COURSE_PAGE,
-  UPDATE_COURSE_PAGE_ACCESS,
-  CREATE_COURSE_PAGE
+  UPDATE_COURSE_PAGE,
+  CREATE_COURSE_PAGE,
+  PageAccess
 } from 'pages/courses/courses.api'
 import slugify from 'slugify'
 
@@ -81,19 +81,30 @@ Phasellus id justo id turpis pulvinar cursus in vel erat.
 Sed consectetur ante odio, a vulputate felis malesuada vel.
 `.trim()
 
-class MockCourse implements Course {
-  id: string
+export function cleanupObject<T extends { [key: string]: any }>(obj: T): Partial<T> {
+  return Object.entries(obj).reduce((acc: Dictionary, [key, val]) => {
+    if (val !== undefined && val !== null) {
+      acc[key] = val
+    }
+
+    return acc
+  }, {}) as Partial<T>
+}
+
+
+class MockCourse {
+  courseId: string
   title: string
   permission: CoursePermission
   owner: boolean
-  pages: Array<CoursePage & CoursePageDetails>
+  pages: GetCoursePageResult[]
 
   constructor(data: Partial<MockCourse>) {
     Object.assign(this, data)
   }
 
-  findPage(id: string) {
-    const page = this.pages.find(p => p.pageId === id)
+  findPage(pageId: string) {
+    const page = this.pages.find(p => p.pageId === pageId)
     if (!page) {
       throw makeError(404)
     }
@@ -101,12 +112,29 @@ class MockCourse implements Course {
     return page
   }
 
-  addPage(page: string | CoursePage & CoursePageDetails) {
+  updatePage(pageId: string, params: {
+    title?: string
+    access?: PageAccess
+    content?: string
+  }) {
+    const cleaned = cleanupObject(params)
+    this.pages = this.pages.map(page => {
+      if (page.pageId === pageId) {
+        return { ...page, ...cleaned, pageId: slugify(cleaned.title || page.title) }
+      } else {
+        return page
+      }
+    })
+
+    return this.findPage(pageId)
+  }
+
+  addPage(page: string | GetCoursePageResult) {
     if (typeof page === 'string') {
       this.pages.push({
         access: 'private',
         pageId: slugify(page),
-        courseId: this.id,
+        courseId: this.courseId,
         title: page,
         content: ''
       })
@@ -127,7 +155,7 @@ interface PageData {
 function makePage(
   courseId: string,
   { title }: PageData
-): CoursePage & CoursePageDetails {
+): GetCoursePageResult {
   const id = slugify(title, { lower: true })
   return {
     title,
@@ -139,8 +167,8 @@ function makePage(
 }
 
 function makeError(status: number) {
-  const error = new Error()
-  ;(error as any).status = status
+  const error = new Error();
+  (error as any).status = status
   return error
 }
 
@@ -150,7 +178,7 @@ class MockCourses {
   constructor() {
     this.courses = [
       new MockCourse({
-        id: 'siguria',
+        courseId: 'siguria',
         title: 'Siguria e te dhenave',
         permission: 'write',
         owner: true,
@@ -168,7 +196,7 @@ class MockCourses {
   }
 
   findCourse(id: string) {
-    const course = this.courses.find(c => c.id === id)
+    const course = this.courses.find(c => c.courseId === id)
     if (!course) {
       throw makeError(404)
     }
@@ -185,9 +213,9 @@ export function mockCourses(api: MockApi) {
     return courses.list()
   })
 
-  api.withQuery(GET_COURSE_PAGES, async ({ id }) => {
+  api.withQuery(GET_COURSE_PAGES, async ({ courseId }) => {
     await delay(500)
-    return courses.findCourse(id).pages
+    return courses.findCourse(courseId).pages
   })
 
   api.withQuery(GET_COURSE_PAGE, async ({ courseId, pageId }) => {
@@ -201,14 +229,15 @@ export function mockCourses(api: MockApi) {
   })
 
   api.withAction(
-    UPDATE_COURSE_PAGE_ACCESS,
-    async ({ courseId, pageId, access }) => {
+    UPDATE_COURSE_PAGE,
+    async ({ courseId, pageId, ...params }) => {
       await delay(500)
-      courses.findCourse(courseId).findPage(pageId).access = access
+      const page = courses.findCourse(courseId).updatePage(pageId, params)
+      return { courseId, pageId: slugify(params.title || page.title) }
     }
   )
 
-  api.withQuery(GET_COURSE_PERMISSION, async ({ id }) => {
+  api.withQuery(GET_COURSE_PERMISSION, async ({ courseId: id }) => {
     await delay(500)
     return {
       permission: courses.findCourse(id).permission

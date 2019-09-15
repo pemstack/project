@@ -24,7 +24,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException()
     }
 
-    const result = await this.usersService.findOne({ id })
+    const result = await this.usersService.findOne({ userId: id })
     if (!result) {
       throw new UnauthorizedException()
     }

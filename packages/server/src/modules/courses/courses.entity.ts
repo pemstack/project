@@ -1,4 +1,4 @@
-import { PrimaryColumn, Column, ManyToOne, OneToMany, Entity } from 'typeorm'
+import { PrimaryColumn, Column, ManyToOne, OneToMany, Entity, JoinColumn } from 'typeorm'
 import { User } from 'modules/users'
 import { IsEnum } from 'class-validator'
 
@@ -10,7 +10,7 @@ export enum CourseAccess {
 @Entity()
 export class Course {
   @PrimaryColumn()
-  id: string
+  courseId: string
 
   @Column()
   title: string
@@ -23,6 +23,7 @@ export class Course {
     nullable: false,
     onDelete: 'CASCADE'
   })
+  @JoinColumn({ name: 'ownerId' })
   owner: User
 
   @IsEnum(CourseAccess)
@@ -52,6 +53,7 @@ export class CoursePermission {
     nullable: false,
     onDelete: 'CASCADE'
   })
+  @JoinColumn({ name: 'userId' })
   user: User
 
   @PrimaryColumn()
@@ -62,6 +64,7 @@ export class CoursePermission {
     nullable: false,
     onDelete: 'CASCADE'
   })
+  @JoinColumn({ name: 'courseId' })
   course: Course
 
   @Column()
@@ -91,6 +94,7 @@ export class CoursePage {
     nullable: false,
     onDelete: 'CASCADE'
   })
+  @JoinColumn({ name: 'courseId' })
   course: Course
 
   @Column()

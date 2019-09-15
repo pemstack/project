@@ -15,7 +15,7 @@ export const Courses: FunctionComponent = () => {
     <CollapseCard className='Courses'>
       <List
         dataSource={courses}
-        rowKey='id'
+        rowKey='courseId'
         pagination={{
           pageSize: 10
         }}
@@ -35,13 +35,13 @@ export const Courses: FunctionComponent = () => {
           const title = slugify(course.title, { lower: true })
           return (
             <List.Item
-              key={course.id}
+              key={course.courseId}
               actions={
                 course.permission === 'write'
                   ? [
                     <Link
                       key='manage'
-                      to={`/courses/manage/${course.id}/${title}`}
+                      to={`/courses/manage/${course.courseId}/${title}`}
                     >
                       <Icon type='setting' />
                     </Link>
@@ -51,7 +51,7 @@ export const Courses: FunctionComponent = () => {
             >
               <span className='Courses__item-content'>
                 <Link
-                  to={`/courses/${course.id}/${title}`}
+                  to={`/courses/${course.courseId}/${title}`}
                 >
                   {course.title}
                 </Link>

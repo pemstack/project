@@ -1,12 +1,10 @@
-import { Body, Controller, Get, Post, Res, UnauthorizedException, UseGuards } from '@nestjs/common'
-import { AuthGuard } from '@nestjs/passport'
-import { ApiBearerAuth, ApiResponse, ApiUseTags } from '@nestjs/swagger'
-import { Recaptcha, RecaptchaResponse, ReqUser, Cookie } from 'common/decorators'
+import { Body, Controller, Post, Res, UnauthorizedException } from '@nestjs/common'
+import { ApiResponse, ApiUseTags } from '@nestjs/swagger'
+import { Recaptcha, RecaptchaResponse, Cookie } from 'common/decorators'
 import { Response } from 'express'
-import { User } from 'modules/users'
 import { RateLimit } from 'nestjs-rate-limiter'
 import { AuthService } from './auth.service'
-import { LoginRequest, TokenRequest, TokenResponse } from './dtos'
+import { LoginRequest, TokenRequest, TokenResponse } from './auth.dto'
 import { AuthTokens } from './interfaces'
 
 const persistAge = 7 * 24 * 60 * 60 * 1000

@@ -21,7 +21,7 @@ export const HomeRoute: View = ({
 
     fetch()
     return () => { cancel = true }
-  }, [])
+  }, [app.user])
 
   const source = `
 ## Access token

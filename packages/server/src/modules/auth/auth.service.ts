@@ -39,7 +39,7 @@ export class AuthService {
       throw new UnauthorizedException()
     }
 
-    const user = await this.usersService.findOne({ id })
+    const user = await this.usersService.findOne({ userId: id })
     if (!user) {
       throw new UnauthorizedException()
     }
@@ -49,12 +49,12 @@ export class AuthService {
 
   async createTokens(user: User, persist = false, sessionId = uniqid()): Promise<AuthTokens> {
     const accessTokenPayload: AccessTokenPayload = {
-      sub: user.id,
+      sub: user.userId,
       email: user.email
     }
 
     const refreshTokenPayload: RefreshTokenPayload = {
-      sub: user.id,
+      sub: user.userId,
       type: 'refresh',
       sid: sessionId,
       persist

@@ -4,15 +4,15 @@ import * as yup from 'yup'
 
 export type CoursePermission = 'none' | 'read' | 'write'
 
-export interface Course {
-  id: string
+export type GetCoursesResult = {
+  courseId: string
   title: string
   permission: CoursePermission
   owner: boolean
 }
 
 // GET /api/courses
-export const GET_COURSES: Query<Course[]> = {
+export const GET_COURSES: Query<GetCoursesResult[]> = {
   resource: 'courses',
   async fetch(_, app) {
     return app
@@ -29,7 +29,7 @@ export interface GetCoursePageParams {
 
 export type PageAccess = 'private' | 'public' | 'unlisted'
 
-export interface CoursePageDetails {
+export interface GetCoursePageResult {
   pageId: string
   courseId: string
   title: string
@@ -38,7 +38,7 @@ export interface CoursePageDetails {
 }
 
 // GET /api/courses/:courseid/pages/:pageid
-export const GET_COURSE_PAGE: Query<CoursePageDetails, GetCoursePageParams> = {
+export const GET_COURSE_PAGE: Query<GetCoursePageResult, GetCoursePageParams> = {
   resource: ({ courseId, pageId }) => `courses/${courseId}/pages/${pageId}`,
   async fetch({ courseId, pageId }, app) {
     return await app
@@ -49,43 +49,43 @@ export const GET_COURSE_PAGE: Query<CoursePageDetails, GetCoursePageParams> = {
 }
 
 export interface GetCoursePagesParams {
-  id: string
+  courseId: string
 }
 
-export interface CoursePage {
+export interface GetCoursePagesResult {
   pageId: string
   title: string
   access: PageAccess
 }
 
 // GET /api/courses/:courseid/pages
-export const GET_COURSE_PAGES: Query<CoursePage[], GetCoursePagesParams> = {
-  resource: ({ id }) => `courses/${id}/pages`,
-  async fetch({ id }, app) {
+export const GET_COURSE_PAGES: Query<GetCoursePagesResult[], GetCoursePagesParams> = {
+  resource: ({ courseId }) => `courses/${courseId}/pages`,
+  async fetch({ courseId }, app) {
     return await app
-      .req(`/api/courses/${id}/pages`)
+      .req(`/api/courses/${courseId}/pages`)
       .get()
       .json()
   }
 }
 
 export interface GetCoursePermissionParams {
-  id: string
+  courseId: string
 }
 
-export interface GetCoursePermissionResponse {
+export interface GetCoursePermissionResult {
   permission: CoursePermission
 }
 
 // GET /api/courses/:courseid/permission
 export const GET_COURSE_PERMISSION: Query<
-  GetCoursePermissionResponse,
+  GetCoursePermissionResult,
   GetCoursePermissionParams
 > = {
-  resource: ({ id }) => `courses/${id}/permission`,
-  async fetch({ id }, app) {
+  resource: ({ courseId }) => `courses/${courseId}/permission`,
+  async fetch({ courseId }, app) {
     return await app
-      .req(`/api/courses/${id}/permission`)
+      .req(`/api/courses/${courseId}/permission`)
       .get()
       .json()
   }
@@ -101,13 +101,13 @@ export const createCourseSchema = yup.object({
 
 export type CreateCourseParams = yup.InferType<typeof createCourseSchema>
 
-export interface CreateCourseResponse {
-  id: string
+export interface CreateCourseResult {
+  courseId: string
   title: string
 }
 
 // POST /api/courses
-export const CREATE_COURSE: Action<CreateCourseParams, CreateCourseResponse> = {
+export const CREATE_COURSE: Action<CreateCourseParams, CreateCourseResult> = {
   schema: createCourseSchema,
   progress: true,
   async perform(params, app) {
@@ -123,9 +123,7 @@ export const deleteCoursePageSchema = yup.object({
   pageId: yup.string().required()
 })
 
-export type DeleteCoursePageParams = yup.InferType<
-  typeof deleteCoursePageSchema
->
+export type DeleteCoursePageParams = yup.InferType<typeof deleteCoursePageSchema>
 
 // DELETE /api/courses/:courseid/pages/:pageid
 export const DELETE_COURSE_PAGE: Action<DeleteCoursePageParams> = {
@@ -145,9 +143,7 @@ const createCoursePageSchema = yup.object({
   title: yup.string().required()
 })
 
-export type CreateCoursePageParams = yup.InferType<
-  typeof createCoursePageSchema
->
+export type CreateCoursePageParams = yup.InferType<typeof createCoursePageSchema>
 
 // POST /api/courses/:courseid/pages
 export const CREATE_COURSE_PAGE: Action<CreateCoursePageParams> = {
@@ -160,25 +156,36 @@ export const CREATE_COURSE_PAGE: Action<CreateCoursePageParams> = {
   invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
 }
 
-export const updateCoursePageAccessSchema = yup.object({
+export const updateCoursePageSchema = yup.object({
   courseId: yup.string().required(),
   pageId: yup.string().required(),
+  title: yup.string().notRequired(),
   access: yup
     .string()
     .oneOf(['private', 'public', 'unlisted'])
-    .required()
+    .required(),
+  content: yup.string().notRequired()
 })
 
 export interface UpdateCoursePageParams {
   courseId: string
   pageId: string
-  access: PageAccess
+  title?: string
+  access?: PageAccess
+  content?: string
 }
 
-export const UPDATE_COURSE_PAGE_ACCESS: Action<UpdateCoursePageParams> = {
-  schema: updateCoursePageAccessSchema as Schema<UpdateCoursePageParams>,
-  async perform({ courseId, pageId, access }, app) {
-    // todo
+export interface UpdateCoursePageResult {
+  courseId: string
+  pageId: string
+}
+
+export const UPDATE_COURSE_PAGE: Action<UpdateCoursePageParams, UpdateCoursePageResult> = {
+  schema: updateCoursePageSchema as Schema<UpdateCoursePageParams>,
+  async perform({ courseId, pageId, ...params }, app) {
+    return await app
+    .req(`/api/courses/${courseId}/pages/${pageId}`, { action: 'updateCoursePage' })
+    .patch(params)
   },
   invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
 }

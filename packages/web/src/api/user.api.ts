@@ -3,7 +3,7 @@ import { TokenResponse } from 'stores/user.store'
 import * as yup from 'yup'
 
 export interface UserInfo {
-  id: string
+  userId: string
   firstName: string
   lastName: string
   email: string

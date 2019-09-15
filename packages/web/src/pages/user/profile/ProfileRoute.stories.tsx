@@ -7,9 +7,9 @@ import { CenterContent } from 'components'
 
 function mocks(api: MockApi) {
   api.withQuery(GET_CURRENT_USER, async () => {
-    await delay(3000)
+    await delay(500)
     return {
-      id: '123',
+      userId: '123',
       firstName: 'Filan',
       lastName: 'Fisteku',
       email: 'filan@example.com'

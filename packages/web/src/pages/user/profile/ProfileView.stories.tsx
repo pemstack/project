@@ -5,7 +5,7 @@ import { ProfileView, ProfileViewItem } from './ProfileView'
 import { CenterContent } from 'components'
 
 const profile: ProfileViewItem = {
-  id: '123',
+  userId: '123',
   firstName: 'Filan',
   lastName: 'Fisteku',
   email: 'filan@example.com'

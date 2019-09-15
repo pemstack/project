@@ -25,9 +25,9 @@ storiesOf('courses/ViewCourse', module)
   .addDecorator(decorator())
   .add('with id', () => (
     <WithInput>
-      {id => {
-        if (id) {
-          return <ViewCourse id={id} />
+      {courseId => {
+        if (courseId) {
+          return <ViewCourse courseId={courseId} />
         } else {
           return <div>Enter id...</div>
         }
@@ -37,14 +37,14 @@ storiesOf('courses/ViewCourse', module)
   .add('with user layout', () => (
     <UserLayout>
       <CenterContent>
-        <ViewCourse id='siguria' />
+        <ViewCourse courseId='siguria' />
       </CenterContent>
     </UserLayout>
   ))
   .add('with anonymous layout', () => (
     <AnonymousLayout>
       <CenterContent>
-        <ViewCourse id='siguria' />
+        <ViewCourse courseId='siguria' />
       </CenterContent>
     </AnonymousLayout>
   ))

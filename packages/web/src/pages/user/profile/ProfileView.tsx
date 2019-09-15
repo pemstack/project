@@ -5,7 +5,7 @@ import { LinkButton } from 'components'
 import './ProfileView.css'
 
 export interface ProfileViewItem {
-  id: string
+  userId: string
   firstName: string
   lastName: string
   email: string

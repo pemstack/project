@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import {
   GET_COURSE_PAGES,
   DELETE_COURSE_PAGE,
-  UPDATE_COURSE_PAGE_ACCESS,
+  UPDATE_COURSE_PAGE,
   CREATE_COURSE_PAGE,
   PageAccess
 } from './courses.api'
@@ -18,31 +18,33 @@ const { TabPane } = Tabs
 const { Option } = Select
 
 interface CreatePageModalProps {
-  id: string
+  courseId: string
   visible: boolean
   setLoading(loading: boolean): void
   onClose(): void
 }
 
 export const CreatePageModal: FunctionComponent<CreatePageModalProps> = ({
-  id,
+  courseId,
   visible,
   onClose,
   setLoading
 }) => {
   const createCoursePage = useAction(CREATE_COURSE_PAGE)
   function close() {
-    typeof onClose === 'function' && onClose()
+    if (typeof onClose === 'function') {
+      onClose()
+    }
   }
 
   return (
     <Formik
-      onSubmit={async (values, actions) => {
+      onSubmit={async ({ title }, actions) => {
         const finish = () => setLoading(false)
         setLoading(true)
         createCoursePage({
-          courseId: id,
-          title: values.title
+          courseId,
+          title
         }).then(finish, finish)
         close()
         actions.resetForm()
@@ -72,15 +74,15 @@ export const CreatePageModal: FunctionComponent<CreatePageModalProps> = ({
 }
 
 interface ManageCourseProps {
-  id: string
+  courseId: string
 }
 
-export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ id }) => {
+export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ courseId }) => {
   const { t } = useTranslation()
-  const { read, reloading } = useQuery(GET_COURSE_PAGES, { id })
+  const { read, reloading } = useQuery(GET_COURSE_PAGES, { courseId })
   const pages = read()
   const deleteCoursePage = useAction(DELETE_COURSE_PAGE)
-  const updateCoursePageAccess = useAction(UPDATE_COURSE_PAGE_ACCESS)
+  const updateCoursePageAccess = useAction(UPDATE_COURSE_PAGE)
   const [showCreatePageModal, setShowCreatePageModal] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -90,12 +92,13 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ id }) => {
         <TabPane tab={t('ManageCourse.tab.pages')} key='pages'>
           <CollapseCard>
             <CreatePageModal
-              id={id}
+              courseId={courseId}
               visible={showCreatePageModal}
               onClose={() => setShowCreatePageModal(false)}
               setLoading={setLoading}
             />
             <List
+              rowKey='pageId'
               locale={{
                 emptyText: (
                   <Empty description={t('ManageCourse.label.noPages')} />
@@ -120,6 +123,7 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ id }) => {
               }
               renderItem={page => (
                 <List.Item
+                  key={page.pageId}
                   actions={[
                     <Select
                       key='visibility'
@@ -130,7 +134,7 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ id }) => {
                         try {
                           setLoading(true)
                           await updateCoursePageAccess({
-                            courseId: id,
+                            courseId,
                             pageId: page.pageId,
                             access
                           })
@@ -150,7 +154,7 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ id }) => {
                       </Option>
                     </Select>,
                     <LinkButton
-                      to={`/courses/${id}/${page.pageId}/edit`}
+                      to={`/courses/${courseId}/${page.pageId}/edit`}
                       type='link'
                       key='edit'
                       icon='edit'
@@ -163,7 +167,7 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ id }) => {
                       onClick={() => {
                         confirm({
                           title: 'Are you sure you want to delete this page?',
-                          content: "Once deleted, you can't bring it back",
+                          content: 'Once deleted, you can\'t bring it back',
                           okText: 'Yes',
                           okType: 'danger',
                           cancelText: 'No',
@@ -171,16 +175,15 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ id }) => {
                             setLoading(true)
                             const finish = () => setLoading(false)
                             deleteCoursePage({
-                              courseId: id,
+                              courseId,
                               pageId: page.pageId
                             }).then(finish, finish)
                           },
-                          onCancel() {}
+                          onCancel() { }
                         })
                       }}
                     />
                   ]}
-                  key={page.pageId}
                 >
                   {page.title}
                 </List.Item>

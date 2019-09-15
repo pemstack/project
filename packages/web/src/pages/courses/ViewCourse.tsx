@@ -9,21 +9,21 @@ import './ViewCourse.css'
 const { TabPane } = Tabs
 
 interface CourseProps {
-  id: string
+  courseId: string
   defaultPage?: string
 }
 
 export const ViewCourse: FunctionComponent<CourseProps> = ({
-  id,
+  courseId,
   defaultPage
 }) => {
-  const data = useQuery(GET_COURSE_PAGES, { id }).read()
+  const data = useQuery(GET_COURSE_PAGES, { courseId }).read()
   const pageTabs = data.map(p => (
     <TabPane tab={p.title} key={p.pageId}>
       <Suspense fallback={<Loading />}>
         <CoursePage
           className='ViewCourse__page'
-          courseId={id}
+          courseId={courseId}
           pageId={p.pageId}
         />
       </Suspense>
