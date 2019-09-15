@@ -37,6 +37,7 @@
     "form-data": "^2.5.0",
     "helmet": "^3.20.0",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "nestjs-config": "^1.4.3",
     "nestjs-rate-limiter": "^1.0.1",
     "node-fetch": "^2.6.0",

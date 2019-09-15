@@ -22,3 +22,15 @@ export class RegisterRequest {
   @Matches(/^[A-Za-z0-9.,!@#$^&*()_-]+$/)
   password: string
 }
+
+export class ResendRequest {
+  @ApiModelProperty()
+  @IsString()
+  resendToken: string
+}
+
+export class ConfirmRequest {
+  @ApiModelProperty()
+  @IsString()
+  registerToken: string
+}

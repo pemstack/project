@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
-import { IsEmail, IsString, Matches, MinLength } from 'class-validator'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn } from 'typeorm'
+import { IsEmail, IsString, Matches, MinLength, IsEnum } from 'class-validator'
 import { CoursePermission, Course } from 'modules/courses'
 
 @Entity()
@@ -39,4 +39,32 @@ export class User {
 
   @OneToMany(type => Course, course => course.owner)
   ownedCourses: Course[]
+}
+
+export enum TokenState {
+  Pending = 'pending',
+  Confirmed = 'confirmed',
+  Canceled = 'canceled'
+}
+
+@Entity()
+export class UserRegistration {
+  @PrimaryGeneratedColumn('uuid')
+  registerToken: string
+
+  @Column()
+  resendToken: string
+
+  @CreateDateColumn()
+  dateCreated: Date
+
+  @Column()
+  email: string
+
+  @Column({ type: 'simple-json' })
+  userData: User
+
+  @Column()
+  @IsEnum(TokenState)
+  state: TokenState = TokenState.Pending
 }
