@@ -126,16 +126,24 @@
 		"reply": "Përgjigju"
 	},
 	"ConfirmEmail":{
-		"title":"Ju faleminderit për regjistrimin.",
-		"subtitle":"Kontrolloni Email-in të verifikoni llogarinë tuaj.",
-		"extra":{
-			"noEmail":"Nuk keni marrë Email-in?",
-			"resend":"Ridërgo Email-in"
+		 "success":{
+			"status":"Sukses",
+			"title":"Email-i u konfirmua",
+			"subtitle":"Ju mund të kyçeni me email-in tuaj.",
+			"login":"Kyçuni"
+		},
+		"error":{
+			"status":"Gabim",
+			"title":"Kërkesë jo valide",
+			"subtitle":"Verifikimi nuk është valid apo ka skaduar.",
+			"back":"Kthehuni"
 		}
 	},
-	"EmailVerified":{
-		"title":"Email-i është verifikuar",
-		"login":"Kyçuni"
+	"RegisterSuccess":{
+	  "title":"Ju faleminderit për regjistrimin",
+	  "subtitle":"Kontrolloni email-in që të verifikoni llogarinë",
+	  "noEmail":"Nuk keni pranuar email-in?",
+	  "resend":"Ridërgoni Email-in"
 	},
 	"Read":{
 		"more":"Lexo më shumë",

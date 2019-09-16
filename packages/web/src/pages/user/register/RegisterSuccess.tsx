@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { useAction } from 'app'
 import { Result, Button, Icon } from 'antd'
 import { RESEND_CONFIRM_EMAIL } from './register.api'
+import { useTranslation } from 'react-i18next'
 
 export interface RegisterSuccessProps {
   resendToken: string
@@ -10,18 +11,19 @@ export interface RegisterSuccessProps {
 export const RegisterSuccess: FunctionComponent<RegisterSuccessProps> = ({
   resendToken
 }) => {
+  const { t } = useTranslation()
   const resendEmail = useAction(RESEND_CONFIRM_EMAIL)
   return (
     <Result
       icon={<Icon type='mail' theme='twoTone' />}
       status='info'
-      title='Thank you for registering'
-      subTitle='Check your email to verify your account'
+      title={t('RegisterSuccess.title')}
+      subTitle={t('RegisterSuccess.subtitle')}
       extra={
         <div>
-          <p>Didn't get an email?</p>
+          <p>{t('RegisterSuccess.noEmail')}</p>
           <Button type='primary' onClick={() => resendEmail({ resendToken })}>
-            Resend Email
+            {t('RegisterSuccess.resend')}
           </Button>
         </div>
       }

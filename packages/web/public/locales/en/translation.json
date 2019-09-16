@@ -126,16 +126,22 @@
 		"reply":"reply"
 	},
 	"ConfirmEmail":{
-		"title":"Thank you for registering",
-		"subtitle":"Check your email to verify your account",
-		"extra":{
-			"noEmail":"Didn't get an email?",
-			"resend":"Resend Email"
+	    "success":{
+			"title":"Email Confirmed",
+			"subtitle":"You may now log in with your email.",
+			"login":"Log In"
+		},
+		"error":{
+			"title":"Invalid Request",
+			"subtitle":"The verification is invalid or has expired.",
+			"back":"Back to home"
 		}
 	},
-	"EmailVerified":{
-	  "title":"Email Verified",
-	  "login":"Log In"
+	"RegisterSuccess":{
+	  "title":"Thank you for registering",
+	  "subtitle":"Check your email to verify your account",
+	  "noEmail":"Didn't get an email?",
+	  "resend":"Resend Email"
 	},
 	"Read":{
 		"more":"Read More",

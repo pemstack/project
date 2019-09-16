@@ -4,6 +4,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react'
 import { Result } from 'antd'
 import { LinkButton } from 'components'
 import { CONFIRM_EMAIL } from './register.api'
+import { useTranslation } from 'react-i18next'
 
 enum State {
   Pending,
@@ -64,14 +65,15 @@ export const ConfirmEmailRoute: View = ({ match }) => {
 }
 
 export const ConfirmEmailSuccess: FunctionComponent = ({ }) => {
+  const { t } = useTranslation()
   return (
     <Result
       status='success'
-      title='Email confirmed'
-      subTitle='You may now log in with your email.'
+      title={t('ConfirmEmail.success.title')}
+      subTitle={t('ConfirmEmail.success.subtitle')}
       extra={
         <LinkButton to='/user/login' type='primary'>
-          Log In
+          {t('ConfirmEmail.success.login')}
         </LinkButton>
       }
     />
@@ -79,14 +81,15 @@ export const ConfirmEmailSuccess: FunctionComponent = ({ }) => {
 }
 
 export const ConfirmEmailError: FunctionComponent = ({ }) => {
+  const { t } = useTranslation()
   return (
     <Result
       status='error'
-      title='Invalid request'
-      subTitle='The verification is invalid or has expired.'
+      title={t('ConfirmEmail.error.title')}
+      subTitle={t('ConfirmEmail.error.subtitle')}
       extra={
         <LinkButton to='/' type='primary'>
-          Back to Home
+          {t('ConfirmEmail.error.back')}
         </LinkButton>
       }
     />
