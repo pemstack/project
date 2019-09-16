@@ -8,11 +8,11 @@ import { CenterContent } from 'components'
 
 storiesOf('courses/ManageCourse', module)
   .addDecorator(decorator())
-  .add('default', () => <ManageCourse courseId='siguria' />)
+  .add('default', () => <ManageCourse courseId='siguria' display='siguria' />)
   .add('with user layout', () => (
     <UserLayout>
       <CenterContent>
-        <ManageCourse courseId='siguria' />
+        <ManageCourse courseId='siguria' display='siguria' />
       </CenterContent>
     </UserLayout>
   ))

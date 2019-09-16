@@ -4,7 +4,7 @@ const routes: RoutingTable = {
   '/': lazy(() => import('./CoursesRoute')),
   '/create': lazy(() => import('./CreateCourseRoute')),
   '/manage/:courseId/:display': lazy(() => import('./ManageCourseRoute')),
-  '/:courseId/:pageId/edit': lazy(() => import('./EditPageRoute')),
+  '/:courseId/:display/:pageId/edit': lazy(() => import('./EditPageRoute')),
   '/:courseId/:display/:pageId?': {
     onEnter: lazy(() => import('./ViewCourseRoute')),
     order: 1

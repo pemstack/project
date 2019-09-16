@@ -75,9 +75,10 @@ export const CreatePageModal: FunctionComponent<CreatePageModalProps> = ({
 
 interface ManageCourseProps {
   courseId: string
+  display: string
 }
 
-export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ courseId }) => {
+export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ courseId, display }) => {
   const { t } = useTranslation()
   const { read, reloading } = useQuery(GET_COURSE_PAGES, { courseId })
   const pages = read()
@@ -154,7 +155,7 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ courseId })
                       </Option>
                     </Select>,
                     <LinkButton
-                      to={`/courses/${courseId}/${page.pageId}/edit`}
+                      to={`/courses/${courseId}/${display}/${page.pageId}/edit`}
                       type='link'
                       key='edit'
                       icon='edit'

@@ -1,23 +1,25 @@
-import { useQuery } from 'app'
+import { useQuery, useAction } from 'app'
 import React, { FunctionComponent } from 'react'
-import { GET_COURSE_PAGE } from './courses.api'
+import { GET_COURSE_PAGE, UPDATE_COURSE_PAGE } from './courses.api'
 import { Formik } from 'forms'
 import { EditPageForm } from './EditPageForm'
 
 interface EditPageProps {
   courseId: string
   pageId: string
+  onSuccess?: () => void
 }
 
 export const EditPage: FunctionComponent<EditPageProps> = ({
   courseId,
-  pageId
+  pageId,
+  onSuccess
 }) => {
   const { title, content, access } = useQuery(GET_COURSE_PAGE, {
     courseId,
     pageId
   }).read()
-  console.log({ title, content, access })
+  const updateCoursePage = useAction(UPDATE_COURSE_PAGE)
   return (
     <Formik
       initialValues={{
@@ -25,7 +27,21 @@ export const EditPage: FunctionComponent<EditPageProps> = ({
         content,
         access
       }}
-      onSubmit={(values, actions) => actions.setSubmitting(false)} // todo
+      onSubmit={async (values, actions) => {
+        try {
+          await updateCoursePage({
+            courseId,
+            pageId,
+            ...values
+          })
+
+          if (typeof onSuccess === 'function') {
+            onSuccess()
+          }
+        } finally {
+          actions.setSubmitting(false)
+        }
+      }}
     >
       <EditPageForm />
     </Formik>
