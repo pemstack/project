@@ -131,10 +131,9 @@ export const DELETE_COURSE_PAGE: Action<DeleteCoursePageParams> = {
   schema: deleteCoursePageSchema,
   async perform({ courseId, pageId }, app) {
     return await app
-      .req(`/api/courses/${courseId}/pages/${pageId}`, {
-        action: 'deleteCoursePage'
-      })
+      .req(`/api/courses/${courseId}/pages/${pageId}`, { action: 'deleteCoursePage' })
       .delete()
+      .res()
   },
   invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
 }
@@ -153,6 +152,7 @@ export const CREATE_COURSE_PAGE: Action<CreateCoursePageParams> = {
     return await app
       .req(`/api/courses/${courseId}/pages`, { action: 'createCoursePage' })
       .post({ title })
+      .res()
   },
   invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
 }
@@ -185,8 +185,9 @@ export const UPDATE_COURSE_PAGE: Action<UpdateCoursePageParams, UpdateCoursePage
   schema: updateCoursePageSchema as Schema<UpdateCoursePageParams>,
   async perform({ courseId, pageId, ...params }, app) {
     return await app
-    .req(`/api/courses/${courseId}/pages/${pageId}`, { action: 'updateCoursePage' })
-    .patch(params)
+      .req(`/api/courses/${courseId}/pages/${pageId}`, { action: 'updateCoursePage' })
+      .patch(params)
+      .res()
   },
   invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
 }

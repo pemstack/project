@@ -226,6 +226,10 @@ export class CoursesService {
       throw new UnauthorizedException()
     }
 
+    if (!courseId || !pageId) {
+      throw new BadRequestException()
+    }
+
     const coursePermission = await this.tryGetPermission({ courseId, userId })
     if (!coursePermission) {
       throw new NotFoundException()
@@ -235,9 +239,7 @@ export class CoursesService {
       throw new ForbiddenException()
     }
 
-    const result = await this.entities.delete(CoursePage, {
-      where: { courseId, pageId }
-    })
+    const result = await this.entities.delete(CoursePage, { courseId, pageId })
 
     // if (result.affected === 0) {
     //   throw new NotFoundException()
