@@ -34,3 +34,9 @@ export class ConfirmRequest {
   @IsString()
   registerToken: string
 }
+
+export class ResetRequest {
+  @ApiModelProperty()
+  @IsString()
+  email: string
+}

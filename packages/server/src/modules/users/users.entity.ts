@@ -68,3 +68,25 @@ export class UserRegistration {
   @IsEnum(TokenState)
   state: TokenState = TokenState.Pending
 }
+
+@Entity()
+export class PasswordReset {
+  @PrimaryGeneratedColumn('uuid')
+  resetToken: string
+
+  @Column()
+  resendToken: string
+
+  @CreateDateColumn()
+  dateCreated: Date
+
+  @Column()
+  email: string
+
+  @Column()
+  @IsEnum(TokenState)
+  state: TokenState = TokenState.Pending
+
+  @Column({ nullable: true })
+  lastSent?: Date
+}

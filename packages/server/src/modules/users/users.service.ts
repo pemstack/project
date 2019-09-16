@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 import { ensureValid, reduceObject } from 'common/utils'
 import { DeepPartial, Repository } from 'typeorm'
 import uniqid from 'uniqid'
-import { User, UserRegistration, TokenState } from './users.entity'
+import { User, UserRegistration, TokenState, PasswordReset } from './users.entity'
 import moment from 'moment'
 import { plainToClass } from 'class-transformer'
 
@@ -14,15 +14,18 @@ const RESEND_EXPIRY = 3600
 export class UsersService {
   constructor(
     @InjectRepository(User) readonly users: Repository<User>,
-    @InjectRepository(UserRegistration) readonly tokens: Repository<UserRegistration>
-  ) { }
+    @InjectRepository(UserRegistration)
+    readonly tokens: Repository<UserRegistration>,
+    @InjectRepository(PasswordReset)
+    readonly passwordTokens: Repository<PasswordReset>
+  ) {}
 
   public async findAll() {
     return await this.users.find()
   }
 
   public async findOne(params: DeepPartial<User>) {
-    return await this.users.findOne(params) || null
+    return (await this.users.findOne(params)) || null
   }
 
   public async create(user: User) {
@@ -47,17 +50,19 @@ export class UsersService {
     registerToken,
     resendToken
   }: {
-    registerToken?: string,
+    registerToken?: string
     resendToken?: string
   }) {
     if (!registerToken && !resendToken) {
       throw new BadRequestException()
     }
 
-    const registration = await this.tokens.findOne(reduceObject({
-      registerToken,
-      resendToken
-    }))
+    const registration = await this.tokens.findOne(
+      reduceObject({
+        registerToken,
+        resendToken
+      })
+    )
 
     if (!registration) {
       throw new NotFoundException()
@@ -76,14 +81,52 @@ export class UsersService {
     return registration
   }
 
+  public async getResetToken({
+    resetToken,
+    resendToken
+  }: {
+    resetToken?: string
+    resendToken?: string
+  }) {
+    if (!resetToken && !resendToken) {
+      throw new BadRequestException()
+    }
+
+    const reset = await this.passwordTokens.findOne(
+      reduceObject({
+        resetToken,
+        resendToken
+      })
+    )
+
+    if (!reset) {
+      throw new NotFoundException()
+    }
+
+    if (reset.state !== TokenState.Pending) {
+      throw new BadRequestException()
+    }
+
+    const expires = moment(reset.dateCreated).add(RESEND_EXPIRY, 'seconds')
+    const now = moment()
+    if (expires.isBefore(now)) {
+      throw new BadRequestException()
+    }
+
+    return reset
+  }
+
   public async completeRegistration({ registerToken }: { registerToken: string }) {
     const registration = await this.getRegistration({ registerToken })
     const user = plainToClass(User, registration.userData)
-    await ensureValid(user)
+    console.log('email: ' + user.email)
+    //await ensureValid(user)
+    console.log('passed validation')
     const exists = !!(await this.users.findOne({
       email: user.email
     }))
 
+    console.log('exists: ' + exists)
     if (exists) {
       throw new BadRequestException('Email already exists.')
     }
@@ -127,6 +170,38 @@ export class UsersService {
     }
 
     return { registerToken, resendToken }
+  }
+
+  public async initiatePasswordReset(email: string) {
+    const exists = !!(await this.users.findOne({
+      email
+    }))
+
+    if (!exists) {
+      throw new NotFoundException()
+    }
+
+    const reset = new PasswordReset()
+    const resendToken = uniqid()
+    reset.resendToken = resendToken
+    reset.email = email
+    reset.state = TokenState.Pending
+
+    let resetToken: string | null = null
+    try {
+      await this.passwordTokens.update({ email }, { state: TokenState.Canceled })
+    } catch {
+      // ignored
+    }
+
+    try {
+      const result = await this.passwordTokens.insert(reset)
+      resetToken = result.identifiers[0].resetToken
+    } catch (error) {
+      throw new BadRequestException(error)
+    }
+
+    return { resetToken, resendToken }
   }
 
   public async match(email: string, password: string) {
