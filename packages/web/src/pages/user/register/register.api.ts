@@ -23,17 +23,53 @@ export const registerSchema = yup.object({
 
 export type RegisterParams = yup.InferType<typeof registerSchema>
 
-export interface RegisterResponse {
-  // todo
+export interface RegisterResult {
+  resendToken: string
 }
 
-export const REGISTER: Action<RegisterParams, RegisterResponse> = {
+export const REGISTER: Action<RegisterParams, RegisterResult> = {
   progress: true,
   schema: registerSchema,
-  perform(params: RegisterParams, app) {
+  perform(params, app) {
     return app
       .req('/api/users', { action: 'register' })
       .post(params, { credentials: 'same-origin' })
+      .json()
+  }
+}
+
+export const resendConfirmEmailSchema = yup.object({
+  resendToken: yup.string().required()
+})
+
+export type ResendConfirmEmailParams = yup.InferType<
+  typeof resendConfirmEmailSchema
+>
+
+export const RESEND_CONFIRM_EMAIL: Action<ResendConfirmEmailParams> = {
+  schema: resendConfirmEmailSchema,
+  progress: true,
+  perform(params, app) {
+    return app
+      .req('/api/users/register/resend')
+      .post(params, { credentials: 'same-origin' })
+      .json()
+  }
+}
+
+export const confirmEmailSchema = yup.object({
+  confirmToken: yup.string().required()
+})
+
+export type ConfirmEmailParams = yup.InferType<typeof confirmEmailSchema>
+
+export const CONFIRM_EMAIL: Action<ConfirmEmailParams> = {
+  schema: confirmEmailSchema,
+  progress: true,
+  perform(params, app) {
+    return app
+      .req(`/api/users/confirm`)
+      .post(params)
       .json()
   }
 }
