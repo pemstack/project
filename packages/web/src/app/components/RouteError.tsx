@@ -36,7 +36,7 @@ function deriveError(
   } else if (code == 500) {
     return {
       status: '500',
-      title: t('error.general')
+      title: t('error.500')
     }
   } else {
     return {
