@@ -41,6 +41,9 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
   }
 
   const selectedKeys = match.isExact ? [match.path] : []
+  if (match.path.indexOf('/courses') === 0 && selectedKeys[0] !== '/courses') {
+    selectedKeys.push('/courses')
+  }
 
   return (
     <Layout className='UserLayout'>

@@ -115,7 +115,8 @@ export const CREATE_COURSE: Action<CreateCourseParams, CreateCourseResult> = {
       .req('/api/courses', { action: 'create' })
       .post(params)
       .json()
-  }
+  },
+  invalidates: ['courses']
 }
 
 export const deleteCoursePageSchema = yup.object({
