@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, redirect, allow, useAction } from 'app'
+import { View, redirect, allow, useAction, view } from 'app'
 import { Formik } from 'forms'
 import { RegisterForm } from './RegisterForm'
 import { REGISTER, registerSchema, RegisterParams } from './register.api'
@@ -12,7 +12,7 @@ const initial: RegisterParams = {
   password: ''
 }
 
-export const RegisterRoute: View = () => {
+export const RegisterRoute: View = ({ router }) => {
   const register = useAction(REGISTER)
   return (
     <CenterContent width='small'>
@@ -20,8 +20,8 @@ export const RegisterRoute: View = () => {
         validationSchema={registerSchema}
         onSubmit={async (values, actions) => {
           try {
-            await register(values)
-            // todo
+            const { resendToken } = await register(values)
+            router.replace(`/user/register/success/${resendToken}`)
           } finally {
             actions.setSubmitting(false)
           }
@@ -34,12 +34,12 @@ export const RegisterRoute: View = () => {
   )
 }
 
-RegisterRoute.onEnter = ({
-  app: { user }
-}) => {
+RegisterRoute.onEnter = ({ app: { user } }) => {
   if (user.authenticated) {
     return redirect('/')
   }
 
   return allow()
 }
+
+export default view(RegisterRoute)
