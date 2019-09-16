@@ -1,5 +1,6 @@
 export interface Subjects {
   confirmEmail: string
+  resetPassword: string
 }
 
 interface LocalizedSubjects {
@@ -8,9 +9,11 @@ interface LocalizedSubjects {
 
 export const subjects: LocalizedSubjects = {
   en: {
-    confirmEmail: 'Confirm your email'
+    confirmEmail: 'Confirm your email',
+    resetPassword: 'Reset your password'
   },
   sq: {
-    confirmEmail: 'Konfirmoni email adresën'
+    confirmEmail: 'Konfirmoni email adresën',
+    resetPassword: 'Rivendosni fjalëkalimin'
   }
 }
