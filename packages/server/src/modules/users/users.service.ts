@@ -18,7 +18,7 @@ export class UsersService {
     readonly tokens: Repository<UserRegistration>,
     @InjectRepository(PasswordReset)
     readonly passwordTokens: Repository<PasswordReset>
-  ) {}
+  ) { }
 
   public async findAll() {
     return await this.users.find()
@@ -46,12 +46,14 @@ export class UsersService {
     }
   }
 
-  public async getRegistration({
+  public async getRegisterConfirmToken({
     registerToken,
-    resendToken
+    resendToken,
+    allowConfirmed = true
   }: {
     registerToken?: string
     resendToken?: string
+    allowConfirmed?: boolean
   }) {
     if (!registerToken && !resendToken) {
       throw new BadRequestException()
@@ -68,20 +70,24 @@ export class UsersService {
       throw new NotFoundException()
     }
 
-    if (registration.state !== TokenState.Pending) {
-      throw new BadRequestException()
-    }
-
     const expires = moment(registration.dateCreated).add(RESEND_EXPIRY, 'seconds')
     const now = moment()
     if (expires.isBefore(now)) {
       throw new BadRequestException()
     }
 
+    if (allowConfirmed && registration.state === TokenState.Confirmed) {
+      return registration
+    }
+
+    if (registration.state !== TokenState.Pending) {
+      throw new BadRequestException()
+    }
+
     return registration
   }
 
-  public async getResetToken({
+  public async getPasswordResetToken({
     resetToken,
     resendToken
   }: {
@@ -103,13 +109,13 @@ export class UsersService {
       throw new NotFoundException()
     }
 
-    if (reset.state !== TokenState.Pending) {
-      throw new BadRequestException()
-    }
-
     const expires = moment(reset.dateCreated).add(RESEND_EXPIRY, 'seconds')
     const now = moment()
     if (expires.isBefore(now)) {
+      throw new BadRequestException()
+    }
+
+    if (reset.state !== TokenState.Pending) {
       throw new BadRequestException()
     }
 
@@ -117,16 +123,16 @@ export class UsersService {
   }
 
   public async completeRegistration({ registerToken }: { registerToken: string }) {
-    const registration = await this.getRegistration({ registerToken })
+    const registration = await this.getRegisterConfirmToken({ registerToken, allowConfirmed: true })
+    if (registration.state === TokenState.Confirmed) {
+      return registration.email
+    }
+
     const user = plainToClass(User, registration.userData)
-    console.log('email: ' + user.email)
-    //await ensureValid(user)
-    console.log('passed validation')
     const exists = !!(await this.users.findOne({
       email: user.email
     }))
 
-    console.log('exists: ' + exists)
     if (exists) {
       throw new BadRequestException('Email already exists.')
     }
@@ -134,6 +140,7 @@ export class UsersService {
     await this.users.insert(user)
     await this.tokens.update({ email: user.email.toLowerCase() }, { state: TokenState.Canceled })
     await this.tokens.update({ registerToken }, { state: TokenState.Confirmed })
+    return user.email
   }
 
   public async initiateRegistration(user: User) {

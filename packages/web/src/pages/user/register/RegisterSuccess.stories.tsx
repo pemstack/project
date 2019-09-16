@@ -3,6 +3,6 @@ import { storiesOf } from '@storybook/react'
 import { decorator } from 'app/mock'
 import { RegisterSuccess } from './RegisterSuccess'
 
-storiesOf('data-display/RegisterSuccess', module)
+storiesOf('user/register/RegisterSuccess', module)
   .addDecorator(decorator())
-  .add('default', () => <RegisterSuccess />)
+  .add('default', () => <RegisterSuccess resendToken='123' />)

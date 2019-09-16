@@ -31,16 +31,12 @@
 // export { default as CaretRightFill } from '@ant-design/icons/lib/fill/CaretRightFill'
 // export { default as CarryOutFill } from '@ant-design/icons/lib/fill/CarryOutFill'
 // export { default as CaretUpFill } from '@ant-design/icons/lib/fill/CaretUpFill'
-export {
-  default as CheckCircleFill
-} from '@ant-design/icons/lib/fill/CheckCircleFill'
+export { default as CheckCircleFill } from '@ant-design/icons/lib/fill/CheckCircleFill'
 // export { default as CheckSquareFill } from '@ant-design/icons/lib/fill/CheckSquareFill'
 // export { default as ChromeFill } from '@ant-design/icons/lib/fill/ChromeFill'
 // export { default as CiCircleFill } from '@ant-design/icons/lib/fill/CiCircleFill'
 // export { default as ClockCircleFill } from '@ant-design/icons/lib/fill/ClockCircleFill'
-export {
-  default as CloseCircleFill
-} from '@ant-design/icons/lib/fill/CloseCircleFill'
+export { default as CloseCircleFill } from '@ant-design/icons/lib/fill/CloseCircleFill'
 // export { default as CloudFill } from '@ant-design/icons/lib/fill/CloudFill'
 // export { default as CloseSquareFill } from '@ant-design/icons/lib/fill/CloseSquareFill'
 // export { default as CodeSandboxSquareFill } from '@ant-design/icons/lib/fill/CodeSandboxSquareFill'
@@ -74,9 +70,7 @@ export {
 // export { default as EditFill } from '@ant-design/icons/lib/fill/EditFill'
 // export { default as EnvironmentFill } from '@ant-design/icons/lib/fill/EnvironmentFill'
 // export { default as ExperimentFill } from '@ant-design/icons/lib/fill/ExperimentFill'
-export {
-  default as ExclamationCircleFill
-} from '@ant-design/icons/lib/fill/ExclamationCircleFill'
+export { default as ExclamationCircleFill } from '@ant-design/icons/lib/fill/ExclamationCircleFill'
 // export { default as EuroCircleFill } from '@ant-design/icons/lib/fill/EuroCircleFill'
 // export { default as EyeInvisibleFill } from '@ant-design/icons/lib/fill/EyeInvisibleFill'
 // export { default as EyeFill } from '@ant-design/icons/lib/fill/EyeFill'
@@ -233,9 +227,7 @@ export {
 // export { default as BoxPlotOutline } from '@ant-design/icons/lib/outline/BoxPlotOutline'
 // export { default as BehanceSquareOutline } from '@ant-design/icons/lib/outline/BehanceSquareOutline'
 // export { default as BellOutline } from '@ant-design/icons/lib/outline/BellOutline'
-export {
-  default as BookOutline
-} from '@ant-design/icons/lib/outline/BookOutline'
+export { default as BookOutline } from '@ant-design/icons/lib/outline/BookOutline'
 // export { default as AppstoreOutline } from '@ant-design/icons/lib/outline/AppstoreOutline'
 // export { default as BulbOutline } from '@ant-design/icons/lib/outline/BulbOutline'
 // export { default as BugOutline } from '@ant-design/icons/lib/outline/BugOutline'
@@ -251,41 +243,29 @@ export {
 // export { default as CarryOutOutline } from '@ant-design/icons/lib/outline/CarryOutOutline'
 // export { default as CheckSquareOutline } from '@ant-design/icons/lib/outline/CheckSquareOutline'
 // export { default as ChromeOutline } from '@ant-design/icons/lib/outline/ChromeOutline'
-export {
-  default as CheckCircleOutline
-} from '@ant-design/icons/lib/outline/CheckCircleOutline'
+export { default as CheckCircleOutline } from '@ant-design/icons/lib/outline/CheckCircleOutline'
 // export { default as CloseSquareOutline } from '@ant-design/icons/lib/outline/CloseSquareOutline'
-export {
-  default as ClockCircleOutline
-} from '@ant-design/icons/lib/outline/ClockCircleOutline'
-export {
-  default as CloseCircleOutline
-} from '@ant-design/icons/lib/outline/CloseCircleOutline'
+export { default as ClockCircleOutline } from '@ant-design/icons/lib/outline/ClockCircleOutline'
+export { default as CloseCircleOutline } from '@ant-design/icons/lib/outline/CloseCircleOutline'
 // export { default as CloudOutline } from '@ant-design/icons/lib/outline/CloudOutline'
 // export { default as CodepenCircleOutline } from '@ant-design/icons/lib/outline/CodepenCircleOutline'
 // export { default as CodeOutline } from '@ant-design/icons/lib/outline/CodeOutline'
 // export { default as CompassOutline } from '@ant-design/icons/lib/outline/CompassOutline'
 // export { default as ContainerOutline } from '@ant-design/icons/lib/outline/ContainerOutline'
 // export { default as ContactsOutline } from '@ant-design/icons/lib/outline/ContactsOutline'
-export {
-  default as CopyOutline
-} from '@ant-design/icons/lib/outline/CopyOutline'
+export { default as CopyOutline } from '@ant-design/icons/lib/outline/CopyOutline'
 // export { default as CreditCardOutline } from '@ant-design/icons/lib/outline/CreditCardOutline'
 // export { default as CrownOutline } from '@ant-design/icons/lib/outline/CrownOutline'
 // export { default as CustomerServiceOutline } from '@ant-design/icons/lib/outline/CustomerServiceOutline'
 // export { default as ControlOutline } from '@ant-design/icons/lib/outline/ControlOutline'
 // export { default as DatabaseOutline } from '@ant-design/icons/lib/outline/DatabaseOutline'
-export {
-  default as DeleteOutline
-} from '@ant-design/icons/lib/outline/DeleteOutline'
+export { default as DeleteOutline } from '@ant-design/icons/lib/outline/DeleteOutline'
 // export { default as DashboardOutline } from '@ant-design/icons/lib/outline/DashboardOutline'
 // export { default as DiffOutline } from '@ant-design/icons/lib/outline/DiffOutline'
 // export { default as DislikeOutline } from '@ant-design/icons/lib/outline/DislikeOutline'
 // export { default as DownCircleOutline } from '@ant-design/icons/lib/outline/DownCircleOutline'
 // export { default as DribbbleSquareOutline } from '@ant-design/icons/lib/outline/DribbbleSquareOutline'
-export {
-  default as EditOutline
-} from '@ant-design/icons/lib/outline/EditOutline'
+export { default as EditOutline } from '@ant-design/icons/lib/outline/EditOutline'
 // export { default as DownSquareOutline } from '@ant-design/icons/lib/outline/DownSquareOutline'
 // export { default as EnvironmentOutline } from '@ant-design/icons/lib/outline/EnvironmentOutline'
 // export { default as EyeInvisibleOutline } from '@ant-design/icons/lib/outline/EyeInvisibleOutline'
@@ -334,9 +314,7 @@ export {
 // export { default as InterationOutline } from '@ant-design/icons/lib/outline/InterationOutline'
 // export { default as LeftSquareOutline } from '@ant-design/icons/lib/outline/LeftSquareOutline'
 // export { default as LikeOutline } from '@ant-design/icons/lib/outline/LikeOutline'
-export {
-  default as LockOutline
-} from '@ant-design/icons/lib/outline/LockOutline'
+export { default as LockOutline } from '@ant-design/icons/lib/outline/LockOutline'
 // export { default as LinkedinOutline } from '@ant-design/icons/lib/outline/LinkedinOutline'
 // export { default as LeftCircleOutline } from '@ant-design/icons/lib/outline/LeftCircleOutline'
 // export { default as MailOutline } from '@ant-design/icons/lib/outline/MailOutline'
@@ -374,9 +352,7 @@ export {
 // export { default as RocketOutline } from '@ant-design/icons/lib/outline/RocketOutline'
 // export { default as ScheduleOutline } from '@ant-design/icons/lib/outline/ScheduleOutline'
 // export { default as SecurityScanOutline } from '@ant-design/icons/lib/outline/SecurityScanOutline'
-export {
-  default as SettingOutline
-} from '@ant-design/icons/lib/outline/SettingOutline'
+export { default as SettingOutline } from '@ant-design/icons/lib/outline/SettingOutline'
 // export { default as ShopOutline } from '@ant-design/icons/lib/outline/ShopOutline'
 // export { default as SkinOutline } from '@ant-design/icons/lib/outline/SkinOutline'
 // export { default as SkypeOutline } from '@ant-design/icons/lib/outline/SkypeOutline'
@@ -386,9 +362,7 @@ export {
 // export { default as ShoppingOutline } from '@ant-design/icons/lib/outline/ShoppingOutline'
 // export { default as SlidersOutline } from '@ant-design/icons/lib/outline/SlidersOutline'
 // export { default as SoundOutline } from '@ant-design/icons/lib/outline/SoundOutline'
-export {
-  default as ReadOutline
-} from '@ant-design/icons/lib/outline/ReadOutline'
+export { default as ReadOutline } from '@ant-design/icons/lib/outline/ReadOutline'
 // export { default as StepForwardOutline } from '@ant-design/icons/lib/outline/StepForwardOutline'
 // export { default as StarOutline } from '@ant-design/icons/lib/outline/StarOutline'
 // export { default as SwitcherOutline } from '@ant-design/icons/lib/outline/SwitcherOutline'
@@ -406,9 +380,7 @@ export {
 // export { default as UpSquareOutline } from '@ant-design/icons/lib/outline/UpSquareOutline'
 // export { default as VideoCameraOutline } from '@ant-design/icons/lib/outline/VideoCameraOutline'
 // export { default as WalletOutline } from '@ant-design/icons/lib/outline/WalletOutline'
-export {
-  default as WarningOutline
-} from '@ant-design/icons/lib/outline/WarningOutline'
+export { default as WarningOutline } from '@ant-design/icons/lib/outline/WarningOutline'
 // export { default as UsbOutline } from '@ant-design/icons/lib/outline/UsbOutline'
 // export { default as WeiboCircleOutline } from '@ant-design/icons/lib/outline/WeiboCircleOutline'
 // export { default as WechatOutline } from '@ant-design/icons/lib/outline/WechatOutline'
@@ -434,9 +406,7 @@ export {
 // export { default as ArrowUpOutline } from '@ant-design/icons/lib/outline/ArrowUpOutline'
 // export { default as ArrowsAltOutline } from '@ant-design/icons/lib/outline/ArrowsAltOutline'
 // export { default as AuditOutline } from '@ant-design/icons/lib/outline/AuditOutline'
-export {
-  default as BarsOutline
-} from '@ant-design/icons/lib/outline/BarsOutline'
+export { default as BarsOutline } from '@ant-design/icons/lib/outline/BarsOutline'
 // export { default as BehanceOutline } from '@ant-design/icons/lib/outline/BehanceOutline'
 // export { default as BarcodeOutline } from '@ant-design/icons/lib/outline/BarcodeOutline'
 // export { default as BoldOutline } from '@ant-design/icons/lib/outline/BoldOutline'
@@ -475,9 +445,7 @@ export {
 // export { default as DollarOutline } from '@ant-design/icons/lib/outline/DollarOutline'
 // export { default as DotChartOutline } from '@ant-design/icons/lib/outline/DotChartOutline'
 // export { default as DoubleRightOutline } from '@ant-design/icons/lib/outline/DoubleRightOutline'
-export {
-  default as DownOutline
-} from '@ant-design/icons/lib/outline/DownOutline'
+export { default as DownOutline } from '@ant-design/icons/lib/outline/DownOutline'
 // export { default as DownloadOutline } from '@ant-design/icons/lib/outline/DownloadOutline'
 // export { default as DragOutline } from '@ant-design/icons/lib/outline/DragOutline'
 // export { default as DribbbleOutline } from '@ant-design/icons/lib/outline/DribbbleOutline'
@@ -516,9 +484,7 @@ export {
 // export { default as ItalicOutline } from '@ant-design/icons/lib/outline/ItalicOutline'
 // export { default as LaptopOutline } from '@ant-design/icons/lib/outline/LaptopOutline'
 // export { default as KeyOutline } from '@ant-design/icons/lib/outline/KeyOutline'
-export {
-  default as LeftOutline
-} from '@ant-design/icons/lib/outline/LeftOutline'
+export { default as LeftOutline } from '@ant-design/icons/lib/outline/LeftOutline'
 // export { default as LineChartOutline } from '@ant-design/icons/lib/outline/LineChartOutline'
 // export { default as LineOutline } from '@ant-design/icons/lib/outline/LineOutline'
 // export { default as LineHeightOutline } from '@ant-design/icons/lib/outline/LineHeightOutline'
@@ -529,17 +495,11 @@ export {
 // export { default as ManOutline } from '@ant-design/icons/lib/outline/ManOutline'
 // export { default as MediumWorkmarkOutline } from '@ant-design/icons/lib/outline/MediumWorkmarkOutline'
 // export { default as MediumOutline } from '@ant-design/icons/lib/outline/MediumOutline'
-export {
-  default as MenuFoldOutline
-} from '@ant-design/icons/lib/outline/MenuFoldOutline'
-export {
-  default as LogoutOutline
-} from '@ant-design/icons/lib/outline/LogoutOutline'
+export { default as MenuFoldOutline } from '@ant-design/icons/lib/outline/MenuFoldOutline'
+export { default as LogoutOutline } from '@ant-design/icons/lib/outline/LogoutOutline'
 // export { default as MenuOutline } from '@ant-design/icons/lib/outline/MenuOutline'
 // export { default as MinusOutline } from '@ant-design/icons/lib/outline/MinusOutline'
-export {
-  default as MenuUnfoldOutline
-} from '@ant-design/icons/lib/outline/MenuUnfoldOutline'
+export { default as MenuUnfoldOutline } from '@ant-design/icons/lib/outline/MenuUnfoldOutline'
 // export { default as MonitorOutline } from '@ant-design/icons/lib/outline/MonitorOutline'
 // export { default as MoreOutline } from '@ant-design/icons/lib/outline/MoreOutline'
 // export { default as OrderedListOutline } from '@ant-design/icons/lib/outline/OrderedListOutline'
@@ -550,9 +510,7 @@ export {
 // export { default as PercentageOutline } from '@ant-design/icons/lib/outline/PercentageOutline'
 // export { default as PicLeftOutline } from '@ant-design/icons/lib/outline/PicLeftOutline'
 // export { default as PicRightOutline } from '@ant-design/icons/lib/outline/PicRightOutline'
-export {
-  default as PlusOutline
-} from '@ant-design/icons/lib/outline/PlusOutline'
+export { default as PlusOutline } from '@ant-design/icons/lib/outline/PlusOutline'
 // export { default as PoweroffOutline } from '@ant-design/icons/lib/outline/PoweroffOutline'
 // export { default as PoundOutline } from '@ant-design/icons/lib/outline/PoundOutline'
 // export { default as QqOutline } from '@ant-design/icons/lib/outline/QqOutline'
@@ -568,9 +526,7 @@ export {
 // export { default as RedditOutline } from '@ant-design/icons/lib/outline/RedditOutline'
 // export { default as RedoOutline } from '@ant-design/icons/lib/outline/RedoOutline'
 // export { default as RetweetOutline } from '@ant-design/icons/lib/outline/RetweetOutline'
-export {
-  default as RightOutline
-} from '@ant-design/icons/lib/outline/RightOutline'
+export { default as RightOutline } from '@ant-design/icons/lib/outline/RightOutline'
 // export { default as ReloadOutline } from '@ant-design/icons/lib/outline/ReloadOutline'
 // export { default as SafetyOutline } from '@ant-design/icons/lib/outline/SafetyOutline'
 // export { default as RiseOutline } from '@ant-design/icons/lib/outline/RiseOutline'
@@ -610,9 +566,7 @@ export {
 // export { default as UserAddOutline } from '@ant-design/icons/lib/outline/UserAddOutline'
 // export { default as UserDeleteOutline } from '@ant-design/icons/lib/outline/UserDeleteOutline'
 // export { default as TransactionOutline } from '@ant-design/icons/lib/outline/TransactionOutline'
-export {
-  default as UserOutline
-} from '@ant-design/icons/lib/outline/UserOutline'
+export { default as UserOutline } from '@ant-design/icons/lib/outline/UserOutline'
 // export { default as UsergroupDeleteOutline } from '@ant-design/icons/lib/outline/UsergroupDeleteOutline'
 // export { default as VerticalAlignBottomOutline } from '@ant-design/icons/lib/outline/VerticalAlignBottomOutline'
 // export { default as UsergroupAddOutline } from '@ant-design/icons/lib/outline/UsergroupAddOutline'
@@ -712,7 +666,7 @@ export {
 // export { default as MedicineBoxTwoTone } from '@ant-design/icons/lib/twotone/MedicineBoxTwoTone'
 // export { default as MessageTwoTone } from '@ant-design/icons/lib/twotone/MessageTwoTone'
 // export { default as MehTwoTone } from '@ant-design/icons/lib/twotone/MehTwoTone'
-// export { default as MailTwoTone } from '@ant-design/icons/lib/twotone/MailTwoTone'
+export { default as MailTwoTone } from '@ant-design/icons/lib/twotone/MailTwoTone'
 // export { default as MinusSquareTwoTone } from '@ant-design/icons/lib/twotone/MinusSquareTwoTone'
 // export { default as MinusCircleTwoTone } from '@ant-design/icons/lib/twotone/MinusCircleTwoTone'
 // export { default as MobileTwoTone } from '@ant-design/icons/lib/twotone/MobileTwoTone'

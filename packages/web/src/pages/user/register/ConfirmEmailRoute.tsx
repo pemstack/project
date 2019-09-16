@@ -1,7 +1,7 @@
 import { View, viewInvariant, useAction, view } from 'app'
 import { Loading } from 'app/components'
 import React, { FunctionComponent, useState, useEffect } from 'react'
-import { Result, Button } from 'antd'
+import { Result } from 'antd'
 import { LinkButton } from 'components'
 import { CONFIRM_EMAIL } from './register.api'
 
@@ -12,14 +12,14 @@ enum State {
 }
 
 export const ConfirmEmailRoute: View = ({ match }) => {
-  const { confirmToken } = match.params
-  viewInvariant(confirmToken, 404)
+  const { registerToken } = match.params
+  viewInvariant(registerToken, 404)
 
   const confirm = useAction(CONFIRM_EMAIL)
   const [confirmState, setConfirmState] = useState(State.Pending)
   useEffect(() => {
     setConfirmState(State.Pending)
-  }, [confirmToken])
+  }, [registerToken])
 
   useEffect(() => {
     if (confirmState !== State.Pending) {
@@ -29,34 +29,41 @@ export const ConfirmEmailRoute: View = ({ match }) => {
     let cancel = false
     async function performConfirm() {
       try {
-        await confirm({ confirmToken })
+        await confirm({ registerToken })
         if (!cancel) {
           setConfirmState(State.Success)
         }
-      } catch {
+      } catch (e) {
         if (!cancel) {
           setConfirmState(State.Error)
         }
       }
     }
 
+    performConfirm()
     return () => {
       cancel = true
     }
-  }, [confirmState, confirmToken])
+  }, [confirmState, registerToken])
 
   switch (confirmState) {
     case State.Success:
-      return <ConfirmEmailSuccess />
+      return (
+        <ConfirmEmailSuccess />
+      )
     case State.Error:
-      return <ConfirmEmailError />
+      return (
+        <ConfirmEmailError />
+      )
     case State.Pending:
     default:
-      return <Loading />
+      return (
+        <Loading />
+      )
   }
 }
 
-export const ConfirmEmailSuccess: FunctionComponent = ({}) => {
+export const ConfirmEmailSuccess: FunctionComponent = ({ }) => {
   return (
     <Result
       status='success'
@@ -71,12 +78,12 @@ export const ConfirmEmailSuccess: FunctionComponent = ({}) => {
   )
 }
 
-export const ConfirmEmailError: FunctionComponent = ({}) => {
+export const ConfirmEmailError: FunctionComponent = ({ }) => {
   return (
     <Result
-      status='warning'
-      title='Email confirmed'
-      subTitle='You may now log in with your email.'
+      status='error'
+      title='Invalid request'
+      subTitle='The verification is invalid or has expired.'
       extra={
         <LinkButton to='/' type='primary'>
           Back to Home

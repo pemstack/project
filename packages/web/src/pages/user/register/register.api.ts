@@ -32,7 +32,7 @@ export const REGISTER: Action<RegisterParams, RegisterResult> = {
   schema: registerSchema,
   perform(params, app) {
     return app
-      .req('/api/users', { action: 'register' })
+      .req('/api/users/register', { action: 'register' })
       .post(params, { credentials: 'same-origin' })
       .json()
   }
@@ -58,7 +58,7 @@ export const RESEND_CONFIRM_EMAIL: Action<ResendConfirmEmailParams> = {
 }
 
 export const confirmEmailSchema = yup.object({
-  confirmToken: yup.string().required()
+  registerToken: yup.string().required()
 })
 
 export type ConfirmEmailParams = yup.InferType<typeof confirmEmailSchema>
@@ -68,7 +68,7 @@ export const CONFIRM_EMAIL: Action<ConfirmEmailParams> = {
   progress: true,
   perform(params, app) {
     return app
-      .req(`/api/users/confirm`)
+      .req('/api/users/register/confirm')
       .post(params)
       .json()
   }

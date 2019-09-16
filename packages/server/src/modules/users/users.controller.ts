@@ -4,19 +4,16 @@ import {
   Get,
   Post,
   UseGuards,
-  NotFoundException,
-  BadRequestException
-} from '@nestjs/common'
+  HttpCode} from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiBearerAuth, ApiResponse, ApiUseTags } from '@nestjs/swagger'
 import { MailerService } from '@nest-modules/mailer'
-import { Recaptcha, RecaptchaResponse, ReqUser, ReqUrl, ReqLang } from 'common/decorators'
-import { User, TokenState } from './users.entity'
+import { ReqUser, ReqUrl, ReqLang } from 'common/decorators'
+import { User } from './users.entity'
 import { RegisterRequest, ResendRequest, ConfirmRequest, ResetRequest } from './users.dto'
 import { UsersService } from './users.service'
 import { RateLimit } from 'nestjs-rate-limiter'
 import { template, subjects } from 'mailer'
-import moment from 'moment'
 
 @ApiUseTags('users')
 @Controller('users')
@@ -25,6 +22,45 @@ export class UsersController {
     private readonly usersService: UsersService,
     private readonly mailerService: MailerService
   ) {}
+
+  @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 400 })
+  @ApiResponse({ status: 404 })
+  @RateLimit({ points: 1, duration: 1 })
+  // @Recaptcha('register-confirm')
+  @Post('register/confirm')
+  @HttpCode(200)
+  async confirm(@Body() { registerToken }: ConfirmRequest) {
+    const email = await this.usersService.completeRegistration({ registerToken })
+    return { email }
+  }
+
+  @ApiResponse({ status: 200 })
+  @ApiResponse({ status: 400 })
+  @ApiResponse({ status: 404 })
+  @RateLimit({ points: 1, duration: 1 })
+  // @Recaptcha('register-resend')
+  @Post('register/resend')
+  @HttpCode(200)
+  async resend(
+    @ReqUrl() url: string,
+    @ReqLang() lang: string,
+    @Body() { resendToken }: ResendRequest
+  ) {
+    const registration = await this.usersService.getRegisterConfirmToken({ resendToken })
+    const { email, firstName } = registration.userData
+    await this.mailerService.sendMail({
+      to: email,
+      subject: subjects[lang].confirmEmail,
+      template: template('confirm-email', lang),
+      context: {
+        firstName,
+        link: url + '/user/confirm/' + registration.registerToken
+      }
+    })
+
+    return {}
+  }
 
   @ApiResponse({ status: 201 })
   @ApiResponse({ status: 401 })
@@ -40,7 +76,7 @@ export class UsersController {
       template: template('confirm-email', lang),
       context: {
         firstName: data.firstName,
-        link: url + '/user/confirm/' + registerToken
+        link: url + '/user/register/confirm/' + registerToken
       }
     })
 
@@ -51,43 +87,8 @@ export class UsersController {
   @ApiResponse({ status: 400 })
   @ApiResponse({ status: 404 })
   @RateLimit({ points: 1, duration: 1 })
-  // @Recaptcha('resend')
-  @Post('resend')
-  async resend(
-    @ReqUrl() url: string,
-    @ReqLang() lang: string,
-    @Body() { resendToken }: ResendRequest
-  ) {
-    const registration = await this.usersService.getRegistration({ resendToken })
-    const { email, firstName } = registration.userData
-    await this.mailerService.sendMail({
-      to: email,
-      subject: subjects[lang].confirmEmail,
-      template: template('confirm-email', lang),
-      context: {
-        firstName,
-        link: url + '/user/confirm?token=' + registration.registerToken
-      }
-    })
-  }
-
-  @ApiResponse({ status: 200 })
-  @ApiResponse({ status: 400 })
-  @ApiResponse({ status: 404 })
-  @RateLimit({ points: 1, duration: 1 })
-  // @Recaptcha('resend')
-  @Post('confirm')
-  async confirm(@Body() { registerToken }: ConfirmRequest) {
-    console.log('token sent: ' + registerToken)
-    await this.usersService.completeRegistration({ registerToken })
-  }
-
-  @ApiResponse({ status: 200 })
-  @ApiResponse({ status: 400 })
-  @ApiResponse({ status: 404 })
-  @RateLimit({ points: 1, duration: 1 })
-  // @Recaptcha()
-  @Post('reset')
+  // @Recaptcha('password-reset')
+  @Post('password/reset')
   async resetPassword(
     @ReqUrl() url: string,
     @ReqLang() lang: string,
@@ -99,7 +100,7 @@ export class UsersController {
       subject: subjects[lang].resetPassword,
       template: template('reset-password', lang),
       context: {
-        link: url + '/user/reset/' + resetToken
+        link: url + '/user/password/reset/' + resetToken
       }
     })
 
@@ -110,21 +111,21 @@ export class UsersController {
   @ApiResponse({ status: 400 })
   @ApiResponse({ status: 404 })
   @RateLimit({ points: 1, duration: 1 })
-  // @Recaptcha('resend')
-  @Post('resendpasswordreset')
+  // @Recaptcha('password-resend')
+  @Post('password/resend')
   async resendPasswordReset(
     @ReqUrl() url: string,
     @ReqLang() lang: string,
     @Body() { resendToken }: ResendRequest
   ) {
-    const reset = await this.usersService.getResetToken({ resendToken })
+    const reset = await this.usersService.getPasswordResetToken({ resendToken })
     const { email, resetToken } = reset
     await this.mailerService.sendMail({
       to: email,
       subject: subjects[lang].resetPassword,
       template: template('reset-password', lang),
       context: {
-        link: url + '/user/reset/' + resetToken
+        link: url + '/user/password/reset/' + resetToken
       }
     })
   }
