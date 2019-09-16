@@ -3,7 +3,9 @@ import { Layout } from 'antd'
 import { LanguageSelector } from 'components'
 import { Loading } from 'app/components'
 import { Link } from '@pema/router-react'
+import { useTranslation } from 'react-i18next'
 import './AnonymousLayout.css'
+
 
 const { Header, Content, Footer } = Layout
 
@@ -14,11 +16,12 @@ export interface AnonymousLayoutProps {
 export const AnonymousLayout: FunctionComponent<AnonymousLayoutProps> = ({
   children
 }) => {
+  const { t } = useTranslation()
   return (
     <Layout className='AnonymousLayout'>
       <Header className='AnonymousLayout__header'>
         <Link className='AnonymousLayout__title' to='/'>Project name</Link>
-        <Link className='AnonymousLayout__login' to='/user/login'>Log in</Link>
+        <Link className='AnonymousLayout__login' to='/user/login'>{t('Layout.anonymous.login')}</Link>
         <span className='AnonymousLayout__language-selector'>
           <LanguageSelector />
         </span>

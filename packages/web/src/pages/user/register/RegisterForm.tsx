@@ -16,9 +16,9 @@ export const RegisterForm: FunctionComponent = () => {
         showCaptcha
       >
         <Form.AntdItem>
-          <h2>{t('register.title')}</h2>
+          <h2>{t('user.label.register')}</h2>
           <div>
-            Already have an account? {t('register.label.existingAccount')} <Link to='/user/login'> Log in</Link>
+            {t('user.label.existingAccount')} <Link to='/user/login'>{t('user.label.login')}</Link>
           </div>
         </Form.AntdItem>
         <Form.Item
@@ -67,7 +67,7 @@ export const RegisterForm: FunctionComponent = () => {
             style={{width: '100%'}}
             className='RegisterForm__submit'
           >
-            Register
+           {t('user.label.register')}
           </SubmitButton>
         </Form.AntdItem>
       </Form>

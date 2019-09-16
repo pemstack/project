@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { Comment as AntdComment, Icon, Tooltip, Avatar } from 'antd'
 import { Markdown } from './Markdown'
+import { useTranslation } from 'react-i18next'
 import './Comment.css'
 
 export interface CommentItem {
@@ -19,6 +20,7 @@ export interface CommentProps {
 export const Comment: FunctionComponent<CommentProps> = ({
 	item: { likes, dislikes, action, title, author, content }
 }) => {
+	const { t } = useTranslation()
 	const actions = [
 		<span>
 			<Tooltip title='Like'>
@@ -44,7 +46,7 @@ export const Comment: FunctionComponent<CommentProps> = ({
 			</Tooltip>
 			<span style={{ paddingLeft: 8, cursor: 'auto' }}>{dislikes}</span>
 		</span>,
-		<span>Reply</span>
+		<span>{t('Comments.reply')}</span>
 	]
 
 	return (

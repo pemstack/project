@@ -43,7 +43,8 @@
 	"MarkdownEditor": {
 		"empty": "No content to display.",
 		"preview": "Preview",
-		"write": "Write"
+		"write": "Write",
+		"submit":"Submit"
 	},
 	"button": {
 		"cancel": "Cancel",
@@ -65,6 +66,9 @@
 		"label": {
 			"newsfeed": "Newsfeed",
 			"courses": "Courses"
+		},
+		"anonymous":{
+			"login":"Log In"
 		}
 	},
 	"RouteError": {
@@ -85,7 +89,12 @@
 			"role": "Role",
 			"settings": "Account Settings",
 			"login": "Log In",
-			"logout": "Log Out"
+			"logout": "Log Out",
+			"register": "Register",
+			"existingAccount": "Already have an account?",
+			"username":"Username",
+			"remember":"Remember me",
+			"forgotPass":"Forgot password?"
 		},
 		"error": {
 			"firstName": {
@@ -108,8 +117,28 @@
 		}
 	},
 	"error": {
-		"general": "There has been an error",
-		"403": "Not authorized",
-		"404": "404: Not found"
+		"general": "There has been an error.",
+		"403": "403: Not authorized.",
+		"404": "404: Not found.",
+		"500": "500: The server is currently unable to handle this request."
+	},
+	"Comments":{
+		"reply":"reply"
+	},
+	"ConfirmEmail":{
+		"title":"Thank you for registering",
+		"subtitle":"Check your email to verify your account",
+		"extra":{
+			"noEmail":"Didn't get an email?",
+			"resend":"Resend Email"
+		}
+	},
+	"EmailVerified":{
+	  "title":"Email Verified",
+	  "login":"Log In"
+	},
+	"Read":{
+		"more":"Read More",
+		"less":"Read Less"
 	}
 }

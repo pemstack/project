@@ -1,19 +1,22 @@
 import React, { FunctionComponent } from 'react';
 import { Result, Button, Icon } from 'antd';
+import { useTranslation } from 'react-i18next'
+
 
 interface ConfrimEmailProps {}
 
 export const ConfirmEmail: FunctionComponent<ConfrimEmailProps> = ({}) => {
+  const { t } = useTranslation()
   return (
     <Result
       icon={<Icon type='mail' theme='twoTone' />}
       status='info'
-      title='Thank you for registering'
-      subTitle='Check your email to verify your account'
+      title={t('ConfirmEmail.title')}
+      subTitle={t('ConfirmEmail.subtitle')}
       extra={
         <div>
-          <p>Didn't get an email?</p>
-          <Button type='primary'>Resend Email</Button>
+          <p>{t('ConfirmEmail.extra.noEmail')}</p>
+          <Button type='primary'>{t('ConfirmEmail.extra.resend')}</Button>
         </div>
       }
     />

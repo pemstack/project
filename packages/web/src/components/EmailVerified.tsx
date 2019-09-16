@@ -1,14 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import { Result, Button } from 'antd';
+import { useTranslation } from 'react-i18next'
 
 interface EmailVerifiedProps {}
 
 export const EmailVerified: FunctionComponent<EmailVerifiedProps> = ({}) => {
+  const { t } = useTranslation()
   return (
     <Result
       status='success'
-      title='Email confirmed'
-      extra={<Button type='primary'>Log In</Button>}
+      title={t('EmailVerified.title')}
+      extra={<Button type='primary'>{t('EmailVerified.login')}</Button>}
     />
   );
 };

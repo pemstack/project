@@ -3,6 +3,7 @@
 import React, { FunctionComponent, useState, useRef } from 'react'
 import { Button, Icon } from 'antd'
 import { useComponentSize } from './use-component-size'
+import { useTranslation } from 'react-i18next'
 import './ReadMore.css'
 
 export interface ToggleButtonProps {
@@ -14,6 +15,7 @@ export interface ReadMoreProps {
   initialHeight?: number
   renderButton?: (props: ToggleButtonProps) => React.ReactNode
 }
+const { t } = useTranslation()
 
 function SimpleButton({ isOpen, toggle }: ToggleButtonProps) {
   return (
@@ -33,7 +35,7 @@ function SimpleButton({ isOpen, toggle }: ToggleButtonProps) {
             transition: 'transform 0.4s',
           }}
         />
-        {isOpen ? 'READ LESS' : 'READ MORE'}
+        {isOpen ? t('Read.less') : t('Read.more')}
       </Button>
     </div>
   )
@@ -44,6 +46,7 @@ export const ReadMore: FunctionComponent<ReadMoreProps> = ({
   renderButton = SimpleButton,
   children
 }) => {
+  
   const container = useRef<null | HTMLDivElement>(null)
   const [maxHeight, setMaxHeight] = useState(initialHeight)
   const { height } = useComponentSize(container)

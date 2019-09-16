@@ -43,12 +43,16 @@
 	"MarkdownEditor": {
 		"empty": "Nuk ka përmbajtje.",
 		"preview": "Pamja",
-		"write": "Shkruaj"
+		"write": "Shkruaj",
+		"submit":"Dërgo"
 	},
 	"Layout": {
 		"label": {
 			"newsfeed": "Ballina",
 			"courses": "Kurset"
+		},
+		"anonymous":{
+			"login":"Kyçuni"
 		}
 	},
 	"button": {
@@ -67,6 +71,9 @@
 			"access": "Jepni nivelin e qasjes."
 		}
 	},
+	"RouteError": {
+		"back": "Kthehuni"
+	},
 	"text": {
 		"confirm": "A jeni të sigurt?"
 	},
@@ -84,7 +91,10 @@
 			"login": "Kyçuni",
 			"logout": "Shkyçuni",
 			"register": "Regjistrohuni",
-			"existingAccount": "Keni llogari aktive?"
+			"existingAccount": "Keni llogari aktive?",
+			"username":"Emri i përdoriesit",
+			"remember":"Më mbaj mend",
+			"forgotPass":"Keni harruar fjalëkalimin?"
 		},
 		"error": {
 			"firstName": {
@@ -107,6 +117,28 @@
 		}
 	},
 	"error": {
-		"general": "Ka pasur një gabim."
+		"general": "Ka pasur një gabim.",
+		"403": "403: Kërkesë e pa autorizuar.",
+		"404": "404: Nuk është gjetur ajo që kërkoni.",
+		"500": "500: Server-i aktualisht nuk mund të procesojë kërkesën."
+	},
+	"Comments":{
+		"reply": "Përgjigju"
+	},
+	"ConfirmEmail":{
+		"title":"Ju faleminderit për regjistrimin.",
+		"subtitle":"Kontrolloni Email-in të verifikoni llogarinë tuaj.",
+		"extra":{
+			"noEmail":"Nuk keni marrë Email-in?",
+			"resend":"Ridërgo Email-in"
+		}
+	},
+	"EmailVerified":{
+		"title":"Email-i është verifikuar",
+		"login":"Kyçuni"
+	},
+	"Read":{
+		"more":"Lexo më shumë",
+		"less":"Lexo më pak"
 	}
 }
