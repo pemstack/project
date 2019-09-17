@@ -4,22 +4,37 @@ import { Tabs } from 'antd'
 import { Loading } from 'app/components'
 import { GET_COURSE_PAGES } from './courses.api'
 import { CoursePage } from './CoursePage'
+import { Link } from '@pema/router-react'
+import { CenterContent } from 'components'
 import './ViewCourse.css'
 
 const { TabPane } = Tabs
 
 interface CourseProps {
   courseId: string
-  defaultPage?: string
+  display: string
+  page?: string
 }
 
 export const ViewCourse: FunctionComponent<CourseProps> = ({
   courseId,
-  defaultPage
+  display,
+  page
 }) => {
-  const data = useQuery(GET_COURSE_PAGES, { courseId }).read()
-  const pageTabs = data.map(p => (
-    <TabPane tab={p.title} key={p.pageId}>
+  const pages = useQuery(GET_COURSE_PAGES, { courseId }).read()
+  const pageTabs = pages.map(p => (
+    <TabPane
+      tab={
+        <Link
+          replace
+          to={`/courses/${courseId}/${display}/${p.pageId}`}
+          className='ViewCourse__tab-link'
+        >
+          {p.title}
+        </Link>
+      }
+      key={p.pageId}
+    >
       <Suspense fallback={<Loading />}>
         <CoursePage
           className='ViewCourse__page'
@@ -32,17 +47,20 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
 
   return (
     <div className='ViewCourse'>
-      <Tabs
-        size='large'
-        className='ViewCourse__tabs'
-        animated={{
-          inkBar: true,
-          tabPane: false
-        }}
-        defaultActiveKey={defaultPage}
-      >
-        {pageTabs}
-      </Tabs>
+      <CenterContent>
+        <Tabs
+          size='large'
+          className='ViewCourse__tabs'
+          tabBarGutter={0}
+          animated={{
+            inkBar: true,
+            tabPane: false
+          }}
+          activeKey={page || (pages[0] && pages[0].pageId)}
+        >
+          {pageTabs}
+        </Tabs>
+      </CenterContent>
     </div>
   )
 }

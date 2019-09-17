@@ -12,6 +12,7 @@ import { CollapseCard, Flex, LinkButton } from 'components'
 import { useQuery, useAction } from 'app'
 import './ManageCourse.css'
 import { Formik, Form, Input } from 'forms'
+import { Link } from '@pema/router-react'
 
 const { confirm } = Modal
 const { TabPane } = Tabs
@@ -186,7 +187,9 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ courseId, d
                     />
                   ]}
                 >
-                  {page.title}
+                  <span className='ManageCourse__item-content'>
+                    <Link to={`/courses/${courseId}/${display}/${page.pageId}`}>{page.title}</Link>
+                  </span>
                 </List.Item>
               )}
             />

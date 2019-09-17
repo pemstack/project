@@ -1,26 +1,8 @@
-/* .CourseView > .ant-tabs-card > .ant-tabs-content {
-  margin-top: -16px;
+.ViewCourse .ant-tabs .ant-tabs-large-bar .ant-tabs-tab {
+  padding: 0;
 }
 
-.CourseView > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
-  background: #fff;
-  overflow: hidden;
+.ViewCourse__tab-link {
+  padding: 16px;
+  display: block;
 }
-
-.CourseView > .ant-tabs-card > .ant-tabs-bar {
-  border-color: #fff;
-}
-
-.CourseView > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
-  border-color: transparent;
-  background: transparent;
-}
-
-.CourseView > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
-  border-color: #fff;
-  background: #fff;
-}
-
-.CourseView__page {
-  margin: 24px;
-} */

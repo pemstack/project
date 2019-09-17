@@ -6,3 +6,7 @@
   border: none;
   min-width: 100px;
 }
+
+.ManageCourse__item-content {
+  flex-grow: 1;
+}
