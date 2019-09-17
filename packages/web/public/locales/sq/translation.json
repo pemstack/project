@@ -44,15 +44,15 @@
 		"empty": "Nuk ka përmbajtje.",
 		"preview": "Pamja",
 		"write": "Shkruaj",
-		"submit":"Dërgo"
+		"submit": "Dërgo"
 	},
 	"Layout": {
 		"label": {
 			"newsfeed": "Ballina",
 			"courses": "Kurset"
 		},
-		"anonymous":{
-			"login":"Kyçuni"
+		"anonymous": {
+			"login": "Kyçuni"
 		}
 	},
 	"button": {
@@ -92,9 +92,9 @@
 			"logout": "Shkyçuni",
 			"register": "Regjistrohuni",
 			"existingAccount": "Keni llogari aktive?",
-			"username":"Emri i përdoriesit",
-			"remember":"Më mbaj mend",
-			"forgotPass":"Keni harruar fjalëkalimin?"
+			"username": "Emri i përdoruesit",
+			"remember": "Më mbaj mend",
+			"forgotPass": "Keni harruar fjalëkalimin?"
 		},
 		"error": {
 			"firstName": {
@@ -118,35 +118,36 @@
 	},
 	"error": {
 		"general": "Ka pasur një gabim.",
+		"401": "401: Not authorized.",
 		"403": "403: Kërkesë e pa autorizuar.",
 		"404": "404: Nuk është gjetur ajo që kërkoni.",
 		"500": "500: Server-i aktualisht nuk mund të procesojë kërkesën."
 	},
-	"Comments":{
+	"Comments": {
 		"reply": "Përgjigju"
 	},
-	"ConfirmEmail":{
-		 "success":{
-			"status":"Sukses",
-			"title":"Email-i u konfirmua",
-			"subtitle":"Ju mund të kyçeni me email-in tuaj.",
-			"login":"Kyçuni"
+	"ConfirmEmail": {
+		"success": {
+			"status": "Sukses",
+			"title": "Email-i u konfirmua",
+			"subtitle": "Ju mund të kyçeni me email-in tuaj.",
+			"login": "Kyçuni"
 		},
-		"error":{
-			"status":"Gabim",
-			"title":"Kërkesë jo valide",
-			"subtitle":"Verifikimi nuk është valid apo ka skaduar.",
-			"back":"Kthehuni"
+		"error": {
+			"status": "Gabim",
+			"title": "Kërkesë jo valide",
+			"subtitle": "Verifikimi nuk është valid apo ka skaduar.",
+			"back": "Kthehuni"
 		}
 	},
-	"RegisterSuccess":{
-	  "title":"Ju faleminderit për regjistrimin",
-	  "subtitle":"Kontrolloni email-in që të verifikoni llogarinë",
-	  "noEmail":"Nuk keni pranuar email-in?",
-	  "resend":"Ridërgoni Email-in"
+	"RegisterSuccess": {
+		"title": "Ju faleminderit për regjistrimin.",
+		"subtitle": "Kontrolloni email-in që të verifikoni llogarinë.",
+		"noEmail": "Nuk keni pranuar mesazhin?",
+		"resend": "Ridërgoni mesazhin."
 	},
-	"Read":{
-		"more":"Lexo më shumë",
-		"less":"Lexo më pak"
+	"Read": {
+		"more": "Lexo më shumë.",
+		"less": "Lexo më pak."
 	}
 }

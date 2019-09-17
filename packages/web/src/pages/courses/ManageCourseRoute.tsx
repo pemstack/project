@@ -11,7 +11,7 @@ export const ManageCourseRoute: View = ({ match }) => {
   viewInvariant(permission === 'write', 403)
 
   return (
-    <CenterContent width='large'>
+    <CenterContent>
       <ManageCourse courseId={courseId} display={display} />
     </CenterContent>
   )
