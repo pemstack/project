@@ -44,7 +44,7 @@
 		"empty": "No content to display.",
 		"preview": "Preview",
 		"write": "Write",
-		"submit":"Submit"
+		"submit": "Submit"
 	},
 	"button": {
 		"cancel": "Cancel",
@@ -67,8 +67,8 @@
 			"newsfeed": "Newsfeed",
 			"courses": "Courses"
 		},
-		"anonymous":{
-			"login":"Log In"
+		"anonymous": {
+			"login": "Log In"
 		}
 	},
 	"RouteError": {
@@ -92,9 +92,9 @@
 			"logout": "Log Out",
 			"register": "Register",
 			"existingAccount": "Already have an account?",
-			"username":"Username",
-			"remember":"Remember me",
-			"forgotPass":"Forgot password?"
+			"username": "Username",
+			"remember": "Remember me",
+			"forgotPass": "Forgot password?"
 		},
 		"error": {
 			"firstName": {
@@ -118,33 +118,34 @@
 	},
 	"error": {
 		"general": "There has been an error.",
+		"401": "401: Not authorized.",
 		"403": "403: Not authorized.",
 		"404": "404: Not found.",
 		"500": "500: The server is currently unable to handle this request."
 	},
-	"Comments":{
-		"reply":"reply"
+	"Comments": {
+		"reply": "reply"
 	},
-	"ConfirmEmail":{
-	    "success":{
-			"title":"Email Confirmed",
-			"subtitle":"You may now log in with your email.",
-			"login":"Log In"
+	"ConfirmEmail": {
+		"success": {
+			"title": "Email Confirmed",
+			"subtitle": "You may now log in with your email.",
+			"login": "Log In"
 		},
-		"error":{
-			"title":"Invalid Request",
-			"subtitle":"The verification is invalid or has expired.",
-			"back":"Back to home"
+		"error": {
+			"title": "Invalid Request",
+			"subtitle": "The verification is invalid or has expired.",
+			"back": "Back to home"
 		}
 	},
-	"RegisterSuccess":{
-	  "title":"Thank you for registering",
-	  "subtitle":"Check your email to verify your account",
-	  "noEmail":"Didn't get an email?",
-	  "resend":"Resend Email"
+	"RegisterSuccess": {
+		"title": "Thank you for registering",
+		"subtitle": "Check your email to verify your account",
+		"noEmail": "Didn't get an email?",
+		"resend": "Resend Email"
 	},
-	"Read":{
-		"more":"Read More",
-		"less":"Read Less"
+	"Read": {
+		"more": "Read More",
+		"less": "Read Less"
 	}
 }
