@@ -50,7 +50,7 @@ export class CoursesController {
     @Param('courseid') courseId: string,
     @ReqUser('userId') userId: string
   ): Promise<GetCoursePermissionResponse> {
-    const permission = await this.courses.tryGetPermission({ courseId, userId })
+    const permission = await this.courses.tryGetCoursePermission({ courseId, userId })
     if (!permission) {
       throw new NotFoundException()
     }

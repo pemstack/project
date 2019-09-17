@@ -83,7 +83,7 @@ export class CoursesService {
     userId,
     courseId
   }: GetCoursePagesParams) {
-    const permission = await this.tryGetPermission({ courseId, userId })
+    const permission = await this.tryGetCoursePermission({ courseId, userId })
     if (!permission) {
       throw new NotFoundException()
     }
@@ -103,11 +103,13 @@ export class CoursesService {
     courseId,
     pageId
   }: GetCoursePageParams) {
-    const permission = await this.tryGetPermission({ courseId, userId })
+    const permission = await this.tryGetCoursePermission({ courseId, userId })
+    // Course does not exist.
     if (!permission) {
       throw new NotFoundException()
     }
 
+    // Course is private.
     if (permission.permissionLevel === CoursePermissionLevel.None) {
       if (userId) {
         throw new ForbiddenException()
@@ -121,12 +123,23 @@ export class CoursesService {
       courseId
     })
 
+    // Page does not exist.
     if (!page) {
       throw new NotFoundException()
     }
 
-    if (!userId && page.access !== PageAccess.Public) {
-      throw new UnauthorizedException()
+    // Page is public - anyone can see it.
+    if (page.access === PageAccess.Public) {
+      return page
+    }
+
+    // Course is public but page is private and user is not authenticated/a course member
+    if (!permission.isMember) {
+      if (userId) {
+        throw new ForbiddenException()
+      } else {
+        throw new UnauthorizedException()
+      }
     }
 
     return page
@@ -139,7 +152,7 @@ export class CoursesService {
     content = '',
     access = PageAccess.Private
   }: CreateCoursePageParams): Promise<string> {
-    const coursePermission = await this.tryGetPermission({ courseId, userId })
+    const coursePermission = await this.tryGetCoursePermission({ courseId, userId })
     if (!coursePermission) {
       throw new NotFoundException()
     }
@@ -178,7 +191,7 @@ export class CoursesService {
     content,
     access
   }: UpdateCoursePageParams): Promise<string> {
-    const coursePermission = await this.tryGetPermission({ courseId, userId })
+    const coursePermission = await this.tryGetCoursePermission({ courseId, userId })
     if (!coursePermission) {
       throw new NotFoundException()
     }
@@ -230,7 +243,7 @@ export class CoursesService {
       throw new BadRequestException()
     }
 
-    const coursePermission = await this.tryGetPermission({ courseId, userId })
+    const coursePermission = await this.tryGetCoursePermission({ courseId, userId })
     if (!coursePermission) {
       throw new NotFoundException()
     }
@@ -246,7 +259,7 @@ export class CoursesService {
     // }
   }
 
-  async tryGetPermission({
+  async tryGetCoursePermission({
     courseId,
     userId
   }: TryGetPermissionParams) {
@@ -258,7 +271,8 @@ export class CoursesService {
     if (userId && course.ownerId === userId) {
       return {
         course,
-        permissionLevel: CoursePermissionLevel.Write
+        permissionLevel: CoursePermissionLevel.Write,
+        isMember: true
       }
     }
 
@@ -268,7 +282,8 @@ export class CoursesService {
         permissionLevel:
           course.access === CourseAccess.Public
             ? CoursePermissionLevel.Read
-            : CoursePermissionLevel.None
+            : CoursePermissionLevel.None,
+        isMember: false
       }
     }
 
@@ -281,7 +296,9 @@ export class CoursesService {
       course,
       permissionLevel: permission
         ? permission.permissionLevel
-        : CoursePermissionLevel.None
+        : course.access === CourseAccess.Public ?
+          CoursePermissionLevel.Read : CoursePermissionLevel.None,
+      isMember: permission && permission.permissionLevel !== CoursePermissionLevel.None
     }
   }
 }

@@ -183,6 +183,7 @@ export interface UpdateCoursePageResult {
 
 export const UPDATE_COURSE_PAGE: Action<UpdateCoursePageParams, UpdateCoursePageResult> = {
   schema: updateCoursePageSchema as Schema<UpdateCoursePageParams>,
+  progress: true,
   async perform({ courseId, pageId, ...params }, app) {
     return await app
       .req(`/api/courses/${courseId}/pages/${pageId}`, { action: 'updateCoursePage' })

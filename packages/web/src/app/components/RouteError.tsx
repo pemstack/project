@@ -26,7 +26,7 @@ function deriveError(
   if (code == 401 || code == 403) {
     return {
       status: '403',
-      title: t('error.403')
+      title: t('error.' + code)
     }
   } else if (code == 404) {
     return {

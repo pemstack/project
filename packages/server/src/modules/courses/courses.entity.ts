@@ -34,7 +34,7 @@ export class Course {
   pages: CoursePage[]
 
   @OneToMany(type => CoursePermission, coursePermission => coursePermission.course)
-  permission: CoursePermission[]
+  permissions: CoursePermission[]
 }
 
 export enum CoursePermissionLevel {
@@ -48,7 +48,7 @@ export class CoursePermission {
   @PrimaryColumn()
   userId: string
 
-  @ManyToOne(type => Course, course => course.pages, {
+  @ManyToOne(type => User, user => user.permissions, {
     primary: true,
     nullable: false,
     onDelete: 'CASCADE'
@@ -59,7 +59,7 @@ export class CoursePermission {
   @PrimaryColumn()
   courseId: string
 
-  @ManyToOne(type => Course, course => course.permission, {
+  @ManyToOne(type => Course, course => course.permissions, {
     primary: true,
     nullable: false,
     onDelete: 'CASCADE'
