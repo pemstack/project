@@ -17,11 +17,11 @@
 	"ManageCourse": {
 		"tab": {
 			"pages": "Faqet",
-			"students": "Studentët"
+			"members": "Anëtarët"
 		},
 		"title": {
 			"pages": "Menaxho faqet",
-			"students": "Menaxho studentët"
+			"members": "Menaxho anëtarët"
 		},
 		"button": {
 			"addPage": "Shto faqe"
@@ -38,6 +38,15 @@
 		"label": {
 			"title": "Emri i faqes",
 			"content": "Përmbajtja"
+		}
+	},
+	"InviteMembersForm": {
+		"title": "Fto anëtarë",
+		"placeholder": "Shëno një apo më shumë email adresa",
+		"label": {
+			"permission": "Qasja",
+			"read": "Lexim",
+			"write": "Shkrim"
 		}
 	},
 	"MarkdownEditor": {
@@ -60,7 +69,8 @@
 		"submit": "Dërgo",
 		"create": "Krijo",
 		"edit": "Ndrysho",
-		"update": "Azhurno"
+		"update": "Azhurno",
+		"invite": "Fto"
 	},
 	"course": {
 		"message": {

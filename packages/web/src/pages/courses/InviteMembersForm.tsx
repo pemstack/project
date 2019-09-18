@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState } from 'react'
 import { Form, Input, Button, Icon, SubmitButton, Radio, EmailSelect } from 'forms'
 import { useTranslation } from 'react-i18next'
-import { inviteMembersSchema } from './courses.api'
+
+const children: Array<any> = []
 
 export const InviteMembersForm: FunctionComponent = ({ }) => {
-  const children: Array<any> = []
   const { t } = useTranslation()
   return (
     <Form>

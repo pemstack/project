@@ -17,11 +17,11 @@
 	"ManageCourse": {
 		"tab": {
 			"pages": "Pages",
-			"students": "Students"
+			"members": "Members"
 		},
 		"title": {
 			"pages": "Manage pages",
-			"students": "Manage students"
+			"members": "Manage members"
 		},
 		"button": {
 			"addPage": "Add page"
@@ -40,6 +40,15 @@
 			"content": "Content"
 		}
 	},
+	"InviteMembersForm": {
+		"title": "Invite members",
+		"placeholder": "Enter one or more emails",
+		"label": {
+			"permission": "Permission",
+			"read": "Read",
+			"write": "Write"
+		}
+	},
 	"MarkdownEditor": {
 		"empty": "No content to display.",
 		"preview": "Preview",
@@ -51,7 +60,8 @@
 		"submit": "Submit",
 		"create": "Create",
 		"edit": "Edit",
-		"update": "Update"
+		"update": "Update",
+		"invite": "Invite"
 	},
 	"course": {
 		"message": {
