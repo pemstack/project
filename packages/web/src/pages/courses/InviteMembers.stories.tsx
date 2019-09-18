@@ -9,7 +9,7 @@ import { inviteMembersSchema } from './courses.api'
 storiesOf('courses/InviteMembersForm', module)
   .addDecorator(decorator())
   .add('default', () => (
-    <CenterContent width='small'>
+    <CenterContent>
       <Formik
         validationSchema={inviteMembersSchema}
         initialValues={{ emails: [], permission: 'read' }}

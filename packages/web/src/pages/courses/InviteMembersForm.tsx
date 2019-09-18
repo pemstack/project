@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react'
-import { Form, Input, Button, Icon, SubmitButton, Radio, Select } from 'forms'
+import { Form, Input, Button, Icon, SubmitButton, Radio, EmailSelect } from 'forms'
 import { useTranslation } from 'react-i18next'
 import { inviteMembersSchema } from './courses.api'
 
@@ -8,30 +8,27 @@ export const InviteMembersForm: FunctionComponent = ({ }) => {
   const { t } = useTranslation()
   return (
     <Form>
+      <h2>{t('InviteMembersForm.title')}</h2>
       <Form.Item name='emails'>
-        <Select
+        <EmailSelect
           name='emails'
-          mode='tags'
           style={{ width: '100%' }}
-          tokenSeparators={[',', ';', ' ', '\n', '\r\n']}
         >
           {children}
-        </Select>
+        </EmailSelect>
       </Form.Item>
-      <Form.Item name='permission' label={t('CreateCourseForm.label.permission')}>
+      <Form.Item name='permission' label={t('InviteMembersForm.label.permission')}>
         <Radio.Group
           name='permission'
           options={[
-            { label: 'Read', value: 'read' },
-            { label: 'Write', value: 'write' }
+            { label: t('InviteMembersForm.label.read'), value: 'read' },
+            { label: t('InviteMembersForm.label.write'), value: 'write' }
           ]}
         />
       </Form.Item>
       <Form.Item name='submit'>
-        <SubmitButton>Submit</SubmitButton>
+        <SubmitButton>{t('button.submit')}</SubmitButton>
       </Form.Item>
     </Form>
   )
 }
-
-
