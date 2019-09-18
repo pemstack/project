@@ -24,3 +24,8 @@ export class CreateInvitationRequest {
   @ApiResponseModelProperty()
   permission: CoursePermissionLevel
 }
+
+export class UpdateInvitationRequest {
+  @ApiResponseModelProperty()
+  accepted: boolean
+}

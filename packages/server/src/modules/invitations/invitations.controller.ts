@@ -1,11 +1,20 @@
-import { Body, Controller, Post, UnauthorizedException, Get, NotFoundException, BadRequestException, Req, ForbiddenException } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  NotFoundException,
+  BadRequestException,
+  ForbiddenException,
+  Patch,
+  Param
+} from '@nestjs/common'
 import { ApiResponse, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger'
 import { InvitationsService } from './invitations.service'
 import { Authorize, ReqUser } from 'common/decorators'
-import { GetUserInvitationsResponse, CreateInvitationRequest } from './invitations.dto'
-import { UsersService } from 'modules/users'
+import { GetUserInvitationsResponse, CreateInvitationRequest, UpdateInvitationRequest } from './invitations.dto'
+import { UsersService, User } from 'modules/users'
 import { CoursesService, CoursePermissionLevel } from 'modules/courses'
-//import { } from './invitations.dto'
 
 @ApiUseTags('invitations')
 @Controller('invitations')
@@ -35,7 +44,7 @@ export class InvitationsController {
   @ApiResponse({ status: 200 })
   @ApiBearerAuth()
   @Authorize()
-  @Post('/create')
+  @Post()
   async createInvitation(
     @ReqUser('userId') requesterUserId: string,
     @Body() { userEmail, courseId, permission }: CreateInvitationRequest
@@ -56,5 +65,21 @@ export class InvitationsController {
     }
 
     return await this.invitations.createInvitation({ userEmail, courseId, permission })
+  }
+
+  @ApiResponse({ status: 200 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Patch(':courseid')
+  async updateInvitation(
+    @ReqUser() user: User,
+    @Param('courseid') courseId: string,
+    @Body() { accepted }: UpdateInvitationRequest
+  ) {
+    return await this.invitations.updateInvitation({
+      user,
+      courseId,
+      accepted
+    })
   }
 }

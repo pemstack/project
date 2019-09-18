@@ -23,7 +23,8 @@ import {
   CreateCoursePageParams,
   UpdateCoursePageParams,
   DeleteCoursePageParams,
-  TryGetPermissionParams
+  TryGetPermissionParams,
+  AddMemberToCourseParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -257,6 +258,20 @@ export class CoursesService {
     // if (result.affected === 0) {
     //   throw new NotFoundException()
     // }
+  }
+
+  // Permissions
+
+  async addMemberToCourse({ userId, courseId, permissionLevel }: AddMemberToCourseParams) {
+    if (!userId || !courseId) {
+      throw new NotFoundException()
+    }
+
+    if (!permissionLevel) {
+      throw new BadRequestException()
+    }
+
+    return await this.entities.insert(CoursePermission, { userId, courseId, permissionLevel })
   }
 
   async tryGetCoursePermission({

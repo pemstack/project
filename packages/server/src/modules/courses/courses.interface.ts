@@ -1,4 +1,4 @@
-import { CourseAccess, PageAccess } from './courses.entity'
+import { CourseAccess, PageAccess, CoursePermissionLevel } from './courses.entity'
 
 export interface GetCoursesParams {
   userId: string
@@ -42,6 +42,12 @@ export interface DeleteCoursePageParams {
   userId: string
   courseId: string
   pageId: string
+}
+
+export interface AddMemberToCourseParams {
+  userId: string
+  courseId: string
+  permissionLevel: CoursePermissionLevel
 }
 
 export interface TryGetPermissionParams {

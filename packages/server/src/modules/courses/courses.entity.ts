@@ -67,7 +67,7 @@ export class CoursePermission {
   @JoinColumn({ name: 'courseId' })
   course: Course
 
-  @Column()
+  @Column({ nullable: true })
   role: string
 
   @IsEnum(CoursePermissionLevel)

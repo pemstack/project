@@ -1,4 +1,5 @@
 import { CoursePermissionLevel } from "modules/courses";
+import { User } from "modules/users";
 
 export interface GetUserInvitationsParams {
   userEmail: string
@@ -18,6 +19,12 @@ export interface CreateInvitationParams {
 export interface DeclineInvitationParams {
   userEmail: string
   courseId: string
+}
+
+export interface UpdateInvitationParams {
+  user: User
+  courseId: string
+  accepted: boolean
 }
 
 export interface CancelInvitationParams {
