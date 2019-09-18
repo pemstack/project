@@ -99,6 +99,16 @@ export const createCourseSchema = yup.object({
     .required('course.error.access')
 })
 
+export const inviteMembersSchema = yup.object({
+  emails: yup
+    .array()
+    .of(yup
+      .string()
+      .required('user.error.email.required')
+      .email('register.error.email.invalid')
+    )
+})
+
 export type CreateCourseParams = yup.InferType<typeof createCourseSchema>
 
 export interface CreateCourseResult {
