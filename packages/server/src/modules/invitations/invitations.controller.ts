@@ -29,7 +29,13 @@ export class InvitationsController {
   async getUserInvitations(
     @ReqUser('email') userEmail: string
   ): Promise<GetUserInvitationsResponse[]> {
-    return await this.invitations.getUserInvitations({ userEmail })
+    const invitations = await this.invitations.getUserInvitations({ userEmail })
+    return invitations.map(invitation => ({
+      courseId: invitation.courseId,
+      courseTitle: invitation.course.title,
+      permission: invitation.permission,
+      dateInvited: invitation.dateInvited
+    }))
   }
 
   @ApiResponse({ status: 200 })

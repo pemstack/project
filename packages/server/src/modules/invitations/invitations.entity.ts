@@ -15,7 +15,7 @@ export enum InvitationStatus {
 }
 
 @Entity()
-export class Invitations {
+export class Invitation {
   @PrimaryColumn()
   userEmail: string
 

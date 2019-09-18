@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException, Inject, ForbiddenException } from '@nestjs/common'
 import { InjectEntityManager } from '@nestjs/typeorm'
 import { EntityManager } from 'typeorm'
-import { Invitations, InvitationStatus } from './invitations.entity'
+import { Invitation, InvitationStatus } from './invitations.entity'
 import {
   GetUserInvitationsParams,
   GetInvitationParams,
@@ -19,11 +19,14 @@ export class InvitationsService {
   ) { }
 
   async getUserInvitations({ userEmail }: GetUserInvitationsParams) {
-    return await this.entities.find(Invitations, { where: { userEmail } })
+    return await this.entities.find(Invitation, {
+      where: { userEmail },
+      relations: ['course']
+    })
   }
 
   async getInvitation({ userEmail, courseId }: GetInvitationParams) {
-    return await this.entities.findOne(Invitations, { where: { userEmail, courseId } })
+    return await this.entities.findOne(Invitation, { where: { userEmail, courseId } })
   }
 
   async createInvitation({ requesterUserId, userEmail, courseId, permission }: CreateInvitationParams) {
@@ -42,7 +45,7 @@ export class InvitationsService {
     }
 
     await this.entities.insert(
-      Invitations,
+      Invitation,
       { userEmail, courseId, permission, status: InvitationStatus.Pending }
     )
   }
@@ -67,13 +70,13 @@ export class InvitationsService {
     }
 
     return await this.entities.update(
-      Invitations,
+      Invitation,
       { userEmail: user.email, courseId },
       { status: accepted ? InvitationStatus.Accepted : InvitationStatus.Declined }
     )
   }
 
   async cancelinvitation({ userEmail, courseId }: CancelInvitationParams) {
-    return await this.entities.delete(Invitations, { userEmail, courseId })
+    return await this.entities.delete(Invitation, { userEmail, courseId })
   }
 }
