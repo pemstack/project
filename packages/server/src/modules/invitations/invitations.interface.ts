@@ -11,6 +11,7 @@ export interface GetInvitationParams {
 }
 
 export interface CreateInvitationParams {
+  requesterUserId: string
   userEmail: string
   courseId: string
   permission: CoursePermissionLevel

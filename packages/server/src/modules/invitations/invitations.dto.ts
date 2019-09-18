@@ -15,17 +15,14 @@ export class GetUserInvitationsResponse {
 }
 
 export class CreateInvitationRequest {
-  @ApiResponseModelProperty()
+  @ApiModelProperty()
   userEmail: string
 
-  @ApiResponseModelProperty()
-  courseId: string
-
-  @ApiResponseModelProperty()
+  @ApiModelProperty()
   permission: CoursePermissionLevel
 }
 
 export class UpdateInvitationRequest {
-  @ApiResponseModelProperty()
+  @ApiModelProperty()
   accepted: boolean
 }

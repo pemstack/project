@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException, Inject } from '@nestjs/common'
+import { Injectable, NotFoundException, BadRequestException, Inject, ForbiddenException } from '@nestjs/common'
 import { InjectEntityManager } from '@nestjs/typeorm'
 import { EntityManager } from 'typeorm'
 import { Invitations, InvitationStatus } from './invitations.entity'
@@ -9,13 +9,13 @@ import {
   CreateInvitationParams,
   CancelInvitationParams
 } from './invitations.interface'
-import { CoursesService } from 'modules/courses'
+import { CoursesService, CoursePermissionLevel } from 'modules/courses'
 
 @Injectable()
 export class InvitationsService {
   constructor(
     @InjectEntityManager() readonly entities: EntityManager,
-    private readonly courses: CoursesService
+    private readonly courses: CoursesService,
   ) { }
 
   async getUserInvitations({ userEmail }: GetUserInvitationsParams) {
@@ -26,8 +26,22 @@ export class InvitationsService {
     return await this.entities.findOne(Invitations, { where: { userEmail, courseId } })
   }
 
-  async createInvitation({ userEmail, courseId, permission }: CreateInvitationParams) {
-    return await this.entities.insert(
+  async createInvitation({ requesterUserId, userEmail, courseId, permission }: CreateInvitationParams) {
+    const coursePermission = await this.courses.tryGetCoursePermission({ courseId, userId: requesterUserId })
+    if (!coursePermission) {
+      throw new NotFoundException()
+    }
+
+    if (coursePermission.permissionLevel !== CoursePermissionLevel.Write) {
+      throw new ForbiddenException()
+    }
+
+    const exists = await this.getInvitation({ userEmail, courseId })
+    if (exists) {
+      throw new BadRequestException('Invitation has already been made.')
+    }
+
+    await this.entities.insert(
       Invitations,
       { userEmail, courseId, permission, status: InvitationStatus.Pending }
     )
