@@ -35,6 +35,7 @@
 	},
 	"EditPageForm": {
 		"title": "Ndrysho faqen",
+		"tooltip": "Një faqe private mund të shihet vetëm nga anëtarët e kursit. Një faqe publike mund të shihet nga kushdo.",
 		"label": {
 			"title": "Emri i faqes",
 			"content": "Përmbajtja"

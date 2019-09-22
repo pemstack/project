@@ -23,7 +23,7 @@ export const EditPageForm: FunctionComponent = () => {
               { label: t('CreateCourseForm.option.public'), value: 'public' }
             ]}
           />
-          <Tooltip title={t('CreateCourseForm.tooltip')} placement='right'>
+          <Tooltip title={t('EditPageForm.tooltip')} placement='right'>
             <Icon type='question-circle' />
           </Tooltip>
         </Form.Item>
