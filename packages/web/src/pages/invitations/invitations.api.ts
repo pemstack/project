@@ -9,7 +9,7 @@ export interface GetUserInvitationsResult {
   dateInvited: string
 }
 
-export const GET_USER_INVITATIONS: Query<GetUserInvitationsResult> = {
+export const GET_USER_INVITATIONS: Query<GetUserInvitationsResult[]> = {
   resource: 'invitations',
   async fetch(_, app) {
     return await app

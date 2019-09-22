@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { decorator } from 'app/mock'
-import { Invitation } from './Invitations'
+import { Invitation } from './Invitation'
 
 storiesOf('Invitations', module)
   .addDecorator(decorator())

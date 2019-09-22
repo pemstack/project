@@ -5,7 +5,8 @@ import coursesRoutes from 'pages/courses'
 const routes: RoutingTable = {
   '/': lazy(() => import('pages/home')),
   '/user': userRoutes,
-  '/courses': coursesRoutes
+  '/courses': coursesRoutes,
+  '/invitations': lazy(() => import('pages/invitations'))
 }
 
 export default routes
