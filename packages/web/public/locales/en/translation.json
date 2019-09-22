@@ -50,6 +50,9 @@
 			"write": "Write"
 		}
 	},
+	"Invitation": {
+		"text": "You have been invited to {{title}} course on {{time}}"
+	},
 	"MarkdownEditor": {
 		"empty": "No content to display.",
 		"preview": "Preview",
@@ -62,7 +65,9 @@
 		"create": "Create",
 		"edit": "Edit",
 		"update": "Update",
-		"invite": "Invite"
+		"invite": "Invite",
+		"accept": "Accept",
+		"reject": "Reject"
 	},
 	"course": {
 		"message": {

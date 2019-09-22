@@ -50,6 +50,9 @@
 			"write": "Shkrim"
 		}
 	},
+	"Invitation": {
+		"text": "Ju jeni ftuar në kursin {{title}} me {{time}}"
+	},
 	"MarkdownEditor": {
 		"empty": "Nuk ka përmbajtje.",
 		"preview": "Pamja",
@@ -71,7 +74,9 @@
 		"create": "Krijo",
 		"edit": "Ndrysho",
 		"update": "Azhurno",
-		"invite": "Fto"
+		"invite": "Fto",
+		"accept": "Prano",
+		"reject": "Refuzo"
 	},
 	"course": {
 		"message": {
