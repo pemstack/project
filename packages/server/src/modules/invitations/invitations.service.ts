@@ -20,7 +20,7 @@ export class InvitationsService {
 
   async getUserInvitations({ userEmail }: GetUserInvitationsParams) {
     return await this.entities.find(Invitation, {
-      where: { userEmail },
+      where: { userEmail, status: InvitationStatus.Pending },
       relations: ['course']
     })
   }

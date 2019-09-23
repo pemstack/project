@@ -62,7 +62,8 @@
 	"Layout": {
 		"label": {
 			"newsfeed": "Ballina",
-			"courses": "Kurset"
+			"courses": "Kurset",
+			"invitations": "Ftesat"
 		},
 		"anonymous": {
 			"login": "Kyçuni"

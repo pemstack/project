@@ -1,10 +1,11 @@
-import React from 'react'
-import { View, useQuery, useAction, authorize, view } from 'app'
-import { Invitation } from './Invitation'
+import React, { FunctionComponent } from 'react'
 import { GET_USER_INVITATIONS, UPDATE_INVITATION } from './invitations.api'
+import { useQuery, useAction } from 'app'
+import { Invitation } from './Invitation'
 
+interface InvitationListProps { }
 
-export const InvitationsRoute: View = ({ }) => {
+export const InvitationList: FunctionComponent<InvitationListProps> = ({ }) => {
   const invitations = useQuery(GET_USER_INVITATIONS).read()
   const updateInvitation = useAction(UPDATE_INVITATION)
   return (
@@ -25,7 +26,3 @@ export const InvitationsRoute: View = ({ }) => {
     </>
   )
 }
-
-export default authorize({
-  action: view(InvitationsRoute)
-})

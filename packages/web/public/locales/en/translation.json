@@ -81,7 +81,8 @@
 	"Layout": {
 		"label": {
 			"newsfeed": "Newsfeed",
-			"courses": "Courses"
+			"courses": "Courses",
+			"invitations": "Invitations"
 		},
 		"anonymous": {
 			"login": "Log In"

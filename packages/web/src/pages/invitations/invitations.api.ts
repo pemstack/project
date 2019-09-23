@@ -19,6 +19,25 @@ export const GET_USER_INVITATIONS: Query<GetUserInvitationsResult[]> = {
   }
 }
 
+const updateInvitationSchema = yup.object({
+  courseId: yup.string().required(),
+  accepted: yup.boolean().required()
+})
+
+export type UpdateInvitationParams = yup.InferType<typeof updateInvitationSchema>
+
+export const UPDATE_INVITATION: Action<UpdateInvitationParams> = {
+  schema: updateInvitationSchema,
+  progress: true,
+  async perform({ courseId, accepted }, app) {
+    return await app
+      .req(`/api/invitations/${courseId}`)
+      .patch({ accepted })
+      .res()
+  },
+  invalidates: ['invitations', 'courses'],
+}
+
 // const addTodoSchema = yup.object({
 //   title: yup.string().required(),
 //   done: yup.boolean().notRequired()

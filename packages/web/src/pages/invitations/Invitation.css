@@ -1,0 +1,11 @@
+.Invitation__buttons {
+  float: right
+}
+
+.Invitation__accept {
+  margin-right: 5px
+}
+
+.Invitation__text {
+  margin-top: 4px
+}
