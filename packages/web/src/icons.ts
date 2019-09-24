@@ -504,7 +504,7 @@ export { default as MenuUnfoldOutline } from '@ant-design/icons/lib/outline/Menu
 // export { default as MoreOutline } from '@ant-design/icons/lib/outline/MoreOutline'
 // export { default as OrderedListOutline } from '@ant-design/icons/lib/outline/OrderedListOutline'
 // export { default as NumberOutline } from '@ant-design/icons/lib/outline/NumberOutline'
-// export { default as PaperClipOutline } from '@ant-design/icons/lib/outline/PaperClipOutline'
+export { default as PaperClipOutline } from '@ant-design/icons/lib/outline/PaperClipOutline'
 // export { default as PauseOutline } from '@ant-design/icons/lib/outline/PauseOutline'
 // export { default as PicCenterOutline } from '@ant-design/icons/lib/outline/PicCenterOutline'
 // export { default as PercentageOutline } from '@ant-design/icons/lib/outline/PercentageOutline'
