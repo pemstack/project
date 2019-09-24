@@ -477,7 +477,7 @@ export { default as DownOutline } from '@ant-design/icons/lib/outline/DownOutlin
 // export { default as HistoryOutline } from '@ant-design/icons/lib/outline/HistoryOutline'
 // export { default as GooglePlusOutline } from '@ant-design/icons/lib/outline/GooglePlusOutline'
 // export { default as ImportOutline } from '@ant-design/icons/lib/outline/ImportOutline'
-// export { default as InboxOutline } from '@ant-design/icons/lib/outline/InboxOutline'
+export { default as InboxOutline } from '@ant-design/icons/lib/outline/InboxOutline'
 // export { default as IeOutline } from '@ant-design/icons/lib/outline/IeOutline'
 // export { default as InfoOutline } from '@ant-design/icons/lib/outline/InfoOutline'
 // export { default as IssuesCloseOutline } from '@ant-design/icons/lib/outline/IssuesCloseOutline'

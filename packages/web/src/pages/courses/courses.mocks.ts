@@ -10,7 +10,8 @@ import {
   DELETE_COURSE_PAGE,
   UPDATE_COURSE_PAGE,
   CREATE_COURSE_PAGE,
-  PageAccess
+  PageAccess,
+  ExistingFile
 } from 'pages/courses/courses.api'
 import slugify from 'slugify'
 
@@ -91,7 +92,6 @@ export function cleanupObject<T extends { [key: string]: any }>(obj: T): Partial
   }, {}) as Partial<T>
 }
 
-
 class MockCourse {
   courseId: string
   title: string
@@ -106,7 +106,7 @@ class MockCourse {
   findPage(pageId: string) {
     const page = this.pages.find(p => p.pageId === pageId)
     if (!page) {
-      throw makeError(404)
+      throw makeError(404, `Page '${pageId}' not found.`)
     }
 
     return page
@@ -115,12 +115,16 @@ class MockCourse {
   updatePage(pageId: string, params: {
     title?: string
     access?: PageAccess
-    content?: string
+    content?: string,
+    files?: ExistingFile[],
+    removedFiles?: string[]
   }) {
     const cleaned = cleanupObject(params)
     this.pages = this.pages.map(page => {
       if (page.pageId === pageId) {
-        return { ...page, ...cleaned, pageId: slugify(cleaned.title || page.title) }
+        const { files: newFiles = [], removedFiles = [] } = params
+        const files = [...(page.files || []), ...newFiles].filter(f => !removedFiles.includes(f.uid))
+        return { ...page, ...cleaned, files, pageId: slugify(cleaned.title || page.title, { lower: true }) }
       } else {
         return page
       }
@@ -150,11 +154,12 @@ class MockCourse {
 
 interface PageData {
   title: string
+  files?: ExistingFile[]
 }
 
 function makePage(
   courseId: string,
-  { title }: PageData
+  { title, files = [] }: PageData,
 ): GetCoursePageResult {
   const id = slugify(title, { lower: true })
   return {
@@ -162,15 +167,37 @@ function makePage(
     pageId: id,
     access: 'public',
     content: longMarkdown,
-    courseId
+    courseId,
+    files
   }
 }
 
-function makeError(status: number) {
-  const error = new Error();
+function makeError(status: number, message?: string) {
+  const error = new Error(message);
   (error as any).status = status
   return error
 }
+
+const existingFiles: ExistingFile[] = [
+  {
+    uid: 'file-1',
+    name: 'File-1.pdf',
+    size: 200,
+    type: 'application/pdf'
+  },
+  {
+    uid: 'file-2',
+    name: 'File-2.pdf',
+    size: 200,
+    type: 'application/pdf'
+  },
+  {
+    uid: 'file-3',
+    name: 'File-3.pdf',
+    size: 200,
+    type: 'application/pdf'
+  }
+]
 
 class MockCourses {
   private courses: MockCourse[]
@@ -183,7 +210,7 @@ class MockCourses {
         permission: 'write',
         owner: true,
         pages: [
-          makePage('siguria', { title: 'Info' }),
+          makePage('siguria', { title: 'Info', files: existingFiles }),
           makePage('siguria', { title: 'Projects' }),
           makePage('siguria', { title: 'Resources' })
         ]
@@ -195,10 +222,10 @@ class MockCourses {
     return this.courses
   }
 
-  findCourse(id: string) {
-    const course = this.courses.find(c => c.courseId === id)
+  findCourse(courseId: string) {
+    const course = this.courses.find(c => c.courseId === courseId)
     if (!course) {
-      throw makeError(404)
+      throw makeError(404, `Course '${courseId}' not found.`)
     }
 
     return course
@@ -233,7 +260,7 @@ export function mockCourses(api: MockApi) {
     async ({ courseId, pageId, ...params }) => {
       await delay(500)
       const page = courses.findCourse(courseId).updatePage(pageId, params)
-      return { courseId, pageId: slugify(params.title || page.title) }
+      return { courseId, pageId: slugify(params.title || page.title, { lower: true }) }
     }
   )
 

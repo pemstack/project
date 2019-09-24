@@ -15,7 +15,7 @@ export const EditPage: FunctionComponent<EditPageProps> = ({
   pageId,
   onSuccess
 }) => {
-  const { title, content, access } = useQuery(GET_COURSE_PAGE, {
+  const { title, content, access, files: existingFiles } = useQuery(GET_COURSE_PAGE, {
     courseId,
     pageId
   }).read()
@@ -25,7 +25,9 @@ export const EditPage: FunctionComponent<EditPageProps> = ({
       initialValues={{
         title,
         content,
-        access
+        access,
+        files: [],
+        removedFiles: []
       }}
       onSubmit={async (values, actions) => {
         try {
@@ -35,6 +37,9 @@ export const EditPage: FunctionComponent<EditPageProps> = ({
             ...values
           })
 
+          actions.setFieldValue('files', [])
+          actions.setFieldValue('removedFiles', [])
+
           if (typeof onSuccess === 'function') {
             onSuccess()
           }
@@ -43,7 +48,7 @@ export const EditPage: FunctionComponent<EditPageProps> = ({
         }
       }}
     >
-      <EditPageForm />
+      <EditPageForm existingFiles={existingFiles} />
     </Formik>
   )
 }

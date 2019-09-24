@@ -1,11 +1,21 @@
 import React, { FunctionComponent } from 'react'
 import { CollapseCard } from 'components'
 import { Form, Input, Radio, SubmitButton, MarkdownInput } from 'forms'
-import { Tooltip, Icon } from 'antd'
+import { Tooltip, Icon, Upload } from 'antd'
 import { useTranslation } from 'react-i18next'
 import './EditPageForm.css'
+import { Field, FieldProps } from 'formik'
+import { ExistingFile } from './courses.api'
 
-export const EditPageForm: FunctionComponent = () => {
+const { Dragger } = Upload
+
+export interface EditPageFormProps {
+  existingFiles?: ExistingFile[]
+}
+
+export const EditPageForm: FunctionComponent<EditPageFormProps> = ({
+  existingFiles = []
+}) => {
   const { t } = useTranslation()
 
   return (
@@ -31,6 +41,53 @@ export const EditPageForm: FunctionComponent = () => {
           <div>
             <MarkdownInput name='content' />
           </div>
+        </Form.Item>
+        <Form.Item name='files'>
+          <Field name='files'>
+            {({ form: { values, setFieldValue } }: FieldProps) => {
+              const newFiles = values.files || []
+              const removedFiles = values.removedFiles || []
+              let fileList = [...existingFiles, ...newFiles]
+              if (removedFiles.length > 0) {
+                fileList = fileList.filter(f => !removedFiles.includes(f.uid))
+              }
+
+              function unique(arr: ExistingFile[]) {
+                return arr.filter((f, i) => arr.findIndex(f2 => f.uid === f2.uid) === i)
+              }
+
+              fileList = unique(fileList)
+
+              return (
+                <Dragger
+                  multiple
+                  fileList={fileList}
+                  beforeUpload={(file, files) => {
+                    setFieldValue('files', unique([...newFiles, ...files]))
+                    return false
+                  }}
+                  onRemove={file => {
+                    if (existingFiles.find(f => file.uid === f.uid)) {
+                      setFieldValue('removedFiles', [...removedFiles, file.uid])
+                    } else {
+                      setFieldValue('files', newFiles.filter(f => file.uid !== f.uid))
+                    }
+
+                    return false
+                  }}
+                >
+                  <p className='ant-upload-drag-icon'>
+                    <Icon type='inbox' />
+                  </p>
+                  <p className='ant-upload-text'>Click or drag file to this area to upload</p>
+                  <p className='ant-upload-hint'>
+                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+                    band files
+                  </p>
+                </Dragger>
+              )
+            }}
+          </Field>
         </Form.Item>
         <Form.AntdItem>
           <SubmitButton

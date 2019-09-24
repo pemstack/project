@@ -29,12 +29,20 @@ export interface GetCoursePageParams {
 
 export type PageAccess = 'private' | 'public' | 'unlisted'
 
+export interface ExistingFile {
+  uid: string
+  size: number
+  name: string
+  type: string
+}
+
 export interface GetCoursePageResult {
   pageId: string
   courseId: string
   title: string
   content: string
   access: PageAccess
+  files: ExistingFile[]
 }
 
 // GET /api/courses/:courseid/pages/:pageid
@@ -175,7 +183,8 @@ export const updateCoursePageSchema = yup.object({
     .string()
     .oneOf(['private', 'public', 'unlisted'])
     .required(),
-  content: yup.string().notRequired()
+  content: yup.string().notRequired(),
+  removedFiles: yup.array(yup.string().required()).notRequired()
 })
 
 export interface UpdateCoursePageParams {
@@ -184,6 +193,8 @@ export interface UpdateCoursePageParams {
   title?: string
   access?: PageAccess
   content?: string
+  files?: any[]
+  removedFiles?: string[]
 }
 
 export interface UpdateCoursePageResult {
