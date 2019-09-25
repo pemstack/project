@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { decorator } from 'app/mock'
 import { ManageCourse } from './ManageCourse'
-import { reloadCourses } from './courses.mocks'
+import { reloadCourses } from '../courses.mocks'
 import { UserLayout } from 'app/layout/UserLayout'
 import { CenterContent } from 'components'
 

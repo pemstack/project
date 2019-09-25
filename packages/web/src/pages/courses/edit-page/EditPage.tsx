@@ -1,6 +1,6 @@
 import { useQuery, useAction } from 'app'
 import React, { FunctionComponent } from 'react'
-import { GET_COURSE_PAGE, UPDATE_COURSE_PAGE } from './courses.api'
+import { GET_COURSE_PAGE, UPDATE_COURSE_PAGE } from '../courses.api'
 import { Formik } from 'forms'
 import { EditPageForm } from './EditPageForm'
 

@@ -7,13 +7,13 @@ import {
   UPDATE_COURSE_PAGE,
   CREATE_COURSE_PAGE,
   PageAccess
-} from './courses.api'
+} from '../courses.api'
 import { CollapseCard, Flex, LinkButton } from 'components'
 import { useQuery, useAction } from 'app'
 import './ManageCourse.css'
 import { Formik, Form, Input } from 'forms'
 import { Link } from '@pema/router-react'
-import { InviteMembersModal } from './InviteMembersModal'
+import { InviteMembersModal } from '../invite/InviteMembersModal'
 
 const { confirm } = Modal
 const { TabPane } = Tabs

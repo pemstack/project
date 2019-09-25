@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions'
 import { decorator } from 'app/mock'
 import { Formik } from 'forms'
 import { CenterContent } from 'components'
-import { createCourseSchema } from './courses.api'
+import { createCourseSchema } from '../courses.api'
 import { UserLayout } from 'app/layout/UserLayout'
 import { CreateCourseForm } from './CreateCourseForm'
 

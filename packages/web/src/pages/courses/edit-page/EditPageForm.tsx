@@ -5,7 +5,7 @@ import { Tooltip, Icon, Upload } from 'antd'
 import { useTranslation } from 'react-i18next'
 import './EditPageForm.css'
 import { Field, FieldProps } from 'formik'
-import { ExistingFile } from './courses.api'
+import { ExistingFile } from '../courses.api'
 
 const { Dragger } = Upload
 

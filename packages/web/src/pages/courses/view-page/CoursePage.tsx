@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { useQuery } from 'app'
 import { Markdown, CollapseCard } from 'components'
 import classNames from 'classnames'
-import { GET_COURSE_PAGE } from './courses.api'
+import { GET_COURSE_PAGE } from '../courses.api'
 import { Icon } from 'antd'
 
 export interface CoursePageProps {

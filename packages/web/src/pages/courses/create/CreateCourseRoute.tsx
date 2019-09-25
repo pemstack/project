@@ -2,7 +2,7 @@ import React from 'react'
 import { View, useAction, authorize, view } from 'app'
 import { CreateCourseForm } from './CreateCourseForm'
 import { Formik } from 'forms'
-import { CREATE_COURSE } from './courses.api'
+import { CREATE_COURSE } from '../courses.api'
 import slugify from 'slugify'
 import { CenterContent } from 'components'
 
