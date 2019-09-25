@@ -130,7 +130,7 @@ export const CREATE_COURSE: Action<CreateCourseParams, CreateCourseResult> = {
   progress: true,
   async perform(params, app) {
     return await app
-      .req('/api/courses', { action: 'create' })
+      .req('/api/courses', { action: 'createCourse' })
       .post(params)
       .json()
   },
@@ -212,4 +212,52 @@ export const UPDATE_COURSE_PAGE: Action<UpdateCoursePageParams, UpdateCoursePage
       .res()
   },
   invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
+}
+
+export interface GetCoursePostsParams {
+  courseId: string
+  page?: number
+}
+
+export interface GetCoursePostsResultItem {
+  postId: string
+  date: Date
+  content: string
+  authorUserId: string
+  authorName: string
+}
+
+export interface GetCoursePostsResult {
+  total: number
+  items: GetCoursePostsResultItem[]
+}
+
+export const GET_COURSE_POSTS: Query<GetCoursePostsResult, GetCoursePostsParams> = {
+  resource: ({ courseId, page }) => `courses/${courseId}/posts/pages/${page}`,
+  async fetch({ courseId, page = 1 }, app) {
+    return await app
+      .req(`/api/courses/${courseId}/posts?page=${page}`)
+      .get()
+      .json()
+  }
+}
+
+export const createCoursePostSchema = yup.object({
+  courseId: yup.string().required(),
+  content: yup.string().required(),
+  notify: yup.boolean().notRequired()
+})
+
+export type CreateCoursePostParams = yup.InferType<typeof createCoursePostSchema>
+
+export const CREATE_COURSE_POST: Action<CreateCoursePostParams> = {
+  schema: createCoursePostSchema as Schema<CreateCoursePostParams>,
+  progress: true,
+  async perform({ courseId, notify = true, content }, app) {
+    return await app
+      .req(`/api/courses/${courseId}/posts`, { action: 'createCoursePost' })
+      .post({ content, notify })
+      .res()
+  },
+  invalidates: ({ params: { courseId } }) => [`courses/${courseId}/posts`]
 }

@@ -13,7 +13,7 @@ function randomDate() {
 const posts: NewsfeedPostItem[] = [
   {
     author: 'Author 1',
-    course: 'Computer Networks',
+    courseTitle: 'Computer Networks',
     date: randomDate(),
     content: `
 ## Some title
@@ -23,7 +23,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   },
   {
     author: 'Author 2',
-    course: 'Data Security',
+    courseTitle: 'Data Security',
     date: randomDate(),
     content: `
 ## Project 1 deadline
@@ -78,7 +78,7 @@ Sed consectetur ante odio, a vulputate felis malesuada vel.
   },
   {
     author: 'Author 3',
-    course: 'Computer Networks',
+    courseTitle: 'Computer Networks',
     date: randomDate(),
     content: `Some simple content.`
   },
@@ -92,7 +92,7 @@ storiesOf('data-display/NewsfeedPost', module)
         item={{
           author: 'Post Author',
           date: randomDate(),
-          course: 'Data Security',
+          courseTitle: 'Data Security',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         }}
       />
@@ -104,7 +104,7 @@ storiesOf('data-display/NewsfeedPost', module)
         item={{
           author: 'Post Author',
           date: randomDate(),
-          course: 'Data Security',
+          courseTitle: 'Data Security',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         }}
         loading

@@ -8,7 +8,7 @@ import './NewsfeedPost.css'
 export interface NewsfeedPostItem {
   author: string
   content: string
-  course: string
+  courseTitle?: string
   date: Date | Moment
 }
 
@@ -21,7 +21,7 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
   item: {
     author,
     content,
-    course,
+    courseTitle,
     date
   },
   loading
@@ -52,7 +52,7 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
           description={<Tooltip title={m.format('DD/MM/YYYY HH:mm')}>{m.fromNow()}</Tooltip>}
         />
       }
-      extra={<a href='/'>{course}</a>}
+      extra={courseTitle && <a href='/'>{courseTitle}</a>}
     >
       <div className='NewsfeedPost__content'>
         <ReadMore>

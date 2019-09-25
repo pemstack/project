@@ -11,7 +11,8 @@ import {
   UPDATE_COURSE_PAGE,
   CREATE_COURSE_PAGE,
   PageAccess,
-  ExistingFile
+  ExistingFile,
+  GET_COURSE_POSTS
 } from 'pages/courses/courses.api'
 import slugify from 'slugify'
 
@@ -137,10 +138,11 @@ class MockCourse {
     if (typeof page === 'string') {
       this.pages.push({
         access: 'private',
-        pageId: slugify(page),
+        pageId: slugify(page, { lower: true }),
         courseId: this.courseId,
         title: page,
-        content: ''
+        content: '',
+        files: []
       })
     } else {
       this.pages.push(page)
@@ -248,6 +250,35 @@ export function mockCourses(api: MockApi) {
   api.withQuery(GET_COURSE_PAGE, async ({ courseId, pageId }) => {
     await delay(500)
     return courses.findCourse(courseId).findPage(pageId)
+  })
+
+  api.withQuery(GET_COURSE_POSTS, async ({ courseId, page }) => {
+    return {
+      total: 9,
+      items: [
+        {
+          postId: '1',
+          date: new Date(),
+          content: 'Hello World 1!',
+          authorUserId: 'filan1',
+          authorName: 'Filan Fisteku 1'
+        },
+        {
+          postId: '2',
+          date: new Date(),
+          content: 'Hello World 2!',
+          authorUserId: 'filan2',
+          authorName: 'Filan Fisteku 2'
+        },
+        {
+          postId: '3',
+          date: new Date(),
+          content: 'Hello World 3!',
+          authorUserId: 'filan3',
+          authorName: 'Filan Fisteku 3'
+        }
+      ]
+    }
   })
 
   api.withAction(DELETE_COURSE_PAGE, async ({ courseId, pageId }) => {
