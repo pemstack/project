@@ -44,6 +44,7 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = ({
                 <Link to={`/courses/${courseId}/${courseDisplay}/newsfeed?page=${page}`}><Icon type='left' /></Link>
               )
             case 'next':
+              return originalElement
               return (
                 <Link to={`/courses/${courseId}/${courseDisplay}/newsfeed?page=${page}`}><Icon type='right' /></Link>
               )
