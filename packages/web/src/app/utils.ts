@@ -23,6 +23,11 @@ export function stringParam<TDefault>
   }
 }
 
+export function asInt(expr: any, defaultValue: number): number {
+  const parsed = typeof expr === 'string' ? parseInt(expr) : expr
+  return isNaN(parsed) || typeof parsed !== 'number' ? defaultValue : parsed
+}
+
 export function viewInvariant(condition: any, code: number, message?: string) {
   if (!condition) {
     const error = new Error(message);

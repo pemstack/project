@@ -16,12 +16,14 @@ interface CourseProps {
   courseId: string
   courseDisplay: string
   page?: string
+  pageNumber?: number
 }
 
 export const ViewCourse: FunctionComponent<CourseProps> = ({
   courseId,
   courseDisplay,
-  page
+  page,
+  pageNumber = 1
 }) => {
   const { t } = useTranslation()
   const pages = useQuery(GET_COURSE_PAGES, { courseId }).read()
@@ -64,7 +66,9 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
       <Suspense fallback={<Loading />}>
         <Newsfeed
           courseId={courseId}
-          courseDisplay={courseDisplay} />
+          courseDisplay={courseDisplay}
+          page={pageNumber}
+        />
       </Suspense>
     </TabPane>
   )

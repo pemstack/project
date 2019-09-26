@@ -93,7 +93,8 @@
 		"back": "Back Home"
 	},
 	"text": {
-		"confirm": "Are you sure?"
+		"confirm": "Are you sure?",
+		"no-posts": "There are no posts."
 	},
 	"user": {
 		"label": {

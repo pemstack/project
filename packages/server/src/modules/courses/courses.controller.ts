@@ -175,9 +175,16 @@ export class CoursesController {
   async getCoursePosts(
     @Param('courseid') courseId: string,
     @ReqUser('userId') userId: string,
-    @Query('page') page = 1,
-    @Query('page-size') pageSize = 5
+    @Query('page') page: number = 1,
+    @Query('page-size') pageSize: number = 4
   ): Promise<GetCoursePostsResponse> {
+    const asInt = (x: any, defaultValue: number) => {
+      const parsed = typeof x === 'string' ? parseInt(x) : x
+      return isNaN(parsed) || typeof parsed !== 'number' ? defaultValue : parsed
+    }
+
+    page = asInt(page, 1)
+    pageSize = asInt(pageSize, 4)
     if (pageSize > 20) {
       pageSize = 20
     }

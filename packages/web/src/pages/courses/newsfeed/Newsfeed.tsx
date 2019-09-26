@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { useQuery } from 'app'
 import { GET_COURSE_POSTS, GET_COURSE_PERMISSION } from '../courses.api'
 import { NewsfeedPost, MarkdownEditor } from 'components'
-import { Pagination, Icon, Button } from 'antd'
+import { Pagination, Icon, Button, Empty } from 'antd'
 import { Link } from '@pema/router-react'
 import './Newsfeed.css'
 import { useTranslation } from 'react-i18next'
@@ -22,19 +22,22 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = ({
   const { items, total, pageSize } = useQuery(GET_COURSE_POSTS, { courseId, page }).read()
   const { permission } = useQuery(GET_COURSE_PERMISSION, { courseId }).read()
   const { t } = useTranslation()
+
   return (
     <div className='Newsfeed'>
       {permission === 'write' && <CreatePost courseId={courseId} />}
-      {items.map(p => (
-        <NewsfeedPost
-          key={p.postId}
-          item={{
-            author: p.authorName,
-            content: p.content,
-            date: p.posted
-          }}
-        />
-      ))}
+      {items && items.length > 0
+        ? items.map(p => (
+          <NewsfeedPost
+            key={p.postId}
+            item={{
+              author: p.authorName,
+              content: p.content,
+              date: p.posted
+            }}
+          />
+        ))
+        : <Empty description={t('text.no-posts')}></Empty>}
       <div className='Newsfeed__pagination-wrapper'>
         <Pagination
           hideOnSinglePage

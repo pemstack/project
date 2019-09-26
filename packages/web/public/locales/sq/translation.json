@@ -93,7 +93,8 @@
 		"back": "Kthehuni"
 	},
 	"text": {
-		"confirm": "A jeni të sigurt?"
+		"confirm": "A jeni të sigurt?",
+		"no-posts": "Nuk ka postime."
 	},
 	"user": {
 		"label": {

@@ -20,8 +20,8 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
   return (
     <div className={classNames('CoursePage', 'CoursePage--content', className)}>
       <CollapseCard>
-        <Markdown source={page.content} />
-        {page.files.length > 0 && (
+        <Markdown source={page.content || ''} />
+        {page.files && page.files.length > 0 && (
           console.log('files are here'),
           <>
             <h3>Attachments</h3>

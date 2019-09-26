@@ -45,7 +45,7 @@ export const EditPageForm: FunctionComponent<EditPageFormProps> = ({
         <Form.Item name='files'>
           <Field name='files'>
             {({ form: { values, setFieldValue } }: FieldProps) => {
-              const newFiles = values.files || []
+              const newFiles: ExistingFile[] = values.files || []
               const removedFiles = values.removedFiles || []
               let fileList = [...existingFiles, ...newFiles]
               if (removedFiles.length > 0) {
