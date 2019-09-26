@@ -70,6 +70,7 @@ export const EditPageForm: FunctionComponent<EditPageFormProps> = ({
                     if (existingFiles.find(f => file.uid === f.uid)) {
                       setFieldValue('removedFiles', [...removedFiles, file.uid])
                     } else {
+                      /* tslint:disable-next-line */
                       setFieldValue('files', newFiles.filter(f => file.uid !== f.uid))
                     }
 

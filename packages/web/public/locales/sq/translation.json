@@ -77,7 +77,8 @@
 		"update": "Azhurno",
 		"invite": "Fto",
 		"accept": "Prano",
-		"reject": "Refuzo"
+		"reject": "Refuzo",
+		"post": "Posto"
 	},
 	"course": {
 		"message": {

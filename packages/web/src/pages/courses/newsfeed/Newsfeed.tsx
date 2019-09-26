@@ -1,9 +1,12 @@
 import React, { FunctionComponent } from 'react'
 import { useQuery } from 'app'
-import { GET_COURSE_POSTS } from '../courses.api'
-import { NewsfeedPost } from 'components'
-import { Pagination, Icon } from 'antd'
+import { GET_COURSE_POSTS, GET_COURSE_PERMISSION } from '../courses.api'
+import { NewsfeedPost, MarkdownEditor } from 'components'
+import { Pagination, Icon, Button } from 'antd'
 import { Link } from '@pema/router-react'
+import './Newsfeed.css'
+import { useTranslation } from 'react-i18next'
+import { CreatePost } from './CreatePost'
 
 export interface NewsfeedProps {
   courseId: string
@@ -16,43 +19,59 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = ({
   courseDisplay,
   page = 1
 }: NewsfeedProps) => {
-  const { total, items } = useQuery(GET_COURSE_POSTS, { courseId, page }).read()
+  const { items, total, pageSize } = useQuery(GET_COURSE_POSTS, { courseId, page }).read()
+  const { permission } = useQuery(GET_COURSE_PERMISSION, { courseId }).read()
+  const { t } = useTranslation()
   return (
-    <div>
+    <div className='Newsfeed'>
+      {permission === 'write' && <CreatePost />}
       {items.map(p => (
         <NewsfeedPost
           key={p.postId}
           item={{
             author: p.authorName,
             content: p.content,
-            date: p.date
+            date: p.posted
           }}
         />
       ))}
-      <Pagination
-        current={page}
-        pageSize={3}
-        total={total}
-        itemRender={(page, type, originalElement) => {
-          switch (type) {
-            case 'page':
-              return (
-                <Link to={`/courses/${courseId}/${courseDisplay}/newsfeed?page=${page}`}>{page}</Link>
-              )
-            case 'prev':
-              return (
-                <Link to={`/courses/${courseId}/${courseDisplay}/newsfeed?page=${page}`}><Icon type='left' /></Link>
-              )
-            case 'next':
-              return originalElement
-              return (
-                <Link to={`/courses/${courseId}/${courseDisplay}/newsfeed?page=${page}`}><Icon type='right' /></Link>
-              )
-            default:
-              return originalElement
-          }
-        }}
-      />
+      <div className='Newsfeed__pagination-wrapper'>
+        <Pagination
+          hideOnSinglePage
+          current={page}
+          pageSize={pageSize}
+          total={total}
+          itemRender={(page, type, originalElement) => {
+            switch (type) {
+              case 'page':
+                return (
+                  <Link to={`/courses/${courseId}/${courseDisplay}/newsfeed?page=${page}`}>{page}</Link>
+                )
+              case 'prev':
+                return (
+                  <Link
+                    className='ant-pagination-item-link'
+                    to={`/courses/${courseId}/${courseDisplay}/newsfeed?page=${page}`}
+                  >
+                    <Icon type='left' />
+                  </Link>
+                )
+              case 'next':
+                return originalElement
+                return (
+                  <Link
+                    className='ant-pagination-item-link'
+                    to={`/courses/${courseId}/${courseDisplay}/newsfeed?page=${page}`}
+                  >
+                    <Icon type='right' />
+                  </Link>
+                )
+              default:
+                return originalElement
+            }
+          }}
+        />
+      </div>
     </div>
   )
 }

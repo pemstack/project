@@ -1,0 +1,12 @@
+.Newsfeed .MarkdownEditor {
+  margin-bottom: 16px;
+}
+
+.Newsfeed .NewsfeedPost {
+  margin-bottom: 16px;
+}
+
+.Newsfeed__pagination-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}

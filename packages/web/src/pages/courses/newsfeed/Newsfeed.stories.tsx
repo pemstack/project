@@ -7,11 +7,11 @@ import { CenterContent } from 'components'
 
 storiesOf('courses/Newsfeed', module)
   .addDecorator(decorator())
-  .add('default', () => <Newsfeed courseId='siguria' />)
+  .add('default', () => <Newsfeed courseId='siguria' courseDisplay='siguria' />)
   .add('with user layout', () => (
     <UserLayout>
       <CenterContent>
-        <Newsfeed courseId='siguria' />
+        <Newsfeed courseId='siguria' courseDisplay='siguria' />
       </CenterContent>
     </UserLayout>
   ))

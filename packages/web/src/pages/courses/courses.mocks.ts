@@ -252,29 +252,36 @@ export function mockCourses(api: MockApi) {
     return courses.findCourse(courseId).findPage(pageId)
   })
 
-  api.withQuery(GET_COURSE_POSTS, async ({ courseId, page }) => {
+  api.withQuery(GET_COURSE_POSTS, async ({ courseId, page, pageSize }) => {
+    const now = new Date()
+    const dates = [new Date(), new Date(), new Date].map((d, i) => {
+      d.setHours(now.getHours() - i * 0.5 - 0.5 * Math.random())
+      return d
+    })
+
     return {
-      total: 9,
+      total: 10,
+      pageSize: 3,
       items: [
         {
           postId: '1',
-          date: new Date(),
-          content: 'Hello World 1!',
-          authorUserId: 'filan1',
+          posted: dates[0],
+          content: `Page ${page} Hello World 1!`,
+          authorId: 'filan1',
           authorName: 'Filan Fisteku 1'
         },
         {
           postId: '2',
-          date: new Date(),
-          content: 'Hello World 2!',
-          authorUserId: 'filan2',
+          posted: dates[1],
+          content: `Page ${page} Hello World 2!`,
+          authorId: 'filan2',
           authorName: 'Filan Fisteku 2'
         },
         {
           postId: '3',
-          date: new Date(),
-          content: 'Hello World 3!',
-          authorUserId: 'filan3',
+          posted: dates[2],
+          content: `Page ${page} Hello World 3!`,
+          authorId: 'filan3',
           authorName: 'Filan Fisteku 3'
         }
       ]

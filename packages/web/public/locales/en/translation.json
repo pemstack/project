@@ -67,7 +67,8 @@
 		"update": "Update",
 		"invite": "Invite",
 		"accept": "Accept",
-		"reject": "Reject"
+		"reject": "Reject",
+		"post": "Post"
 	},
 	"course": {
 		"message": {

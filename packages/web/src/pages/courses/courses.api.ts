@@ -217,26 +217,38 @@ export const UPDATE_COURSE_PAGE: Action<UpdateCoursePageParams, UpdateCoursePage
 export interface GetCoursePostsParams {
   courseId: string
   page?: number
+  pageSize?: number
 }
 
 export interface GetCoursePostsResultItem {
   postId: string
-  date: Date
   content: string
-  authorUserId: string
+  authorId: string
   authorName: string
+  posted: Date
 }
 
 export interface GetCoursePostsResult {
-  total: number
   items: GetCoursePostsResultItem[]
+  total: number
+  pageSize: number
 }
 
+const DEFAULT_PAGE_SIZE = 5
+
 export const GET_COURSE_POSTS: Query<GetCoursePostsResult, GetCoursePostsParams> = {
-  resource: ({ courseId, page }) => `courses/${courseId}/posts/pages/${page}`,
-  async fetch({ courseId, page = 1 }, app) {
+  resource: ({
+    courseId,
+    page,
+    pageSize = DEFAULT_PAGE_SIZE
+  }) => `courses/${courseId}/posts/pages/${page}-${pageSize}`,
+  async fetch({
+    courseId,
+    page = 1,
+    pageSize = DEFAULT_PAGE_SIZE
+  }, app) {
     return await app
-      .req(`/api/courses/${courseId}/posts?page=${page}`)
+      .req(`/api/courses/${courseId}/posts?page=${page}&page-size=${pageSize}`)
       .get()
       .json()
   }
