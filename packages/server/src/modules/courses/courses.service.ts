@@ -13,7 +13,8 @@ import {
   CoursePermission,
   CoursePermissionLevel,
   CourseAccess,
-  PageAccess
+  PageAccess,
+  CoursePost
 } from './courses.entity'
 import {
   GetCoursesParams,
@@ -24,12 +25,15 @@ import {
   UpdateCoursePageParams,
   DeleteCoursePageParams,
   TryGetPermissionParams,
-  AddMemberToCourseParams
+  AddMemberToCourseParams,
+  GetCoursePostsParams,
+  CreateCoursePostParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
 import { unionBy } from 'lodash'
 import { reduceObject } from 'common/utils'
+import { plainToClass } from 'class-transformer'
 
 @Injectable()
 export class CoursesService {
@@ -258,6 +262,67 @@ export class CoursesService {
     // if (result.affected === 0) {
     //   throw new NotFoundException()
     // }
+  }
+
+  // Posts
+
+  async getCoursePosts({
+    courseId,
+    userId,
+    page,
+    pageSize = 10
+  }: GetCoursePostsParams) {
+    const permission = await this.tryGetCoursePermission({ courseId, userId })
+    if (!permission) {
+      throw new NotFoundException()
+    }
+
+    if (permission.permissionLevel === CoursePermissionLevel.None) {
+      if (!userId) {
+        throw new UnauthorizedException()
+      } else {
+        throw new ForbiddenException()
+      }
+    }
+
+    const total = await this.entities.count(CoursePost, {
+      where: { courseId }
+    })
+
+    const items = await this.entities.find(CoursePost, {
+      relations: ['author'],
+      where: { courseId },
+      order: { posted: 'DESC' },
+      skip: (page - 1) * pageSize,
+      take: pageSize
+    })
+
+    return {
+      items,
+      pageSize,
+      total
+    }
+  }
+
+  async createCoursePost({ courseId, userId, content }: CreateCoursePostParams) {
+    if (!userId) {
+      throw new UnauthorizedException()
+    }
+
+    const permission = await this.tryGetCoursePermission({ courseId, userId })
+    if (!permission) {
+      throw new NotFoundException()
+    }
+
+    if (permission.permissionLevel !== CoursePermissionLevel.Write) {
+      throw new ForbiddenException() // 401
+    }
+
+    await this.entities.insert(CoursePost, {
+      courseId,
+      authorId: userId,
+      content
+    })
   }
 
   // Permissions

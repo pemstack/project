@@ -51,6 +51,19 @@ export interface AddMemberToCourseParams {
 }
 
 export interface TryGetPermissionParams {
-  courseId: string,
+  courseId: string
   userId: string | null
+}
+
+export interface GetCoursePostsParams {
+  courseId: string
+  userId: string
+  page: number
+  pageSize: number
+}
+
+export interface CreateCoursePostParams {
+  courseId: string
+  userId: string
+  content: string
 }

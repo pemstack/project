@@ -118,3 +118,32 @@ export class UpdateCoursePageResponse {
   @ApiResponseModelProperty()
   pageId: string
 }
+
+export class GetCoursePostsResponseItem {
+  @ApiResponseModelProperty()
+  content: string
+
+  @ApiResponseModelProperty()
+  authorId: string
+
+  @ApiResponseModelProperty()
+  authorName: string
+
+  @ApiResponseModelProperty()
+  posted: Date
+}
+
+export class GetCoursePostsResponse {
+  @ApiResponseModelProperty()
+  items: GetCoursePostsResponseItem[]
+
+  @ApiResponseModelProperty()
+  total: number
+
+  @ApiResponseModelProperty()
+  pageSize: number
+}
+
+export class CreateCoursePostRequest {
+  content: string
+}

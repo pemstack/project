@@ -6,7 +6,8 @@ import {
   Post,
   NotFoundException,
   Delete,
-  Patch
+  Patch,
+  Query
 } from '@nestjs/common'
 import { ApiUseTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger'
 import { CoursesService } from './courses.service'
@@ -20,7 +21,9 @@ import {
   CreateCoursePageRequest,
   CreateCoursePageResponse,
   UpdateCoursePageRequest,
-  UpdateCoursePageResponse
+  UpdateCoursePageResponse,
+  GetCoursePostsResponse,
+  CreateCoursePostRequest
 } from './courses.dto'
 import { ReqUser, Authorize } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
@@ -60,7 +63,7 @@ export class CoursesController {
     }
   }
 
-  @ApiResponse({ status: 200, type: CreateCourseResponse })
+  @ApiResponse({ status: 201, type: CreateCourseResponse })
   @ApiBearerAuth()
   @Authorize()
   @Post()
@@ -109,7 +112,7 @@ export class CoursesController {
     return plainToClass(GetCoursePageResponse, coursePage)
   }
 
-  @ApiResponse({ status: 200, type: CreateCoursePageResponse })
+  @ApiResponse({ status: 201, type: CreateCoursePageResponse })
   @ApiBearerAuth()
   @Authorize()
   @Post(':courseid/pages')
@@ -161,5 +164,47 @@ export class CoursesController {
     @Param('pageid') pageId: string
   ): Promise<void> {
     await this.courses.deleteCoursePage({ userId, courseId, pageId })
+  }
+
+  // Posts
+
+  // GET /api/courses/:courseid/posts
+  @ApiResponse({ status: 200, type: GetCoursePostsResponse })
+  @Authorize(['jwt', 'anonymous'])
+  @Get(':courseid/posts')
+  async getCoursePosts(
+    @Param('courseid') courseId: string,
+    @ReqUser('userId') userId: string,
+    @Query('page') page = 1,
+    @Query('page-size') pageSize = 5
+  ): Promise<GetCoursePostsResponse> {
+    if (pageSize > 20) {
+      pageSize = 20
+    }
+
+    const { items, pageSize: pageSizeResult, total } = await this.courses.getCoursePosts({ userId, courseId, page, pageSize })
+    return {
+      items: items.map(({ content, author, posted }) => ({
+        content,
+        authorId: author.userId,
+        authorName: `${author.firstName} ${author.lastName}`,
+        posted
+      })),
+      pageSize: pageSizeResult,
+      total
+    }
+  }
+
+  // POST /api/courses/:courseid/posts
+  @ApiResponse({ status: 201 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Post(':courseid/posts')
+  async createCoursePost(
+    @Param('courseid') courseId: string,
+    @ReqUser('userId') userId: string,
+    @Body() { content }: CreateCoursePostRequest,
+  ): Promise<void> {
+    await this.courses.createCoursePost({ courseId, userId, content })
   }
 }
