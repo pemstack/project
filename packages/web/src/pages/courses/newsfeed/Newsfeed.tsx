@@ -60,7 +60,6 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = ({
                   </Link>
                 )
               case 'next':
-                return originalElement
                 return (
                   <Link
                     className='ant-pagination-item-link'

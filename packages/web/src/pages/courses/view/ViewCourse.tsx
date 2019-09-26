@@ -54,7 +54,6 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
     <TabPane
       tab={
         <Link
-          replace
           to={`/courses/${courseId}/${courseDisplay}`}
           className='ViewCourse__tab-link'
         >

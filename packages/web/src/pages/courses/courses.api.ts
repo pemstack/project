@@ -242,6 +242,7 @@ export const GET_COURSE_POSTS: Query<GetCoursePostsResult, GetCoursePostsParams>
     page,
     pageSize = DEFAULT_PAGE_SIZE
   }) => `courses/${courseId}/posts/pages/${page}-${pageSize}`,
+  progress: true,
   async fetch({
     courseId,
     page = 1,
