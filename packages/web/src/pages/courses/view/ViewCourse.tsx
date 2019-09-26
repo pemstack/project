@@ -7,27 +7,30 @@ import { CoursePage } from '../view-page/CoursePage'
 import { Link } from '@pema/router-react'
 import { CenterContent } from 'components'
 import './ViewCourse.css'
+import { useTranslation } from 'react-i18next'
+import { Newsfeed } from '../newsfeed/Newsfeed'
 
 const { TabPane } = Tabs
 
 interface CourseProps {
   courseId: string
-  display: string
+  courseDisplay: string
   page?: string
 }
 
 export const ViewCourse: FunctionComponent<CourseProps> = ({
   courseId,
-  display,
+  courseDisplay,
   page
 }) => {
+  const { t } = useTranslation()
   const pages = useQuery(GET_COURSE_PAGES, { courseId }).read()
   const pageTabs = pages.map(p => (
     <TabPane
       tab={
         <Link
           replace
-          to={`/courses/${courseId}/${display}/${p.pageId}`}
+          to={`/courses/${courseId}/${courseDisplay}/${p.pageId}`}
           className='ViewCourse__tab-link'
         >
           {p.title}
@@ -45,6 +48,27 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
     </TabPane>
   ))
 
+  pageTabs.unshift(
+    <TabPane
+      tab={
+        <Link
+          replace
+          to={`/courses/${courseId}/${courseDisplay}`}
+          className='ViewCourse__tab-link'
+        >
+          {t('Layout.label.newsfeed')}
+        </Link>
+      }
+      key={'newsfeed'}
+    >
+      <Suspense fallback={<Loading />}>
+        <Newsfeed
+          courseId={courseId}
+          courseDisplay={courseDisplay} />
+      </Suspense>
+    </TabPane>
+  )
+
   return (
     <div className='ViewCourse'>
       <CenterContent>
@@ -56,7 +80,7 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
             inkBar: true,
             tabPane: false
           }}
-          activeKey={page || (pages[0] && pages[0].pageId)}
+          activeKey={page || 'newsfeed'}
         >
           {pageTabs}
         </Tabs>

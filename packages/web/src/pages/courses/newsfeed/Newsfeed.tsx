@@ -24,7 +24,7 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = ({
   const { t } = useTranslation()
   return (
     <div className='Newsfeed'>
-      {permission === 'write' && <CreatePost />}
+      {permission === 'write' && <CreatePost courseId={courseId} />}
       {items.map(p => (
         <NewsfeedPost
           key={p.postId}

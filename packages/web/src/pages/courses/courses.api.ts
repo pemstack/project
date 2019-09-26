@@ -234,7 +234,7 @@ export interface GetCoursePostsResult {
   pageSize: number
 }
 
-const DEFAULT_PAGE_SIZE = 5
+export const DEFAULT_PAGE_SIZE = 4
 
 export const GET_COURSE_POSTS: Query<GetCoursePostsResult, GetCoursePostsParams> = {
   resource: ({
@@ -256,7 +256,7 @@ export const GET_COURSE_POSTS: Query<GetCoursePostsResult, GetCoursePostsParams>
 
 export const createCoursePostSchema = yup.object({
   courseId: yup.string().required(),
-  content: yup.string().required(),
+  content: yup.string().required().min(5),
   notify: yup.boolean().notRequired()
 })
 

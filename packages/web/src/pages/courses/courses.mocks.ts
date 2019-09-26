@@ -12,7 +12,10 @@ import {
   CREATE_COURSE_PAGE,
   PageAccess,
   ExistingFile,
-  GET_COURSE_POSTS
+  GET_COURSE_POSTS,
+  CREATE_COURSE_POST,
+  GetCoursePostsResultItem,
+  DEFAULT_PAGE_SIZE
 } from 'pages/courses/courses.api'
 import slugify from 'slugify'
 
@@ -99,6 +102,7 @@ class MockCourse {
   permission: CoursePermission
   owner: boolean
   pages: GetCoursePageResult[]
+  posts: GetCoursePostsResultItem[]
 
   constructor(data: Partial<MockCourse>) {
     Object.assign(this, data)
@@ -205,6 +209,12 @@ class MockCourses {
   private courses: MockCourse[]
 
   constructor() {
+    const now = new Date()
+    const dates = [new Date(), new Date(), new Date(), new Date(), new Date()].map((d, i) => {
+      d.setHours(now.getHours() - i * 0.5 - 0.5 * Math.random())
+      return d
+    })
+
     this.courses = [
       new MockCourse({
         courseId: 'siguria',
@@ -215,7 +225,14 @@ class MockCourses {
           makePage('siguria', { title: 'Info', files: existingFiles }),
           makePage('siguria', { title: 'Projects' }),
           makePage('siguria', { title: 'Resources' })
-        ]
+        ],
+        posts: dates.map((date, i) => ({
+          postId: (i + 1).toString(),
+          posted: date,
+          content: `Hello from post ${i + 1}`,
+          authorId: 'author_id',
+          authorName: 'Filan Fisteku'
+        }))
       })
     ]
   }
@@ -252,39 +269,19 @@ export function mockCourses(api: MockApi) {
     return courses.findCourse(courseId).findPage(pageId)
   })
 
-  api.withQuery(GET_COURSE_POSTS, async ({ courseId, page, pageSize }) => {
-    const now = new Date()
-    const dates = [new Date(), new Date(), new Date].map((d, i) => {
-      d.setHours(now.getHours() - i * 0.5 - 0.5 * Math.random())
-      return d
-    })
-
+  api.withQuery(GET_COURSE_POSTS, async ({
+    courseId,
+    page = 1,
+    pageSize = DEFAULT_PAGE_SIZE
+  }) => {
+    await delay(500)
+    const posts = courses.findCourse(courseId).posts || []
+    const start = (page - 1) * pageSize
+    const end = start + pageSize
     return {
-      total: 10,
-      pageSize: 3,
-      items: [
-        {
-          postId: '1',
-          posted: dates[0],
-          content: `Page ${page} Hello World 1!`,
-          authorId: 'filan1',
-          authorName: 'Filan Fisteku 1'
-        },
-        {
-          postId: '2',
-          posted: dates[1],
-          content: `Page ${page} Hello World 2!`,
-          authorId: 'filan2',
-          authorName: 'Filan Fisteku 2'
-        },
-        {
-          postId: '3',
-          posted: dates[2],
-          content: `Page ${page} Hello World 3!`,
-          authorId: 'filan3',
-          authorName: 'Filan Fisteku 3'
-        }
-      ]
+      items: posts.slice(start, end),
+      total: posts.length,
+      pageSize: Math.min(pageSize, 15)
     }
   })
 
@@ -299,6 +296,22 @@ export function mockCourses(api: MockApi) {
       await delay(500)
       const page = courses.findCourse(courseId).updatePage(pageId, params)
       return { courseId, pageId: slugify(params.title || page.title, { lower: true }) }
+    }
+  )
+
+  api.withAction(
+    CREATE_COURSE_POST,
+    async ({ courseId, content }) => {
+      await delay(500)
+      const course = courses.findCourse(courseId)
+      const posts = course.posts || []
+      course.posts = [{
+        postId: (posts.length + 1).toString(),
+        posted: new Date(),
+        content,
+        authorId: 'author_id',
+        authorName: 'Filan Fisteku'
+      }, ...posts]
     }
   )
 

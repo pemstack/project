@@ -27,7 +27,7 @@ storiesOf('courses/ViewCourse', module)
     <WithInput>
       {courseId => {
         if (courseId) {
-          return <ViewCourse courseId={courseId} display='display-name' />
+          return <ViewCourse courseId={courseId} courseDisplay='display-name' />
         } else {
           return <div>Enter id...</div>
         }
@@ -37,14 +37,21 @@ storiesOf('courses/ViewCourse', module)
   .add('with user layout', () => (
     <UserLayout>
       <CenterContent>
-        <ViewCourse courseId='siguria' display='siguria' />
+        <ViewCourse courseId='siguria' courseDisplay='siguria' />
+      </CenterContent>
+    </UserLayout>
+  ))
+  .add('with custom page', () => (
+    <UserLayout>
+      <CenterContent>
+        <ViewCourse courseId='siguria' courseDisplay='siguria' page='info' />
       </CenterContent>
     </UserLayout>
   ))
   .add('with anonymous layout', () => (
     <AnonymousLayout>
       <CenterContent>
-        <ViewCourse courseId='siguria' display='siguria' />
+        <ViewCourse courseId='siguria' courseDisplay='siguria' />
       </CenterContent>
     </AnonymousLayout>
   ))

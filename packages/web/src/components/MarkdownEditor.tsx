@@ -24,7 +24,7 @@ class MemoMarkdown extends React.Component<MemoMarkdownProps> {
   }
 }
 
-interface MarkdownEditorProps {
+export interface MarkdownEditorProps {
   value: string
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void
