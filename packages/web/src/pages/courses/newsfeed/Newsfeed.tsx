@@ -1,12 +1,12 @@
 import { Link } from '@pema/router-react'
 import { Empty, Icon, Pagination } from 'antd'
 import { useQuery } from 'app'
-import { NewsfeedPost } from 'components'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GET_COURSE_PERMISSION, GET_COURSE_POSTS } from '../courses.api'
 import { CreatePost } from './CreatePost'
 import './Newsfeed.css'
+import { EditableNewsfeedPost } from './EditableNewsfeedPost'
 
 export interface NewsfeedProps {
   courseId: string
@@ -28,13 +28,11 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = ({
       {permission === 'write' && <CreatePost courseId={courseId} />}
       {items && items.length > 0
         ? items.map(p => (
-          <NewsfeedPost
+          <EditableNewsfeedPost
             key={p.postId}
-            item={{
-              author: p.authorName,
-              content: p.content,
-              date: p.posted
-            }}
+            post={p}
+            courseId={courseId}
+            canEdit={permission === 'write'}
           />
         ))
         : <Empty className='Newsfeed__Empty' description={t('text.no-posts')} />}

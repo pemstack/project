@@ -265,7 +265,7 @@ export class CoursesController {
   @Authorize()
   @Delete(':courseid/posts/:postid')
   async deleteCoursePost(
-    @Param('courseId') courseId: string,
+    @Param('courseid') courseId: string,
     @Param('postid') postId: string,
     @ReqUser('userId') userId: string
   ): Promise<void> {

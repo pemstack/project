@@ -1,19 +1,19 @@
-import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { decorator } from 'app/mock'
-import moment from 'moment'
-import { NewsfeedPost, NewsfeedPostItem } from './NewsfeedPost'
 import { UserLayout } from 'app/layout/UserLayout'
-import { CenterContent } from 'components'
+import { decorator } from 'app/mock'
+import { CenterContent, Markdown, ReadMore } from 'components'
+import moment from 'moment'
+import React from 'react'
+import { NewsfeedPost } from './NewsfeedPost'
 
 function randomDate() {
   return moment().subtract(0.5 * Math.random(), 'hours')
 }
 
-const posts: NewsfeedPostItem[] = [
+const posts = [
   {
-    author: 'Author 1',
-    courseTitle: 'Computer Networks',
+    title: 'Author 1',
+    extra: 'Computer Networks',
     date: randomDate(),
     content: `
 ## Some title
@@ -22,8 +22,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 `
   },
   {
-    author: 'Author 2',
-    courseTitle: 'Data Security',
+    title: 'Author 2',
+    extra: 'Data Security',
     date: randomDate(),
     content: `
 ## Project 1 deadline
@@ -77,8 +77,8 @@ Sed consectetur ante odio, a vulputate felis malesuada vel.
 `
   },
   {
-    author: 'Author 3',
-    courseTitle: 'Computer Networks',
+    title: 'Author 3',
+    extra: 'Computer Networks',
     date: randomDate(),
     content: `Some simple content.`
   },
@@ -87,36 +87,42 @@ Sed consectetur ante odio, a vulputate felis malesuada vel.
 storiesOf('data-display/NewsfeedPost', module)
   .addDecorator(decorator())
   .add('single', () => (
-    <>
-      <NewsfeedPost
-        item={{
-          author: 'Post Author',
-          date: randomDate(),
-          courseTitle: 'Data Security',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        }}
-      />
-    </>
+    <NewsfeedPost
+      title='Post Author'
+      date={randomDate()}
+      extra={<a href='/'>Data Security</a>}
+    >
+      <ReadMore>
+        <Markdown source='Lorem ipsum dolor sit amet, consectetur adipiscing elit.' />
+      </ReadMore>
+    </NewsfeedPost>
   ))
   .add('loading', () => (
-    <>
-      <NewsfeedPost
-        item={{
-          author: 'Post Author',
-          date: randomDate(),
-          courseTitle: 'Data Security',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        }}
-        loading
-      />
-    </>
+    <NewsfeedPost
+      loading
+      title='Post Author'
+      date={randomDate()}
+      extra={<a href='/'>Data Security</a>}
+    >
+      <ReadMore>
+        <Markdown source='Lorem ipsum dolor sit amet, consectetur adipiscing elit.' />
+      </ReadMore>
+    </NewsfeedPost>
   ))
   .add('list of posts', () => (
     <UserLayout>
       <CenterContent>
         {posts.map((post, i) => (
           <div key={i} style={{ marginTop: '24px', marginBottom: '24px' }}>
-            <NewsfeedPost item={post} />
+            <NewsfeedPost
+              title={post.title}
+              date={post.date}
+              extra={<a href='/'>{post.extra}</a>}
+            >
+              <ReadMore>
+                <Markdown source={post.content} />
+              </ReadMore>
+            </NewsfeedPost>
           </div>
         ))}
       </CenterContent>

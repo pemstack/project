@@ -4,32 +4,29 @@ import moment, { Moment } from 'moment'
 import { Markdown } from './Markdown'
 import { ReadMore } from './ReadMore'
 import './NewsfeedPost.css'
-
-export interface NewsfeedPostItem {
-  author: string
-  content: string
-  courseTitle?: string
-  date: Date | Moment
-}
+import classNames from 'classnames'
 
 export interface NewsfeedPostProps {
-  item: NewsfeedPostItem
+  title: string
+  date: Date | Moment
   loading?: boolean
+  extra?: React.ReactNode
+  children?: React.ReactNode
+  className?: string
 }
 
 export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
-  item: {
-    author,
-    content,
-    courseTitle,
-    date
-  },
-  loading
+  title,
+  date,
+  loading,
+  extra,
+  children,
+  className
 }) => {
   if (loading) {
     return (
       <Card
-        className='NewsfeedPost'
+        className={classNames('NewsfeedPost', className)}
         bodyStyle={{ padding: 0 }}
       >
         <div className='NewsfeedPost__content'>
@@ -43,12 +40,12 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
 
   return (
     <Card
-      className='NewsfeedPost'
+      className={classNames('NewsfeedPost', className)}
       bodyStyle={{ padding: 0 }}
       title={
         <Card.Meta
           avatar={<Avatar icon='user' />}
-          title={author}
+          title={title}
           description={
             <Tooltip title={m.format('DD/MM/YYYY HH:mm')}>
               {moment.min([m, moment()]).fromNow()}
@@ -56,12 +53,10 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
           }
         />
       }
-      extra={courseTitle && <a href='/'>{courseTitle}</a>}
+      extra={extra}
     >
       <div className='NewsfeedPost__content'>
-        <ReadMore>
-          <Markdown source={content} />
-        </ReadMore>
+        {children}
       </div>
     </Card>
   )
