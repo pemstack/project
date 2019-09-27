@@ -49,7 +49,11 @@ export const NewsfeedPost: FunctionComponent<NewsfeedPostProps> = ({
         <Card.Meta
           avatar={<Avatar icon='user' />}
           title={author}
-          description={<Tooltip title={m.format('DD/MM/YYYY HH:mm')}>{m.fromNow()}</Tooltip>}
+          description={
+            <Tooltip title={m.format('DD/MM/YYYY HH:mm')}>
+              {moment.min([m, moment()]).fromNow()}
+            </Tooltip>
+          }
         />
       }
       extra={courseTitle && <a href='/'>{courseTitle}</a>}
