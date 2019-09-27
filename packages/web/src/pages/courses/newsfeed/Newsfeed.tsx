@@ -37,7 +37,7 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = ({
             }}
           />
         ))
-        : <Empty description={t('text.no-posts')}></Empty>}
+        : <Empty className='Newsfeed__Empty' description={t('text.no-posts')} />}
       <div className='Newsfeed__pagination-wrapper'>
         <Pagination
           hideOnSinglePage

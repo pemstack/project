@@ -71,7 +71,7 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
           </Menu.Item>
           <Menu.Item key='/invitations'>
             <Link to='/invitations' className='nav-text'>
-              <Icon type='book' />
+              <Icon type='mail' />
               <span className='link-text'>{t('Layout.label.invitations')}</span>
             </Link>
           </Menu.Item>

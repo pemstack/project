@@ -10,3 +10,7 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.Newsfeed__Empty {
+  margin-top: 32px;
+}

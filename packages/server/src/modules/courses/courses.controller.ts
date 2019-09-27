@@ -50,7 +50,7 @@ export class CoursesController {
 
   @ApiResponse({ status: 200, type: GetCoursePermissionResponse })
   @ApiBearerAuth()
-  @Authorize()
+  @Authorize(['jwt', 'anonymous'])
   @Get(':courseid/permission')
   async getCoursePermission(
     @Param('courseid') courseId: string,
@@ -220,7 +220,8 @@ export class CoursesController {
 
     const { items, pageSize: pageSizeResult, total } = await this.courses.getCoursePosts({ userId, courseId, page, pageSize })
     return {
-      items: items.map(({ content, author, posted }) => ({
+      items: items.map(({ postId, content, author, posted }) => ({
+        postId,
         content,
         authorId: author.userId,
         authorName: `${author.firstName} ${author.lastName}`,
