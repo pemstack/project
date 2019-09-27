@@ -137,6 +137,54 @@ export const CREATE_COURSE: Action<CreateCourseParams, CreateCourseResult> = {
   invalidates: ['courses']
 }
 
+export const updateCourseSchema = yup.object({
+  courseId: yup.string().required(),
+  newTitle: yup.string().required(),
+  access: yup
+    .string()
+    .oneOf(['private', 'public'])
+    .required()
+})
+
+export type UpdateCourseParams = yup.InferType<typeof updateCourseSchema>
+
+export interface UpdateCourseResult {
+  courseId: string
+  newTitle: string
+}
+
+// PATCH /api/courses/:courseid
+export const UPDATE_COURSE: Action<UpdateCourseParams, UpdateCourseResult> = {
+  schema: updateCourseSchema as Schema<UpdateCourseParams>,
+  progress: true,
+  async perform({ courseId, newTitle, access }, app) {
+    return await app
+      .req(`/api/courses/${courseId}`, { action: 'updateCourse' })
+      .patch({ newTitle, access })
+      .json()
+  },
+  invalidates: ['courses']
+}
+
+export const deleteCourseSchema = yup.object({
+  courseId: yup.string().required()
+})
+
+export type DeleteCourseParams = yup.InferType<typeof deleteCourseSchema>
+
+// DELETE /api/courses/:courseid
+export const DELETE_COURSE: Action<DeleteCourseParams> = {
+  schema: deleteCourseSchema as Schema<DeleteCourseParams>,
+  progress: true,
+  async perform({ courseId }, app) {
+    return await app
+      .req(`/api/courses/${courseId}`, { action: 'deleteCourse' })
+      .delete()
+      .res()
+  },
+  invalidates: ['courses']
+}
+
 export const deleteCoursePageSchema = yup.object({
   courseId: yup.string().required(),
   pageId: yup.string().required()
