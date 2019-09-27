@@ -23,7 +23,8 @@ import {
   UpdateCoursePageRequest,
   UpdateCoursePageResponse,
   GetCoursePostsResponse,
-  CreateCoursePostRequest
+  CreateCoursePostRequest,
+  EditCoursePostRequest
 } from './courses.dto'
 import { ReqUser, Authorize } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
@@ -210,8 +211,20 @@ export class CoursesController {
   async createCoursePost(
     @Param('courseid') courseId: string,
     @ReqUser('userId') userId: string,
-    @Body() { content }: CreateCoursePostRequest,
+    @Body() { content }: CreateCoursePostRequest
   ): Promise<void> {
     await this.courses.createCoursePost({ courseId, userId, content })
+  }
+
+  @ApiResponse({ status: 201 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Patch(':courseid/posts')
+  async editCoursePost(
+    @Param('courseId') courseId: string,
+    @ReqUser('userId') userId: string,
+    @Body() { postId, content }: EditCoursePostRequest
+  ): Promise<void> {
+    await this.courses.editCoursePost({ courseId, postId, userId, content })
   }
 }

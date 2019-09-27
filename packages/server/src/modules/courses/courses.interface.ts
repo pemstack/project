@@ -67,3 +67,10 @@ export interface CreateCoursePostParams {
   userId: string
   content: string
 }
+
+export interface EditCoursePostParams {
+  courseId: string
+  postId: string
+  userId: string
+  content: string
+}

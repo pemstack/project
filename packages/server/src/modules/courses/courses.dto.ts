@@ -147,3 +147,8 @@ export class GetCoursePostsResponse {
 export class CreateCoursePostRequest {
   content: string
 }
+
+export class EditCoursePostRequest {
+  postId: string
+  content: string
+}

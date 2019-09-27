@@ -27,7 +27,8 @@ import {
   TryGetPermissionParams,
   AddMemberToCourseParams,
   GetCoursePostsParams,
-  CreateCoursePostParams
+  CreateCoursePostParams,
+  EditCoursePostParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -323,6 +324,35 @@ export class CoursesService {
       authorId: userId,
       content
     })
+  }
+
+  async editCoursePost({ courseId, postId, userId, content }: EditCoursePostParams) {
+    if (!userId) {
+      throw new UnauthorizedException()
+    }
+
+    const permission = await this.tryGetCoursePermission({ courseId, userId })
+    if (!permission) {
+      throw new NotFoundException()
+    }
+
+    if (permission.permissionLevel !== CoursePermissionLevel.Write) {
+      throw new ForbiddenException()
+    }
+
+    const postExists = this.entities.find(CoursePost, {
+      where: { courseId, postId }
+    })
+
+    if (!postExists) {
+      throw new NotFoundException()
+    }
+
+    if (content.length < 5) {
+      throw new BadRequestException()
+    }
+
+    await this.entities.update(CoursePost, { courseId, postId }, { content })
   }
 
   // Permissions
