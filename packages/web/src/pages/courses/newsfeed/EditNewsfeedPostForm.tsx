@@ -1,6 +1,6 @@
-import { Button, Form } from 'antd'
+import { Button } from 'antd'
 import { useAction } from 'app'
-import { Formik, MarkdownInput, SubmitButton } from 'forms'
+import { Form, Formik, MarkdownInput, SubmitButton } from 'forms'
 import React, { FunctionComponent } from 'react'
 import { UPDATE_COURSE_POST } from '../courses.api'
 import './EditNewsfeedPostForm.css'
