@@ -45,6 +45,7 @@ export const ConfirmEmailRoute: View = ({ match }) => {
     return () => {
       cancel = true
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmState, registerToken])
 
   switch (confirmState) {
@@ -64,7 +65,7 @@ export const ConfirmEmailRoute: View = ({ match }) => {
   }
 }
 
-export const ConfirmEmailSuccess: FunctionComponent = ({ }) => {
+export const ConfirmEmailSuccess: FunctionComponent = () => {
   const { t } = useTranslation()
   return (
     <Result
@@ -80,7 +81,7 @@ export const ConfirmEmailSuccess: FunctionComponent = ({ }) => {
   )
 }
 
-export const ConfirmEmailError: FunctionComponent = ({ }) => {
+export const ConfirmEmailError: FunctionComponent = () => {
   const { t } = useTranslation()
   return (
     <Result

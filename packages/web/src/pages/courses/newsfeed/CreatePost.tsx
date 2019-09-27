@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { CREATE_COURSE_POST } from '../courses.api'
 import { useAction } from 'app'
-import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Formik, Form, MarkdownInput, SubmitButton } from 'forms'
 import './CreatePost.css'

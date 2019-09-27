@@ -1,19 +1,19 @@
+import { Link } from '@pema/router-react'
+import { Button, Empty, List, Modal, Select, Tabs } from 'antd'
+import { useAction, useQuery } from 'app'
+import { CollapseCard, Flex, LinkButton } from 'components'
+import { Form, Formik, Input } from 'forms'
 import React, { FunctionComponent, useState } from 'react'
-import { Modal, Tabs, List, Select, Button, Empty } from 'antd'
 import { useTranslation } from 'react-i18next'
 import {
-  GET_COURSE_PAGES,
-  DELETE_COURSE_PAGE,
-  UPDATE_COURSE_PAGE,
   CREATE_COURSE_PAGE,
-  PageAccess
+  DELETE_COURSE_PAGE,
+  GET_COURSE_PAGES,
+  PageAccess,
+  UPDATE_COURSE_PAGE
 } from '../courses.api'
-import { CollapseCard, Flex, LinkButton } from 'components'
-import { useQuery, useAction } from 'app'
-import './ManageCourse.css'
-import { Formik, Form, Input } from 'forms'
-import { Link } from '@pema/router-react'
 import { InviteMembersModal } from '../invite/InviteMembersModal'
+import './ManageCourse.css'
 
 const { confirm } = Modal
 const { TabPane } = Tabs

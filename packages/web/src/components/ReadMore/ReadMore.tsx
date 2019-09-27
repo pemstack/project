@@ -13,11 +13,12 @@ export interface ToggleButtonProps {
 
 export interface ReadMoreProps {
   initialHeight?: number
-  renderButton?: (props: ToggleButtonProps) => React.ReactNode
+  ToggleButton?: React.ComponentType<ToggleButtonProps>
 }
-const { t } = useTranslation()
 
 function SimpleButton({ isOpen, toggle }: ToggleButtonProps) {
+  const { t } = useTranslation()
+
   return (
     <div
       style={{
@@ -43,10 +44,9 @@ function SimpleButton({ isOpen, toggle }: ToggleButtonProps) {
 
 export const ReadMore: FunctionComponent<ReadMoreProps> = ({
   initialHeight = 250,
-  renderButton = SimpleButton,
+  ToggleButton = SimpleButton,
   children
 }) => {
-  
   const container = useRef<null | HTMLDivElement>(null)
   const [maxHeight, setMaxHeight] = useState(initialHeight)
   const { height } = useComponentSize(container)
@@ -82,7 +82,7 @@ export const ReadMore: FunctionComponent<ReadMoreProps> = ({
           />
         )}
       </div>
-      {isButtonVisible && renderButton && renderButton({ isOpen, toggle })}
+      {isButtonVisible && ToggleButton && <ToggleButton isOpen={isOpen} toggle={toggle} />}
     </div>
   )
 }

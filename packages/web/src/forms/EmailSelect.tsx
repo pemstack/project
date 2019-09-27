@@ -11,6 +11,7 @@ function onlyUnique<T>(value: T, index: number, self: T[]) {
 }
 
 function getEmails(str: string) {
+  // eslint-disable-next-line
   return str.match(/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/gim) || []
 }
 

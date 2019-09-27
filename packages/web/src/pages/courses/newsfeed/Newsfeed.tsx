@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from 'react'
-import { useQuery } from 'app'
-import { GET_COURSE_POSTS, GET_COURSE_PERMISSION } from '../courses.api'
-import { NewsfeedPost, MarkdownEditor } from 'components'
-import { Pagination, Icon, Button, Empty } from 'antd'
 import { Link } from '@pema/router-react'
-import './Newsfeed.css'
+import { Empty, Icon, Pagination } from 'antd'
+import { useQuery } from 'app'
+import { NewsfeedPost } from 'components'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { GET_COURSE_PERMISSION, GET_COURSE_POSTS } from '../courses.api'
 import { CreatePost } from './CreatePost'
+import './Newsfeed.css'
 
 export interface NewsfeedProps {
   courseId: string

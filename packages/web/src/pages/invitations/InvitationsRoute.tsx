@@ -1,10 +1,9 @@
+import { authorize, useAction, useQuery, View, view } from 'app'
 import React from 'react'
-import { View, useQuery, useAction, authorize, view } from 'app'
 import { Invitation } from './Invitation'
 import { GET_USER_INVITATIONS, UPDATE_INVITATION } from './invitations.api'
 
-
-export const InvitationsRoute: View = ({ }) => {
+export const InvitationsRoute: View = () => {
   const invitations = useQuery(GET_USER_INVITATIONS).read()
   const updateInvitation = useAction(UPDATE_INVITATION)
   return (

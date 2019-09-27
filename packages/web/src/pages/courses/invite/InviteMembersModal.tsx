@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react'
-import { Formik, Form, Input, EmailSelect, Radio } from 'forms'
+import { Formik, Form, EmailSelect, Radio } from 'forms'
 import { Modal } from 'antd'
-import { InviteMembersForm } from './InviteMembersForm'
 import { useTranslation } from 'react-i18next'
 
 export interface InviteMembersModalProps {
