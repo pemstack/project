@@ -327,7 +327,7 @@ export class CoursesService {
     })
   }
 
-  async editCoursePost({ courseId, postId, userId, content }: EditCoursePostParams) {
+  async updateCoursePost({ courseId, postId, userId, content }: EditCoursePostParams) {
     if (!userId) {
       throw new UnauthorizedException()
     }
@@ -341,7 +341,7 @@ export class CoursesService {
       throw new ForbiddenException()
     }
 
-    const postExists = this.entities.find(CoursePost, {
+    const postExists = await this.entities.find(CoursePost, {
       where: { courseId, postId }
     })
 

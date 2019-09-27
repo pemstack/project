@@ -149,10 +149,5 @@ export class CreateCoursePostRequest {
 }
 
 export class EditCoursePostRequest {
-  postId: string
   content: string
-}
-
-export class DeleteCoursePostRequest {
-  postId: string
 }

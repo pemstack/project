@@ -217,26 +217,29 @@ export class CoursesController {
     await this.courses.createCoursePost({ courseId, userId, content })
   }
 
+  // PATCH /api/courses/:courseid/posts/:postid
   @ApiResponse({ status: 201 })
   @ApiBearerAuth()
   @Authorize()
-  @Patch(':courseid/posts')
-  async editCoursePost(
-    @Param('courseId') courseId: string,
+  @Patch(':courseid/posts/:postid')
+  async updateCoursePost(
+    @Param('courseid') courseId: string,
+    @Param('postid') postId: string,
     @ReqUser('userId') userId: string,
-    @Body() { postId, content }: EditCoursePostRequest
+    @Body() { content }: EditCoursePostRequest
   ): Promise<void> {
-    await this.courses.editCoursePost({ courseId, postId, userId, content })
+    await this.courses.updateCoursePost({ courseId, postId, userId, content })
   }
 
+  // DELETE /api/courses/:courseid/posts/:postid
   @ApiResponse({ status: 201 })
   @ApiBearerAuth()
   @Authorize()
-  @Delete(':courseid/posts')
+  @Delete(':courseid/posts/:postid')
   async deleteCoursePost(
     @Param('courseId') courseId: string,
-    @ReqUser('userId') userId: string,
-    @Body() { postId }: DeleteCoursePostRequest
+    @Param('postid') postId: string,
+    @ReqUser('userId') userId: string
   ): Promise<void> {
     await this.courses.deleteCoursePost({ courseId, postId, userId })
   }

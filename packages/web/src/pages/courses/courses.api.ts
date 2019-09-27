@@ -275,21 +275,21 @@ export const CREATE_COURSE_POST: Action<CreateCoursePostParams> = {
   invalidates: ({ params: { courseId } }) => [`courses/${courseId}/posts`]
 }
 
-export const editCoursePostSchema = yup.object({
+export const updateCoursePostSchema = yup.object({
   courseId: yup.string().required(),
   postId: yup.string().required(),
   content: yup.string().required().min(5)
 })
 
-export type EditCoursePostParams = yup.InferType<typeof editCoursePostSchema>
+export type UpdateCoursePostParams = yup.InferType<typeof updateCoursePostSchema>
 
-export const EDIT_COURSE_POST: Action<EditCoursePostParams> = {
-  schema: editCoursePostSchema as Schema<EditCoursePostParams>,
+export const UPDATE_COURSE_POST: Action<UpdateCoursePostParams> = {
+  schema: updateCoursePostSchema as Schema<UpdateCoursePostParams>,
   progress: true,
   async perform({ courseId, postId, content }, app) {
     return await app
-      .req(`/api/courses/${courseId}/posts`, { action: 'editCoursePost' })
-      .patch({ postId, content })
+      .req(`/api/courses/${courseId}/posts/${postId}`, { action: 'updateCoursePost' })
+      .patch({ content })
       .res()
   },
   invalidates: ({ params: { courseId } }) => [`courses/${courseId}/posts`]
@@ -307,8 +307,8 @@ export const DELETE_COURSE_POST: Action<DeleteCoursePostParams> = {
   progress: true,
   async perform({ courseId, postId }, app) {
     return await app
-      .req(`/api/courses/${courseId}/posts`, { action: 'deleteCoursePost' })
-      .delete({ postId })
+      .req(`/api/courses/${courseId}/posts/${postId}`, { action: 'deleteCoursePost' })
+      .delete()
       .res()
   },
   invalidates: ({ params: { courseId } }) => [`courses/${courseId}/posts`]
