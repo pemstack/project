@@ -29,7 +29,8 @@ import {
   GetCoursePostsParams,
   CreateCoursePostParams,
   EditCoursePostParams,
-  DeleteCoursePostParams
+  DeleteCoursePostParams,
+  AssertPermissionParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -90,14 +91,7 @@ export class CoursesService {
     userId,
     courseId
   }: GetCoursePagesParams) {
-    const permission = await this.tryGetCoursePermission({ courseId, userId })
-    if (!permission) {
-      throw new NotFoundException()
-    }
-
-    if (permission.permissionLevel === CoursePermissionLevel.None) {
-      throw new ForbiddenException()
-    }
+    await this.assertReadPermission({ courseId, userId })
 
     return await this.entities.find(CoursePage, {
       select: ['pageId', 'title', 'access'],
@@ -110,20 +104,7 @@ export class CoursesService {
     courseId,
     pageId
   }: GetCoursePageParams) {
-    const permission = await this.tryGetCoursePermission({ courseId, userId })
-    // Course does not exist.
-    if (!permission) {
-      throw new NotFoundException()
-    }
-
-    // Course is private.
-    if (permission.permissionLevel === CoursePermissionLevel.None) {
-      if (userId) {
-        throw new ForbiddenException()
-      } else {
-        throw new UnauthorizedException()
-      }
-    }
+    const permission = await this.assertReadPermission({ courseId, userId })
 
     const page = await this.entities.findOne(CoursePage, {
       pageId,
@@ -159,14 +140,7 @@ export class CoursesService {
     content = '',
     access = PageAccess.Private
   }: CreateCoursePageParams): Promise<string> {
-    const coursePermission = await this.tryGetCoursePermission({ courseId, userId })
-    if (!coursePermission) {
-      throw new NotFoundException()
-    }
-
-    if (coursePermission.permissionLevel !== CoursePermissionLevel.Write) {
-      throw new ForbiddenException()
-    }
+    await this.assertWritePermission({ courseId, userId })
 
     const pageId = slugify(title, { lower: true })
 
@@ -198,14 +172,7 @@ export class CoursesService {
     content,
     access
   }: UpdateCoursePageParams): Promise<string> {
-    const coursePermission = await this.tryGetCoursePermission({ courseId, userId })
-    if (!coursePermission) {
-      throw new NotFoundException()
-    }
-
-    if (coursePermission.permissionLevel !== CoursePermissionLevel.Write) {
-      throw new ForbiddenException()
-    }
+    await this.assertWritePermission({ courseId, userId })
 
     const newPageId = title ? slugify(title, { lower: true }) : pageId
 
@@ -242,28 +209,13 @@ export class CoursesService {
     courseId,
     pageId
   }: DeleteCoursePageParams) {
-    if (!userId) {
-      throw new UnauthorizedException()
-    }
+    await this.assertWritePermission({ courseId, userId })
 
-    if (!courseId || !pageId) {
+    if (!pageId) {
       throw new BadRequestException()
     }
 
-    const coursePermission = await this.tryGetCoursePermission({ courseId, userId })
-    if (!coursePermission) {
-      throw new NotFoundException()
-    }
-
-    if (coursePermission.permissionLevel !== CoursePermissionLevel.Write) {
-      throw new ForbiddenException()
-    }
-
-    const result = await this.entities.delete(CoursePage, { courseId, pageId })
-
-    // if (result.affected === 0) {
-    //   throw new NotFoundException()
-    // }
+    await this.entities.delete(CoursePage, { courseId, pageId })
   }
 
   // Posts
@@ -274,18 +226,7 @@ export class CoursesService {
     page,
     pageSize = 10
   }: GetCoursePostsParams) {
-    const permission = await this.tryGetCoursePermission({ courseId, userId })
-    if (!permission) {
-      throw new NotFoundException()
-    }
-
-    if (permission.permissionLevel === CoursePermissionLevel.None) {
-      if (!userId) {
-        throw new UnauthorizedException()
-      } else {
-        throw new ForbiddenException()
-      }
-    }
+    await this.assertReadPermission({ courseId, userId })
 
     const total = await this.entities.count(CoursePost, {
       where: { courseId }
@@ -307,18 +248,7 @@ export class CoursesService {
   }
 
   async createCoursePost({ courseId, userId, content }: CreateCoursePostParams) {
-    if (!userId) {
-      throw new UnauthorizedException()
-    }
-
-    const permission = await this.tryGetCoursePermission({ courseId, userId })
-    if (!permission) {
-      throw new NotFoundException()
-    }
-
-    if (permission.permissionLevel !== CoursePermissionLevel.Write) {
-      throw new ForbiddenException() // 401
-    }
+    this.assertWritePermission({ courseId, userId })
 
     await this.entities.insert(CoursePost, {
       courseId,
@@ -328,18 +258,7 @@ export class CoursesService {
   }
 
   async updateCoursePost({ courseId, postId, userId, content }: EditCoursePostParams) {
-    if (!userId) {
-      throw new UnauthorizedException()
-    }
-
-    const permission = await this.tryGetCoursePermission({ courseId, userId })
-    if (!permission) {
-      throw new NotFoundException()
-    }
-
-    if (permission.permissionLevel !== CoursePermissionLevel.Write) {
-      throw new ForbiddenException()
-    }
+    this.assertWritePermission({ courseId, userId })
 
     const postExists = await this.entities.find(CoursePost, {
       where: { courseId, postId }
@@ -357,18 +276,7 @@ export class CoursesService {
   }
 
   async deleteCoursePost({ courseId, postId, userId }: DeleteCoursePostParams) {
-    if (!userId) {
-      throw new UnauthorizedException()
-    }
-
-    const permission = await this.tryGetCoursePermission({ courseId, userId })
-    if (!permission) {
-      throw new NotFoundException()
-    }
-
-    if (permission.permissionLevel !== CoursePermissionLevel.Write) {
-      throw new ForbiddenException()
-    }
+    this.assertWritePermission({ courseId, userId })
 
     const postExists = this.entities.find(CoursePost, {
       where: { courseId, postId }
@@ -435,6 +343,38 @@ export class CoursesService {
         : course.access === CourseAccess.Public ?
           CoursePermissionLevel.Read : CoursePermissionLevel.None,
       isMember: permission && permission.permissionLevel !== CoursePermissionLevel.None
+    }
+  }
+
+  async assertReadPermission({ courseId, userId }: AssertPermissionParams) {
+    const permission = await this.tryGetCoursePermission({ courseId, userId })
+    if (!permission) {
+      throw new NotFoundException()
+    }
+
+    if (permission.permissionLevel === CoursePermissionLevel.None) {
+      if (userId) {
+        throw new ForbiddenException()
+      } else {
+        throw new UnauthorizedException()
+      }
+    }
+
+    return permission
+  }
+
+  async assertWritePermission({ courseId, userId }: AssertPermissionParams) {
+    if (!userId) {
+      throw new UnauthorizedException()
+    }
+
+    const permission = await this.tryGetCoursePermission({ courseId, userId })
+    if (!permission) {
+      throw new NotFoundException()
+    }
+
+    if (permission.permissionLevel !== CoursePermissionLevel.Write) {
+      throw new ForbiddenException()
     }
   }
 }

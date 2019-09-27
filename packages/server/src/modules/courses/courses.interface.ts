@@ -80,3 +80,8 @@ export interface DeleteCoursePostParams {
   postId: string
   userId: string
 }
+
+export interface AssertPermissionParams {
+  courseId: string
+  userId: string | null
+}
