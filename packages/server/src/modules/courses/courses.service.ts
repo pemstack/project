@@ -28,7 +28,8 @@ import {
   AddMemberToCourseParams,
   GetCoursePostsParams,
   CreateCoursePostParams,
-  EditCoursePostParams
+  EditCoursePostParams,
+  DeleteCoursePostParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -353,6 +354,31 @@ export class CoursesService {
     }
 
     await this.entities.update(CoursePost, { courseId, postId }, { content })
+  }
+
+  async deleteCoursePost({ courseId, postId, userId }: DeleteCoursePostParams) {
+    if (!userId) {
+      throw new UnauthorizedException()
+    }
+
+    const permission = await this.tryGetCoursePermission({ courseId, userId })
+    if (!permission) {
+      throw new NotFoundException()
+    }
+
+    if (permission.permissionLevel !== CoursePermissionLevel.Write) {
+      throw new ForbiddenException()
+    }
+
+    const postExists = this.entities.find(CoursePost, {
+      where: { courseId, postId }
+    })
+
+    if (!postExists) {
+      throw new NotFoundException()
+    }
+
+    await this.entities.delete(CoursePost, { courseId, postId })
   }
 
   // Permissions

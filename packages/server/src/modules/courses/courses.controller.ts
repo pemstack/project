@@ -24,7 +24,8 @@ import {
   UpdateCoursePageResponse,
   GetCoursePostsResponse,
   CreateCoursePostRequest,
-  EditCoursePostRequest
+  EditCoursePostRequest,
+  DeleteCoursePostRequest
 } from './courses.dto'
 import { ReqUser, Authorize } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
@@ -226,5 +227,17 @@ export class CoursesController {
     @Body() { postId, content }: EditCoursePostRequest
   ): Promise<void> {
     await this.courses.editCoursePost({ courseId, postId, userId, content })
+  }
+
+  @ApiResponse({ status: 201 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Delete(':courseid/posts')
+  async deleteCoursePost(
+    @Param('courseId') courseId: string,
+    @ReqUser('userId') userId: string,
+    @Body() { postId }: DeleteCoursePostRequest
+  ): Promise<void> {
+    await this.courses.deleteCoursePost({ courseId, postId, userId })
   }
 }

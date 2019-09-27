@@ -74,3 +74,9 @@ export interface EditCoursePostParams {
   userId: string
   content: string
 }
+
+export interface DeleteCoursePostParams {
+  courseId: string
+  postId: string
+  userId: string
+}
