@@ -40,6 +40,25 @@ export class CreateCourseResponse {
   title: string
 }
 
+export class UpdateCourseRequest {
+  @ApiModelProperty({ minLength: 1 })
+  @IsString()
+  @MinLength(1)
+  newTitle: string
+
+  @ApiModelProperty({ enum: Object.values(CourseAccess) })
+  @IsString()
+  access: CourseAccess
+}
+
+export class UpdateCourseResponse {
+  @ApiResponseModelProperty()
+  courseId: string
+
+  @ApiResponseModelProperty()
+  newTitle: string
+}
+
 export class GetCoursePagesResponse {
   @ApiResponseModelProperty()
   pageId: string

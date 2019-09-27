@@ -10,6 +10,18 @@ export interface CreateCourseParams {
   access: CourseAccess
 }
 
+export interface UpdateCourseParams {
+  courseId: string
+  userId: string
+  newTitle: string
+  access: CourseAccess
+}
+
+export interface DeleteCourseParams {
+  courseId: string
+  userId: string
+}
+
 export interface GetCoursePagesParams {
   userId: string | null
   courseId: string

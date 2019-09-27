@@ -30,7 +30,9 @@ import {
   CreateCoursePostParams,
   EditCoursePostParams,
   DeleteCoursePostParams,
-  AssertPermissionParams
+  AssertPermissionParams,
+  UpdateCourseParams,
+  DeleteCourseParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -85,6 +87,23 @@ export class CoursesService {
     })
 
     return courseId
+  }
+
+  async updateCourse({
+    courseId,
+    userId,
+    newTitle,
+    access
+  }: UpdateCourseParams) {
+    this.assertWritePermission({ courseId, userId })
+
+    await this.entities.update(Course, { courseId }, { title: newTitle, access })
+  }
+
+  async deleteCourse({ courseId, userId }: DeleteCourseParams) {
+    this.assertWritePermission({ courseId, userId })
+
+    await this.entities.delete(Course, { courseId })
   }
 
   async getCoursePages({
