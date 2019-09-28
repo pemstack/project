@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useState } from 'react'
-import { Dictionary } from '@pema/utils'
 import { MockApiClient } from '@pema/state/lib/mock-api-client'
-import { createMemoryHistory } from 'history'
+import { Dictionary } from '@pema/utils'
 import { init } from 'app'
-import { RouteParams } from './types'
-import { AppRoot } from './components/AppRoot'
+import { createMemoryHistory } from 'history'
 import { mockCourses } from 'pages/courses/courses.mocks'
 import { mockInvitations } from 'pages/invitations/invitations.mocks'
+import React, { FunctionComponent, useState } from 'react'
+import { MemoryStore } from 'stores'
+import { AppRoot } from './components/AppRoot'
+import { RouteParams } from './types'
 
 export interface MockApi {
   withQuery: MockApiClient['withQuery']
@@ -72,13 +73,15 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
       {},
       {
         reload: () => {
+          console.log('Reloading app...')
           setApp(createApp())
         },
         createHistory: createMemoryHistory,
         historyProps: {
           initialEntries: [path]
         },
-        ApiClient: MockApiClient
+        ApiClient: MockApiClient,
+        Session: MemoryStore
       }
     )
 

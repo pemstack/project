@@ -18,16 +18,28 @@ import { baseWretcher } from './utils'
 
 wretch().errorType('json')
 
+interface ISession {
+  get(key: string): any
+  remove(key: string): void
+}
+
 interface InitOptions {
   reload: (hardRefresh?: boolean) => void
   createHistory?: () => History
   historyProps?: AppOptions<HistoryBuildOptions>
   ApiClient?: new (...args: any[]) => IApiClient
+  Session?: new (...args: any[]) => ISession
 }
 
 export function init(
   state: JObject,
-  { reload, createHistory, historyProps, ApiClient }: InitOptions
+  {
+    reload,
+    createHistory,
+    historyProps,
+    ApiClient,
+    Session = CookiesStore
+  }: InitOptions
 ): App {
   const root = app(state)
     .extend(
@@ -41,7 +53,7 @@ export function init(
     .extend({
       progress: ProgressStore,
       user: UserStore,
-      cookies: CookiesStore,
+      cookies: Session,
       apiClient: ApiClient || CachedApiClient,
       session: SessionStore,
       recaptcha: RecaptchaStore,
