@@ -201,7 +201,7 @@ export const DELETE_COURSE_PAGE: Action<DeleteCoursePageParams> = {
       .delete()
       .res()
   },
-  invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
+  invalidates: ({ courseId }) => [`courses/${courseId}/pages`]
 }
 
 const createCoursePageSchema = yup.object({
@@ -220,7 +220,7 @@ export const CREATE_COURSE_PAGE: Action<CreateCoursePageParams> = {
       .post({ title })
       .res()
   },
-  invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
+  invalidates: ({ courseId }) => [`courses/${courseId}/pages`]
 }
 
 export const updateCoursePageSchema = yup.object({
@@ -259,7 +259,7 @@ export const UPDATE_COURSE_PAGE: Action<UpdateCoursePageParams, UpdateCoursePage
       .patch(params)
       .res()
   },
-  invalidates: ({ params: { courseId } }) => [`courses/${courseId}/pages`]
+  invalidates: ({ courseId }) => [`courses/${courseId}/pages`]
 }
 
 export interface GetCoursePostsParams {
@@ -320,7 +320,7 @@ export const CREATE_COURSE_POST: Action<CreateCoursePostParams> = {
       .post({ content, notify })
       .res()
   },
-  invalidates: ({ params: { courseId } }) => [`courses/${courseId}/posts`]
+  invalidates: ({ courseId }) => [`courses/${courseId}/posts`]
 }
 
 export const updateCoursePostSchema = yup.object({
@@ -340,7 +340,7 @@ export const UPDATE_COURSE_POST: Action<UpdateCoursePostParams> = {
       .patch({ content })
       .res()
   },
-  invalidates: ({ params: { courseId } }) => [`courses/${courseId}/posts`]
+  invalidates: ({ courseId }) => [`courses/${courseId}/posts`]
 }
 
 export const deleteCoursePostSchema = yup.object({
@@ -359,5 +359,41 @@ export const DELETE_COURSE_POST: Action<DeleteCoursePostParams> = {
       .delete()
       .res()
   },
-  invalidates: ({ params: { courseId } }) => [`courses/${courseId}/posts`]
+  invalidates: ({ courseId }) => [`courses/${courseId}/posts`]
+}
+
+export interface GetCourseMembersParams {
+  courseId: string
+}
+
+export interface GetCourseMembersResult {
+  name: string | null
+  email: string
+  permission: CoursePermission
+  status: 'member' | 'invited'
+}
+
+export const GET_COURSE_MEMBERS: Query<GetCourseMembersResult[], GetCourseMembersParams> = {
+  resource: ({ courseId }) => `courses/${courseId}/members`,
+  async fetch({ courseId }, app) {
+    return await app
+      .req(`/api/courses/${courseId}/members`, { action: 'getCourseMembers' })
+      .get()
+      .json()
+  }
+}
+
+export interface DeleteCourseMemberParams {
+  courseId: string
+  email: string
+}
+
+export const DELETE_COURSE_MEMBER: Action<DeleteCourseMemberParams> = {
+  async perform({ courseId, email }, app) {
+    return await app
+      .req(`/api/courses/${courseId}/members/${email}`, { action: 'deleteCourseMember' })
+      .delete()
+      .res()
+  },
+  invalidates: ({ courseId }) => [`courses/${courseId}/members`]
 }

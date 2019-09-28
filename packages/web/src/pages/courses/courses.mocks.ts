@@ -15,7 +15,10 @@ import {
   GET_COURSE_POSTS,
   CREATE_COURSE_POST,
   GetCoursePostsResultItem,
-  DEFAULT_PAGE_SIZE
+  DEFAULT_PAGE_SIZE,
+  GetCourseMembersResult,
+  GET_COURSE_MEMBERS,
+  DELETE_COURSE_MEMBER
 } from 'pages/courses/courses.api'
 import slugify from 'slugify'
 
@@ -103,6 +106,7 @@ class MockCourse {
   owner: boolean
   pages: GetCoursePageResult[]
   posts: GetCoursePostsResultItem[]
+  members: GetCourseMembersResult[]
 
   constructor(data: Partial<MockCourse>) {
     Object.assign(this, data)
@@ -232,7 +236,33 @@ class MockCourses {
           content: `Hello from post ${i + 1}`,
           authorId: 'author_id',
           authorName: 'Filan Fisteku'
-        }))
+        })),
+        members: [
+          {
+            name: 'Florentina Haxhimustafaj',
+            email: 'first1.last1@example.com',
+            permission: 'write',
+            status: 'member'
+          },
+          {
+            name: 'Nexhmedin Demehajdaraj',
+            email: 'first2.last2@example.com',
+            permission: 'read',
+            status: 'member'
+          },
+          {
+            name: 'Muzafer Mahmutdemaj',
+            email: 'first3.last3@example.com',
+            permission: 'read',
+            status: 'invited'
+          },
+          {
+            name: 'Dea Aliu',
+            email: 'first4.last4@example.com',
+            permission: 'read',
+            status: 'invited'
+          }
+        ]
       })
     ]
   }
@@ -325,6 +355,18 @@ export function mockCourses(api: MockApi) {
   api.withAction(CREATE_COURSE_PAGE, async ({ courseId, title }) => {
     await delay(500)
     courses.findCourse(courseId).addPage(title)
+  })
+
+  api.withQuery(GET_COURSE_MEMBERS, async ({ courseId }) => {
+    await delay(500)
+    return courses.findCourse(courseId).members || []
+  })
+
+  api.withAction(DELETE_COURSE_MEMBER, async ({ courseId, email }) => {
+    await delay(500)
+    const course = courses.findCourse(courseId)
+    const members = course.members || []
+    course.members = members.filter(m => m.email !== email)
   })
 }
 

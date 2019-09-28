@@ -14,6 +14,7 @@ import {
 } from '../courses.api'
 import { InviteMembersModal } from '../invite/InviteMembersModal'
 import './ManageCourse.css'
+import { MemberCardList } from './MemberCardList'
 
 const { confirm } = Modal
 const { TabPane } = Tabs
@@ -226,6 +227,7 @@ const ManageCourseMembers: FunctionComponent<ManageCourseProps> = ({
           {t('button.invite')}
         </Button>
       </Flex>
+      <MemberCardList courseId={courseId} />
     </CollapseCard>
   )
 }

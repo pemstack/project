@@ -1,5 +1,5 @@
 export { NewsfeedPost } from './NewsfeedPost'
-export { MemberCard } from './MemberCard'
+export { MemberCard } from '../pages/courses/manage/MemberCard'
 export { Markdown } from './Markdown'
 export { MarkdownEditor } from './MarkdownEditor'
 export { ReadMore } from './ReadMore'
