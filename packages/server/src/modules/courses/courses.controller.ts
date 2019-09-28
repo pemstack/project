@@ -26,7 +26,8 @@ import {
   CreateCoursePostRequest,
   EditCoursePostRequest,
   UpdateCourseRequest,
-  UpdateCourseResponse
+  UpdateCourseResponse,
+  GetCourseMembersResponse
 } from './courses.dto'
 import { ReqUser, Authorize } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
@@ -270,5 +271,19 @@ export class CoursesController {
     @ReqUser('userId') userId: string
   ): Promise<void> {
     await this.courses.deleteCoursePost({ courseId, postId, userId })
+  }
+
+  // Members
+
+  // GET /api/courses/:courseid/members
+  @ApiResponse({ status: 200, type: [GetCourseMembersResponse] })
+  @ApiBearerAuth()
+  @Authorize()
+  @Get(':courseid/members')
+  async getCourseMembers(
+    @Param('courseid') courseId: string,
+    @ReqUser('userId') userId: string
+  ): Promise<GetCourseMembersResponse[]> {
+    return await this.courses.getCourseMembers({ courseId, userId })
   }
 }

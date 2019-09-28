@@ -1,6 +1,6 @@
 import { ApiModelProperty, ApiResponseModelProperty } from '@nestjs/swagger'
 import { IsString, MinLength, IsOptional } from 'class-validator'
-import { CourseAccess, PageAccess, CoursePermissionLevel } from './courses.entity'
+import { CourseAccess, PageAccess, CoursePermissionLevel, CoursePermission } from './courses.entity'
 
 export class GetCourseResponse {
   @ApiResponseModelProperty()
@@ -164,9 +164,25 @@ export class GetCoursePostsResponse {
 }
 
 export class CreateCoursePostRequest {
+  @ApiModelProperty()
   content: string
 }
 
 export class EditCoursePostRequest {
+  @ApiModelProperty()
   content: string
+}
+
+export class GetCourseMembersResponse {
+  @ApiResponseModelProperty()
+  name: string | null
+
+  @ApiResponseModelProperty()
+  email: string
+
+  @ApiResponseModelProperty()
+  permission: CoursePermissionLevel
+
+  @ApiResponseModelProperty()
+  status: 'member' | 'invited'
 }

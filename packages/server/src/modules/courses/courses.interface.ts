@@ -97,3 +97,15 @@ export interface AssertPermissionParams {
   courseId: string
   userId: string | null
 }
+
+export interface GetCourseMembersParams {
+  courseId: string
+  userId: string
+}
+
+export interface GetCourseMembersResult {
+  name: string | null
+  email: string
+  permission: CoursePermissionLevel
+  status: 'member' | 'invited'
+}

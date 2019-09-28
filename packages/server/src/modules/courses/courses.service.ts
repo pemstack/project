@@ -16,6 +16,7 @@ import {
   PageAccess,
   CoursePost
 } from './courses.entity'
+import { Invitation, InvitationStatus } from 'modules/invitations'
 import {
   GetCoursesParams,
   CreateCourseParams,
@@ -32,7 +33,9 @@ import {
   DeleteCoursePostParams,
   AssertPermissionParams,
   UpdateCourseParams,
-  DeleteCourseParams
+  DeleteCourseParams,
+  GetCourseMembersParams,
+  GetCourseMembersResult
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -297,7 +300,7 @@ export class CoursesService {
   async deleteCoursePost({ courseId, postId, userId }: DeleteCoursePostParams) {
     this.assertWritePermission({ courseId, userId })
 
-    const postExists = this.entities.find(CoursePost, {
+    const postExists = await this.entities.find(CoursePost, {
       where: { courseId, postId }
     })
 
@@ -306,6 +309,39 @@ export class CoursesService {
     }
 
     await this.entities.delete(CoursePost, { courseId, postId })
+  }
+
+  // Members
+
+  async getCourseMembers({ courseId, userId }: GetCourseMembersParams) {
+    this.assertWritePermission({ courseId, userId })
+
+    const members: GetCourseMembersResult[] = (await this.entities.find(CoursePermission, {
+      relations: ['user'],
+      where: { courseId },
+      order: {
+        permissionLevel: 'DESC'
+      }
+    })).map(m => ({
+      name: `${m.user.firstName} ${m.user.lastName}`,
+      email: m.user.email,
+      permission: m.permissionLevel,
+      status: 'member'
+    }))
+
+    const invited: GetCourseMembersResult[] = (await this.entities.find(Invitation, {
+      where: { courseId, status: InvitationStatus.Pending },
+      order: {
+        permission: 'DESC'
+      }
+    })).map(m => ({
+      name: null,
+      email: m.userEmail,
+      permission: m.permission,
+      status: 'invited'
+    }))
+
+    return members.concat(invited)
   }
 
   // Permissions
