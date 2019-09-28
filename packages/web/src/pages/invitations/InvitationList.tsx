@@ -1,28 +1,42 @@
+import { Spin } from 'antd'
+import { useLoadingAction, useQuery } from 'app'
 import React, { FunctionComponent } from 'react'
-import { GET_USER_INVITATIONS, UPDATE_INVITATION } from './invitations.api'
-import { useQuery, useAction } from 'app'
 import { Invitation } from './Invitation'
+import {
+  GetUserInvitationsResult,
+  GET_USER_INVITATIONS,
+  UPDATE_INVITATION
+} from './invitations.api'
 
-interface InvitationListProps { }
+interface InvitationItemProps {
+  invitation: GetUserInvitationsResult
+}
 
-export const InvitationList: FunctionComponent<InvitationListProps> = ({ }) => {
+const InvitationItem: FunctionComponent<InvitationItemProps> = ({
+  invitation
+}) => {
+  const [updateInvitation, loading] = useLoadingAction(UPDATE_INVITATION)
+  return (
+    <Spin spinning={loading}>
+      <Invitation
+        courseId={invitation.courseId}
+        courseTitle={invitation.courseTitle}
+        permission={invitation.permission}
+        dateInvited={invitation.dateInvited}
+        onAccept={() => updateInvitation({ courseId: invitation.courseId, accepted: true })}
+        onDecline={() => updateInvitation({ courseId: invitation.courseId, accepted: false })}
+      />
+    </Spin>
+  )
+}
+
+export const InvitationList: FunctionComponent = () => {
   const invitations = useQuery(GET_USER_INVITATIONS).read()
-  const updateInvitation = useAction(UPDATE_INVITATION)
   return (
     <>
-      {invitations.map((inv) =>
-        (
-          <div key={inv.courseId}>
-            <Invitation
-              courseId={inv.courseId}
-              courseTitle={inv.courseTitle}
-              permission={inv.permission}
-              dateInvited={inv.dateInvited}
-              onAccept={() => updateInvitation({ courseId: inv.courseId, accepted: true })}
-              onDecline={() => updateInvitation({ courseId: inv.courseId, accepted: false })}
-            />
-          </div>
-        ))}
+      {invitations.map(inv => (
+        <InvitationItem key={inv.courseId} invitation={inv} />
+      ))}
     </>
   )
 }
