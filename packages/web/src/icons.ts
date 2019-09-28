@@ -490,7 +490,7 @@ export { default as LeftOutline } from '@ant-design/icons/lib/outline/LeftOutlin
 // export { default as LineHeightOutline } from '@ant-design/icons/lib/outline/LineHeightOutline'
 // export { default as LinkOutline } from '@ant-design/icons/lib/outline/LinkOutline'
 // export { default as Loading3QuartersOutline } from '@ant-design/icons/lib/outline/Loading3QuartersOutline'
-// export { default as LoadingOutline } from '@ant-design/icons/lib/outline/LoadingOutline'
+export { default as LoadingOutline } from '@ant-design/icons/lib/outline/LoadingOutline'
 // export { default as LoginOutline } from '@ant-design/icons/lib/outline/LoginOutline'
 // export { default as ManOutline } from '@ant-design/icons/lib/outline/ManOutline'
 // export { default as MediumWorkmarkOutline } from '@ant-design/icons/lib/outline/MediumWorkmarkOutline'
