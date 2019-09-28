@@ -18,7 +18,9 @@ import {
   DEFAULT_PAGE_SIZE,
   GetCourseMembersResult,
   GET_COURSE_MEMBERS,
-  DELETE_COURSE_MEMBER
+  DELETE_COURSE_MEMBER,
+  DELETE_COURSE_POST,
+  UPDATE_COURSE_POST
 } from 'pages/courses/courses.api'
 import slugify from 'slugify'
 
@@ -342,6 +344,26 @@ export function mockCourses(api: MockApi) {
         authorId: 'author_id',
         authorName: 'Filan Fisteku'
       }, ...posts]
+    }
+  )
+
+  api.withAction(
+    UPDATE_COURSE_POST,
+    async ({ courseId, postId, content }) => {
+      await delay(500)
+      const course = courses.findCourse(courseId)
+      const posts = course.posts || []
+      course.posts = posts.map(p => p.postId !== postId ? p : { ...p, content })
+    }
+  )
+
+  api.withAction(
+    DELETE_COURSE_POST,
+    async ({ courseId, postId }) => {
+      await delay(500)
+      const course = courses.findCourse(courseId)
+      const posts = course.posts || []
+      course.posts = posts.filter(p => p.postId !== postId)
     }
   )
 
