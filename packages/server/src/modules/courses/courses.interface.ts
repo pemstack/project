@@ -109,3 +109,9 @@ export interface GetCourseMembersResult {
   permission: CoursePermissionLevel
   status: 'member' | 'invited'
 }
+
+export interface DeleteCourseMemberParams {
+  courseId: string
+  userId: string
+  email: string
+}

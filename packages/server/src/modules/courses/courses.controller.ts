@@ -286,4 +286,17 @@ export class CoursesController {
   ): Promise<GetCourseMembersResponse[]> {
     return await this.courses.getCourseMembers({ courseId, userId })
   }
+
+  // DELETE /api/courses/:courseid/members/:email
+  @ApiResponse({ status: 200 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Delete(':courseid/members/:email')
+  async deleteCourseMember(
+    @Param('courseid') courseId: string,
+    @Param('email') email: string,
+    @ReqUser('userId') userId: string
+  ): Promise<void> {
+    await this.courses.deleteCourseMember({ courseId, userId, email })
+  }
 }

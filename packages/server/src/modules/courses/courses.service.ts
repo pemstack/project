@@ -35,17 +35,22 @@ import {
   UpdateCourseParams,
   DeleteCourseParams,
   GetCourseMembersParams,
-  GetCourseMembersResult
+  GetCourseMembersResult,
+  DeleteCourseMemberParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
 import { unionBy } from 'lodash'
 import { reduceObject } from 'common/utils'
 import { plainToClass } from 'class-transformer'
+import { UsersService } from 'modules/users'
 
 @Injectable()
 export class CoursesService {
-  constructor(@InjectEntityManager() readonly entities: EntityManager) { }
+  constructor(
+    @InjectEntityManager() readonly entities: EntityManager,
+    readonly users: UsersService
+  ) { }
 
   // Courses
 
@@ -342,6 +347,18 @@ export class CoursesService {
     }))
 
     return members.concat(invited)
+  }
+
+  async deleteCourseMember({ courseId, userId, email }: DeleteCourseMemberParams) {
+    this.assertWritePermission({ courseId, userId })
+
+    const user = await this.users.findOne({ email })
+
+    if (user) {
+      await this.entities.delete(CoursePermission, { courseId, userId: user.userId })
+    }
+
+    await this.entities.delete(Invitation, { courseId, email })
   }
 
   // Permissions
