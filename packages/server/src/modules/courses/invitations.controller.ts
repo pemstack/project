@@ -10,16 +10,13 @@ import { ApiResponse, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger'
 import { InvitationsService } from './invitations.service'
 import { Authorize, ReqUser } from 'common/decorators'
 import { GetUserInvitationsResponse, CreateInvitationRequest, UpdateInvitationRequest } from './invitations.dto'
-import { UsersService, User } from 'modules/users'
-import { CoursesService } from 'modules/courses'
+import { User } from 'modules/users'
 
 @ApiUseTags('invitations')
 @Controller('invitations')
 export class InvitationsController {
   constructor(
-    private readonly invitations: InvitationsService,
-    private readonly users: UsersService,
-    private readonly courses: CoursesService
+    private readonly invitations: InvitationsService
   ) { }
 
   @ApiResponse({ status: 200, type: [GetUserInvitationsResponse] })

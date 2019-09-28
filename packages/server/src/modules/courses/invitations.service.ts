@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException, Inject, ForbiddenException } from '@nestjs/common'
+import { Injectable, NotFoundException, BadRequestException, Inject, ForbiddenException, forwardRef } from '@nestjs/common'
 import { InjectEntityManager } from '@nestjs/typeorm'
 import { EntityManager } from 'typeorm'
 import { Invitation, InvitationStatus } from './invitations.entity'
@@ -9,12 +9,14 @@ import {
   CreateInvitationParams,
   CancelInvitationParams
 } from './invitations.interface'
-import { CoursesService, CoursePermissionLevel } from 'modules/courses'
+import { CoursePermissionLevel } from './courses.entity'
+import { CoursesService } from './courses.service'
 
 @Injectable()
 export class InvitationsService {
   constructor(
     @InjectEntityManager() readonly entities: EntityManager,
+    @Inject(forwardRef(() => CoursesService))
     private readonly courses: CoursesService,
   ) { }
 

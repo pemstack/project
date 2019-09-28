@@ -1,6 +1,7 @@
 import { ApiModelProperty, ApiResponseModelProperty } from '@nestjs/swagger'
 import { IsBoolean, IsString, IsOptional } from 'class-validator'
-import { Invitation, CoursePermissionLevel, InvitationStatus } from './invitations.entity'
+import { Invitation, InvitationStatus } from './invitations.entity'
+import { CoursePermissionLevel } from './courses.entity'
 
 export class GetUserInvitationsResponse {
   @ApiResponseModelProperty()

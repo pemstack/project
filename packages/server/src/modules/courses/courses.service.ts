@@ -16,7 +16,6 @@ import {
   PageAccess,
   CoursePost
 } from './courses.entity'
-import { Invitation, InvitationStatus } from 'modules/invitations'
 import {
   GetCoursesParams,
   CreateCourseParams,
@@ -44,6 +43,7 @@ import { unionBy } from 'lodash'
 import { reduceObject } from 'common/utils'
 import { plainToClass } from 'class-transformer'
 import { UsersService } from 'modules/users'
+import { Invitation, InvitationStatus } from './invitations.entity'
 
 @Injectable()
 export class CoursesService {

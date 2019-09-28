@@ -18,7 +18,7 @@ export class Course {
   @Column()
   ownerId: string
 
-  @ManyToOne(type => User, user => user.ownedCourses, {
+  @ManyToOne(type => User, {
     primary: true,
     nullable: false,
     onDelete: 'CASCADE'
@@ -51,7 +51,7 @@ export class CoursePermission {
   @PrimaryColumn()
   userId: string
 
-  @ManyToOne(type => User, user => user.permissions, {
+  @ManyToOne(type => User, {
     primary: true,
     nullable: false,
     onDelete: 'CASCADE'

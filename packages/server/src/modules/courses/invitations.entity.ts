@@ -1,17 +1,17 @@
 import { PrimaryColumn, Column, Entity, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
 import { IsEnum } from 'class-validator'
-import { Course } from 'modules/courses'
-
-export enum CoursePermissionLevel {
-  None = 'none',
-  Read = 'read',
-  Write = 'write'
-}
+import { Course } from './courses.entity'
 
 export enum InvitationStatus {
   Pending = 'pending',
   Accepted = 'accepted',
   Declined = 'declined'
+}
+
+enum CoursePermissionLevel {
+  None = 'none',
+  Read = 'read',
+  Write = 'write'
 }
 
 @Entity()

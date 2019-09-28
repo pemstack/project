@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn } from 'typeorm'
 import { IsEmail, IsString, Matches, MinLength, IsEnum } from 'class-validator'
-import { CoursePermission, Course } from 'modules/courses'
 
 @Entity()
 export class User {
@@ -33,12 +32,6 @@ export class User {
 
   @Column({ type: 'simple-array', nullable: true })
   roles?: string[]
-
-  @OneToMany(type => CoursePermission, permission => permission.user)
-  permissions: CoursePermission[]
-
-  @OneToMany(type => Course, course => course.owner)
-  ownedCourses: Course[]
 }
 
 export enum TokenState {

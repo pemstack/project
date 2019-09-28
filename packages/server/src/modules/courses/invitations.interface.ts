@@ -1,5 +1,5 @@
-import { CoursePermissionLevel } from "modules/courses";
-import { User } from "modules/users";
+import { User } from 'modules/users'
+import { CoursePermissionLevel } from './courses.entity'
 
 export interface GetUserInvitationsParams {
   userEmail: string

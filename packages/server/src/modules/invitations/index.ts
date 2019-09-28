@@ -1,5 +1,0 @@
-export * from './invitations.controller'
-export * from './invitations.dto'
-export * from './invitations.entity'
-export * from './invitations.module'
-export * from './invitations.service'
