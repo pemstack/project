@@ -43,6 +43,7 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
       <Suspense fallback={<Loading />}>
         <CoursePage
           className='ViewCourse__page'
+          courseDisplay={courseDisplay}
           courseId={courseId}
           pageId={p.pageId}
         />

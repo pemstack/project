@@ -1,14 +1,24 @@
 import { JObject, Dictionary } from '@pema/utils'
-import { App, RequestContext } from './types'
+import { App, RequestContext, Query } from './types'
 import wretch from 'wretch'
 import { useApp } from '@pema/app-react'
 import { MessagesStore } from 'stores'
+import { useQuery } from '@pema/state-react'
 
 /* eslint-disable eqeqeq */
 
 export function useMessages(): MessagesStore {
   const app = useApp<App>()
   return app.messages
+}
+
+export function createQueryHook<TResult, TParams>
+  (query: Query<TResult, TParams>): TResult extends void
+  ? (() => TResult)
+  : ((params: TParams) => TResult) {
+  return function useMemoQuery(params: TParams) {
+    return useQuery(query, params).read()
+  } as any
 }
 
 export function errorCode(error: any) {
