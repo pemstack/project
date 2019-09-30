@@ -89,7 +89,7 @@ export class CoursePage {
   @PrimaryColumn()
   pageId: string
 
-  @Column()
+  @PrimaryColumn()
   courseId: string
 
   @ManyToOne(type => Course, course => course.pages, {

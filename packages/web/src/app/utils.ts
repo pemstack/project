@@ -1,8 +1,15 @@
 import { JObject, Dictionary } from '@pema/utils'
 import { App, RequestContext } from './types'
 import wretch from 'wretch'
+import { useApp } from '@pema/app-react'
+import { MessagesStore } from 'stores'
 
 /* eslint-disable eqeqeq */
+
+export function useMessages(): MessagesStore {
+  const app = useApp<App>()
+  return app.messages
+}
 
 export function errorCode(error: any) {
   return (error && error.statusCode) || (500)

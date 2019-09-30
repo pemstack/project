@@ -1,5 +1,6 @@
 import { message } from 'antd'
 import i18n from 'i18next'
+import { Dictionary } from '@pema/utils'
 
 export class MessagesStore {
   successKey(key: string) {
@@ -8,6 +9,10 @@ export class MessagesStore {
 
   success(text: string) {
     message.success(text)
+  }
+
+  errorKey(error: string, options?: Dictionary) {
+    message.error(i18n.t(error, options))
   }
 
   error(error?: string) {

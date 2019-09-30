@@ -1,4 +1,4 @@
-import { useQuery, useAction } from 'app'
+import { useQuery, useAction, useMessages } from 'app'
 import React, { FunctionComponent } from 'react'
 import { CREATE_COURSE_PAGE } from '../courses.api'
 import { Formik } from 'forms'
@@ -18,13 +18,14 @@ export const CreatePage: FunctionComponent<CreatePageProps> = ({
   onSuccess
 }) => {
   const createCoursePage = useAction(CREATE_COURSE_PAGE)
+  const messages = useMessages()
   return (
     <Formik
       validationSchema={createCoursePage.schema}
       initialValues={{
         courseId,
         title: '',
-        content:'',
+        content: '',
         access: 'private',
         files: [],
         removedFiles: []
@@ -39,6 +40,8 @@ export const CreatePage: FunctionComponent<CreatePageProps> = ({
           if (typeof onSuccess === 'function') {
             onSuccess(values)
           }
+        } catch (e) {
+          messages.error()
         } finally {
           actions.setSubmitting(false)
         }
