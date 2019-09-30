@@ -72,7 +72,8 @@
 	},
 	"course": {
 		"message": {
-			"create": "Course has been created."
+			"created": "Course has been created.",
+			"pageCreated": "Page has been created."
 		},
 		"error": {
 			"title": "Enter course name.",

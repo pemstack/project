@@ -18,7 +18,7 @@ export const CreateCourseRoute: View = ({ app }) => {
         onSubmit={async (values, actions) => {
           try {
             const { courseId, title } = await createCourse(values)
-            app.messages.successKey('course.message.create')
+            app.messages.successKey('course.message.created')
             app.router.push(`/courses/manage/${courseId}/${slugify(title)}`)
           } finally {
             actions.setSubmitting(false)

@@ -4,9 +4,13 @@ import { CREATE_COURSE_PAGE } from '../courses.api'
 import { Formik } from 'forms'
 import { EditPageForm } from '../edit-page/EditPageForm'
 
+interface PageValues {
+  title: string
+}
+
 interface CreatePageProps {
   courseId: string
-  onSuccess?: () => void
+  onSuccess?: (values: PageValues) => void
 }
 
 export const CreatePage: FunctionComponent<CreatePageProps> = ({
@@ -33,7 +37,7 @@ export const CreatePage: FunctionComponent<CreatePageProps> = ({
           })
 
           if (typeof onSuccess === 'function') {
-            onSuccess()
+            onSuccess(values)
           }
         } finally {
           actions.setSubmitting(false)

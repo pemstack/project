@@ -6,7 +6,7 @@ export class MessagesStore {
     message.success(i18n.t(key))
   }
 
-  successText(text: string) {
+  success(text: string) {
     message.success(text)
   }
 

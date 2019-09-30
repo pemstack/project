@@ -82,7 +82,8 @@
 	},
 	"course": {
 		"message": {
-			"create": "Kursi është krijuar."
+			"created": "Kursi është krijuar.",
+			"pageCreated": "Faqja është krijuar."
 		},
 		"error": {
 			"title": "Shënoni emrin e kursit.",
