@@ -564,7 +564,7 @@ export { default as RightOutline } from '@ant-design/icons/lib/outline/RightOutl
 // export { default as UpOutline } from '@ant-design/icons/lib/outline/UpOutline'
 // export { default as UploadOutline } from '@ant-design/icons/lib/outline/UploadOutline'
 // export { default as UserAddOutline } from '@ant-design/icons/lib/outline/UserAddOutline'
-// export { default as UserDeleteOutline } from '@ant-design/icons/lib/outline/UserDeleteOutline'
+export { default as UserDeleteOutline } from '@ant-design/icons/lib/outline/UserDeleteOutline'
 // export { default as TransactionOutline } from '@ant-design/icons/lib/outline/TransactionOutline'
 export { default as UserOutline } from '@ant-design/icons/lib/outline/UserOutline'
 // export { default as UsergroupDeleteOutline } from '@ant-design/icons/lib/outline/UsergroupDeleteOutline'
