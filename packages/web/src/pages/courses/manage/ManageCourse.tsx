@@ -1,33 +1,22 @@
 import { Link } from '@pema/router-react'
 import { Button, Empty, List, Modal, Select, Tabs } from 'antd'
-import { useAction, useQuery } from 'app'
+import { useLoadingAction, useQuery } from 'app'
 import { CollapseCard, Flex, LinkButton } from 'components'
-import { Form, Formik, Input } from 'forms'
 import React, { FunctionComponent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
-  CREATE_COURSE_PAGE,
   DELETE_COURSE_PAGE,
   GET_COURSE_PAGES,
   PageAccess,
   UPDATE_COURSE_PAGE
 } from '../courses.api'
 import { InviteMembersModal } from '../invite/InviteMembersModal'
-import './ManageCourse.css'
 import { MemberCardList } from './MemberCardList'
+import './ManageCourse.css'
 
 const { confirm } = Modal
 const { TabPane } = Tabs
 const { Option } = Select
-
-interface CreatePageModalProps {
-  courseId: string
-  visible: boolean
-  setLoading(loading: boolean): void
-  onClose(): void
-}
-
-
 
 interface ManageCourseProps {
   courseId: string
@@ -39,12 +28,9 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
   courseDisplay
 }) => {
   const { t } = useTranslation()
-  const { read, reloading } = useQuery(GET_COURSE_PAGES, { courseId })
-  const pages = read()
-  const deleteCoursePage = useAction(DELETE_COURSE_PAGE)
-  const updateCoursePageAccess = useAction(UPDATE_COURSE_PAGE)
-  const [loading, setLoading] = useState(false)
-  const [showModal, setShowModal] = useState(false)
+  const pages = useQuery(GET_COURSE_PAGES, { courseId }).read()
+  const [deleteCoursePage, deleteLoading] = useLoadingAction(DELETE_COURSE_PAGE)
+  const [updateCoursePageAccess, updateLoading] = useLoadingAction(UPDATE_COURSE_PAGE)
 
   return (
     <CollapseCard>
@@ -55,7 +41,7 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
             <Empty description={t('ManageCourse.label.noPages')} />
           )
         }}
-        loading={loading || reloading}
+        loading={deleteLoading || updateLoading}
         dataSource={pages}
         size='large'
         header={
@@ -82,16 +68,11 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
                 dropdownStyle={{ border: 'none' }}
                 value={page.access}
                 onChange={async (access: PageAccess) => {
-                  try {
-                    setLoading(true)
-                    await updateCoursePageAccess({
-                      courseId,
-                      pageId: page.pageId,
-                      access
-                    })
-                  } finally {
-                    setLoading(false)
-                  }
+                  await updateCoursePageAccess({
+                    courseId,
+                    pageId: page.pageId,
+                    access
+                  })
                 }}
               >
                 <Option value='private'>
@@ -123,12 +104,10 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
                     okType: 'danger',
                     cancelText: 'No',
                     onOk() {
-                      setLoading(true)
-                      const finish = () => setLoading(false)
                       deleteCoursePage({
                         courseId,
                         pageId: page.pageId
-                      }).then(finish, finish)
+                      })
                     },
                     onCancel() { }
                   })
