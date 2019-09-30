@@ -8,7 +8,8 @@ import {
   DELETE_COURSE_PAGE,
   GET_COURSE_PAGES,
   PageAccess,
-  UPDATE_COURSE_PAGE
+  UPDATE_COURSE_PAGE,
+  INVITE_MEMBERS
 } from '../courses.api'
 import { InviteMembersModal } from '../invite/InviteMembersModal'
 import { MemberCardList } from './MemberCardList'
@@ -130,16 +131,19 @@ const ManageCourseMembers: FunctionComponent<ManageCourseProps> = ({
   courseDisplay
 }) => {
   const { t } = useTranslation()
-  const [loading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [inviteMembers, loading] = useLoadingAction(INVITE_MEMBERS)  
 
   return (
     <CollapseCard>
       <InviteMembersModal
-        courseId={courseId}
         visible={showModal}
-        onClose={() => setShowModal(false)}
-        setLoading={setLoading}
+        onCancel={() => setShowModal(false)}
+        onSubmit={({ emails, permission }, actions) => {
+          actions.setSubmitting(false)
+          inviteMembers({ courseId, emails, permission })
+          setShowModal(false)
+        }}
       />
       <Flex justifyContent='space-between' alignItems='center'>
         <h2 className='ManageCourse__title'>

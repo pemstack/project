@@ -108,14 +108,33 @@ export const createCourseSchema = yup.object({
 })
 
 export const inviteMembersSchema = yup.object({
+  courseId: yup.string().required(),
   emails: yup
     .array()
     .of(yup
       .string()
       .required('user.error.email.required')
       .email('register.error.email.invalid')
-    )
+    ),
+  permission: yup
+    .string()
+    .oneOf(['read', 'write'])
+    .required()
 })
+
+export type InviteMembersParams = yup.InferType<typeof inviteMembersSchema>
+
+export const INVITE_MEMBERS: Action<InviteMembersParams> = {
+  schema: inviteMembersSchema,
+  progress: true,
+  async perform({ courseId, emails, permission }, app) {
+    await app
+      .req(`/api/courses/${courseId}/members`)
+      .post({ emails, permission })
+      .res()
+  },
+  invalidates: ({ courseId }) => [`courses/${courseId}/members`]
+}
 
 export type CreateCourseParams = yup.InferType<typeof createCourseSchema>
 

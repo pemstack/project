@@ -31,25 +31,24 @@ export class InvitationsService {
     return await this.entities.findOne(Invitation, { where: { userEmail, courseId } })
   }
 
-  async createInvitation({ requesterUserId, userEmail, courseId, permission }: CreateInvitationParams) {
-    const coursePermission = await this.courses.tryGetCoursePermission({ courseId, userId: requesterUserId })
-    if (!coursePermission) {
-      throw new NotFoundException()
-    }
+  async sendInvitationEmail({ userEmail, courseId }: SendInvitationEmailParams) {
 
-    if (coursePermission.permissionLevel !== CoursePermissionLevel.Write) {
-      throw new ForbiddenException()
-    }
+  }
 
-    const exists = await this.getInvitation({ userEmail, courseId })
-    if (exists) {
-      throw new BadRequestException('Invitation has already been made.')
-    }
+  async createInvitations({ requesterUserId, emails, courseId, permission }: CreateInvitationParams) {
+    await this.courses.assertWritePermission({ courseId, userId: requesterUserId })
 
-    await this.entities.insert(
-      Invitation,
-      { userEmail, courseId, permission, status: InvitationStatus.Pending }
-    )
+    Promise.all((emails || []).map(async userEmail => {
+      const exists = await this.getInvitation({ userEmail, courseId })
+      if (!exists) {
+        await this.entities.insert(
+          Invitation,
+          { userEmail, courseId, permission, status: InvitationStatus.Pending }
+        )
+
+        this.sendInvitationEmail({ userEmail, courseId })
+      }
+    }))
   }
 
   async updateInvitation({ user, courseId, accepted }: UpdateInvitationParams) {

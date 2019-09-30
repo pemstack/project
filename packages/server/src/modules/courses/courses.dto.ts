@@ -168,7 +168,7 @@ export class CreateCoursePostRequest {
   content: string
 }
 
-export class EditCoursePostRequest {
+export class UpdateCoursePostRequest {
   @ApiModelProperty()
   content: string
 }
@@ -185,4 +185,12 @@ export class GetCourseMembersResponse {
 
   @ApiResponseModelProperty()
   status: 'member' | 'invited'
+}
+
+export class InviteCourseMembersRequest {
+  @ApiModelProperty()
+  emails: string[]
+
+  @ApiModelProperty()
+  permission: 'read' | 'write'
 }

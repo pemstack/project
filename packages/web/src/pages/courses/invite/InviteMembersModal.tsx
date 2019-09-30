@@ -1,36 +1,30 @@
 import React, { FunctionComponent } from 'react'
-import { Formik, Form, EmailSelect, Radio } from 'forms'
+import { Formik, Form, EmailSelect, Radio, FormikActions } from 'forms'
 import { Modal } from 'antd'
 import { useTranslation } from 'react-i18next'
 
+interface InviteMembersModalValues {
+  emails: string[]
+  permission: 'read' | 'write'
+}
+
 export interface InviteMembersModalProps {
-  courseId: string
   visible: boolean
-  setLoading(loading: boolean): void
-  onClose(): void
+  onSubmit(values: InviteMembersModalValues, actions: FormikActions<InviteMembersModalValues>): void
+  onCancel(): void
 }
 
 const children: Array<any> = []
 
 export const InviteMembersModal: FunctionComponent<InviteMembersModalProps> = ({
-  courseId,
   visible,
-  onClose,
-  setLoading
+  onSubmit,
+  onCancel
 }) => {
-  // const createCoursePage = useAction(CREATE_COURSE_PAGE)
-  function close() {
-    if (typeof onClose === 'function') {
-      onClose()
-    }
-  }
   const { t } = useTranslation()
   return (
     <Formik
-      onSubmit={async ({ emails, permission }, actions) => {
-        close()
-        actions.setSubmitting(false)
-      }}
+      onSubmit={onSubmit}
       initialValues={{
         emails: [],
         permission: 'read'
@@ -39,7 +33,7 @@ export const InviteMembersModal: FunctionComponent<InviteMembersModalProps> = ({
         <Modal
           title={t('InviteMembersForm.title')}
           visible={visible}
-          onCancel={close}
+          onCancel={onCancel}
           onOk={() => {
             props.submitForm()
           }}

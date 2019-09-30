@@ -7,10 +7,12 @@ import {
   NotFoundException,
   Delete,
   Patch,
-  Query
+  Query,
+  BadRequestException
 } from '@nestjs/common'
 import { ApiUseTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger'
 import { CoursesService } from './courses.service'
+import { InvitationsService } from './invitations.service'
 import {
   CreateCourseRequest,
   GetCourseResponse,
@@ -24,18 +26,23 @@ import {
   UpdateCoursePageResponse,
   GetCoursePostsResponse,
   CreateCoursePostRequest,
-  EditCoursePostRequest,
+  UpdateCoursePostRequest,
   UpdateCourseRequest,
   UpdateCourseResponse,
-  GetCourseMembersResponse
+  GetCourseMembersResponse,
+  InviteCourseMembersRequest
 } from './courses.dto'
 import { ReqUser, Authorize } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
+import { CoursePermissionLevel } from './courses.entity'
 
 @ApiUseTags('courses')
 @Controller('courses')
 export class CoursesController {
-  constructor(private readonly courses: CoursesService) { }
+  constructor(
+    private readonly courses: CoursesService,
+    private readonly invitations: InvitationsService
+  ) { }
 
   // Courses
 
@@ -255,7 +262,7 @@ export class CoursesController {
     @Param('courseid') courseId: string,
     @Param('postid') postId: string,
     @ReqUser('userId') userId: string,
-    @Body() { content }: EditCoursePostRequest
+    @Body() { content }: UpdateCoursePostRequest
   ): Promise<void> {
     await this.courses.updateCoursePost({ courseId, postId, userId, content })
   }
@@ -285,6 +292,35 @@ export class CoursesController {
     @ReqUser('userId') userId: string
   ): Promise<GetCourseMembersResponse[]> {
     return await this.courses.getCourseMembers({ courseId, userId })
+  }
+
+  @ApiResponse({ status: 201 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Post(':courseid/members')
+  async inviteCourseMembers(
+    @Param('courseid') courseId: string,
+    @ReqUser('userId') requesterUserId: string,
+    @Body() { emails, permission }: InviteCourseMembersRequest
+  ): Promise<void> {
+    let coursePermissionlevel: CoursePermissionLevel
+    switch (permission || 'none') {
+      case 'read':
+        coursePermissionlevel = CoursePermissionLevel.Read
+        break
+      case 'write':
+        coursePermissionlevel = CoursePermissionLevel.Write
+        break
+      default:
+        throw new BadRequestException()
+    }
+
+    await this.invitations.createInvitations({
+      requesterUserId,
+      courseId,
+      emails,
+      permission: coursePermissionlevel
+    })
   }
 
   // DELETE /api/courses/:courseid/members/:email

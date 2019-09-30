@@ -10,9 +10,14 @@ export interface GetInvitationParams {
   courseId: string
 }
 
+export interface SendInvitationEmailParams {
+  userEmail: string
+  courseId: string
+}
+
 export interface CreateInvitationParams {
   requesterUserId: string
-  userEmail: string
+  emails: string[]
   courseId: string
   permission: CoursePermissionLevel
 }
