@@ -206,7 +206,12 @@ export const DELETE_COURSE_PAGE: Action<DeleteCoursePageParams> = {
 
 const createCoursePageSchema = yup.object({
   courseId: yup.string().required(),
-  title: yup.string().required()
+  title: yup.string().required(),
+  access: yup
+    .string()
+    .oneOf(['private', 'public', 'unlisted'])
+    .required(),
+  content: yup.string().notRequired()
 })
 
 export type CreateCoursePageParams = yup.InferType<typeof createCoursePageSchema>
@@ -214,10 +219,10 @@ export type CreateCoursePageParams = yup.InferType<typeof createCoursePageSchema
 // POST /api/courses/:courseid/pages
 export const CREATE_COURSE_PAGE: Action<CreateCoursePageParams> = {
   schema: createCoursePageSchema,
-  async perform({ courseId, title }, app) {
+  async perform({ courseId, ...values }, app) {
     return await app
       .req(`/api/courses/${courseId}/pages`, { action: 'createCoursePage' })
-      .post({ title })
+      .post(values)
       .res()
   },
   invalidates: ({ courseId }) => [`courses/${courseId}/pages`]
@@ -230,7 +235,7 @@ export const updateCoursePageSchema = yup.object({
   access: yup
     .string()
     .oneOf(['private', 'public', 'unlisted'])
-    .required(),
+    .notRequired(),
   content: yup.string().notRequired(),
   removedFiles: yup.array(yup.string().required()).notRequired()
 })

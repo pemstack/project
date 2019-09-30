@@ -1,21 +1,19 @@
 import React from 'react'
 import { View, view, viewInvariant } from 'app'
 import { CenterContent } from 'components'
-import { EditPage } from './EditPage'
+import { CreatePage } from './CreatePage'
 
-export const EditPageRoute: View = ({ router, match }) => {
-  const { courseId, pageId, courseDisplay } = match.params
+export const CreatePageRoute: View = ({ router, match }) => {
+  const { courseId, courseDisplay } = match.params
   viewInvariant(courseId && typeof courseId === 'string', 404)
-  viewInvariant(pageId && typeof pageId === 'string', 404)
   return (
     <CenterContent width='medium'>
-      <EditPage
+      <CreatePage
         courseId={courseId}
-        pageId={pageId}
         onSuccess={() => router.replace(`/courses/manage/${courseId}/${courseDisplay}`)}
       />
     </CenterContent>
   )
 }
 
-export default view(EditPageRoute)
+export default view(CreatePageRoute)

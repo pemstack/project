@@ -22,7 +22,9 @@ export const EditPage: FunctionComponent<EditPageProps> = ({
   const updateCoursePage = useAction(UPDATE_COURSE_PAGE)
   return (
     <Formik
+      validationSchema={updateCoursePage.schema}
       initialValues={{
+        courseId,
         title,
         content,
         access,
@@ -48,7 +50,7 @@ export const EditPage: FunctionComponent<EditPageProps> = ({
         }
       }}
     >
-      <EditPageForm existingFiles={existingFiles} />
+      <EditPageForm existingFiles={existingFiles} submitButtonKey='button.update' />
     </Formik>
   )
 }

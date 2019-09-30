@@ -27,63 +27,16 @@ interface CreatePageModalProps {
   onClose(): void
 }
 
-export const CreatePageModal: FunctionComponent<CreatePageModalProps> = ({
-  courseId,
-  visible,
-  onClose,
-  setLoading
-}) => {
-  const createCoursePage = useAction(CREATE_COURSE_PAGE)
-  function close() {
-    if (typeof onClose === 'function') {
-      onClose()
-    }
-  }
 
-  return (
-    <Formik
-      onSubmit={async ({ title }, actions) => {
-        const finish = () => setLoading(false)
-        setLoading(true)
-        createCoursePage({
-          courseId,
-          title
-        }).then(finish, finish)
-        close()
-        actions.resetForm()
-        actions.setSubmitting(false)
-      }}
-      initialValues={{
-        title: ''
-      }}
-      render={props => (
-        <Modal
-          title='Enter page title'
-          visible={visible}
-          onCancel={close}
-          onOk={() => {
-            props.submitForm()
-          }}
-        >
-          <Form>
-            <Form.Item name='title'>
-              <Input name='title' type='text' spellCheck={false} />
-            </Form.Item>
-          </Form>
-        </Modal>
-      )}
-    />
-  )
-}
 
 interface ManageCourseProps {
   courseId: string
-  display: string
+  courseDisplay: string
 }
 
 export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
   courseId,
-  display
+  courseDisplay
 }) => {
   const { t } = useTranslation()
   const { read, reloading } = useQuery(GET_COURSE_PAGES, { courseId })
@@ -95,12 +48,6 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
 
   return (
     <CollapseCard>
-      <CreatePageModal
-        courseId={courseId}
-        visible={showModal}
-        onClose={() => setShowModal(false)}
-        setLoading={setLoading}
-      />
       <List
         rowKey='pageId'
         locale={{
@@ -116,13 +63,13 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
             <h2 className='ManageCourse__title'>
               {t('ManageCourse.title.pages')}
             </h2>
-            <Button
-              type='primary'
+            <LinkButton
               icon='plus'
-              onClick={() => setShowModal(true)}
+              type='primary'
+              to={`/courses/manage/${courseId}/${courseDisplay}/create-page`}
             >
               {t('button.create')}
-            </Button>
+            </LinkButton>
           </Flex>
         }
         renderItem={page => (
@@ -158,7 +105,7 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
                 </Option>
               </Select>,
               <LinkButton
-                to={`/courses/${courseId}/${display}/${page.pageId}/edit`}
+                to={`/courses/${courseId}/${courseDisplay}/${page.pageId}/edit`}
                 type='link'
                 key='edit'
                 icon='edit'
@@ -190,7 +137,7 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
             ]}
           >
             <span className='ManageCourse__item-content'>
-              <Link to={`/courses/${courseId}/${display}/${page.pageId}`}>{page.title}</Link>
+              <Link to={`/courses/${courseId}/${courseDisplay}/${page.pageId}`}>{page.title}</Link>
             </span>
           </List.Item>
         )}
@@ -201,7 +148,7 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
 
 const ManageCourseMembers: FunctionComponent<ManageCourseProps> = ({
   courseId,
-  display
+  courseDisplay
 }) => {
   const { t } = useTranslation()
   const [loading, setLoading] = useState(false)
@@ -232,16 +179,16 @@ const ManageCourseMembers: FunctionComponent<ManageCourseProps> = ({
   )
 }
 
-export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ courseId, display }) => {
+export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ courseId, courseDisplay }) => {
   const { t } = useTranslation()
   return (
     <div className='ManageCourse'>
       <Tabs tabPosition='left'>
         <TabPane tab={t('ManageCourse.tab.pages')} key='pages'>
-          <ManageCoursePages courseId={courseId} display={display} />
+          <ManageCoursePages courseId={courseId} courseDisplay={courseDisplay} />
         </TabPane>
         <TabPane tab={t('ManageCourse.tab.members')} key='members'>
-          <ManageCourseMembers courseId={courseId} display={display} />
+          <ManageCourseMembers courseId={courseId} courseDisplay={courseDisplay} />
         </TabPane>
       </Tabs>
     </div>

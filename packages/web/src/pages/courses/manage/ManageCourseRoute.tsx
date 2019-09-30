@@ -5,14 +5,14 @@ import { ManageCourse } from './ManageCourse'
 import { GET_COURSE_PERMISSION } from '../courses.api'
 
 export const ManageCourseRoute: View = ({ match }) => {
-  const { courseId, display } = match.params
+  const { courseId, courseDisplay } = match.params
   viewInvariant(courseId && typeof courseId === 'string', 404)
   const { permission } = useQuery(GET_COURSE_PERMISSION, { courseId }).read()
   viewInvariant(permission === 'write', 403)
 
   return (
     <CenterContent>
-      <ManageCourse courseId={courseId} display={display} />
+      <ManageCourse courseId={courseId} courseDisplay={courseDisplay} />
     </CenterContent>
   )
 }

@@ -11,10 +11,12 @@ const { Dragger } = Upload
 
 export interface EditPageFormProps {
   existingFiles?: ExistingFile[]
+  submitButtonKey?: string
 }
 
 export const EditPageForm: FunctionComponent<EditPageFormProps> = ({
-  existingFiles = []
+  existingFiles = [],
+  submitButtonKey = 'button.submit'
 }) => {
   const { t } = useTranslation()
 
@@ -96,7 +98,7 @@ export const EditPageForm: FunctionComponent<EditPageFormProps> = ({
             preventDisabling
             className='CreateCourseForm__submit'
           >
-            {t('button.update')}
+            {t(submitButtonKey)}
           </SubmitButton>
         </Form.AntdItem>
       </Form>
