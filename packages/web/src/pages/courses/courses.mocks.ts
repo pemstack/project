@@ -20,7 +20,8 @@ import {
   GET_COURSE_MEMBERS,
   DELETE_COURSE_MEMBER,
   DELETE_COURSE_POST,
-  UPDATE_COURSE_POST
+  UPDATE_COURSE_POST,
+  GET_COURSE
 } from 'pages/courses/courses.api'
 import slugify from 'slugify'
 
@@ -106,11 +107,13 @@ class MockCourse {
   title: string
   permission: CoursePermission
   owner: boolean
+  access: 'private' | 'public'
   pages: GetCoursePageResult[]
   posts: GetCoursePostsResultItem[]
   members: GetCourseMembersResult[]
 
   constructor(data: Partial<MockCourse>) {
+    this.access = 'private'
     Object.assign(this, data)
   }
 
@@ -289,6 +292,11 @@ export function mockCourses(api: MockApi) {
   api.withQuery(GET_COURSES, async () => {
     await delay(500)
     return courses.list()
+  })
+
+  api.withQuery(GET_COURSE, async ({ courseId }) => {
+    await delay(500)
+    return courses.findCourse(courseId)
   })
 
   api.withQuery(GET_COURSE_PAGES, async ({ courseId }) => {
