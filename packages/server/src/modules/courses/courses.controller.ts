@@ -15,7 +15,6 @@ import { CoursesService } from './courses.service'
 import { InvitationsService } from './invitations.service'
 import {
   CreateCourseRequest,
-  GetCourseResponse,
   GetCoursePermissionResponse,
   CreateCourseResponse,
   GetCoursePagesResponse,
@@ -30,7 +29,9 @@ import {
   UpdateCourseRequest,
   UpdateCourseResponse,
   GetCourseMembersResponse,
-  InviteCourseMembersRequest
+  InviteCourseMembersRequest,
+  GetCoursesResponse,
+  GetCourseResponse
 } from './courses.dto'
 import { ReqUser, Authorize } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
@@ -46,14 +47,29 @@ export class CoursesController {
 
   // Courses
 
-  @ApiResponse({ status: 200, type: [GetCourseResponse] })
+  @ApiResponse({ status: 200, type: [GetCoursesResponse] })
   @ApiBearerAuth()
   @Authorize()
   @Get()
   async getCourses(
     @ReqUser('userId') userId: string
-  ): Promise<GetCourseResponse[]> {
+  ): Promise<GetCoursesResponse[]> {
     return await this.courses.getCourses({ userId })
+  }
+
+  @ApiResponse({ status: 200, type: GetCourseResponse })
+  @ApiBearerAuth()
+  @Authorize()
+  @Get(':courseid')
+  async getCourse(
+    @ReqUser('userId') userId: string,
+    @Param('courseid') courseId: string
+  ): Promise<GetCourseResponse> {
+    const result = await this.courses.getCourse({ userId, courseId })
+    return {
+      title: result.title,
+      access: result.access
+    }
   }
 
   @ApiResponse({ status: 200, type: GetCoursePermissionResponse })

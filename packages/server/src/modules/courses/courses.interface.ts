@@ -4,6 +4,11 @@ export interface GetCoursesParams {
   userId: string
 }
 
+export interface GetCourseParams {
+  courseId: string
+  userId: string
+}
+
 export interface CreateCourseParams {
   ownerId: string
   title: string

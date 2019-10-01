@@ -2,7 +2,7 @@ import { ApiModelProperty, ApiResponseModelProperty } from '@nestjs/swagger'
 import { IsString, MinLength, IsOptional } from 'class-validator'
 import { CourseAccess, PageAccess, CoursePermissionLevel, CoursePermission } from './courses.entity'
 
-export class GetCourseResponse {
+export class GetCoursesResponse {
   @ApiResponseModelProperty()
   courseId: string
 
@@ -14,6 +14,14 @@ export class GetCourseResponse {
 
   @ApiResponseModelProperty()
   owner: boolean
+}
+
+export class GetCourseResponse {
+  @ApiResponseModelProperty()
+  title: string
+
+  @ApiResponseModelProperty()
+  access: CourseAccess
 }
 
 export class GetCoursePermissionResponse {

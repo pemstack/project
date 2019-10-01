@@ -35,7 +35,8 @@ import {
   DeleteCourseParams,
   GetCourseMembersParams,
   GetCourseMembersResult,
-  DeleteCourseMemberParams
+  DeleteCourseMemberParams,
+  GetCourseParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -79,6 +80,18 @@ export class CoursesService {
     }))
 
     return unionBy(ownCourses, otherCourses, c => c.courseId)
+  }
+
+  async getCourse({ courseId, userId }: GetCourseParams) {
+    this.assertReadPermission({ courseId, userId })
+
+    const result = await this.entities.findOne(Course, { courseId })
+
+    if (!result) {
+      throw new NotFoundException()
+    }
+
+    return result
   }
 
   async createCourse({
