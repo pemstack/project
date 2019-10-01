@@ -67,8 +67,8 @@ export const ManageCourseDetails: FunctionComponent<ManageCourseDetailsProps> = 
       </Formik>
       <Button type='danger' icon='delete' onClick={() => {
         confirm({
-          title: 'Are you sure you want to delete this course?', // todo t()
-          content: 'Once deleted, you can\'t bring it back',
+          title: t('ManageCourse.confirm.title'), // todo t()
+          content: t('ManageCourse.confirm.content'),
           okText: t('button.yes'),
           okType: 'danger',
           cancelText: t('button.no'),

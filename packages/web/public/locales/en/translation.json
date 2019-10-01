@@ -1,171 +1,181 @@
 {
-	"CreateCourseForm": {
-		"title": "Create course",
-		"label": {
-			"access": "Access level",
-			"title": "Course name"
-		},
-		"option": {
-			"private": "Private",
-			"public": "Public"
-		},
-		"tooltip": "A private course can only be seen by its members. A public course can be seen by anyone, but it may have private pages that are only accessible to members."
-	},
-	"Courses": {
-		"title": "My courses"
-	},
-	"ManageCourse": {
-		"tab": {
-			"pages": "Pages",
-			"members": "Members"
-		},
-		"title": {
-			"pages": "Manage pages",
-			"members": "Manage members"
-		},
-		"button": {
-			"addPage": "Add page"
-		},
-		"label": {
-			"private": "Private",
-			"public": "Public",
-			"unlisted": "Unlisted",
-			"noPages": "No Pages"
-		}
-	},
-	"EditPageForm": {
-		"title": "Edit page",
-		"tooltip": "A private page can only be seen by the course members. A public page can be seen by anyone.",
-		"label": {
-			"title": "Page name",
-			"content": "Content"
-		}
-	},
-	"InviteMembersForm": {
-		"title": "Invite members",
-		"placeholder": "Enter one or more emails",
-		"label": {
-			"permission": "Permission",
-			"read": "Read",
-			"write": "Write"
-		}
-	},
-	"Invitation": {
-		"text": "You have been invited to {{title}} course on {{time}}"
-	},
-	"MarkdownEditor": {
-		"empty": "No content to display.",
-		"preview": "Preview",
-		"write": "Write",
-		"submit": "Submit"
-	},
-	"button": {
-		"cancel": "Cancel",
-		"submit": "Submit",
-		"create": "Create",
-		"edit": "Edit",
-		"update": "Update",
-		"invite": "Invite",
-		"accept": "Accept",
-		"reject": "Reject",
-		"post": "Post"
-	},
-	"course": {
-		"message": {
-			"created": "Course has been created.",
-			"pageCreated": "Page has been created."
-		},
-		"error": {
-			"title": "Enter course name.",
-			"access": "Specify course access."
-		}
-	},
-	"Layout": {
-		"label": {
-			"newsfeed": "Newsfeed",
-			"courses": "Courses",
-			"invitations": "Invitations"
-		},
-		"anonymous": {
-			"login": "Log In"
-		}
-	},
-	"RouteError": {
-		"back": "Back Home"
-	},
-	"text": {
-		"confirm": "Are you sure?",
-		"no-posts": "There are no posts."
-	},
-	"user": {
-		"label": {
-			"profile": "Profile",
-			"firstName": "First Name",
-			"lastName": "Last Name",
-			"name": "Name",
-			"email": "Email",
-			"password": "Password",
-			"confirmPassword": "Confirm password",
-			"role": "Role",
-			"settings": "Account Settings",
-			"login": "Log In",
-			"logout": "Log Out",
-			"register": "Register",
-			"existingAccount": "Already have an account?",
-			"username": "Username",
-			"remember": "Remember me",
-			"forgotPass": "Forgot password?"
-		},
-		"error": {
-			"firstName": {
-				"required": "First name is required.",
-				"invalid": "First name contains invalid characters."
-			},
-			"lastName": {
-				"required": "Last name is required.",
-				"invalid": "Last name contains invalid characters."
-			},
-			"email": {
-				"required": "Email is required.",
-				"invalid": "Invalid email."
-			},
-			"password": {
-				"required": "Password is required.",
-				"min": "Password must contain at least 6 characters.",
-				"invalid": "Password contains invalid characters."
-			}
-		}
-	},
-	"error": {
-		"general": "There has been an error.",
-		"401": "401: Not authorized.",
-		"403": "403: Not authorized.",
-		"404": "404: Not found.",
-		"500": "500: The server is currently unable to handle this request."
-	},
-	"Comments": {
-		"reply": "reply"
-	},
-	"ConfirmEmail": {
-		"success": {
-			"title": "Email Confirmed",
-			"subtitle": "You may now log in with your email.",
-			"login": "Log In"
-		},
-		"error": {
-			"title": "Invalid Request",
-			"subtitle": "The verification is invalid or has expired.",
-			"back": "Back to home"
-		}
-	},
-	"RegisterSuccess": {
-		"title": "Thank you for registering",
-		"subtitle": "Check your email to verify your account",
-		"noEmail": "Didn't get an email?",
-		"resend": "Resend Email"
-	},
-	"Read": {
-		"more": "Read More",
-		"less": "Read Less"
-	}
+  "CreateCourseForm": {
+    "title": "Create course",
+    "label": {
+      "access": "Access level",
+      "title": "Course name"
+    },
+    "option": {
+      "private": "Private",
+      "public": "Public"
+    },
+    "tooltip": "A private course can only be seen by its members. A public course can be seen by anyone, but it may have private pages that are only accessible to members."
+  },
+  "Courses": {
+    "title": "My courses"
+  },
+  "ManageCourse": {
+    "tab": {
+      "pages": "Pages",
+      "members": "Members",
+      "details": "Details"
+    },
+    "title": {
+      "details": "Manage Course",
+      "pages": "Manage pages",
+      "members": "Manage members"
+    },
+    "button": {
+      "addPage": "Add page",
+      "deleteCourse": "Delete Course"
+    },
+    "label": {
+      "private": "Private",
+      "public": "Public",
+      "unlisted": "Unlisted",
+      "noPages": "No Pages"
+    },
+    "confirm": {
+      "title": "Are you sure you want to delete this course?",
+      "content": "Once deleted, you can't bring it back."
+    }
+  },
+  "EditPageForm": {
+    "title": "Edit page",
+    "tooltip": "A private page can only be seen by the course members. A public page can be seen by anyone.",
+    "label": {
+      "title": "Page name",
+      "content": "Content"
+    }
+  },
+  "InviteMembersForm": {
+    "title": "Invite members",
+    "placeholder": "Enter one or more emails",
+    "label": {
+      "permission": "Permission",
+      "read": "Read",
+      "write": "Write"
+    }
+  },
+  "Invitation": {
+    "text": "You have been invited to {{title}} course on {{time}}"
+  },
+  "MarkdownEditor": {
+    "empty": "No content to display.",
+    "preview": "Preview",
+    "write": "Write",
+    "submit": "Submit"
+  },
+  "button": {
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "create": "Create",
+    "edit": "Edit",
+    "update": "Update",
+    "invite": "Invite",
+    "accept": "Accept",
+    "reject": "Reject",
+    "post": "Post",
+    "save": "Save",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "course": {
+    "message": {
+      "created": "Course has been created.",
+      "pageCreated": "Page has been created."
+    },
+    "error": {
+      "title": "Enter course name.",
+      "access": "Specify course access."
+    }
+  },
+  "Layout": {
+    "label": {
+      "newsfeed": "Newsfeed",
+      "courses": "Courses",
+      "invitations": "Invitations"
+    },
+    "anonymous": {
+      "login": "Log In"
+    }
+  },
+  "RouteError": {
+    "back": "Back Home"
+  },
+  "text": {
+    "confirm": "Are you sure?",
+    "no-posts": "There are no posts."
+  },
+  "user": {
+    "label": {
+      "profile": "Profile",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "role": "Role",
+      "settings": "Account Settings",
+      "login": "Log In",
+      "logout": "Log Out",
+      "register": "Register",
+      "existingAccount": "Already have an account?",
+      "username": "Username",
+      "remember": "Remember me",
+      "forgotPass": "Forgot password?"
+    },
+    "error": {
+      "firstName": {
+        "required": "First name is required.",
+        "invalid": "First name contains invalid characters."
+      },
+      "lastName": {
+        "required": "Last name is required.",
+        "invalid": "Last name contains invalid characters."
+      },
+      "email": {
+        "required": "Email is required.",
+        "invalid": "Invalid email."
+      },
+      "password": {
+        "required": "Password is required.",
+        "min": "Password must contain at least 6 characters.",
+        "invalid": "Password contains invalid characters."
+      }
+    }
+  },
+  "error": {
+    "general": "There has been an error.",
+    "401": "401: Not authorized.",
+    "403": "403: Not authorized.",
+    "404": "404: Not found.",
+    "500": "500: The server is currently unable to handle this request."
+  },
+  "Comments": {
+    "reply": "reply"
+  },
+  "ConfirmEmail": {
+    "success": {
+      "title": "Email Confirmed",
+      "subtitle": "You may now log in with your email.",
+      "login": "Log In"
+    },
+    "error": {
+      "title": "Invalid Request",
+      "subtitle": "The verification is invalid or has expired.",
+      "back": "Back to home"
+    }
+  },
+  "RegisterSuccess": {
+    "title": "Thank you for registering",
+    "subtitle": "Check your email to verify your account",
+    "noEmail": "Didn't get an email?",
+    "resend": "Resend Email"
+  },
+  "Read": {
+    "more": "Read More",
+    "less": "Read Less"
+  }
 }
