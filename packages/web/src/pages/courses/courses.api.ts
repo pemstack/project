@@ -22,6 +22,26 @@ export const GET_COURSES: Query<GetCoursesResult[]> = {
   }
 }
 
+export interface GetCourseParams {
+  courseId: string
+}
+
+export interface GetCourseResult {
+  title: string
+  access: 'private' | 'public'
+}
+
+// GET /api/courses/:courseid
+export const GET_COURSE: Query<GetCourseResult, GetCourseParams> = {
+  resource: ({ courseId }) => `courses/${courseId}`,
+  async fetch({ courseId }, app) {
+    return await app
+      .req(`/api/courses/${courseId}`)
+      .get()
+      .json()
+  }
+}
+
 export interface GetCoursePageParams {
   courseId: string
   pageId: string
@@ -186,7 +206,8 @@ export const UPDATE_COURSE: Action<UpdateCourseParams, UpdateCourseResult> = {
 }
 
 export const deleteCourseSchema = yup.object({
-  courseId: yup.string().required()
+  courseId: yup.string().required(),
+  eager: yup.boolean().notRequired()
 })
 
 export type DeleteCourseParams = yup.InferType<typeof deleteCourseSchema>
@@ -195,6 +216,7 @@ export type DeleteCourseParams = yup.InferType<typeof deleteCourseSchema>
 export const DELETE_COURSE: Action<DeleteCourseParams> = {
   schema: deleteCourseSchema as Schema<DeleteCourseParams>,
   progress: true,
+  eager: ({ eager = false }) => eager,
   async perform({ courseId }, app) {
     return await app
       .req(`/api/courses/${courseId}`, { action: 'deleteCourse' })
