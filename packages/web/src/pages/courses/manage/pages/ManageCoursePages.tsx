@@ -6,6 +6,7 @@ import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DELETE_COURSE_PAGE, GET_COURSE_PAGES, PageAccess, UPDATE_COURSE_PAGE } from '../../courses.api'
 import { ManageCourseProps } from '../ManageCourse'
+import './ManageCoursePages.css'
 
 const { confirm } = Modal
 const { Option } = Select
@@ -33,7 +34,7 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
         size='large'
         header={
           <Flex justifyContent='space-between' alignItems='center'>
-            <h2 className='ManageCourse__title'>
+            <h2 className='ManageCoursePages__title'>
               {t('ManageCourse.title.pages')}
             </h2>
             <LinkButton
@@ -102,7 +103,7 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
               />
             ]}
           >
-            <span className='ManageCourse__item-content'>
+            <span className='ManageCoursePages__item-content'>
               <Link to={`/courses/${courseId}/${courseDisplay}/${page.pageId}`}>{page.title}</Link>
             </span>
           </List.Item>
