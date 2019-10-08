@@ -92,7 +92,7 @@ export const AppProvider: FunctionComponent<AppProviderProps> = ({
       apiMocks(client)
     }
 
-    ; (root.router as any).locked = true
+    (root.router as any).locked = true
     return root
   }
 

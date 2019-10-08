@@ -12,7 +12,8 @@ export const ViewCourseRoute: View = ({ match, location }) => {
         courseId={courseId}
         page={pageId}
         pageNumber={asInt(pageNumber, 1)}
-        courseDisplay={courseDisplay} />
+        courseDisplay={courseDisplay}
+      />
     </div>
   )
 }

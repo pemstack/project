@@ -148,7 +148,7 @@
     "prefix": "view",
     "body": [
       "import React from 'react'",
-      "import { View } from 'app'",
+      "import { View, view } from 'app'",
       "import { Button } from 'antd'",
       "",
       "export interface $1RouteProps { }",
@@ -167,7 +167,8 @@
       "  const initialProps: $1RouteProps = {}",
       "  state.props = initialProps",
       "}",
-      ""
+      "",
+      "export default view($1Route)"
     ]
   },
   "Pema view (static)": {
@@ -175,7 +176,7 @@
     "prefix": "views",
     "body": [
       "import React from 'react'",
-      "import { View } from 'app'",
+      "import { View, view } from 'app'",
       "import { Button } from 'antd'",
       "",
       "export const $1Route: View = ({ }) => {",
@@ -185,7 +186,8 @@
       "    </div>",
       "  )",
       "}",
-      ""
+      "",
+      "export default view($1Route)"
     ]
   },
   "Pema API": {
@@ -195,12 +197,12 @@
       "import { Action, Query } from 'app'",
       "import * as yup from 'yup'",
       "",
-      "export interface Todo {",
+      "export interface TodoResult {",
       "  title: string",
       "  done: boolean",
       "}",
       "",
-      "export const GET_TODOS: Query<Todo[]> = {",
+      "export const GET_TODOS: Query<TodoResult[]> = {",
       "  resource: 'todos',",
       "  async fetch(_, app) {",
       "    return app",
@@ -217,7 +219,7 @@
       "",
       "type AddTodoParams = yup.InferType<typeof addTodoSchema>",
       "",
-      "export const ADD_TODO: Action<AddTodoParams, void> = {",
+      "export const ADD_TODO: Action<AddTodoParams> = {",
       "  schema: addTodoSchema,",
       "  perform(params: AddTodoParams, app) {",
       "    return app",
@@ -228,7 +230,7 @@
       "  invalidates: ['todos']",
       "}",
       "",
-      "export const CLEAR_TODOS: Action<void, void> = {",
+      "export const CLEAR_TODOS: Action = {",
       "  async perform(_, app) {",
       "    return app",
       "      .req('/api/todos')",

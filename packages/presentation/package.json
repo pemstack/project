@@ -17,6 +17,6 @@
 	},
 	"dependencies": {
 		"@my-app/shared": "^0.1.0",
-		"@types/node": "^12.7.2"
+		"@types/node": "^12.7.11"
 	}
 }
