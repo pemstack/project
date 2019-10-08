@@ -4,13 +4,21 @@ import {
   Get,
   Post,
   UseGuards,
-  HttpCode} from '@nestjs/common'
+  HttpCode,
+  Param
+} from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiBearerAuth, ApiResponse, ApiUseTags } from '@nestjs/swagger'
 import { MailerService } from '@nest-modules/mailer'
 import { ReqUser, ReqUrl, ReqLang } from 'common/decorators'
 import { User } from './users.entity'
-import { RegisterRequest, ResendRequest, ConfirmRequest, ResetRequest } from './users.dto'
+import {
+  RegisterRequest,
+  ResendRequest,
+  ConfirmRequest,
+  InitiateResetPasswordRequest,
+  ResetPasswordRequest
+} from './users.dto'
 import { UsersService } from './users.service'
 import { RateLimit } from 'nestjs-rate-limiter'
 import { template, subjects } from 'mailer'
@@ -21,7 +29,7 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private readonly mailerService: MailerService
-  ) {}
+  ) { }
 
   @ApiResponse({ status: 200 })
   @ApiResponse({ status: 400 })
@@ -89,12 +97,12 @@ export class UsersController {
   @RateLimit({ points: 1, duration: 1 })
   // @Recaptcha('password-reset')
   @Post('password/reset')
-  async resetPassword(
+  async initiateResetPassword(
     @ReqUrl() url: string,
     @ReqLang() lang: string,
-    @Body() { email }: ResetRequest
+    @Body() { email }: InitiateResetPasswordRequest
   ) {
-    const { resetToken, resendToken } = await this.usersService.initiatePasswordReset(email)
+    const resetToken = await this.usersService.initiatePasswordReset(email)
     await this.mailerService.sendMail({
       to: email,
       subject: subjects[lang].resetPassword,
@@ -103,8 +111,6 @@ export class UsersController {
         link: url + '/user/password/reset/' + resetToken
       }
     })
-
-    return { resendToken }
   }
 
   @ApiResponse({ status: 200 })
@@ -112,22 +118,14 @@ export class UsersController {
   @ApiResponse({ status: 404 })
   @RateLimit({ points: 1, duration: 1 })
   // @Recaptcha('password-resend')
-  @Post('password/resend')
-  async resendPasswordReset(
+  @Post('password/reset/:resettoken')
+  async resetPassword(
     @ReqUrl() url: string,
     @ReqLang() lang: string,
-    @Body() { resendToken }: ResendRequest
+    @Param('resettoken') resetToken: string,
+    @Body() { newPassword, confirmNewPassword }: ResetPasswordRequest
   ) {
-    const reset = await this.usersService.getPasswordResetToken({ resendToken })
-    const { email, resetToken } = reset
-    await this.mailerService.sendMail({
-      to: email,
-      subject: subjects[lang].resetPassword,
-      template: template('reset-password', lang),
-      context: {
-        link: url + '/user/password/reset/' + resetToken
-      }
-    })
+    return await this.usersService.resetPassword(resetToken, newPassword, confirmNewPassword)
   }
 
   @ApiBearerAuth()

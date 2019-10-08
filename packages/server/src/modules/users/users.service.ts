@@ -9,6 +9,7 @@ import moment from 'moment'
 import { plainToClass } from 'class-transformer'
 
 const RESEND_EXPIRY = 3600
+const RESET_PASSWORD_EXPIRY = 3600
 
 @Injectable()
 export class UsersService {
@@ -189,8 +190,6 @@ export class UsersService {
     }
 
     const reset = new PasswordReset()
-    const resendToken = uniqid()
-    reset.resendToken = resendToken
     reset.email = email
     reset.state = TokenState.Pending
 
@@ -208,7 +207,34 @@ export class UsersService {
       throw new BadRequestException(error)
     }
 
-    return { resetToken, resendToken }
+    return resetToken
+  }
+
+  public async resetPassword(resetToken: string, newPassword: string, confirmNewPassword: string) {
+    const request = await this.passwordTokens.findOne({ resetToken }, {
+      select: ['email', 'dateCreated'],
+      where: { state: TokenState.Pending }
+    })
+
+    if (!request) {
+      throw new NotFoundException()
+    }
+
+    if (newPassword !== confirmNewPassword) {
+      throw new BadRequestException()
+    }
+
+    const { email, dateCreated } = request
+
+    const expires = moment(dateCreated).add(RESET_PASSWORD_EXPIRY, 'seconds')
+    const now = moment()
+    if (expires.isBefore(now)) {
+      throw new BadRequestException()
+    }
+
+    const password = await bcrypt.hash(newPassword, 10)
+
+    return await this.users.update({ email }, { password })
   }
 
   public async match(email: string, password: string) {

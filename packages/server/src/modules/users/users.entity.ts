@@ -67,9 +67,6 @@ export class PasswordReset {
   @PrimaryGeneratedColumn('uuid')
   resetToken: string
 
-  @Column()
-  resendToken: string
-
   @CreateDateColumn()
   dateCreated: Date
 
@@ -79,7 +76,4 @@ export class PasswordReset {
   @Column()
   @IsEnum(TokenState)
   state: TokenState = TokenState.Pending
-
-  @Column({ nullable: true })
-  lastSent?: Date
 }

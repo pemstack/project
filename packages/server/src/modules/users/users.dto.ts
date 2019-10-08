@@ -35,8 +35,18 @@ export class ConfirmRequest {
   registerToken: string
 }
 
-export class ResetRequest {
+export class InitiateResetPasswordRequest {
   @ApiModelProperty()
   @IsString()
   email: string
+}
+
+export class ResetPasswordRequest {
+  @ApiModelProperty()
+  @IsString()
+  newPassword: string
+
+  @ApiModelProperty()
+  @IsString()
+  confirmNewPassword: string
 }
