@@ -41,13 +41,13 @@ export const LoginForm: FunctionComponent<LoginFormProps> = ({
         </Form.Item>
         <Form.AntdItem>
           <Checkbox name='persist'>{t('user.label.remember')}</Checkbox>
-          <Link className='LoginForm__forgot' to='/user/register'>{t('user.label.forgotPass')}</Link>
+          <Link className='LoginForm__forgot' to='/user/forgot-password'>{t('user.label.forgotPass')}</Link>
           <SubmitButton
             preventDisabling
             block
             className='LoginForm__submit'
           >
-           {t('user.label.login')}
+            {t('user.label.login')}
           </SubmitButton>
           <Link to='/user/register'>{t('user.label.register')}!</Link>
         </Form.AntdItem>
