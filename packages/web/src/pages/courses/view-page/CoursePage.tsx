@@ -30,8 +30,8 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
             <h3>Attachments</h3>
             <span className='ant-upload-list ant-upload-list-text'>
               {page.files.map(f =>
-                <span className="ant-upload-list-item-name" title={f.uid}>
-                  <Icon type="paper-clip" />
+                <span key={f.uid} title={f.uid} className='ant-upload-list-item-name'>
+                  <Icon type='paper-clip' />
                   {f.name}
                 </span>
               )}
@@ -39,7 +39,7 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
           </>
         )}
         {permission === 'write' && (
-          <Link to={`/courses//${courseId}/${courseDisplay}/${pageId}/edit`}>Edit this page</Link>
+          <Link to={`/courses/${courseId}/${courseDisplay}/${pageId}/edit`}>Edit this page</Link>
         )}
       </CollapseCard>
     </div>

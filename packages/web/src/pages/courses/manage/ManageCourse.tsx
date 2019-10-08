@@ -1,20 +1,10 @@
-import { Link } from '@pema/router-react'
-import { Button, Empty, List, Modal, Select, Tabs } from 'antd'
-import { useLoadingAction, useQuery } from 'app'
-import { CollapseCard, Flex, LinkButton } from 'components'
-import React, { FunctionComponent, useState, Suspense } from 'react'
-import { useTranslation } from 'react-i18next'
-import {
-  DELETE_COURSE_PAGE,
-  GET_COURSE_PAGES,
-  PageAccess,
-  UPDATE_COURSE_PAGE,
-  INVITE_MEMBERS
-} from '../courses.api'
-import { ManageCoursePages } from './pages/ManageCoursePages'
-import { ManageCourseMembers } from './members/ManageCourseMembers'
-import { ManageCourseDetails } from './course-details/ManageCourseDetails'
+import { Tabs } from 'antd'
 import { Loading } from 'app/components'
+import React, { FunctionComponent, Suspense } from 'react'
+import { useTranslation } from 'react-i18next'
+import { ManageCourseDetails } from './course-details/ManageCourseDetails'
+import { ManageCourseMembers } from './members/ManageCourseMembers'
+import { ManageCoursePages } from './pages/ManageCoursePages'
 
 const { TabPane } = Tabs
 
