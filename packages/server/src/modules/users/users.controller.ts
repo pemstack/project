@@ -5,7 +5,8 @@ import {
   Post,
   UseGuards,
   HttpCode,
-  Param
+  Param,
+  Patch
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiBearerAuth, ApiResponse, ApiUseTags } from '@nestjs/swagger'
@@ -108,9 +109,19 @@ export class UsersController {
       subject: subjects[lang].resetPassword,
       template: template('reset-password', lang),
       context: {
-        link: url + '/user/password/reset/' + resetToken
+        link: url + '/user/forgot-password/' + resetToken
       }
     })
+  }
+
+  @ApiResponse({ status: 200 })
+  @RateLimit({ points: 3, duration: 1 })
+  // @Recaptcha('password-resend')
+  @Get('password/reset/:resettoken')
+  async getPasswordResetTokenState(
+    @Param('resettoken') resetToken: string
+  ) {
+    return await this.usersService.getPasswordResetTokenState(resetToken)
   }
 
   @ApiResponse({ status: 200 })
@@ -118,14 +129,12 @@ export class UsersController {
   @ApiResponse({ status: 404 })
   @RateLimit({ points: 1, duration: 1 })
   // @Recaptcha('password-resend')
-  @Post('password/reset/:resettoken')
+  @Patch('password/reset/:resettoken')
   async resetPassword(
-    @ReqUrl() url: string,
-    @ReqLang() lang: string,
     @Param('resettoken') resetToken: string,
-    @Body() { newPassword, confirmNewPassword }: ResetPasswordRequest
+    @Body() { newPassword }: ResetPasswordRequest
   ) {
-    return await this.usersService.resetPassword(resetToken, newPassword, confirmNewPassword)
+    return await this.usersService.resetPassword(resetToken, newPassword)
   }
 
   @ApiBearerAuth()

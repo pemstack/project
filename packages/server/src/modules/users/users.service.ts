@@ -88,39 +88,24 @@ export class UsersService {
     return registration
   }
 
-  public async getPasswordResetToken({
-    resetToken,
-    resendToken
-  }: {
-    resetToken?: string
-    resendToken?: string
-  }) {
-    if (!resetToken && !resendToken) {
-      throw new BadRequestException()
+  public async getPasswordResetTokenState(resetToken: string) {
+    const token = await this.passwordTokens.findOne({
+      resetToken,
+      state: TokenState.Pending
+    })
+
+    if (token) {
+      const expires = moment(token.dateCreated).add(RESET_PASSWORD_EXPIRY, 'seconds')
+      const now = moment()
+      if (expires.isAfter(now)) {
+        return {
+          isValid: true,
+          email: token.email
+        }
+      }
     }
 
-    const reset = await this.passwordTokens.findOne(
-      reduceObject({
-        resetToken,
-        resendToken
-      })
-    )
-
-    if (!reset) {
-      throw new NotFoundException()
-    }
-
-    const expires = moment(reset.dateCreated).add(RESEND_EXPIRY, 'seconds')
-    const now = moment()
-    if (expires.isBefore(now)) {
-      throw new BadRequestException()
-    }
-
-    if (reset.state !== TokenState.Pending) {
-      throw new BadRequestException()
-    }
-
-    return reset
+    return { isValid: false, email: null }
   }
 
   public async completeRegistration({ registerToken }: { registerToken: string }) {
@@ -210,18 +195,11 @@ export class UsersService {
     return resetToken
   }
 
-  public async resetPassword(resetToken: string, newPassword: string, confirmNewPassword: string) {
-    const request = await this.passwordTokens.findOne({ resetToken }, {
-      select: ['email', 'dateCreated'],
-      where: { state: TokenState.Pending }
-    })
+  public async resetPassword(resetToken: string, newPassword: string) {
+    const request = await this.passwordTokens.findOne({ resetToken, state: TokenState.Pending })
 
     if (!request) {
       throw new NotFoundException()
-    }
-
-    if (newPassword !== confirmNewPassword) {
-      throw new BadRequestException()
     }
 
     const { email, dateCreated } = request

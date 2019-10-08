@@ -45,8 +45,4 @@ export class ResetPasswordRequest {
   @ApiModelProperty()
   @IsString()
   newPassword: string
-
-  @ApiModelProperty()
-  @IsString()
-  confirmNewPassword: string
 }
