@@ -11,7 +11,13 @@ export const HomeRoute: View = ({
   useEffect(() => {
     let cancel = false
     async function fetch() {
-      const token = await app.user.getAccessToken(true)
+      let token: string | null
+      try {
+        token = await app.user.getAccessToken(true)
+      } catch {
+        token = null
+      }
+
       if (cancel) {
         return
       }

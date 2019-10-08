@@ -22,7 +22,19 @@ export function createQueryHook<TResult, TParams>
 }
 
 export function errorCode(error: any) {
-  return (error && error.statusCode) || (500)
+  if (!error) {
+    return 500
+  }
+
+  if (error.status) {
+    return error.status
+  }
+
+  if (error.statusCode) {
+    return error.statusCode
+  }
+
+  return 500
 }
 
 export function isErrorCode(code: number | string, error: any): boolean {
