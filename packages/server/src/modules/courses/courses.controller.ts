@@ -8,8 +8,12 @@ import {
   Delete,
   Patch,
   Query,
-  BadRequestException
+  BadRequestException,
+  UseInterceptors,
+  UploadedFiles,
+  UploadedFile
 } from '@nestjs/common'
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express'
 import { ApiUseTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger'
 import { CoursesService } from './courses.service'
 import { InvitationsService } from './invitations.service'
@@ -36,6 +40,7 @@ import {
 import { ReqUser, Authorize } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
 import { CoursePermissionLevel } from './courses.entity'
+import { MulterFile } from 'common/interfaces'
 
 @ApiUseTags('courses')
 @Controller('courses')
@@ -168,11 +173,13 @@ export class CoursesController {
   @ApiResponse({ status: 201, type: CreateCoursePageResponse })
   @ApiBearerAuth()
   @Authorize()
+  @UseInterceptors(FilesInterceptor('files[]'))
   @Post(':courseid/pages')
   async createCoursePage(
     @Param('courseid') courseId: string,
     @ReqUser('userId') userId: string,
-    @Body() { title, content, access }: CreateCoursePageRequest
+    @Body() { title, content, access }: CreateCoursePageRequest,
+    @UploadedFiles() files: MulterFile[]
   ): Promise<CreateCoursePageResponse> {
     const pageId = await this.courses.createCoursePage({
       courseId,

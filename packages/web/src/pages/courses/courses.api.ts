@@ -263,14 +263,6 @@ export type CreateCoursePageParams = yup.InferType<typeof createCoursePageSchema
 export const CREATE_COURSE_PAGE: Action<CreateCoursePageParams> = {
   schema: createCoursePageSchema,
   async perform({ courseId, title, access, content, files }, app) {
-    // const data = new FormData()
-    // data.append('title', title)
-    // data.append('access', access)
-    // if (content) {
-    //   data.append('content', content)
-    // }
-    // const files: Blob[] = (newFiles || []) as Blob[]
-    // files.forEach((file) => data.append('newFiles[]', file))
     return await app
       .req(`/api/courses/${courseId}/pages`, { action: 'createCoursePage' })
       .formData({ title, access, content, files })
