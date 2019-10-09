@@ -119,13 +119,6 @@ export const GET_COURSE_PERMISSION: Query<
   }
 }
 
-export const createCourseSchema = yup.object({
-  title: yup.string().required('course.error.title'),
-  access: yup
-    .string()
-    .oneOf(['private', 'public'])
-    .required('course.error.access')
-})
 
 export const inviteMembersSchema = yup.object({
   courseId: yup.string().required(),
@@ -155,6 +148,14 @@ export const INVITE_MEMBERS: Action<InviteMembersParams> = {
   },
   invalidates: ({ courseId }) => [`courses/${courseId}/members`]
 }
+
+export const createCourseSchema = yup.object({
+  title: yup.string().required('course.error.title'),
+  access: yup
+    .string()
+    .oneOf(['private', 'public'])
+    .required('course.error.access'),
+})
 
 export type CreateCourseParams = yup.InferType<typeof createCourseSchema>
 
@@ -252,7 +253,8 @@ const createCoursePageSchema = yup.object({
     .string()
     .oneOf(['private', 'public', 'unlisted'])
     .required(),
-  content: yup.string().notRequired()
+  content: yup.string().notRequired(),
+  files: yup.array().notRequired()
 })
 
 export type CreateCoursePageParams = yup.InferType<typeof createCoursePageSchema>
@@ -260,10 +262,19 @@ export type CreateCoursePageParams = yup.InferType<typeof createCoursePageSchema
 // POST /api/courses/:courseid/pages
 export const CREATE_COURSE_PAGE: Action<CreateCoursePageParams> = {
   schema: createCoursePageSchema,
-  async perform({ courseId, ...values }, app) {
+  async perform({ courseId, title, access, content, files }, app) {
+    // const data = new FormData()
+    // data.append('title', title)
+    // data.append('access', access)
+    // if (content) {
+    //   data.append('content', content)
+    // }
+    // const files: Blob[] = (newFiles || []) as Blob[]
+    // files.forEach((file) => data.append('newFiles[]', file))
     return await app
       .req(`/api/courses/${courseId}/pages`, { action: 'createCoursePage' })
-      .post(values)
+      .formData({ title, access, content, files })
+      .post()
       .res()
   },
   invalidates: ({ courseId }) => [`courses/${courseId}/pages`]
