@@ -1,4 +1,5 @@
 import { CourseAccess, PageAccess, CoursePermissionLevel } from './courses.entity'
+import { MulterFile } from 'common/interfaces';
 
 export interface GetCoursesParams {
   userId: string
@@ -44,6 +45,7 @@ export interface CreateCoursePageParams {
   title: string
   content?: string
   access: PageAccess
+  files: MulterFile[]
 }
 
 export interface UpdateCoursePageParams {
@@ -119,4 +121,11 @@ export interface DeleteCourseMemberParams {
   courseId: string
   userId: string
   email: string
+}
+
+export interface SaveFilesToDbParams {
+  courseId: string
+  userId: string
+  pageId: string
+  files: MulterFile[]
 }

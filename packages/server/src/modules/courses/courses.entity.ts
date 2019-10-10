@@ -142,3 +142,36 @@ export class CoursePost {
   @JoinColumn({ name: 'courseId' })
   course: Course
 }
+
+@Entity()
+export class CoursePageFile {
+  @PrimaryColumn()
+  fileId: string
+
+  @Column()
+  fileName: string
+
+  @Column()
+  courseId: string
+
+  @ManyToOne(type => Course, {
+    nullable: false,
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn({ name: 'courseId' })
+  course: Course
+
+  @Column()
+  pageId: string
+
+  @ManyToOne(type => CoursePage, {
+    nullable: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+  })
+  @JoinColumn([
+    { name: 'courseId', referencedColumnName: 'courseId' },
+    { name: 'pageId', referencedColumnName: 'pageId' }
+  ])
+  page: CoursePage
+}

@@ -186,7 +186,8 @@ export class CoursesController {
       userId,
       title,
       content,
-      access
+      access,
+      files
     })
 
     return { courseId, pageId }

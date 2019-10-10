@@ -14,7 +14,8 @@ import {
   CoursePermissionLevel,
   CourseAccess,
   PageAccess,
-  CoursePost
+  CoursePost,
+  CoursePageFile
 } from './courses.entity'
 import {
   GetCoursesParams,
@@ -36,7 +37,8 @@ import {
   GetCourseMembersParams,
   GetCourseMembersResult,
   DeleteCourseMemberParams,
-  GetCourseParams
+  GetCourseParams,
+  SaveFilesToDbParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -178,7 +180,8 @@ export class CoursesService {
     userId,
     title,
     content = '',
-    access = PageAccess.Private
+    access = PageAccess.Private,
+    files
   }: CreateCoursePageParams): Promise<string> {
     await this.assertWritePermission({ courseId, userId })
 
@@ -199,6 +202,13 @@ export class CoursesService {
       title,
       content,
       access
+    })
+
+    await this.saveFilesToDb({
+      courseId,
+      userId,
+      pageId,
+      files
     })
 
     return pageId
@@ -460,6 +470,19 @@ export class CoursesService {
 
     if (permission.permissionLevel !== CoursePermissionLevel.Write) {
       throw new ForbiddenException()
+    }
+  }
+
+  async saveFilesToDb({ courseId, userId, pageId, files }: SaveFilesToDbParams) {
+    await this.assertWritePermission({ courseId, userId })
+
+    for (const file of files) {
+      await this.entities.insert(CoursePageFile, {
+        fileId: file.filename,
+        fileName: file.originalname,
+        courseId,
+        pageId
+      })
     }
   }
 }
