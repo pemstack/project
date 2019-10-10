@@ -158,9 +158,13 @@ export class CoursesService {
       throw new NotFoundException()
     }
 
+    const files = await this.entities.find(CoursePageFile, {
+      where: { courseId, pageId }
+    })
+
     // Page is public - anyone can see it.
     if (page.access === PageAccess.Public) {
-      return page
+      return { page, files }
     }
 
     // Course is public but page is private and user is not authenticated/a course member
@@ -172,7 +176,7 @@ export class CoursesService {
       }
     }
 
-    return page
+    return { page, files }
   }
 
   async createCoursePage({

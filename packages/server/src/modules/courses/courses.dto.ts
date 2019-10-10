@@ -78,6 +78,14 @@ export class GetCoursePagesResponse {
   access: PageAccess
 }
 
+export class GetCoursePageResponseFile {
+  @ApiResponseModelProperty()
+  fileId: string
+
+  @ApiResponseModelProperty()
+  fileName: string
+}
+
 export class GetCoursePageResponse {
   @ApiResponseModelProperty()
   pageId: string
@@ -93,6 +101,9 @@ export class GetCoursePageResponse {
 
   @ApiResponseModelProperty()
   access: PageAccess
+
+  @ApiResponseModelProperty({ type: [GetCoursePageResponseFile] })
+  files: GetCoursePageResponseFile[]
 }
 
 export class CreateCoursePageRequest {

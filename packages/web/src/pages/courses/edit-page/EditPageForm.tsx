@@ -9,6 +9,22 @@ import { ExistingFile } from '../courses.api'
 
 const { Dragger } = Upload
 
+interface RcUploadedFile {
+  uid: string
+  size: number
+  name: string
+  type: string
+}
+
+function toRc({ fileId, fileName }: ExistingFile): RcUploadedFile {
+  return {
+    uid: fileId,
+    size: 0,
+    name: fileName,
+    type: 'application/octet-stream'
+  }
+}
+
 export interface EditPageFormProps {
   existingFiles?: ExistingFile[]
   submitButtonKey?: string
@@ -47,14 +63,15 @@ export const EditPageForm: FunctionComponent<EditPageFormProps> = ({
         <Form.Item name='files'>
           <Field name='files'>
             {({ form: { values, setFieldValue } }: FieldProps) => {
-              const newFiles: ExistingFile[] = values.files || []
-              const removedFiles = values.removedFiles || []
-              let fileList = [...existingFiles, ...newFiles]
+              const newFiles: RcUploadedFile[] = values.files || []
+              const removedFiles: string[] = values.removedFiles || []
+              const existingFilesRc = existingFiles.map(toRc)
+              let fileList = [...existingFilesRc, ...newFiles]
               if (removedFiles.length > 0) {
                 fileList = fileList.filter(f => !removedFiles.includes(f.uid))
               }
 
-              function unique(arr: ExistingFile[]) {
+              function unique(arr: RcUploadedFile[]) {
                 return arr.filter((f, i) => arr.findIndex(f2 => f.uid === f2.uid) === i)
               }
 
@@ -69,7 +86,7 @@ export const EditPageForm: FunctionComponent<EditPageFormProps> = ({
                     return false
                   }}
                   onRemove={file => {
-                    if (existingFiles.find(f => file.uid === f.uid)) {
+                    if (existingFiles.find(f => file.uid === f.fileId)) {
                       setFieldValue('removedFiles', [...removedFiles, file.uid])
                     } else {
                       /* tslint:disable-next-line */

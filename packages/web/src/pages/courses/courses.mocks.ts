@@ -137,7 +137,7 @@ class MockCourse {
     this.pages = this.pages.map(page => {
       if (page.pageId === pageId) {
         const { files: newFiles = [], removedFiles = [] } = params
-        const files = [...(page.files || []), ...newFiles].filter(f => !removedFiles.includes(f.uid))
+        const files = [...(page.files || []), ...newFiles].filter(f => !removedFiles.includes(f.fileId))
         return { ...page, ...cleaned, files, pageId: slugify(cleaned.title || page.title, { lower: true }) }
       } else {
         return page
@@ -195,22 +195,16 @@ function makeError(status: number, message?: string) {
 
 const existingFiles: ExistingFile[] = [
   {
-    uid: 'file-1',
-    name: 'File-1.pdf',
-    size: 200,
-    type: 'application/pdf'
+    fileId: 'file-1',
+    fileName: 'File-1.pdf'
   },
   {
-    uid: 'file-2',
-    name: 'File-2.pdf',
-    size: 200,
-    type: 'application/pdf'
+    fileId: 'file-2',
+    fileName: 'File-2.pdf'
   },
   {
-    uid: 'file-3',
-    name: 'File-3.pdf',
-    size: 200,
-    type: 'application/pdf'
+    fileId: 'file-3',
+    fileName: 'File-3.pdf'
   }
 ]
 

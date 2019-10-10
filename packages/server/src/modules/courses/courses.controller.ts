@@ -35,7 +35,8 @@ import {
   GetCourseMembersResponse,
   InviteCourseMembersRequest,
   GetCoursesResponse,
-  GetCourseResponse
+  GetCourseResponse,
+  GetCoursePageResponseFile
 } from './courses.dto'
 import { ReqUser, Authorize } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
@@ -161,13 +162,20 @@ export class CoursesController {
     @Param('courseid') courseId: string,
     @Param('pageid') pageId: string
   ): Promise<GetCoursePageResponse> {
-    const coursePage = await this.courses.getCoursePage({
+    const { page: coursePage, files } = await this.courses.getCoursePage({
       userId,
       courseId,
       pageId
     })
 
-    return plainToClass(GetCoursePageResponse, coursePage)
+    return {
+      pageId: coursePage.pageId,
+      courseId: coursePage.courseId,
+      title: coursePage.title,
+      content: coursePage.content,
+      access: coursePage.access,
+      files: (files || []).map(({ fileId, fileName }) => ({ fileId, fileName }))
+    }
   }
 
   @ApiResponse({ status: 201, type: CreateCoursePageResponse })

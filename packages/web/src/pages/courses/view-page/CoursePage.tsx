@@ -26,17 +26,17 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
       <CollapseCard>
         <Markdown source={page.content || ''} />
         {page.files && page.files.length > 0 && (
-          <>
+          <div>
             <h3>Attachments</h3>
             <span className='ant-upload-list ant-upload-list-text'>
               {page.files.map(f =>
-                <span key={f.uid} title={f.uid} className='ant-upload-list-item-name'>
+                <span key={f.fileId} title={f.fileId} className='ant-upload-list-item-name'>
                   <Icon type='paper-clip' />
-                  {f.name}
+                  {f.fileName}
                 </span>
               )}
             </span>
-          </>
+          </div>
         )}
         {permission === 'write' && (
           <Link to={`/courses/${courseId}/${courseDisplay}/${pageId}/edit`}>Edit this page</Link>

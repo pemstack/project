@@ -50,10 +50,8 @@ export interface GetCoursePageParams {
 export type PageAccess = 'private' | 'public' | 'unlisted'
 
 export interface ExistingFile {
-  uid: string
-  size: number
-  name: string
-  type: string
+  fileId: string
+  fileName: string
 }
 
 export interface GetCoursePageResult {
