@@ -34,7 +34,6 @@ export const AnonymousLayout: FunctionComponent<AnonymousLayoutProps> = ({
         </div>
       </Content>
       <Footer className='AnonymousLayout__footer'>
-        Ant Design ©2018 Created by Ant UED
       </Footer>
     </Layout>
   )

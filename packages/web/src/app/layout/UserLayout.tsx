@@ -100,8 +100,7 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
           </div>
         </Content>
         <Footer className='UserLayout__footer'>
-          Ant Design ©2018 Created by Ant UED
-				</Footer>
+        </Footer>
       </Layout>
     </Layout>
   )
