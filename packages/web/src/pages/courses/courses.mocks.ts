@@ -326,9 +326,14 @@ export function mockCourses(api: MockApi) {
 
   api.withAction(
     UPDATE_COURSE_PAGE,
-    async ({ courseId, pageId, ...params }) => {
+    async ({ courseId, pageId, files, ...params }) => {
       await delay(500)
-      const page = courses.findCourse(courseId).updatePage(pageId, params)
+      const existing = (files || []).map(f => ({ fileId: f.uid, fileName: f.name }))
+      const page = courses.findCourse(courseId).updatePage(pageId, {
+        ...params,
+        files: existing
+      })
+
       return { courseId, pageId: slugify(params.title || page.title, { lower: true }) }
     }
   )
