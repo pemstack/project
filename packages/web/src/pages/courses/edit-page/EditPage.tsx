@@ -1,6 +1,6 @@
 import { useQuery, useAction } from 'app'
 import React, { FunctionComponent } from 'react'
-import { GET_COURSE_PAGE, UPDATE_COURSE_PAGE } from '../courses.api'
+import { GET_COURSE_PAGE, UPDATE_COURSE_PAGE, RcUploadedFile } from '../courses.api'
 import { Formik } from 'forms'
 import { EditPageForm } from './EditPageForm'
 
@@ -25,11 +25,12 @@ export const EditPage: FunctionComponent<EditPageProps> = ({
       validationSchema={updateCoursePage.schema}
       initialValues={{
         courseId,
+        pageId,
         title,
         content,
         access,
-        files: [],
-        removedFiles: []
+        files: [] as RcUploadedFile[],
+        removedFiles: [] as string[]
       }}
       onSubmit={async (values, actions) => {
         try {

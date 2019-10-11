@@ -282,13 +282,20 @@ export const updateCoursePageSchema = yup.object({
   removedFiles: yup.array(yup.string().required()).notRequired()
 })
 
+export interface RcUploadedFile {
+  uid: string
+  size: number
+  name: string
+  type: string
+}
+
 export interface UpdateCoursePageParams {
   courseId: string
   pageId: string
   title?: string
   access?: PageAccess
   content?: string
-  files?: any[]
+  files?: RcUploadedFile[]
   removedFiles?: string[]
 }
 
@@ -303,7 +310,8 @@ export const UPDATE_COURSE_PAGE: Action<UpdateCoursePageParams, UpdateCoursePage
   async perform({ courseId, pageId, ...params }, app) {
     return await app
       .req(`/api/courses/${courseId}/pages/${pageId}`, { action: 'updateCoursePage' })
-      .patch(params)
+      .formData(params)
+      .patch()
       .res()
   },
   invalidates: ({ courseId }) => [`courses/${courseId}/pages`]

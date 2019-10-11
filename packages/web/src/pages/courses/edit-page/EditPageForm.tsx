@@ -5,16 +5,9 @@ import { Tooltip, Icon, Upload } from 'antd'
 import { useTranslation } from 'react-i18next'
 import './EditPageForm.css'
 import { Field, FieldProps } from 'formik'
-import { ExistingFile } from '../courses.api'
+import { ExistingFile, RcUploadedFile } from '../courses.api'
 
 const { Dragger } = Upload
-
-interface RcUploadedFile {
-  uid: string
-  size: number
-  name: string
-  type: string
-}
 
 function toRc({ fileId, fileName }: ExistingFile): RcUploadedFile {
   return {
