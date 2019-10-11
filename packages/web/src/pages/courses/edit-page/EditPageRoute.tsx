@@ -3,7 +3,8 @@ import { View, view, viewInvariant } from 'app'
 import { CenterContent } from 'components'
 import { EditPage } from './EditPage'
 
-export const EditPageRoute: View = ({ router, match }) => {
+export const EditPageRoute: View = ({ router, match, location }) => {
+  const { redirect } = location.query
   const { courseId, pageId, courseDisplay } = match.params
   viewInvariant(courseId && typeof courseId === 'string', 404)
   viewInvariant(pageId && typeof pageId === 'string', 404)
@@ -12,7 +13,12 @@ export const EditPageRoute: View = ({ router, match }) => {
       <EditPage
         courseId={courseId}
         pageId={pageId}
-        onSuccess={() => router.replace(`/courses/manage/${courseId}/${courseDisplay}`)}
+        onSuccess={() => {
+          const to = redirect === 'manage'
+            ? `/courses/manage/${courseId}/${courseDisplay}`
+            : `/courses/${courseId}/${courseDisplay}/${pageId}`
+          router.push(to)
+        }}
       />
     </CenterContent>
   )

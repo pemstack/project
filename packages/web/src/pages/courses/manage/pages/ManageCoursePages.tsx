@@ -74,7 +74,7 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
                 </Option>
               </Select>,
               <LinkButton
-                to={`/courses/${courseId}/${courseDisplay}/${page.pageId}/edit`}
+                to={`/courses/${courseId}/${courseDisplay}/${page.pageId}/edit?redirect=manage`}
                 type='link'
                 key='edit'
                 icon='edit'
