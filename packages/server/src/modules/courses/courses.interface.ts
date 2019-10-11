@@ -45,7 +45,7 @@ export interface CreateCoursePageParams {
   title: string
   content?: string
   access: PageAccess
-  files: MulterFile[]
+  files?: MulterFile[]
 }
 
 export interface UpdateCoursePageParams {
@@ -55,6 +55,8 @@ export interface UpdateCoursePageParams {
   title?: string
   content?: string
   access?: PageAccess
+  files?: MulterFile[]
+  removedFiles?: string[]
 }
 
 export interface DeleteCoursePageParams {
@@ -121,6 +123,13 @@ export interface DeleteCourseMemberParams {
   courseId: string
   userId: string
   email: string
+}
+
+export interface DeleteFilesParams {
+  courseId: string
+  userId: string
+  pageId: string
+  removedFiles: string[]
 }
 
 export interface SaveFilesToDbParams {

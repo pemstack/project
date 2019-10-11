@@ -1,6 +1,7 @@
 import { ApiModelProperty, ApiResponseModelProperty } from '@nestjs/swagger'
 import { IsString, MinLength, IsOptional } from 'class-validator'
 import { CourseAccess, PageAccess, CoursePermissionLevel, CoursePermission } from './courses.entity'
+import { MulterFile } from 'common/interfaces'
 
 export class GetCoursesResponse {
   @ApiResponseModelProperty()
@@ -147,6 +148,10 @@ export class UpdateCoursePageRequest {
   @IsOptional()
   @IsString()
   access?: PageAccess
+
+  @ApiModelProperty({ required: false })
+  @IsOptional()
+  removedFiles?: string[]
 }
 
 export class UpdateCoursePageResponse {

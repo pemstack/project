@@ -39,7 +39,8 @@ import {
   DeleteCourseMemberParams,
   GetCourseParams,
   SaveFilesToDbParams,
-  GetFileParams
+  GetFileParams,
+  DeleteFilesParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -49,7 +50,8 @@ import { plainToClass } from 'class-transformer'
 import { UsersService } from 'modules/users'
 import { Invitation, InvitationStatus } from './invitations.entity'
 import { createReadStream } from 'fs'
-import { inProject } from 'globals'
+import { inProject, inUploads } from 'globals'
+import fs from 'fs'
 
 @Injectable()
 export class CoursesService {
@@ -211,12 +213,14 @@ export class CoursesService {
       access
     })
 
-    await this.saveFilesToDb({
-      courseId,
-      userId,
-      pageId,
-      files
-    })
+    if (files) {
+      await this.saveFilesToDb({
+        courseId,
+        userId,
+        pageId,
+        files
+      })
+    }
 
     return pageId
   }
@@ -227,7 +231,9 @@ export class CoursesService {
     userId,
     title,
     content,
-    access
+    access,
+    files,
+    removedFiles
   }: UpdateCoursePageParams): Promise<string> {
     await this.assertWritePermission({ courseId, userId })
 
@@ -257,6 +263,24 @@ export class CoursesService {
         access
       })
     )
+
+    if (removedFiles) {
+      await this.deleteFiles({
+        courseId,
+        userId,
+        pageId,
+        removedFiles
+      })
+    }
+
+    if (files) {
+      await this.saveFilesToDb({
+        courseId,
+        userId,
+        pageId,
+        files
+      })
+    }
 
     return newPageId
   }
@@ -477,6 +501,23 @@ export class CoursesService {
 
     if (permission.permissionLevel !== CoursePermissionLevel.Write) {
       throw new ForbiddenException()
+    }
+  }
+
+  async deleteFiles({ courseId, userId, pageId, removedFiles }: DeleteFilesParams) {
+    await this.assertWritePermission({ courseId, userId })
+
+    for (const fileId of removedFiles) {
+      try {
+        await this.entities.delete(CoursePageFile, { courseId, pageId, fileId })
+        fs.unlink(inUploads(fileId), error => {
+          if (error) {
+            console.error(error)
+          }
+        })
+      } catch {
+        console.error(`Failed removing file ${fileId}`)
+      }
     }
   }
 

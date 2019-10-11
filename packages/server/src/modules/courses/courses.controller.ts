@@ -209,12 +209,14 @@ export class CoursesController {
   @ApiResponse({ status: 200, type: UpdateCoursePageRequest })
   @ApiBearerAuth()
   @Authorize()
+  @UseInterceptors(FilesInterceptor('files[]'))
   @Patch(':courseid/pages/:pageid')
   async updateCoursePage(
     @Param('courseid') courseId: string,
     @Param('pageid') pageId: string,
     @ReqUser('userId') userId: string,
-    @Body() { title, content, access }: UpdateCoursePageRequest
+    @Body() { title, content, access, removedFiles }: UpdateCoursePageRequest,
+    @UploadedFiles() files: MulterFile[]
   ): Promise<UpdateCoursePageResponse> {
     const newPageId = await this.courses.updateCoursePage({
       courseId,
@@ -222,7 +224,9 @@ export class CoursesController {
       userId,
       title,
       content,
-      access
+      access,
+      files,
+      removedFiles
     })
 
     return { courseId, pageId: newPageId }
