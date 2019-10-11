@@ -3,8 +3,8 @@ import { Request } from 'express'
 
 export const Cookie = createParamDecorator((key: string, req: Request) => {
   if (key) {
-    return req.cookies[key] as string
+    return req.cookies ? req.cookies[key] as string : null
   } else {
-    return req.cookies
+    return req.cookies || {}
   }
 })
