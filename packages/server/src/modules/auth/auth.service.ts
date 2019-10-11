@@ -47,6 +47,31 @@ export class AuthService {
     return this.createTokens(user, persist && payload.persist, payload.sid)
   }
 
+  async getUserFromSession(
+    refreshToken: string,
+    sessionId: string
+  ): Promise<User | null> {
+    if (!refreshToken || !sessionId || typeof sessionId !== 'string') {
+      return null
+    }
+
+    try {
+      const payload = await this.jwtService.verifyAsync(refreshToken) as RefreshTokenPayload
+      const id = payload.sub
+      if (!id || (payload as any).type !== 'refresh') {
+        return null
+      }
+
+      if (payload.sid !== sessionId) {
+        return null
+      }
+
+      return await this.usersService.findOne({ userId: id })
+    } catch {
+      return null
+    }
+  }
+
   async createTokens(user: User, persist = false, sessionId = uniqid()): Promise<AuthTokens> {
     const accessTokenPayload: AccessTokenPayload = {
       sub: user.userId,
