@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { useQuery } from 'app'
+import { useQuery, useAction } from 'app'
 import { Markdown, CollapseCard } from 'components'
 import classNames from 'classnames'
 import { GET_COURSE_PAGE, GET_COURSE_PERMISSION } from '../courses.api'
@@ -31,15 +31,20 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
             <span className='ant-upload-list ant-upload-list-text'>
               {page.files.map(f =>
                 <span key={f.fileId} title={f.fileId} className='ant-upload-list-item-name'>
-                  <Icon type='paper-clip' />
-                  {f.fileName}
+                  <a href={`${process.env.REACT_APP_URL_BASE}/api/courses/${courseId}/pages/${pageId}/${f.fileId}`}>
+                    <Icon type='paper-clip' />
+                    {f.fileName}
+                  </a>
                 </span>
               )}
             </span>
           </div>
         )}
         {permission === 'write' && (
-          <Link to={`/courses/${courseId}/${courseDisplay}/${pageId}/edit`}>Edit this page</Link>
+          <>
+            <br />
+            <Link to={`/courses/${courseId}/${courseDisplay}/${pageId}/edit`}>Edit this page</Link>
+          </>
         )}
       </CollapseCard>
     </div>
