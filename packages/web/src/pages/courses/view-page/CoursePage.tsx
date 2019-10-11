@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { GET_COURSE_PAGE, GET_COURSE_PERMISSION } from '../courses.api'
 import { Icon } from 'antd'
 import { Link } from '@pema/router-react'
+import 'antd/es/upload/style/index.css'
 
 export interface CoursePageProps {
   courseId: string
@@ -28,16 +29,23 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
         {page.files && page.files.length > 0 && (
           <div>
             <h3>Attachments</h3>
-            <span className='ant-upload-list ant-upload-list-text'>
+            <div className='ant-upload-list ant-upload-list-text'>
               {page.files.map(f =>
-                <span key={f.fileId} title={f.fileId} className='ant-upload-list-item-name'>
-                  <a href={`${process.env.REACT_APP_URL_BASE}/api/courses/${courseId}/pages/${pageId}/${f.fileId}`}>
-                    <Icon type='paper-clip' />
-                    {f.fileName}
-                  </a>
-                </span>
+                <div key={f.fileId} className='ant-upload-list-item ant-upload-list-item-done'>
+                  <div className='ant-upload-list-item-info'>
+                    <span>
+                      <Icon type='paper-clip' />
+                      <a
+                        className='ant-upload-list-item-name'
+                        href={`${process.env.REACT_APP_URL_BASE}/api/courses/${courseId}/pages/${pageId}/${f.fileId}`}
+                      >
+                        {f.fileName}
+                      </a>
+                    </span>
+                  </div>
+                </div>
               )}
-            </span>
+            </div>
           </div>
         )}
         {permission === 'write' && (
