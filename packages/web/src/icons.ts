@@ -426,7 +426,7 @@ export { default as BarsOutline } from '@ant-design/icons/lib/outline/BarsOutlin
 // export { default as CheckOutline } from '@ant-design/icons/lib/outline/CheckOutline'
 // export { default as CiOutline } from '@ant-design/icons/lib/outline/CiOutline'
 // export { default as CloudDownloadOutline } from '@ant-design/icons/lib/outline/CloudDownloadOutline'
-// export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline'
+export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline'
 // export { default as CloudSyncOutline } from '@ant-design/icons/lib/outline/CloudSyncOutline'
 // export { default as CloudServerOutline } from '@ant-design/icons/lib/outline/CloudServerOutline'
 // export { default as CloudUploadOutline } from '@ant-design/icons/lib/outline/CloudUploadOutline'
