@@ -38,7 +38,8 @@ import {
   GetCourseMembersResult,
   DeleteCourseMemberParams,
   GetCourseParams,
-  SaveFilesToDbParams
+  SaveFilesToDbParams,
+  GetFileParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -47,6 +48,8 @@ import { reduceObject } from 'common/utils'
 import { plainToClass } from 'class-transformer'
 import { UsersService } from 'modules/users'
 import { Invitation, InvitationStatus } from './invitations.entity'
+import { createReadStream } from 'fs'
+import { inProject } from 'globals'
 
 @Injectable()
 export class CoursesService {
@@ -488,5 +491,17 @@ export class CoursesService {
         pageId
       })
     }
+  }
+
+  async getFile({ courseId, userId, pageId, fileId }: GetFileParams) {
+    const page = await this.getCoursePage({ userId, courseId, pageId })
+
+    const file = page.files.find(element => element.fileId === fileId)
+
+    if (!file) {
+      throw new NotFoundException()
+    }
+
+    return file.fileName
   }
 }

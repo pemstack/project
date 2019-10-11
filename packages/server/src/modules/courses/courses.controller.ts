@@ -11,7 +11,8 @@ import {
   BadRequestException,
   UseInterceptors,
   UploadedFiles,
-  UploadedFile
+  UploadedFile,
+  Res
 } from '@nestjs/common'
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express'
 import { ApiUseTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger'
@@ -38,17 +39,21 @@ import {
   GetCourseResponse,
   GetCoursePageResponseFile
 } from './courses.dto'
-import { ReqUser, Authorize } from 'common/decorators'
+import { ReqUser, Authorize, Cookie } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
 import { CoursePermissionLevel } from './courses.entity'
 import { MulterFile } from 'common/interfaces'
+import { Response } from 'express'
+import { inProject, inUploads } from 'globals'
+import { AuthService } from 'modules/auth'
 
 @ApiUseTags('courses')
 @Controller('courses')
 export class CoursesController {
   constructor(
     private readonly courses: CoursesService,
-    private readonly invitations: InvitationsService
+    private readonly invitations: InvitationsService,
+    private readonly auth: AuthService
   ) { }
 
   // Courses
@@ -233,6 +238,31 @@ export class CoursesController {
     @Param('pageid') pageId: string
   ): Promise<void> {
     await this.courses.deleteCoursePage({ userId, courseId, pageId })
+  }
+
+  @ApiResponse({ status: 200 })
+  @ApiBearerAuth()
+  @Authorize(['jwt', 'anonymous'])
+  @Get(':courseid/pages/:pageid/:fileid')
+  async downloadFile(
+    @ReqUser('userid') userId: string,
+    @Param('courseid') courseId: string,
+    @Param('pageid') pageId: string,
+    @Param('fileid') fileId: string,
+    @Cookie('refresh_token') refreshToken: string,
+    @Cookie('session_id') sessionId: string,
+    @Res() res: Response
+  ) {
+    if (!userId && refreshToken && sessionId) {
+      const user = await this.auth.getUserFromSession(refreshToken, sessionId)
+      if (user) {
+        userId = user.userId
+      }
+    }
+
+    const fileName = await this.courses.getFile({ courseId, userId, pageId, fileId })
+
+    res.download(inUploads(fileId), fileName)
   }
 
   // Posts

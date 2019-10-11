@@ -129,3 +129,10 @@ export interface SaveFilesToDbParams {
   pageId: string
   files: MulterFile[]
 }
+
+export interface GetFileParams {
+  courseId: string
+  userId: string
+  pageId: string
+  fileId: string
+}
