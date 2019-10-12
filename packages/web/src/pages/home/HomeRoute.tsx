@@ -51,13 +51,15 @@ ${accessToken || '<no token>'}
       <CenterContent>
         <CollapseCard>
           <Markdown source={source} />
-          {accessToken && <Button
-            icon='copy'
-            type='primary'
-            onClick={() => navigator.clipboard.writeText(accessToken)}
-          >
-            Copy
-          </Button>}
+          {accessToken && (
+            <Button
+              icon='copy'
+              type='primary'
+              onClick={() => navigator.clipboard.writeText(accessToken)}
+            >
+              Copy
+            </Button>
+          )}
         </CollapseCard>
       </CenterContent>
     </div>
