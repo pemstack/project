@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Post,
   Get,
   Patch,
   Param
@@ -9,7 +8,7 @@ import {
 import { ApiResponse, ApiUseTags, ApiBearerAuth } from '@nestjs/swagger'
 import { InvitationsService } from './invitations.service'
 import { Authorize, ReqUser } from 'common/decorators'
-import { GetUserInvitationsResponse, CreateInvitationRequest, UpdateInvitationRequest } from './invitations.dto'
+import { GetUserInvitationsResponse, UpdateInvitationRequest } from './invitations.dto'
 import { User } from 'modules/users'
 
 @ApiUseTags('invitations')
@@ -33,23 +32,6 @@ export class InvitationsController {
       permission: invitation.permission,
       dateInvited: invitation.dateInvited
     }))
-  }
-
-  @ApiResponse({ status: 200 })
-  @ApiBearerAuth()
-  @Authorize()
-  @Post(':courseid')
-  async createInvitation(
-    @ReqUser('userId') requesterUserId: string,
-    @Param('courseid') courseId: string,
-    @Body() { userEmail, permission }: CreateInvitationRequest
-  ) {
-    await this.invitations.createInvitation({
-      requesterUserId,
-      userEmail,
-      courseId,
-      permission
-    })
   }
 
   @ApiResponse({ status: 200 })
