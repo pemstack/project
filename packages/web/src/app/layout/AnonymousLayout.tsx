@@ -33,8 +33,6 @@ export const AnonymousLayout: FunctionComponent<AnonymousLayoutProps> = ({
           </Suspense>
         </div>
       </Content>
-      <Footer className='AnonymousLayout__footer'>
-      </Footer>
     </Layout>
   )
 }

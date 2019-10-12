@@ -99,8 +99,8 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
             <Suspense fallback={<Loading />}>{children}</Suspense>
           </div>
         </Content>
-        <Footer className='UserLayout__footer'>
-        </Footer>
+        {/* <Footer className='UserLayout__footer'>
+        </Footer> */}
       </Layout>
     </Layout>
   )

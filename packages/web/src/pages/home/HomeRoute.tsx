@@ -65,3 +65,4 @@ ${accessToken || '<no token>'}
     </div>
   )
 }
+HomeRoute.layout = ({ app }) => app.user.authenticated ? 'user' : 'none'

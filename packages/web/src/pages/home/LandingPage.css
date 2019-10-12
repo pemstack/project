@@ -1,0 +1,63 @@
+.LandingPage{
+    background: rgb(9,9,121);
+    background: linear-gradient(32deg, rgba(9,9,121,1) 0%, 
+                                       rgba(51,137,200,1) 43%, 
+                                       rgba(0,212,255,1) 100%);
+    box-sizing: border-box;
+    padding:0px 150px;
+    min-height: 100vh;
+}
+
+.center{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Welcome{
+    float: left;
+}
+
+.Illustration{
+    float:right;
+    margin-top: 25px;
+}
+
+h2{
+    color:white;
+    font-size:50px;
+    font-family:'CustomFont';
+}
+
+p{
+    color:white;
+    font-size:10px;
+}
+
+#myBtn{
+    cursor: pointer;
+    padding:10px 40px;
+    background-color:#1f8acc;
+    border:none;
+    color:white;
+    font-weight: 600;
+    font-size: 15px;
+    margin-left:40px;
+    outline: none;
+    margin-top:30px;
+    margin-left: 0;
+    border-radius:20px;
+}
+
+#myBtn:active{
+    border-bottom:solid 1px #074a73 ;
+}
+
+#myBtn:hover{
+    background-color: #007acc;
+}
+
+@font-face {
+    font-family: "CustomFont";
+    src: url("./misc/code.otf");
+  }
