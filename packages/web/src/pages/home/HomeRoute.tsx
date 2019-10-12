@@ -8,14 +8,6 @@ import { LandingPage } from './LandingPage'
 export const HomeRoute: View = ({
   app
 }) => {
-  if (!app.user.authenticated) {
-    return (
-      <div className='HomeRoute'>
-        <LandingPage />
-      </div>
-    )
-  }
-
   const [accessToken, setAccessToken] = useState<string | null>(null)
   useEffect(() => {
     let cancel = false
@@ -37,6 +29,14 @@ export const HomeRoute: View = ({
     fetch()
     return () => { cancel = true }
   }, [app.user])
+
+  if (!app.user.authenticated) {
+    return (
+      <div className='HomeRoute'>
+        <LandingPage />
+      </div>
+    )
+  }
 
   const source = `
 ## Access token
