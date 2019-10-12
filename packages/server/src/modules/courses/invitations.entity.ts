@@ -1,4 +1,4 @@
-import { PrimaryColumn, Column, Entity, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { PrimaryColumn, Column, Entity, CreateDateColumn, ManyToOne, JoinColumn, IsNull } from 'typeorm'
 import { IsEnum } from 'class-validator'
 import { Course } from './courses.entity'
 
@@ -36,6 +36,9 @@ export class Invitation {
 
   @CreateDateColumn()
   dateInvited: Date
+
+  @Column({ nullable: true })
+  group: string
 
   @IsEnum(InvitationStatus)
   @Column()

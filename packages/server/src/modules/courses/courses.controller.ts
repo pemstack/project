@@ -367,7 +367,7 @@ export class CoursesController {
   async inviteCourseMembers(
     @Param('courseid') courseId: string,
     @ReqUser('userId') requesterUserId: string,
-    @Body() { emails, permission }: InviteCourseMembersRequest
+    @Body() { emails, permission, group }: InviteCourseMembersRequest
   ): Promise<void> {
     let coursePermissionlevel: CoursePermissionLevel
     switch (permission || 'none') {
@@ -385,7 +385,8 @@ export class CoursesController {
       requesterUserId,
       courseId,
       emails,
-      permission: coursePermissionlevel
+      permission: coursePermissionlevel,
+      group
     })
   }
 
@@ -400,5 +401,31 @@ export class CoursesController {
     @ReqUser('userId') userId: string
   ): Promise<void> {
     await this.courses.deleteCourseMember({ courseId, userId, email })
+  }
+
+  // GROUPS
+
+  @ApiResponse({ status: 201 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Post(':courseid/groups/:groupname')
+  async createGroup(
+    @Param('courseid') courseId: string,
+    @Param('groupname') groupName: string,
+    @ReqUser('userId') userId: string
+  ): Promise<void> {
+    await this.courses.createGroup({ courseId, userId, groupName })
+  }
+
+  @ApiResponse({ status: 200 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Delete(':courseid/groups/:groupname')
+  async deleteGroup(
+    @Param('courseid') courseId: string,
+    @Param('groupname') groupName: string,
+    @ReqUser('userId') userId: string
+  ): Promise<void> {
+    await this.courses.deleteGroup({ courseId, userId, groupName })
   }
 }

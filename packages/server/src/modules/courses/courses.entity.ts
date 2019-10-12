@@ -73,6 +73,9 @@ export class CoursePermission {
   @Column({ nullable: true })
   role: string
 
+  @Column({ nullable: true })
+  group: string
+
   @IsEnum(CoursePermissionLevel)
   @Column()
   permissionLevel: CoursePermissionLevel
@@ -174,4 +177,21 @@ export class CoursePageFile {
     { name: 'pageId', referencedColumnName: 'pageId' }
   ])
   page: CoursePage
+}
+
+@Entity()
+export class CourseGroup {
+  @PrimaryColumn()
+  courseId: string
+
+  @ManyToOne(type => Course, {
+    primary: true,
+    nullable: false,
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn({ name: 'courseId' })
+  course: Course
+
+  @PrimaryColumn()
+  groupName: string
 }

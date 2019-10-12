@@ -15,7 +15,8 @@ import {
   CourseAccess,
   PageAccess,
   CoursePost,
-  CoursePageFile
+  CoursePageFile,
+  CourseGroup
 } from './courses.entity'
 import {
   GetCoursesParams,
@@ -40,7 +41,9 @@ import {
   GetCourseParams,
   SaveFilesToDbParams,
   GetFileParams,
-  DeleteFilesParams
+  DeleteFilesParams,
+  CreateGroupParams,
+  DeleteGroupParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -415,9 +418,29 @@ export class CoursesService {
     await this.entities.delete(Invitation, { courseId, email })
   }
 
+  // Groups
+
+  async createGroup({ courseId, userId, groupName }: CreateGroupParams) {
+    this.assertWritePermission({ courseId, userId })
+
+    const exists = await this.entities.findOne(CourseGroup, { courseId, groupName })
+
+    if (exists) {
+      throw new BadRequestException('Group already exists')
+    }
+
+    return await this.entities.insert(CourseGroup, { courseId, groupName })
+  }
+
+  async deleteGroup({ courseId, userId, groupName }: DeleteGroupParams) {
+    this.assertWritePermission({ courseId, userId })
+
+    return await this.entities.delete(CourseGroup, { courseId, groupName })
+  }
+
   // Permissions
 
-  async addMemberToCourse({ userId, courseId, permissionLevel }: AddMemberToCourseParams) {
+  async addMemberToCourse({ userId, courseId, permissionLevel, group }: AddMemberToCourseParams) {
     if (!userId || !courseId) {
       throw new NotFoundException()
     }
@@ -426,7 +449,7 @@ export class CoursesService {
       throw new BadRequestException()
     }
 
-    return await this.entities.insert(CoursePermission, { userId, courseId, permissionLevel })
+    return await this.entities.insert(CoursePermission, { userId, courseId, permissionLevel, group })
   }
 
   async tryGetCoursePermission({

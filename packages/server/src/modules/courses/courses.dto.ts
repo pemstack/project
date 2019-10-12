@@ -217,4 +217,7 @@ export class InviteCourseMembersRequest {
 
   @ApiModelProperty()
   permission: 'read' | 'write'
+
+  @ApiModelProperty()
+  group: string
 }

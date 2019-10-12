@@ -20,6 +20,7 @@ export interface CreateInvitationParams {
   emails: string[]
   courseId: string
   permission: CoursePermissionLevel
+  group: string
 }
 
 export interface DeclineInvitationParams {

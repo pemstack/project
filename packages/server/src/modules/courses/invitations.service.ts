@@ -31,11 +31,11 @@ export class InvitationsService {
     return await this.entities.findOne(Invitation, { where: { userEmail, courseId } })
   }
 
-  async sendInvitationEmail({ userEmail, courseId }: SendInvitationEmailParams) {
+  // async sendInvitationEmail({ userEmail, courseId }: SendInvitationEmailParams) {
 
-  }
+  // }
 
-  async createInvitations({ requesterUserId, emails, courseId, permission }: CreateInvitationParams) {
+  async createInvitations({ requesterUserId, emails, courseId, permission, group }: CreateInvitationParams) {
     await this.courses.assertWritePermission({ courseId, userId: requesterUserId })
 
     Promise.all((emails || []).map(async userEmail => {
@@ -43,10 +43,10 @@ export class InvitationsService {
       if (!exists) {
         await this.entities.insert(
           Invitation,
-          { userEmail, courseId, permission, status: InvitationStatus.Pending }
+          { userEmail, courseId, permission, group, status: InvitationStatus.Pending }
         )
 
-        this.sendInvitationEmail({ userEmail, courseId })
+        // this.sendInvitationEmail({ userEmail, courseId })
       }
     }))
   }
@@ -66,7 +66,8 @@ export class InvitationsService {
       await this.courses.addMemberToCourse({
         userId: user.userId,
         courseId,
-        permissionLevel: invitation.permission
+        permissionLevel: invitation.permission,
+        group: invitation.group
       })
     }
 

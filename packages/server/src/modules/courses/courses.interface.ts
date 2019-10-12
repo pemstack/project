@@ -69,6 +69,7 @@ export interface AddMemberToCourseParams {
   userId: string
   courseId: string
   permissionLevel: CoursePermissionLevel
+  group: string
 }
 
 export interface TryGetPermissionParams {
@@ -144,4 +145,16 @@ export interface GetFileParams {
   userId: string
   pageId: string
   fileId: string
+}
+
+export interface CreateGroupParams {
+  courseId: string
+  userId: string
+  groupName: string
+}
+
+export interface DeleteGroupParams {
+  courseId: string
+  userId: string
+  groupName: string
 }
