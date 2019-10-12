@@ -3,10 +3,19 @@ import { View } from 'app'
 import { useEffect } from 'react'
 import { Markdown, CenterContent, CollapseCard } from 'components'
 import { Button } from 'antd'
+import { LandingPage } from './LandingPage'
 
 export const HomeRoute: View = ({
   app
 }) => {
+  if (!app.user.authenticated) {
+    return (
+      <div className='HomeRoute'>
+        <LandingPage />
+      </div>
+    )
+  }
+
   const [accessToken, setAccessToken] = useState<string | null>(null)
   useEffect(() => {
     let cancel = false
