@@ -1,40 +1,40 @@
 .LandingPage{
     background: rgb(9,9,121);
-    background: linear-gradient(32deg, rgba(9,9,121,1) 0%, 
-                                       rgba(51,137,200,1) 43%, 
+    background: linear-gradient(32deg, rgba(9,9,121,1) 0%,
+                                       rgba(51,137,200,1) 43%,
                                        rgba(0,212,255,1) 100%);
     box-sizing: border-box;
     padding:0px 150px;
     min-height: 100vh;
 }
 
-.center{
+.LandingPage .center{
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-.Welcome{
+.LandingPage .Welcome{
     float: left;
 }
 
-.Illustration{
+.LandingPage .Illustration{
     float:right;
     margin-top: 25px;
 }
 
-h2{
+.LandingPage h2{
     color:white;
     font-size:50px;
     font-family:'CustomFont';
 }
 
-p{
+.LandingPage p{
     color:white;
     font-size:10px;
 }
 
-#myBtn{
+.LandingPage #myBtn{
     cursor: pointer;
     padding:10px 40px;
     background-color:#1f8acc;
@@ -49,11 +49,11 @@ p{
     border-radius:20px;
 }
 
-#myBtn:active{
+.LandingPage #myBtn:active{
     border-bottom:solid 1px #074a73 ;
 }
 
-#myBtn:hover{
+.LandingPage #myBtn:hover{
     background-color: #007acc;
 }
 
