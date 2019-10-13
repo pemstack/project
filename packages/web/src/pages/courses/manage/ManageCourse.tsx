@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { ManageCourseDetails } from './course-details/ManageCourseDetails'
 import { ManageCourseMembers } from './members/ManageCourseMembers'
 import { ManageCoursePages } from './pages/ManageCoursePages'
+import { ManageCourseGroups } from './groups/ManageCourseGroups'
 
 const { TabPane } = Tabs
 
@@ -31,6 +32,11 @@ export const ManageCourse: FunctionComponent<ManageCourseProps> = ({ courseId, c
         <TabPane tab={t('ManageCourse.tab.members')} key='members'>
           <Suspense fallback={<Loading />}>
             <ManageCourseMembers courseId={courseId} courseDisplay={courseDisplay} />
+          </Suspense>
+        </TabPane>
+        <TabPane tab={t('ManageCourse.tab.groups')} key='groups'>
+          <Suspense fallback={<Loading />}>
+            <ManageCourseGroups courseId={courseId} courseDisplay={courseDisplay} />
           </Suspense>
         </TabPane>
       </Tabs>
