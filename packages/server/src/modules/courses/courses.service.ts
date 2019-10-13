@@ -43,7 +43,8 @@ import {
   GetFileParams,
   DeleteFilesParams,
   CreateGroupParams,
-  DeleteGroupParams
+  DeleteGroupParams,
+  GetGroupsParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -419,6 +420,17 @@ export class CoursesService {
   }
 
   // Groups
+
+  async getGroups({ courseId, userId }: GetGroupsParams) {
+    this.assertReadPermission({ courseId, userId })
+
+    const groups = await this.entities.find(CourseGroup, {
+      select: ['groupName'],
+      where: { courseId }
+    })
+
+    return groups
+  }
 
   async createGroup({ courseId, userId, groupName }: CreateGroupParams) {
     this.assertWritePermission({ courseId, userId })

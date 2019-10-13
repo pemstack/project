@@ -37,7 +37,8 @@ import {
   InviteCourseMembersRequest,
   GetCoursesResponse,
   GetCourseResponse,
-  GetCoursePageResponseFile
+  GetCoursePageResponseFile,
+  GetGroupsResponse
 } from './courses.dto'
 import { ReqUser, Authorize, Cookie } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
@@ -404,6 +405,17 @@ export class CoursesController {
   }
 
   // GROUPS
+
+  @ApiResponse({ status: 200 })
+  @ApiBearerAuth()
+  @Authorize(['jwt', 'anonymous'])
+  @Get(':courseid/groups')
+  async getGroups(
+    @Param('courseid') courseId: string,
+    @ReqUser('userId') userId: string
+  ): Promise<GetGroupsResponse[]> {
+    return await this.courses.getGroups({ courseId, userId })
+  }
 
   @ApiResponse({ status: 201 })
   @ApiBearerAuth()

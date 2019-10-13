@@ -221,3 +221,8 @@ export class InviteCourseMembersRequest {
   @ApiModelProperty()
   group: string
 }
+
+export class GetGroupsResponse {
+  @ApiModelProperty()
+  groupName: string
+}

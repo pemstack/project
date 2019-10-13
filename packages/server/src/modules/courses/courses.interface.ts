@@ -147,6 +147,11 @@ export interface GetFileParams {
   fileId: string
 }
 
+export interface GetGroupsParams {
+  courseId: string
+  userId: string
+}
+
 export interface CreateGroupParams {
   courseId: string
   userId: string
