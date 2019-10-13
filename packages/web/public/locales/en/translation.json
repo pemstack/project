@@ -18,12 +18,14 @@
     "tab": {
       "pages": "Pages",
       "members": "Members",
-      "details": "Details"
+      "details": "Details",
+      "groups": "Groups"
     },
     "title": {
       "details": "Manage Course",
       "pages": "Manage pages",
-      "members": "Manage members"
+      "members": "Manage members",
+      "groups": "Manage groups"
     },
     "button": {
       "addPage": "Add page",

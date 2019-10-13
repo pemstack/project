@@ -18,12 +18,14 @@
     "tab": {
       "pages": "Faqet",
       "members": "Anëtarët",
-      "details": "Detajet"
+      "details": "Detajet",
+      "groups": "Grupet"
     },
     "title": {
       "details": "Menaxho Kursin",
       "pages": "Menaxho faqet",
-      "members": "Menaxho anëtarët"
+      "members": "Menaxho anëtarët",
+      "groups": "Menaxho grupet"
     },
     "button": {
       "addPage": "Shto faqe",
