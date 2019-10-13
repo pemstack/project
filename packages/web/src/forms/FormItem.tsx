@@ -24,7 +24,7 @@ export const FormItem = ({ name, showValidateSuccess, children, ...restProps }: 
         return (
           <Form.Item
             validateStatus={hasError ? 'error' : (isValid && showValidateSuccess) ? 'success' : undefined}
-            hasFeedback={isValid}
+            hasFeedback={!!isValid}
             help={(hasError && <li>{typeof error === 'string' ? t(error) : error}</li>) || (isValid && '')}
             {...restProps}
           >
