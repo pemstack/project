@@ -21,11 +21,12 @@ export const ManageCourseMembers: FunctionComponent<ManageCourseProps> = ({
       <InviteMembersModal
         visible={showModal}
         onCancel={() => setShowModal(false)}
-        onSubmit={({ emails, permission }, actions) => {
+        onSubmit={({ emails, permission, group }, actions) => {
           actions.setSubmitting(false)
-          inviteMembers({ courseId, emails, permission })
+          inviteMembers({ courseId, emails, permission, group })
           setShowModal(false)
         }}
+        courseId={courseId}
       />
       <Flex justifyContent='space-between' alignItems='center'>
         <h2 className='ManageCourse__title'>

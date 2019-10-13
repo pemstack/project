@@ -130,7 +130,8 @@ export const inviteMembersSchema = yup.object({
   permission: yup
     .string()
     .oneOf(['read', 'write'])
-    .required()
+    .required(),
+  group: yup.string().required()
 })
 
 export type InviteMembersParams = yup.InferType<typeof inviteMembersSchema>
@@ -138,10 +139,10 @@ export type InviteMembersParams = yup.InferType<typeof inviteMembersSchema>
 export const INVITE_MEMBERS: Action<InviteMembersParams> = {
   schema: inviteMembersSchema,
   progress: true,
-  async perform({ courseId, emails, permission }, app) {
+  async perform({ courseId, emails, permission, group }, app) {
     await app
       .req(`/api/courses/${courseId}/members`)
-      .post({ emails, permission })
+      .post({ emails, permission, group })
       .res()
   },
   invalidates: ({ courseId }) => [`courses/${courseId}/members`]
