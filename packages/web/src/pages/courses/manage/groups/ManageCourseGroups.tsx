@@ -31,6 +31,18 @@ export const ManageCourseGroups: FunctionComponent<ManageCourseGroupsProps> = ({
         onClose={() => setShowModal(false)}
         setLoading={setLoading}
       />
+      <Flex justifyContent='space-between' alignItems='flex-start'>
+        <h2 className='ManageCourseGroups__title'>
+          {t('ManageCourse.title.groups')}
+        </h2>
+        <Button
+          icon='plus'
+          type='primary'
+          onClick={() => setShowModal(true)}
+        >
+          {t('button.create')}
+        </Button>
+      </Flex>
       <List
         rowKey='groupName'
         locale={{
@@ -41,24 +53,10 @@ export const ManageCourseGroups: FunctionComponent<ManageCourseGroupsProps> = ({
         loading={deleteLoading}
         dataSource={groups}
         size='large'
-        header={
-          <Flex justifyContent='space-between' alignItems='center'>
-            <h2 className='ManageCourseGroups__title'>
-              {t('ManageCourse.title.groups')}
-            </h2>
-            <Button
-              icon='plus'
-              type='primary'
-              onClick={() => setShowModal(true)}
-            >
-              {t('button.create')}
-            </Button>
-          </Flex>
-        }
         renderItem={group => (
           <List.Item
             key={group.groupName}
-            actions={[
+            actions={[(
               <Button
                 type='link'
                 key='delete'
@@ -81,14 +79,14 @@ export const ManageCourseGroups: FunctionComponent<ManageCourseGroupsProps> = ({
                   })
                 }}
               />
-            ]}
+            )]}
           >
             <span className='ManageCourseGroups__item-content'>
               {group.groupName}
             </span>
           </List.Item>
         )}
-      ></List>
+      />
     </CollapseCard>
   )
 }

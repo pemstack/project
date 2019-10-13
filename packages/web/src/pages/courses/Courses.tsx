@@ -13,24 +13,22 @@ export const Courses: FunctionComponent = () => {
   const courses = useQuery(GET_COURSES).read()
   return (
     <CollapseCard className='Courses'>
+      <Flex justifyContent='space-between' alignItems='flex-start'>
+        <h2 className='Courses__title'>{t('Courses.title')}</h2>
+        <LinkButton
+          to='/courses/create'
+          type='primary'
+          icon='plus'
+        >
+          {t('button.create')}
+        </LinkButton>
+      </Flex>
       <List
         dataSource={courses}
         rowKey='courseId'
         pagination={{
           pageSize: 10
         }}
-        header={
-          <Flex justifyContent='space-between' alignItems='center'>
-            <h2 className='Courses__title'>{t('Courses.title')}</h2>
-            <LinkButton
-              to='/courses/create'
-              type='primary'
-              icon='plus'
-            >
-              {t('button.create')}
-            </LinkButton>
-          </Flex>
-        }
         renderItem={course => {
           const title = slugify(course.title, { lower: true })
           return (

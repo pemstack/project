@@ -6,6 +6,7 @@ import { useQuery, useLoadingAction, useMessages, useAction } from 'app'
 import { useRouter } from '@pema/router-react'
 import { UPDATE_COURSE, DELETE_COURSE, GET_COURSE } from 'pages/courses/courses.api'
 import './ManageCourseDetails.css'
+import { CollapseCard } from 'components'
 
 const { confirm } = Modal
 
@@ -25,7 +26,7 @@ export const ManageCourseDetails: FunctionComponent<ManageCourseDetailsProps> = 
   const deleteCourse = useAction(DELETE_COURSE)
   const [updateCourse, loading] = useLoadingAction(UPDATE_COURSE)
   return (
-    <>
+    <CollapseCard>
       <Formik
         validationSchema={updateCourse.schema}
         initialValues={{
@@ -65,26 +66,30 @@ export const ManageCourseDetails: FunctionComponent<ManageCourseDetailsProps> = 
           </Form.Item>
         </Form>
       </Formik>
-      <Button type='danger' icon='delete' onClick={() => {
-        confirm({
-          title: t('ManageCourse.confirm.title'), // todo t()
-          content: t('ManageCourse.confirm.content'),
-          okText: t('button.yes'),
-          okType: 'danger',
-          cancelText: t('button.no'),
-          async onOk() {
-            try {
-              await deleteCourse({ courseId, eager: true })
-              router.replace('/courses')
-            } catch {
-              messages.error()
-            }
-          },
-          onCancel() { }
-        })
-      }}>
+      <Button
+        type='danger'
+        icon='delete'
+        onClick={() => {
+          confirm({
+            title: t('ManageCourse.confirm.title'), // todo t()
+            content: t('ManageCourse.confirm.content'),
+            okText: t('button.yes'),
+            okType: 'danger',
+            cancelText: t('button.no'),
+            async onOk() {
+              try {
+                await deleteCourse({ courseId, eager: true })
+                router.replace('/courses')
+              } catch {
+                messages.error()
+              }
+            },
+            onCancel() { }
+          })
+        }}
+      >
         {t('ManageCourse.button.deleteCourse')}
       </Button>
-    </>
+    </CollapseCard>
   )
 }

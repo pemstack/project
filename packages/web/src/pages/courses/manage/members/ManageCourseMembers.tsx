@@ -18,17 +18,7 @@ export const ManageCourseMembers: FunctionComponent<ManageCourseProps> = ({
 
   return (
     <CollapseCard>
-      <InviteMembersModal
-        visible={showModal}
-        onCancel={() => setShowModal(false)}
-        onSubmit={({ emails, permission, group }, actions) => {
-          actions.setSubmitting(false)
-          inviteMembers({ courseId, emails, permission, group })
-          setShowModal(false)
-        }}
-        courseId={courseId}
-      />
-      <Flex justifyContent='space-between' alignItems='center'>
+      <Flex justifyContent='space-between' alignItems='flex-start'>
         <h2 className='ManageCourse__title'>
           {t('ManageCourse.title.members')}
         </h2>
@@ -41,6 +31,16 @@ export const ManageCourseMembers: FunctionComponent<ManageCourseProps> = ({
         </Button>
       </Flex>
       <MemberCardList courseId={courseId} />
+      <InviteMembersModal
+        visible={showModal}
+        onCancel={() => setShowModal(false)}
+        onSubmit={({ emails, permission, group }, actions) => {
+          actions.setSubmitting(false)
+          inviteMembers({ courseId, emails, permission, group })
+          setShowModal(false)
+        }}
+        courseId={courseId}
+      />
     </CollapseCard>
   )
 }

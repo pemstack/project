@@ -22,6 +22,18 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
 
   return (
     <CollapseCard>
+      <Flex justifyContent='space-between' alignItems='flex-start'>
+        <h2 className='ManageCoursePages__title'>
+          {t('ManageCourse.title.pages')}
+        </h2>
+        <LinkButton
+          icon='plus'
+          type='primary'
+          to={`/courses/manage/${courseId}/${courseDisplay}/create-page`}
+        >
+          {t('button.create')}
+        </LinkButton>
+      </Flex>
       <List
         rowKey='pageId'
         locale={{
@@ -32,75 +44,67 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
         loading={deleteLoading || updateLoading}
         dataSource={pages}
         size='large'
-        header={
-          <Flex justifyContent='space-between' alignItems='center'>
-            <h2 className='ManageCoursePages__title'>
-              {t('ManageCourse.title.pages')}
-            </h2>
-            <LinkButton
-              icon='plus'
-              type='primary'
-              to={`/courses/manage/${courseId}/${courseDisplay}/create-page`}
-            >
-              {t('button.create')}
-            </LinkButton>
-          </Flex>
-        }
         renderItem={page => (
           <List.Item
             key={page.pageId}
             actions={[
-              <Select
-                key='visibility'
-                size='small'
-                dropdownStyle={{ border: 'none' }}
-                value={page.access}
-                onChange={async (access: PageAccess) => {
-                  await updateCoursePageAccess({
-                    courseId,
-                    pageId: page.pageId,
-                    access
-                  })
-                }}
-              >
-                <Option value='private'>
-                  {t('ManageCourse.label.private')}
-                </Option>
-                <Option value='public'>
-                  {t('ManageCourse.label.public')}
-                </Option>
-                <Option value='unlisted'>
-                  {t('ManageCourse.label.unlisted')}
-                </Option>
-              </Select>,
-              <LinkButton
-                to={`/courses/${courseId}/${courseDisplay}/${page.pageId}/edit?redirect=manage`}
-                type='link'
-                key='edit'
-                icon='edit'
-              />,
-              <Button
-                type='link'
-                key='delete'
-                icon='delete'
-                className='color-danger'
-                onClick={() => {
-                  confirm({
-                    title: 'Are you sure you want to delete this page?', // todo t()
-                    content: 'Once deleted, you can\'t bring it back',
-                    okText: 'Yes',
-                    okType: 'danger',
-                    cancelText: 'No',
-                    onOk() {
-                      deleteCoursePage({
-                        courseId,
-                        pageId: page.pageId
-                      })
-                    },
-                    onCancel() { }
-                  })
-                }}
-              />
+              (
+                <Select
+                  key='visibility'
+                  size='small'
+                  dropdownStyle={{ border: 'none' }}
+                  value={page.access}
+                  onChange={async (access: PageAccess) => {
+                    await updateCoursePageAccess({
+                      courseId,
+                      pageId: page.pageId,
+                      access
+                    })
+                  }}
+                >
+                  <Option value='private'>
+                    {t('ManageCourse.label.private')}
+                  </Option>
+                  <Option value='public'>
+                    {t('ManageCourse.label.public')}
+                  </Option>
+                  <Option value='unlisted'>
+                    {t('ManageCourse.label.unlisted')}
+                  </Option>
+                </Select>
+              ),
+              (
+                <LinkButton
+                  to={`/courses/${courseId}/${courseDisplay}/${page.pageId}/edit?redirect=manage`}
+                  type='link'
+                  key='edit'
+                  icon='edit'
+                />
+              ),
+              (
+                <Button
+                  type='link'
+                  key='delete'
+                  icon='delete'
+                  className='color-danger'
+                  onClick={() => {
+                    confirm({
+                      title: 'Are you sure you want to delete this page?', // todo t()
+                      content: 'Once deleted, you can\'t bring it back',
+                      okText: 'Yes',
+                      okType: 'danger',
+                      cancelText: 'No',
+                      onOk() {
+                        deleteCoursePage({
+                          courseId,
+                          pageId: page.pageId
+                        })
+                      },
+                      onCancel() { }
+                    })
+                  }}
+                />
+              )
             ]}
           >
             <span className='ManageCoursePages__item-content'>
@@ -109,6 +113,6 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
           </List.Item>
         )}
       />
-    </CollapseCard>
+    </CollapseCard >
   )
 }
