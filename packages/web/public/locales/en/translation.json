@@ -74,7 +74,8 @@
     }
   },
   "Invitation": {
-    "text": "You have been invited to {{title}} course on {{time}}"
+    "text": "You have been invited to {{title}} course on {{time}}",
+    "empty": "You have no invitations."
   },
   "MarkdownEditor": {
     "empty": "No content to display.",

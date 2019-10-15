@@ -1,4 +1,4 @@
-import { Spin } from 'antd'
+import { Spin, Empty } from 'antd'
 import { useLoadingAction, useQuery } from 'app'
 import React, { FunctionComponent } from 'react'
 import { Invitation } from './Invitation'
@@ -7,6 +7,7 @@ import {
   GET_USER_INVITATIONS,
   UPDATE_INVITATION
 } from './invitations.api'
+import { useTranslation } from 'react-i18next'
 
 interface InvitationItemProps {
   invitation: GetUserInvitationsResult
@@ -32,6 +33,14 @@ const InvitationItem: FunctionComponent<InvitationItemProps> = ({
 
 export const InvitationList: FunctionComponent = () => {
   const invitations = useQuery(GET_USER_INVITATIONS).read()
+  const { t } = useTranslation()
+
+  if (invitations.length === 0) {
+    return (
+      <Empty description={t('Invitation.empty')} />
+    )
+  }
+
   return (
     <>
       {invitations.map(inv => (

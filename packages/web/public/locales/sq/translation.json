@@ -74,7 +74,8 @@
     }
   },
   "Invitation": {
-    "text": "Ju jeni ftuar në kursin {{title}} me {{time}}"
+    "text": "Ju jeni ftuar në kursin {{title}} me {{time}}",
+    "empty": "Nuk keni ftesa."
   },
   "MarkdownEditor": {
     "empty": "Nuk ka përmbajtje.",
