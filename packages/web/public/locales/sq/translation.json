@@ -35,7 +35,8 @@
       "private": "Private",
       "public": "Publike",
       "unlisted": "E palistuar",
-      "noPages": "Nuk ka faqe"
+      "noPages": "Nuk ka faqe",
+      "noGroups": "Nuk ka grupe"
     },
     "confirm": {
       "title": "A jeni të sigurt që dëshironi të fshini këtë kurs?",

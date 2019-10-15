@@ -15,7 +15,7 @@ export const LandingPage: FunctionComponent = () => {
           <p>{t('LandingPage.text')}</p>
           <p><strong>{t('LandingPage.alpha')}</strong></p>
           <LinkButton to='/user/login' className='LandingPage__button'>
-            Get Started
+            {t('LandingPage.getStarted')}
           </LinkButton>
         </Col>
         <Col span={12} xs={4} sm={12} md={12} lg={12} className='Illustration'>

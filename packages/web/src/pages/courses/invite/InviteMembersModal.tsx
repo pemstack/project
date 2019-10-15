@@ -33,7 +33,6 @@ export const InviteMembersModal: FunctionComponent<InviteMembersModalProps> = ({
   groupsResult.forEach(group =>
     groups.push({ label: group.groupName, value: group.groupName })
   )
-  console.log(groups)
   return (
     <Formik
       onSubmit={onSubmit}

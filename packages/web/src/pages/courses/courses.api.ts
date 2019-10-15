@@ -433,7 +433,7 @@ export const GET_COURSE_MEMBERS: Query<GetCourseMembersResult[], GetCourseMember
   resource: ({ courseId }) => `courses/${courseId}/members`,
   async fetch({ courseId }, app) {
     return await app
-      .req(`/api/courses/${courseId}/members`, { action: 'getCourseMembers' })
+      .req(`/api/courses/${courseId}/members`)
       .get()
       .json()
   }

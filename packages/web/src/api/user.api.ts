@@ -26,8 +26,8 @@ export const GET_CURRENT_USER: Query<UserInfo | null> = {
 }
 
 export const loginSchema = yup.object({
-  username: yup.string().required(),
-  password: yup.string().required(),
+  username: yup.string().required('user.error.email.required'),
+  password: yup.string().required('user.error.password.required'),
   persist: yup.boolean().notRequired()
 })
 
