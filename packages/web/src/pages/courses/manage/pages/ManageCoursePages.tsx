@@ -89,11 +89,11 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
                   className='color-danger'
                   onClick={() => {
                     confirm({
-                      title: 'Are you sure you want to delete this page?', // todo t()
-                      content: 'Once deleted, you can\'t bring it back',
-                      okText: 'Yes',
+                      title: t('DeletePage.title'),
+                      content: t('DeletePage.subtitle'),
+                      okText: t('DeletePage.ok'),
                       okType: 'danger',
-                      cancelText: 'No',
+                      cancelText: t('DeletePage.cancel'),
                       onOk() {
                         deleteCoursePage({
                           courseId,

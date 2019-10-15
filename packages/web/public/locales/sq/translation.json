@@ -42,6 +42,19 @@
       "content": "Pasi të fshihet, nuk mund të kthehet."
     }
   },
+  "ManageGroups": {
+    "create": {
+      "title": "Shënoni emrin e grupit",
+      "ok": "Ok",
+      "cancel": "Anulo"
+    },
+    "delete": {
+      "title": "A jeni të sigurt që dëshironi të fshini këtë grup?",
+      "subtitle": "Pasi të fshihet, nuk mund të kthehet.",
+      "ok": "Po",
+      "cancel": "Jo"
+    }
+  },
   "EditPageForm": {
     "title": "Ndrysho faqen",
     "tooltip": "Një faqe private mund të shihet vetëm nga anëtarët e kursit. Një faqe publike mund të shihet nga kushdo.",
@@ -56,7 +69,8 @@
     "label": {
       "permission": "Qasja",
       "read": "Lexim",
-      "write": "Shkrim"
+      "write": "Shkrim",
+      "groups": "Grupi"
     }
   },
   "Invitation": {
@@ -78,6 +92,25 @@
       "login": "Kyçuni"
     }
   },
+  "LandingPage": {
+    "title": "Mirë se vini",
+    "text": "/Project name here/ është një ueb aplikacion i krijuar për të ndihmuar profesorët si dhe studentët. Ai synon të lehtësojë komunikimin mes tyre duke siguruar një medium për të shkëmbyer informacione, shtruar pyetje dhe për të ndarë materiale mësimore.",
+    "alpha": "Ky është një version alfa shumë i hershëm, kështu që do të ketë gabime dhe gjëra që mungojnë. Ju lutemi tregohuni të durueshëm derisa punojmë në përmirësimin e tij.",
+    "getStarted": "Filloni Këtu"
+  },
+  "ForgotPasswordForm": {
+    "title": "Keni harruar fjalëkalimin",
+    "enterEmail": "Ju lutem shkruani email-in për të rivendosur fjalëkalimin.",
+    "sendEmail": "Dërgo email"
+  },
+  "ForgotPasswordSuccess": {
+    "title": "Emaili është dërguar me sukses.",
+    "subtitle": "Ndjekni linkun në email për të rivendosur fjalëkalimin."
+  },
+  "ResetPasswordError": {
+    "title": "Linku për rivendosje është jo valid",
+    "subtitle": "Linku mund të jetë jo valid ose i skaduar."
+  },
   "button": {
     "cancel": "Anulo",
     "submit": "Dërgo",
@@ -91,6 +124,15 @@
     "save": "Ruaj",
     "yes": "Po",
     "no": "Jo"
+  },
+  "CreatePage": {
+    "title": "Krijo faqe"
+  },
+  "DeletePage": {
+    "title": "A jeni të sigurt që dëshironi të fshini këtë faqe?",
+    "subtitle": "Pas fshirjes nuk mund të rikthehet",
+    "ok": "Po",
+    "cancel": "Jo"
   },
   "course": {
     "message": {
@@ -126,7 +168,8 @@
       "existingAccount": "Keni llogari aktive?",
       "username": "Emri i përdoruesit",
       "remember": "Më mbaj mend",
-      "forgotPass": "Keni harruar fjalëkalimin?"
+      "forgotPass": "Keni harruar fjalëkalimin?",
+      "newPassword": "Fjalëkalimi i ri"
     },
     "error": {
       "firstName": {

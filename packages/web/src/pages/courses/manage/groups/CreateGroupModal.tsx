@@ -3,6 +3,7 @@ import { CREATE_GROUP } from 'pages/courses/courses.api'
 import { useAction } from 'app'
 import { Formik, Form, Input } from 'forms'
 import { Modal } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 export interface CreateGroupModalProps {
   courseId: string
@@ -23,6 +24,7 @@ export const CreateGroupModal: FunctionComponent<CreateGroupModalProps> = ({
       onClose()
     }
   }
+  const { t } = useTranslation()
 
   return (
     <Formik
@@ -42,12 +44,14 @@ export const CreateGroupModal: FunctionComponent<CreateGroupModalProps> = ({
       }}
       render={props => (
         <Modal
-          title='Enter group name'
+          title={t('ManageGroups.create.title')}
           visible={visible}
           onCancel={close}
           onOk={() => {
             props.submitForm()
           }}
+          okText={t('ManageGroups.create.ok')}
+          cancelText={t('ManageGroups.create.cancel')}
         >
           <Form>
             <Form.Item name='groupName'>

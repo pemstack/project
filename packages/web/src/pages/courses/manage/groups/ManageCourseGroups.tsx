@@ -64,11 +64,11 @@ export const ManageCourseGroups: FunctionComponent<ManageCourseGroupsProps> = ({
                 className='color-danger'
                 onClick={() => {
                   confirm({
-                    title: 'Are you sure you want to delete this group?', // todo t()
-                    content: 'Once deleted, you can\'t bring it back',
-                    okText: 'Yes',
+                    title: t('ManageGroups.delete.title'),
+                    content: t('ManageGroups.delete.subtitle'),
+                    okText: t('ManageGroups.delete.ok'),
                     okType: 'danger',
-                    cancelText: 'No',
+                    cancelText: t('ManageGroups.delete.cancel'),
                     onOk() {
                       deleteGroup({
                         courseId,

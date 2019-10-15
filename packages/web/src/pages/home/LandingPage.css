@@ -31,10 +31,10 @@
 
 .LandingPage p{
     color:white;
-    font-size:10px;
+    font-size:20px;
 }
 
-.LandingPage #myBtn{
+.LandingPage__button{
     cursor: pointer;
     padding:10px 40px;
     background-color:#1f8acc;
@@ -42,18 +42,17 @@
     color:white;
     font-weight: 600;
     font-size: 15px;
-    margin-left:40px;
+    margin-left: auto;
     outline: none;
     margin-top:30px;
-    margin-left: 0;
     border-radius:20px;
 }
 
-.LandingPage #myBtn:active{
+.LandingPage__button:active{
     border-bottom:solid 1px #074a73 ;
 }
 
-.LandingPage #myBtn:hover{
+.LandingPage__button:hover{
     background-color: #007acc;
 }
 

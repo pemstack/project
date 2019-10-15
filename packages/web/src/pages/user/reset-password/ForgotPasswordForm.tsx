@@ -12,8 +12,8 @@ export const ForgotPasswordForm: FunctionComponent<ForgotPasswordFormProps> = ({
     <CollapseCard
       className='ForgotPasswordForm'
     >
-      <h2>Forgot password</h2>
-      <p>Please enter your email to reset your password</p>
+      <h2>{t('ForgotPasswordForm.title')}</h2>
+      <p>{t('ForgotPasswordForm.enterEmail')}</p>
       <Form
         layout='vertical'
         className='ForgotPasswordForm__form'
@@ -33,8 +33,8 @@ export const ForgotPasswordForm: FunctionComponent<ForgotPasswordFormProps> = ({
           block
           className='ForgotPasswordForm__submit'
         >
-          Send email
-          </SubmitButton>
+          {t('ForgotPasswordForm.sendEmail')}
+        </SubmitButton>
       </Form>
     </CollapseCard>
   )

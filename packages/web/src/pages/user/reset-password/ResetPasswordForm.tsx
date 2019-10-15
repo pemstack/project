@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { CollapseCard } from 'components'
-import { t } from 'i18next'
 import { Form, Input, SubmitButton } from 'forms'
+import { useTranslation } from 'react-i18next'
 
 interface ResetPasswordFormProps {
   email: string
@@ -10,11 +10,12 @@ interface ResetPasswordFormProps {
 export const ResetPasswordForm: FunctionComponent<ResetPasswordFormProps> = ({
   email
 }) => {
+  const { t } = useTranslation()
   return (
     <CollapseCard
       className='ResetPasswordForm'
     >
-      <h2>Reset password</h2>
+      <h2>{t('ResetPasswordForm.title')}</h2>
       <Form
         layout='vertical'
         className='ResetPasswordForm__form'
@@ -23,7 +24,7 @@ export const ResetPasswordForm: FunctionComponent<ResetPasswordFormProps> = ({
         <input type='hidden' name='email' value={email} />
         <Form.Item
           name='newPassword'
-          label='New Password'
+          label={t('user.label.newPassword')}
         >
           <Input.Password
             name='newPassword'
@@ -35,7 +36,7 @@ export const ResetPasswordForm: FunctionComponent<ResetPasswordFormProps> = ({
           block
           className='ResetPasswordForm__submit'
         >
-          Submit
+          {t('button.submit')}
         </SubmitButton>
       </Form>
     </CollapseCard>

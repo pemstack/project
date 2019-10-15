@@ -21,18 +21,20 @@ function toRc({ fileId, fileName }: ExistingFile): RcUploadedFile {
 export interface EditPageFormProps {
   existingFiles?: ExistingFile[]
   submitButtonKey?: string
+  titleKey?: string
 }
 
 export const EditPageForm: FunctionComponent<EditPageFormProps> = ({
   existingFiles = [],
-  submitButtonKey = 'button.submit'
+  submitButtonKey = 'button.submit',
+  titleKey = 'EditPageForm.title'
 }) => {
   const { t } = useTranslation()
 
   return (
     <CollapseCard className='EditPageForm'>
       <Form layout='vertical' className='EditPageForm__form'>
-        <h2>{t('EditPageForm.title')}</h2>
+        <h2>{t(titleKey)}</h2>
         <Form.Item name='title' label={t('EditPageForm.label.title')}>
           <Input name='title' type='text' spellCheck={false} />
         </Form.Item>

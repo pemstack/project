@@ -39,8 +39,8 @@ export const ResetPasswordRoute: View = ({ router, match }) => {
         ) : (
           <Result
             status='error'
-            title='Invalid reset link'
-            subTitle='The link may be invalid or expired.'
+            title={t('ResetPasswordError.title')}
+            subTitle={t('ResetPasswordError.subtitle')}
             extra={
               <LinkButton type='primary' to='/'>{t('RouteError.back')}</LinkButton>
             }

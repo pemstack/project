@@ -42,6 +42,19 @@
       "content": "Once deleted, you can't bring it back."
     }
   },
+  "ManageGroups": {
+    "create": {
+      "title": "Enter group name",
+      "ok": "Ok",
+      "cancel": "Cancel"
+    },
+    "delete": {
+      "title": "Are you sure you want to delete this group?",
+      "subtitle": "Once deleted, you can't bring it back",
+      "ok": "Yes",
+      "cancel": "No"
+    }
+  },
   "EditPageForm": {
     "title": "Edit page",
     "tooltip": "A private page can only be seen by the course members. A public page can be seen by anyone.",
@@ -56,7 +69,8 @@
     "label": {
       "permission": "Permission",
       "read": "Read",
-      "write": "Write"
+      "write": "Write",
+      "groups": "Group"
     }
   },
   "Invitation": {
@@ -67,6 +81,34 @@
     "preview": "Preview",
     "write": "Write",
     "submit": "Submit"
+  },
+  "LandingPage": {
+    "title": "Welcome",
+    "text": "/Project name here/ is a web app designed to assist teachers and students alike. It aims to ease the communication between them by providing a medium to exchange information, ask questions and share learning material.",
+    "alpha": "This is a very early alpha version so there will be bugs and missing features. Please be patient as we work on improving it.",
+    "getStarted": "Get Started"
+  },
+  "ForgotPasswordForm": {
+    "title": "Forgot password",
+    "enterEmail": "Please enter your email to reset your password",
+    "sendEmail": "Send email"
+  },
+  "ForgotPasswordSuccess": {
+    "title": "Email has been sent successfully.",
+    "subtitle": "Follow the link in the email to reset your password."
+  },
+  "ResetPasswordError": {
+    "title": "Invalid reset link",
+    "subtitle": "The link may be invalid or expired."
+  },
+  "CreatePage": {
+    "title": "Create page"
+  },
+  "DeletePage": {
+    "title": "Are you sure you want to delete this page?",
+    "subtitle": "Once deleted, you can't bring it back",
+    "ok": "Yes",
+    "cancel": "No"
   },
   "button": {
     "cancel": "Cancel",
@@ -126,7 +168,8 @@
       "existingAccount": "Already have an account?",
       "username": "Username",
       "remember": "Remember me",
-      "forgotPass": "Forgot password?"
+      "forgotPass": "Forgot password?",
+      "newPassword": "New password"
     },
     "error": {
       "firstName": {

@@ -47,7 +47,7 @@ export const CreatePage: FunctionComponent<CreatePageProps> = ({
         }
       }}
     >
-      <EditPageForm submitButtonKey='button.create' />
+      <EditPageForm submitButtonKey='button.create' titleKey='CreatePage.title' />
     </Formik>
   )
 }
