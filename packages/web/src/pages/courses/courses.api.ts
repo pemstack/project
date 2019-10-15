@@ -131,7 +131,7 @@ export const inviteMembersSchema = yup.object({
     .string()
     .oneOf(['read', 'write'])
     .required(),
-  group: yup.string().required()
+  group: yup.string().notRequired()
 })
 
 export type InviteMembersParams = yup.InferType<typeof inviteMembersSchema>
@@ -178,7 +178,7 @@ export const CREATE_COURSE: Action<CreateCourseParams, CreateCourseResult> = {
 
 export const updateCourseSchema = yup.object({
   courseId: yup.string().required(),
-  newTitle: yup.string().required(),
+  newTitle: yup.string().required('UpdateCourse.error.title'),
   access: yup
     .string()
     .oneOf(['private', 'public'])
@@ -247,7 +247,7 @@ export const DELETE_COURSE_PAGE: Action<DeleteCoursePageParams> = {
 
 const createCoursePageSchema = yup.object({
   courseId: yup.string().required(),
-  title: yup.string().required(),
+  title: yup.string().required('EditPageForm.error.title'),
   access: yup
     .string()
     .oneOf(['private', 'public', 'unlisted'])

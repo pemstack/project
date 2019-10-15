@@ -61,6 +61,9 @@
     "label": {
       "title": "Emri i faqes",
       "content": "Përmbajtja"
+    },
+    "error": {
+      "title": "Shënoni emrin e faqes"
     }
   },
   "InviteMembersForm": {
@@ -71,6 +74,12 @@
       "read": "Lexim",
       "write": "Shkrim",
       "groups": "Grupi"
+    },
+    "error": {
+      "email": {
+        "required": "Email është i domosdoshëm.",
+        "invalid": "Së paku një email është jo valid."
+      }
     }
   },
   "Invitation": {
@@ -111,6 +120,11 @@
   "ResetPasswordError": {
     "title": "Linku për rivendosje është jo valid",
     "subtitle": "Linku mund të jetë jo valid ose i skaduar."
+  },
+  "UpdateCourse": {
+    "error": {
+      "title": "Shënoni emrin e ri të kursit."
+    }
   },
   "button": {
     "cancel": "Anulo",

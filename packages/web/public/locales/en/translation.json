@@ -61,6 +61,9 @@
     "label": {
       "title": "Page name",
       "content": "Content"
+    },
+    "error": {
+      "title": "Enter page title"
     }
   },
   "InviteMembersForm": {
@@ -71,6 +74,12 @@
       "read": "Read",
       "write": "Write",
       "groups": "Group"
+    },
+    "error": {
+      "email": {
+        "required": "Email is required.",
+        "invalid": "At least an email is invalid."
+      }
     }
   },
   "Invitation": {
@@ -110,6 +119,11 @@
     "subtitle": "Once deleted, you can't bring it back",
     "ok": "Yes",
     "cancel": "No"
+  },
+  "UpdateCourse": {
+    "error": {
+      "title": "Please type the new course title."
+    }
   },
   "button": {
     "cancel": "Cancel",
