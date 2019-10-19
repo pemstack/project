@@ -389,7 +389,7 @@ export class CoursesService {
       name: `${m.user.firstName} ${m.user.lastName}`,
       email: m.user.email,
       permission: m.permissionLevel,
-      status: 'member'
+      status: 'member' as 'member' | 'invited'
     }))
 
     const invited: GetCourseMembersResult[] = (await this.entities.find(Invitation, {
@@ -401,7 +401,7 @@ export class CoursesService {
       name: null,
       email: m.userEmail,
       permission: m.permission,
-      status: 'invited'
+      status: 'invited' as 'member' | 'invited'
     }))
 
     return members.concat(invited)
