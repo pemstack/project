@@ -4,7 +4,7 @@ import { AppModule } from 'modules/app'
 import { swaggerSetup } from 'swagger/swagger.setup'
 import helmet from 'helmet'
 
-async function bootstrap() {
+export async function bootstrap(port = 4000) {
   const basePath = process.env.NEST_BASE_PATH || 'api'
 
   const app = await NestFactory.create(AppModule)
@@ -17,7 +17,9 @@ async function bootstrap() {
 
   swaggerSetup(app)
 
-  await app.listen(4000)
+  await app.listen(port)
 }
 
-bootstrap().catch(console.error)
+if (require.main === module) {
+  bootstrap().catch(console.error)
+}

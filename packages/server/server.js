@@ -11,4 +11,5 @@ if (process.env.NODE_ENV !== 'production') {
   console.warn('NODE_ENV is not set to production.')
 }
 
-require('./build/index.js')
+const { bootstrap } = require('./build/index.js')
+bootstrap(80).catch(console.error)
