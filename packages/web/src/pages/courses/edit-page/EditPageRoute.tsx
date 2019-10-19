@@ -1,6 +1,7 @@
-import React from 'react'
 import { View, view, viewInvariant } from 'app'
 import { CenterContent } from 'components'
+import React from 'react'
+import slugify from 'slugify'
 import { EditPage } from './EditPage'
 
 export const EditPageRoute: View = ({ router, match, location }) => {
@@ -13,10 +14,10 @@ export const EditPageRoute: View = ({ router, match, location }) => {
       <EditPage
         courseId={courseId}
         pageId={pageId}
-        onSuccess={() => {
+        onSuccess={title => {
           const to = redirect === 'manage'
             ? `/courses/manage/${courseId}/${courseDisplay}`
-            : `/courses/${courseId}/${courseDisplay}/${pageId}`
+            : `/courses/${courseId}/${courseDisplay}/${slugify(title, { lower: true })}`
           router.push(to)
         }}
       />
