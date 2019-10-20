@@ -1,65 +1,45 @@
-import React, { FunctionComponent } from 'react'
+import { useLoadingAction } from 'app'
+import { FormikModal, ModalController, useControllerLoading } from 'components/FormikModal'
+import { Form, Input } from 'forms'
 import { CREATE_GROUP } from 'pages/courses/courses.api'
-import { useAction } from 'app'
-import { Formik, Form, Input } from 'forms'
-import { Modal } from 'antd'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export interface CreateGroupModalProps {
   courseId: string
-  visible: boolean
-  setLoading(loading: boolean): void
-  onClose(): void
+  controller: ModalController
 }
 
 export const CreateGroupModal: FunctionComponent<CreateGroupModalProps> = ({
   courseId,
-  visible,
-  onClose,
-  setLoading
+  controller
 }) => {
-  const createGroup = useAction(CREATE_GROUP)
-  function close() {
-    if (typeof onClose === 'function') {
-      onClose()
-    }
-  }
+  const [createGroup, loading] = useLoadingAction(CREATE_GROUP)
+  useControllerLoading(controller, loading)
   const { t } = useTranslation()
 
   return (
-    <Formik
-      onSubmit={async ({ groupName }, actions) => {
-        const finish = () => setLoading(false)
-        setLoading(true)
+    <FormikModal
+      title={t('ManageGroups.create.title')}
+      okText={t('ManageGroups.create.ok')}
+      cancelText={t('ManageGroups.create.cancel')}
+      controller={controller}
+      onSubmit={async ({ groupName }) => {
+        controller.close()
         await createGroup({
           courseId,
           groupName
-        }).then(finish, finish)
-        close()
-        actions.resetForm()
-        actions.setSubmitting(false)
+        })
       }}
       initialValues={{
         groupName: ''
       }}
-      render={props => (
-        <Modal
-          title={t('ManageGroups.create.title')}
-          visible={visible}
-          onCancel={close}
-          onOk={() => {
-            props.submitForm()
-          }}
-          okText={t('ManageGroups.create.ok')}
-          cancelText={t('ManageGroups.create.cancel')}
-        >
-          <Form>
-            <Form.Item name='groupName'>
-              <Input name='groupName' type='text' spellCheck={false} />
-            </Form.Item>
-          </Form>
-        </Modal>
-      )}
-    />
+    >
+      <Form>
+        <Form.Item name='groupName'>
+          <Input name='groupName' type='text' spellCheck={false} />
+        </Form.Item>
+      </Form>
+    </FormikModal>
   )
 }
