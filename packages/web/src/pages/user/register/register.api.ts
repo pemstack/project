@@ -13,7 +13,7 @@ export const registerSchema = yup.object({
   email: yup
     .string()
     .required('user.error.email.required')
-    .email('register.error.email.invalid'),
+    .email('user.error.email.invalid'),
   password: yup
     .string()
     .required('user.error.password.required')

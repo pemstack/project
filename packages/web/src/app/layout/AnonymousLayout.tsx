@@ -20,7 +20,7 @@ export const AnonymousLayout: FunctionComponent<AnonymousLayoutProps> = ({
   return (
     <Layout className='AnonymousLayout'>
       <Header className='AnonymousLayout__header'>
-        <Link className='AnonymousLayout__title' to='/'>Project name</Link>
+        <Link className='AnonymousLayout__title' to='/'>InClass</Link>
         <Link className='AnonymousLayout__login' to='/user/login'>{t('Layout.anonymous.login')}</Link>
         <span className='AnonymousLayout__language-selector'>
           <LanguageSelector />
