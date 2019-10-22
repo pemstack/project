@@ -21,20 +21,60 @@ export function createQueryHook<TResult, TParams>
   } as any
 }
 
-export function errorCode(error: any) {
+const defaultKeys: { [key: number]: string } = {
+  401: 'unauthorized',
+  403: 'forbidden',
+  404: 'not_found'
+}
+
+export function errorKey(error: any): string {
+  const key = (error && error.json && error.json.key) || defaultKeys[errorCode(error)]
+  if (typeof key === 'string') {
+    return key
+  } else {
+    return 'error'
+  }
+}
+
+export function errorMessage(error: any): string {
+  const message = (error && error.json && error.json.message)
+  if (typeof message === 'string') {
+    return message
+  } else if (error && typeof error.message === 'string' && error.message !== '[object Object]') {
+    return error.message
+  } else {
+    return errorKey(error)
+  }
+}
+
+export function errorCode(error: any): number {
   if (!error) {
     return 500
   }
 
   if (error.status) {
-    return error.status
+    return parseInt(error.status, 10)
   }
 
   if (error.statusCode) {
-    return error.statusCode
+    return parseInt(error.statusCode, 10)
   }
 
   return 500
+}
+
+interface FormattedError {
+  status: number
+  key: string
+  message: string
+}
+
+export function formatError(error: any): FormattedError {
+  return {
+    status: errorCode(error),
+    key: errorKey(error),
+    message: errorMessage(error)
+  }
 }
 
 export function isErrorCode(code: number | string, error: any): boolean {
@@ -53,7 +93,7 @@ export function stringParam<TDefault>
 }
 
 export function asInt(expr: any, defaultValue: number): number {
-  const parsed = typeof expr === 'string' ? parseInt(expr) : expr
+  const parsed = typeof expr === 'string' ? parseInt(expr, 10) : expr
   return isNaN(parsed) || typeof parsed !== 'number' ? defaultValue : parsed
 }
 
