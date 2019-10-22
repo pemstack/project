@@ -7,7 +7,7 @@ import { EditPageForm } from './EditPageForm'
 interface EditPageProps {
   courseId: string
   pageId: string
-  onSuccess?: () => void
+  onSuccess?: (pageTitle: string) => void
 }
 
 export const EditPage: FunctionComponent<EditPageProps> = ({
@@ -44,7 +44,7 @@ export const EditPage: FunctionComponent<EditPageProps> = ({
           actions.setFieldValue('removedFiles', [])
 
           if (typeof onSuccess === 'function') {
-            onSuccess()
+            onSuccess(values.title || title)
           }
         } finally {
           actions.setSubmitting(false)

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { GET_GROUPS, DELETE_GROUP } from 'pages/courses/courses.api'
 import './ManageCourseGroups.css'
 import { CreateGroupModal } from './CreateGroupModal'
+import { useModalController } from 'components/FormikModal'
 
 const { confirm } = Modal
 
@@ -20,16 +21,13 @@ export const ManageCourseGroups: FunctionComponent<ManageCourseGroupsProps> = ({
 }) => {
   const groups = useQuery(GET_GROUPS, { courseId }).read()
   const [deleteGroup, deleteLoading] = useLoadingAction(DELETE_GROUP)
-  const [showModal, setShowModal] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const createGroupModal = useModalController()
   const { t } = useTranslation()
   return (
     <CollapseCard>
       <CreateGroupModal
+        controller={createGroupModal}
         courseId={courseId}
-        visible={showModal}
-        onClose={() => setShowModal(false)}
-        setLoading={setLoading}
       />
       <Flex justifyContent='space-between' alignItems='flex-start'>
         <h2 className='ManageCourseGroups__title'>
@@ -38,7 +36,7 @@ export const ManageCourseGroups: FunctionComponent<ManageCourseGroupsProps> = ({
         <Button
           icon='plus'
           type='primary'
-          onClick={() => setShowModal(true)}
+          onClick={() => createGroupModal.open()}
         >
           {t('button.create')}
         </Button>
@@ -50,7 +48,7 @@ export const ManageCourseGroups: FunctionComponent<ManageCourseGroupsProps> = ({
             <Empty description={t('ManageCourse.label.noGroups')} />
           )
         }}
-        loading={deleteLoading}
+        loading={deleteLoading || createGroupModal.loading}
         dataSource={groups}
         size='large'
         renderItem={group => (

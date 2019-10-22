@@ -1,5 +1,5 @@
-import { inSrc } from 'globals'
+import { inProject } from 'globals'
 
 export function template(name: string, lang = 'en') {
-  return inSrc(`mailer/templates/${lang}/${name}.hbs`)
+  return inProject(`src/mailer/templates/${lang}/${name}.hbs`)
 }

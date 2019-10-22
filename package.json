@@ -7,7 +7,8 @@
   "scripts": {
     "analyze": "lerna run analyze --scope @my-app/web",
     "storybook": "lerna run storybook --scope @my-app/web --stream",
-    "build": "lerna run build",
+    "build": "lerna run build --stream",
+    "start:prod": "lerna run build --stream && cd packages/server && cross-env NODE_ENV=production node server.js",
     "bootstrap": "lerna bootstrap --use-workspaces --force-local",
     "commit": "git-cz",
     "start": "lerna run build --scope @my-app/shared && lerna run build --scope @my-app/presentation && lerna run start --parallel --stream"

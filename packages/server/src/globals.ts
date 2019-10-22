@@ -17,6 +17,7 @@ extendGlobal({
 export const srcDirectory = __dirname
 export const projectDirectory = path.resolve(__dirname, '..')
 export const uploadsDirectory = path.resolve(projectDirectory, 'data', 'uploads')
+export const packagesDirectory = path.resolve(projectDirectory, '..')
 
 export function inProject(subpath?: string): string {
   if (subpath) {
@@ -39,5 +40,13 @@ export function inUploads(subpath?: string): string {
     return path.resolve(uploadsDirectory, subpath)
   } else {
     return uploadsDirectory
+  }
+}
+
+export function inPackages(subpath?: string): string {
+  if (subpath) {
+    return path.resolve(packagesDirectory, subpath)
+  } else {
+    return packagesDirectory
   }
 }
