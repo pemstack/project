@@ -1,8 +1,8 @@
-import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { UserLayout } from 'app/layout/UserLayout'
 import { decorator } from 'app/mock'
 import { CenterContent } from 'components'
-import { UserLayout } from 'app/layout/UserLayout'
+import React from 'react'
 import { EditPage } from './EditPage'
 
 storiesOf('courses/EditPageForm', module)

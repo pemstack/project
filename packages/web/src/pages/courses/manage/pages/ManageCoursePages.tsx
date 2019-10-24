@@ -1,10 +1,10 @@
 import { Link } from '@pema/router-react'
 import { Button, Empty, List, Modal, Select } from 'antd'
+import { DELETE_COURSE_PAGE, GET_COURSE_PAGES, PageAccess, UPDATE_COURSE_PAGE } from 'api/pages.api'
 import { useLoadingAction, useQuery } from 'app'
 import { CollapseCard, Flex, LinkButton } from 'components'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { DELETE_COURSE_PAGE, GET_COURSE_PAGES, PageAccess, UPDATE_COURSE_PAGE } from '../../courses.api'
 import { ManageCourseProps } from '../ManageCourse'
 import './ManageCoursePages.css'
 

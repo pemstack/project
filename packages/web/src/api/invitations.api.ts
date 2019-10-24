@@ -1,6 +1,6 @@
 import { Action, Query } from 'app'
 import * as yup from 'yup'
-import { CoursePermission } from 'pages/courses/courses.api'
+import { CoursePermission } from './courses.api'
 
 export interface GetUserInvitationsResult {
   courseId: string

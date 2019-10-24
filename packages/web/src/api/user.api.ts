@@ -1,4 +1,4 @@
-import { Query, Action } from 'app'
+import { Action, Query } from 'app'
 import { TokenResponse } from 'stores/user.store'
 import * as yup from 'yup'
 

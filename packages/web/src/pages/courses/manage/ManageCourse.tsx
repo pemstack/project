@@ -3,9 +3,9 @@ import { Loading } from 'app/components'
 import React, { FunctionComponent, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ManageCourseDetails } from './course-details/ManageCourseDetails'
+import { ManageCourseGroups } from './groups/ManageCourseGroups'
 import { ManageCourseMembers } from './members/ManageCourseMembers'
 import { ManageCoursePages } from './pages/ManageCoursePages'
-import { ManageCourseGroups } from './groups/ManageCourseGroups'
 
 const { TabPane } = Tabs
 

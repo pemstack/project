@@ -1,10 +1,10 @@
-import React from 'react'
-import { View, useAction, authorize, view } from 'app'
-import { CreateCourseForm } from './CreateCourseForm'
-import { Formik } from 'forms'
-import { CREATE_COURSE } from '../courses.api'
-import slugify from 'slugify'
+import { CREATE_COURSE } from 'api/courses.api'
+import { authorize, useAction, View, view } from 'app'
 import { CenterContent } from 'components'
+import { Formik } from 'forms'
+import React from 'react'
+import slugify from 'slugify'
+import { CreateCourseForm } from './CreateCourseForm'
 
 export const CreateCourseRoute: View = ({ app }) => {
   const createCourse = useAction(CREATE_COURSE)

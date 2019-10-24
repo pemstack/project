@@ -1,11 +1,11 @@
 import { Dropdown, Menu, Spin } from 'antd'
+import { DELETE_COURSE_POST, GetCoursePostsResultItem } from 'api/posts.api'
 import { useAction } from 'app'
 import { Markdown, NewsfeedPost, ReadMore } from 'components'
 import { Icon } from 'forms'
 import React, { FunctionComponent, useState } from 'react'
-import { DELETE_COURSE_POST, GetCoursePostsResultItem } from '../courses.api'
-import { EditNewsfeedPostForm } from './EditNewsfeedPostForm'
 import './EditableNewsfeedPost.css'
+import { EditNewsfeedPostForm } from './EditNewsfeedPostForm'
 
 export interface EditableNewsfeedPostProps {
   post: GetCoursePostsResultItem
@@ -32,23 +32,25 @@ export const EditableNewsfeedPost: FunctionComponent<EditableNewsfeedPostProps> 
           canEdit && (
             <div>
               <Dropdown
-                overlay={
+                overlay={(
                   <Menu>
                     <Menu.Item onClick={() => setIsEditing(true)}>
                       <Icon type='edit' /> Edit
                     </Menu.Item>
-                    <Menu.Item onClick={async () => {
-                      setLoading(true)
-                      try {
-                        await deleteCoursePost({ courseId, postId: post.postId })
-                      } finally {
-                        setLoading(false)
-                      }
-                    }}>
+                    <Menu.Item
+                      onClick={async () => {
+                        setLoading(true)
+                        try {
+                          await deleteCoursePost({ courseId, postId: post.postId })
+                        } finally {
+                          setLoading(false)
+                        }
+                      }}
+                    >
                       <Icon type='delete' /> Delete
                     </Menu.Item>
                   </Menu>
-                }
+                )}
                 className='MemberCard__settings'
               >
                 <Icon type='down' />

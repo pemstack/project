@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react'
+import { Icon, Tooltip, Upload } from 'antd'
+import { ExistingFile, RcUploadedFile } from 'api/pages.api'
 import { CollapseCard } from 'components'
-import { Form, Input, Radio, SubmitButton, MarkdownInput } from 'forms'
-import { Tooltip, Icon, Upload } from 'antd'
+import { Field, FieldProps } from 'formik'
+import { Form, Input, MarkdownInput, Radio, SubmitButton } from 'forms'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import './EditPageForm.css'
-import { Field, FieldProps } from 'formik'
-import { ExistingFile, RcUploadedFile } from '../courses.api'
 
 const { Dragger } = Upload
 

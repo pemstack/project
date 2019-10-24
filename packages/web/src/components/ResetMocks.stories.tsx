@@ -1,7 +1,7 @@
-import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { reloadCourses } from 'api/courses.mocks'
 import { decorator } from 'app/mock'
-import { reloadCourses } from 'pages/courses/courses.mocks'
+import React from 'react'
 
 storiesOf('mocks', module)
   .addDecorator(decorator())

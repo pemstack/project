@@ -1,8 +1,8 @@
+import { EmailSelect, Form, Radio, SubmitButton } from 'forms'
 import React, { FunctionComponent } from 'react'
-import { Form, SubmitButton, Radio, EmailSelect } from 'forms'
 import { useTranslation } from 'react-i18next'
 
-const children: Array<any> = []
+const children: any[] = []
 
 export const InviteMembersForm: FunctionComponent = ({ }) => {
   const { t } = useTranslation()

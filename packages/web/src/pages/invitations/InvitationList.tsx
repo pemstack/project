@@ -1,13 +1,9 @@
-import { Spin, Empty } from 'antd'
+import { Empty, Spin } from 'antd'
+import { GetUserInvitationsResult, GET_USER_INVITATIONS, UPDATE_INVITATION } from 'api/invitations.api'
 import { useLoadingAction, useQuery } from 'app'
 import React, { FunctionComponent } from 'react'
-import { Invitation } from './Invitation'
-import {
-  GetUserInvitationsResult,
-  GET_USER_INVITATIONS,
-  UPDATE_INVITATION
-} from './invitations.api'
 import { useTranslation } from 'react-i18next'
+import { Invitation } from './Invitation'
 
 interface InvitationItemProps {
   invitation: GetUserInvitationsResult

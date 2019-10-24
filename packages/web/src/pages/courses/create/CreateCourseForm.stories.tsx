@@ -1,11 +1,11 @@
-import React from 'react'
-import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { decorator } from 'app/mock'
-import { Formik } from 'forms'
-import { CenterContent } from 'components'
-import { createCourseSchema } from '../courses.api'
+import { storiesOf } from '@storybook/react'
+import { createCourseSchema } from 'api/courses.api'
 import { UserLayout } from 'app/layout/UserLayout'
+import { decorator } from 'app/mock'
+import { CenterContent } from 'components'
+import { Formik } from 'forms'
+import React from 'react'
 import { CreateCourseForm } from './CreateCourseForm'
 
 const initial = {

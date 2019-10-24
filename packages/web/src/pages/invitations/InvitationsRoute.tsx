@@ -1,6 +1,6 @@
 import { authorize, View, view } from 'app'
-import React from 'react'
 import { CenterContent } from 'components'
+import React from 'react'
 import { InvitationList } from './InvitationList'
 
 export const InvitationsRoute: View = () => {

@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from 'react'
-import { Form, Input, Radio, Formik, SubmitButton } from 'forms'
-import { useTranslation } from 'react-i18next'
-import { Tooltip, Icon, Button, Modal } from 'antd'
-import { useQuery, useLoadingAction, useMessages, useAction } from 'app'
 import { useRouter } from '@pema/router-react'
-import { UPDATE_COURSE, DELETE_COURSE, GET_COURSE } from 'pages/courses/courses.api'
-import './ManageCourseDetails.css'
+import { Button, Icon, Modal, Tooltip } from 'antd'
+import { DELETE_COURSE, GET_COURSE, UPDATE_COURSE } from 'api/courses.api'
+import { useAction, useLoadingAction, useMessages, useQuery } from 'app'
 import { CollapseCard } from 'components'
+import { Form, Formik, Input, Radio, SubmitButton } from 'forms'
+import React, { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
+import './ManageCourseDetails.css'
 
 const { confirm } = Modal
 

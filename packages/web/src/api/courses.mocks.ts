@@ -1,29 +1,26 @@
-import { MockApi, delay } from 'app/mock'
 import { Dictionary } from '@pema/utils'
-import {
-  GET_COURSE_PAGES,
-  GET_COURSE_PAGE,
-  GET_COURSE_PERMISSION,
-  GET_COURSES,
-  CoursePermission,
-  GetCoursePageResult,
-  DELETE_COURSE_PAGE,
-  UPDATE_COURSE_PAGE,
-  CREATE_COURSE_PAGE,
-  PageAccess,
-  ExistingFile,
-  GET_COURSE_POSTS,
-  CREATE_COURSE_POST,
-  GetCoursePostsResultItem,
-  DEFAULT_PAGE_SIZE,
-  GetCourseMembersResult,
-  GET_COURSE_MEMBERS,
-  DELETE_COURSE_MEMBER,
-  DELETE_COURSE_POST,
-  UPDATE_COURSE_POST,
-  GET_COURSE
-} from 'pages/courses/courses.api'
+import { delay, MockApi } from 'app/mock'
 import slugify from 'slugify'
+import { CoursePermission, GET_COURSE, GET_COURSES, GET_COURSE_PERMISSION } from './courses.api'
+import { DELETE_COURSE_MEMBER, GetCourseMembersResult, GET_COURSE_MEMBERS } from './members.api'
+import {
+  CREATE_COURSE_PAGE,
+  DELETE_COURSE_PAGE,
+  ExistingFile,
+  GetCoursePageResult,
+  GET_COURSE_PAGE,
+  GET_COURSE_PAGES,
+  PageAccess,
+  UPDATE_COURSE_PAGE
+} from './pages.api'
+import {
+  CREATE_COURSE_POST,
+  DEFAULT_PAGE_SIZE,
+  DELETE_COURSE_POST,
+  GetCoursePostsResultItem,
+  GET_COURSE_POSTS,
+  UPDATE_COURSE_POST
+} from './posts.api'
 
 const longMarkdown = `
 ## Project 1 deadline

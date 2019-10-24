@@ -1,5 +1,5 @@
+import { asInt, view, View, viewInvariant } from 'app'
 import React from 'react'
-import { view, viewInvariant, View, asInt } from 'app'
 import { ViewCourse } from './ViewCourse'
 
 export const ViewCourseRoute: View = ({ match, location }) => {

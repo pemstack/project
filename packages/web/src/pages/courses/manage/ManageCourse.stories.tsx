@@ -1,10 +1,10 @@
-import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { decorator } from 'app/mock'
-import { ManageCourse } from './ManageCourse'
-import { reloadCourses } from '../courses.mocks'
+import { reloadCourses } from 'api/courses.mocks'
 import { UserLayout } from 'app/layout/UserLayout'
+import { decorator } from 'app/mock'
 import { CenterContent } from 'components'
+import React from 'react'
+import { ManageCourse } from './ManageCourse'
 
 storiesOf('courses/ManageCourse', module)
   .addDecorator(decorator())

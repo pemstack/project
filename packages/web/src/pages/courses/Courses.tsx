@@ -4,9 +4,9 @@ import { Link } from '@pema/router-react'
 import slugify from 'slugify'
 import { List, Icon } from 'antd'
 import { CollapseCard, Flex, LinkButton } from 'components'
-import { GET_COURSES } from './courses.api'
 import { useTranslation } from 'react-i18next'
 import './Courses.css'
+import { GET_COURSES } from 'api/courses.api'
 
 export const Courses: FunctionComponent = () => {
   const { t } = useTranslation()

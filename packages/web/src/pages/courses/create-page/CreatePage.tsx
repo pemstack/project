@@ -1,7 +1,7 @@
-import { useQuery, useAction, useMessages } from 'app'
-import React, { FunctionComponent } from 'react'
-import { CREATE_COURSE_PAGE } from '../courses.api'
+import { CREATE_COURSE_PAGE } from 'api/pages.api'
+import { useAction, useMessages } from 'app'
 import { Formik } from 'forms'
+import React, { FunctionComponent } from 'react'
 import { EditPageForm } from '../edit-page/EditPageForm'
 
 interface PageValues {

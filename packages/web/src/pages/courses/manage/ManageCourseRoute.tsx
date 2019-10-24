@@ -1,8 +1,8 @@
-import React from 'react'
-import { view, viewInvariant, View, useQuery } from 'app'
+import { GET_COURSE_PERMISSION } from 'api/courses.api'
+import { useQuery, view, View, viewInvariant } from 'app'
 import { CenterContent } from 'components'
+import React from 'react'
 import { ManageCourse } from './ManageCourse'
-import { GET_COURSE_PERMISSION } from '../courses.api'
 
 export const ManageCourseRoute: View = ({ match }) => {
   const { courseId, courseDisplay } = match.params

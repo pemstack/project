@@ -1,7 +1,7 @@
-import { useQuery, useAction } from 'app'
-import React, { FunctionComponent } from 'react'
-import { GET_COURSE_PAGE, UPDATE_COURSE_PAGE, RcUploadedFile } from '../courses.api'
+import { GET_COURSE_PAGE, RcUploadedFile, UPDATE_COURSE_PAGE } from 'api/pages.api'
+import { useAction, useQuery } from 'app'
 import { Formik } from 'forms'
+import React, { FunctionComponent } from 'react'
 import { EditPageForm } from './EditPageForm'
 
 interface EditPageProps {

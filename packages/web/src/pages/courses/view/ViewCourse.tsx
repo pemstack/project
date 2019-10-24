@@ -1,14 +1,14 @@
-import React, { FunctionComponent, Suspense } from 'react'
-import { useQuery } from 'app'
-import { Tabs } from 'antd'
-import { Loading } from 'app/components'
-import { GET_COURSE_PAGES } from '../courses.api'
-import { CoursePage } from '../view-page/CoursePage'
 import { Link } from '@pema/router-react'
+import { Tabs } from 'antd'
+import { GET_COURSE_PAGES } from 'api/pages.api'
+import { useQuery } from 'app'
+import { Loading } from 'app/components'
 import { CenterContent } from 'components'
-import './ViewCourse.css'
+import React, { FunctionComponent, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Newsfeed } from '../newsfeed/Newsfeed'
+import { CoursePage } from '../view-page/CoursePage'
+import './ViewCourse.css'
 
 const { TabPane } = Tabs
 
@@ -29,7 +29,7 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
   const pages = useQuery(GET_COURSE_PAGES, { courseId }).read()
   const pageTabs = pages.map(p => (
     <TabPane
-      tab={
+      tab={(
         <Link
           replace
           to={`/courses/${courseId}/${courseDisplay}/${p.pageId}`}
@@ -37,7 +37,7 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
         >
           {p.title}
         </Link>
-      }
+      )}
       key={p.pageId}
     >
       <Suspense fallback={<Loading />}>
@@ -53,14 +53,14 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
 
   pageTabs.unshift(
     <TabPane
-      tab={
+      tab={(
         <Link
           to={`/courses/${courseId}/${courseDisplay}`}
           className='ViewCourse__tab-link'
         >
           {t('Layout.label.newsfeed')}
         </Link>
-      }
+      )}
       key={'newsfeed'}
     >
       <Suspense fallback={<Loading />}>

@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react'
-import { Form, Input, SubmitButton, Radio } from 'forms'
+import { Icon, Tooltip } from 'antd'
 import { CollapseCard } from 'components'
+import { Form, Input, Radio, SubmitButton } from 'forms'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Tooltip, Icon } from 'antd'
 
 interface CreateCourseFormProps { }
 

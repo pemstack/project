@@ -1,9 +1,9 @@
-import React from 'react'
 import { View, view, viewInvariant } from 'app'
 import { CenterContent } from 'components'
-import { CreatePage } from './CreatePage'
-import slugify from 'slugify'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import slugify from 'slugify'
+import { CreatePage } from './CreatePage'
 
 export const CreatePageRoute: View = ({
   router,

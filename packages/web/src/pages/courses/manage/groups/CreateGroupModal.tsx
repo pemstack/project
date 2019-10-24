@@ -1,7 +1,7 @@
+import { CREATE_GROUP } from 'api/groups.api'
 import { useLoadingAction } from 'app'
 import { FormikModal, ModalController, useControllerLoading } from 'components/FormikModal'
 import { Form, Input } from 'forms'
-import { CREATE_GROUP } from 'pages/courses/courses.api'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 

@@ -4,7 +4,7 @@ import { decorator } from 'app/mock'
 import { InviteMembersForm } from './InviteMembersForm'
 import { Formik } from 'forms'
 import { CenterContent } from 'components'
-import { inviteMembersSchema } from '../courses.api'
+import { inviteMembersSchema } from 'api/members.api'
 
 storiesOf('courses/InviteMembersForm', module)
   .addDecorator(decorator())

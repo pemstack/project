@@ -1,6 +1,6 @@
-import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { decorator } from 'app/mock'
+import React from 'react'
 import { Invitation } from './Invitation'
 import { InvitationList } from './InvitationList'
 

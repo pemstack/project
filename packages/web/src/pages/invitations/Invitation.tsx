@@ -1,8 +1,8 @@
+import { Button, Card } from 'antd'
+import { CoursePermission } from 'api/courses.api'
+import moment from 'moment'
 import React, { FunctionComponent } from 'react'
-import { Card, Button } from 'antd';
-import { CoursePermission } from 'pages/courses/courses.api';
-import moment from 'moment';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 import './Invitation.css'
 
 interface InvitationProps {

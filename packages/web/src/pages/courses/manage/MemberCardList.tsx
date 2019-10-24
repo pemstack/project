@@ -1,8 +1,9 @@
-import React, { FunctionComponent } from 'react'
 import { List, Spin } from 'antd'
+import { CoursePermission } from 'api/courses.api'
+import { DELETE_COURSE_MEMBER, GET_COURSE_MEMBERS } from 'api/members.api'
+import { useLoadingAction, useQuery } from 'app'
+import React, { FunctionComponent } from 'react'
 import { MemberCard } from './MemberCard'
-import { GET_COURSE_MEMBERS, DELETE_COURSE_MEMBER, CoursePermission } from 'pages/courses/courses.api'
-import { useQuery, useAction, useLoadingAction } from 'app'
 
 interface MemberCardListProps {
   courseId: string

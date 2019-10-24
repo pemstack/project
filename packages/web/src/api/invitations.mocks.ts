@@ -1,5 +1,5 @@
+import { delay, MockApi } from 'app/mock'
 import { GetUserInvitationsResult, GET_USER_INVITATIONS, UPDATE_INVITATION } from './invitations.api'
-import { MockApi, delay } from 'app/mock'
 
 let invitations: GetUserInvitationsResult[] = [
   {

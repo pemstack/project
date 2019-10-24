@@ -1,7 +1,7 @@
+import { Avatar, Card, Dropdown, Icon, Menu } from 'antd'
+import { CoursePermission } from 'api/courses.api'
 import React, { FunctionComponent } from 'react'
-import { Card, Avatar, Skeleton, Dropdown, Menu, Icon } from 'antd'
 import './MemberCard.css'
-import { CoursePermission } from 'pages/courses/courses.api'
 
 export interface MemberCardItem {
   avatar: string
@@ -29,13 +29,13 @@ export const MemberCard: FunctionComponent<MemberCardProps> = ({
   return (
     <Card className='MemberCard'>
       <Dropdown
-        overlay={
+        overlay={(
           <Menu>
             <Menu.Item onClick={() => onDelete(email)}>
               <Icon type='user-delete' /> {status === 'member' ? 'Remove from class' : 'Cancel invite'}
             </Menu.Item>
           </Menu>
-        }
+        )}
         className='MemberCard__settings'
       >
         <Icon type='setting' />

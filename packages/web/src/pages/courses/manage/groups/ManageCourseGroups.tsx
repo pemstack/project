@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useState } from 'react'
-import { CollapseCard, Flex } from 'components'
-import { List, Empty, Button, Modal } from 'antd'
+import { Button, Empty, List, Modal } from 'antd'
+import { DELETE_GROUP, GET_GROUPS } from 'api/groups.api'
 import { useLoadingAction, useQuery } from 'app'
-import { useTranslation } from 'react-i18next'
-import { GET_GROUPS, DELETE_GROUP } from 'pages/courses/courses.api'
-import './ManageCourseGroups.css'
-import { CreateGroupModal } from './CreateGroupModal'
+import { CollapseCard, Flex } from 'components'
 import { useModalController } from 'components/FormikModal'
+import React, { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
+import { CreateGroupModal } from './CreateGroupModal'
+import './ManageCourseGroups.css'
 
 const { confirm } = Modal
 

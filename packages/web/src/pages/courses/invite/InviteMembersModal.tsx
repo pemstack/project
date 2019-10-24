@@ -1,10 +1,9 @@
-import React, { FunctionComponent } from 'react'
-import { Formik, Form, EmailSelect, Radio, FormikActions } from 'forms'
 import { Modal } from 'antd'
-import { useTranslation } from 'react-i18next'
+import { GET_GROUPS } from 'api/groups.api'
 import { useQuery } from 'app'
-import { GET_GROUPS } from '../courses.api'
-import { CheckboxOptionType } from 'antd/lib/checkbox'
+import { EmailSelect, Form, Formik, FormikActions, Radio } from 'forms'
+import React, { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface InviteMembersModalValues {
   emails: string[]
@@ -19,7 +18,7 @@ export interface InviteMembersModalProps {
   courseId: string
 }
 
-const children: Array<any> = []
+const children: any[] = []
 
 export const InviteMembersModal: FunctionComponent<InviteMembersModalProps> = ({
   visible,
@@ -69,12 +68,14 @@ export const InviteMembersModal: FunctionComponent<InviteMembersModalProps> = ({
                 ]}
               />
             </Form.Item>
-            {groups.length > 0 && <Form.Item name='groups' label={t('InviteMembersForm.label.groups')}>
-              <Radio.Group
-                name='group'
-                options={groups}
-              />
-            </Form.Item>}
+            {groups.length > 0 && (
+              <Form.Item name='groups' label={t('InviteMembersForm.label.groups')}>
+                <Radio.Group
+                  name='group'
+                  options={groups}
+                />
+              </Form.Item>
+            )}
           </Form>
         </Modal>
       )}
