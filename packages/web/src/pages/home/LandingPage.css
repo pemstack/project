@@ -1,57 +1,41 @@
-.LandingPage{
-    background: rgb(9,9,121);
-    background: linear-gradient(32deg, rgba(9,9,121,1) 0%,
-                                       rgba(51,137,200,1) 43%,
-                                       rgba(0,212,255,1) 100%);
-    box-sizing: border-box;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+body.LandingPage {
+  background: rgb(9, 9, 121);
+  background: linear-gradient(32deg, rgba(9, 9, 121, 1) 0%, rgba(51, 137, 200, 1) 43%, rgba(0, 212, 255, 1) 100%);
 }
 
-.LandingPage .center{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.LandingPage {
+  padding-top: 32px;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
-.LandingPage h2{
-    color:white;
-    font-size:50px;
-    font-family:'CustomFont';
+.LandingPage h2 {
+  color: white;
+  font-size: 50px;
+  font-family: 'LandingPageFont';
 }
 
-.LandingPage p{
-    color:white;
-    font-size:20px;
-    text-align: center
+.LandingPage__description {
+  color: white;
+  font-size: 20px;
 }
 
-.LandingPage__button{
-    cursor: pointer;
-    padding:10px 40px;
-    background-color:#1f8acc;
-    border:none;
-    color:white;
-    font-weight: 600;
-    font-size: 15px;
-    outline: none;
-    margin-top:30px;
-    margin-bottom: 30px;
-    border-radius:20px;
+.LandingPage__alpha {
+  color: white;
+  text-align: center;
+  font-size: 16px;
 }
 
-.LandingPage__button:active{
-    border-bottom:solid 1px #074a73 ;
+.LandingPage__img-wrapper {
+  text-align: center;
 }
 
-.LandingPage__button:hover{
-    background-color: #007acc;
+.LandingPage__img {
+  width: 100%;
+  max-width: 400px;
 }
 
 @font-face {
-    font-family: "CustomFont";
-    src: url("./misc/code.otf");
-  }
+  font-family: "LandingPageFont";
+  src: url('./misc/code.otf');
+}
