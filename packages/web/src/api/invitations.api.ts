@@ -9,6 +9,7 @@ export interface GetUserInvitationsResult {
   dateInvited: string
 }
 
+// GET /api/invitations
 export const GET_USER_INVITATIONS: Query<GetUserInvitationsResult[]> = {
   resource: 'invitations',
   async fetch(_, app) {
@@ -26,6 +27,7 @@ const updateInvitationSchema = yup.object({
 
 export type UpdateInvitationParams = yup.InferType<typeof updateInvitationSchema>
 
+// PATCH /api/invitations/:courseid
 export const UPDATE_INVITATION: Action<UpdateInvitationParams> = {
   schema: updateInvitationSchema,
   progress: true,

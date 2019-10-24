@@ -13,6 +13,7 @@ export interface GetCourseMembersResult {
   status: 'member' | 'invited'
 }
 
+// GET /api/courses/:courseid/members
 export const GET_COURSE_MEMBERS: Query<GetCourseMembersResult[], GetCourseMembersParams> = {
   resource: ({ courseId }) => `courses/${courseId}/members`,
   async fetch({ courseId }, app) {
@@ -28,6 +29,7 @@ export interface DeleteCourseMemberParams {
   email: string
 }
 
+// DELETE /api/courses/:courseid/members/:email
 export const DELETE_COURSE_MEMBER: Action<DeleteCourseMemberParams> = {
   async perform({ courseId, email }, app) {
     return await app
@@ -56,6 +58,7 @@ export const inviteMembersSchema = yup.object({
 
 export type InviteMembersParams = yup.InferType<typeof inviteMembersSchema>
 
+// POST /api/courses/:courseid/members
 export const INVITE_MEMBERS: Action<InviteMembersParams> = {
   schema: inviteMembersSchema,
   progress: true,

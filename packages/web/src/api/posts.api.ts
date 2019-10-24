@@ -23,6 +23,7 @@ export interface GetCoursePostsResult {
 
 export const DEFAULT_PAGE_SIZE = 4
 
+// GET /api/courses/:courseid/posts
 export const GET_COURSE_POSTS: Query<GetCoursePostsResult, GetCoursePostsParams> = {
   resource: ({
     courseId,
@@ -53,6 +54,7 @@ export const createCoursePostSchema = yup.object({
 
 export type CreateCoursePostParams = yup.InferType<typeof createCoursePostSchema>
 
+// POST /api/courses/:courseid/posts
 export const CREATE_COURSE_POST: Action<CreateCoursePostParams> = {
   schema: createCoursePostSchema,
   progress: true,
@@ -73,6 +75,7 @@ export const updateCoursePostSchema = yup.object({
 
 export type UpdateCoursePostParams = yup.InferType<typeof updateCoursePostSchema>
 
+// PATCH /api/courses/:courseid/posts/:postid
 export const UPDATE_COURSE_POST: Action<UpdateCoursePostParams> = {
   schema: updateCoursePostSchema,
   progress: true,
@@ -92,6 +95,7 @@ export const deleteCoursePostSchema = yup.object({
 
 export type DeleteCoursePostParams = yup.InferType<typeof deleteCoursePostSchema>
 
+// DELETE /api/courses/:courseid/posts/:postid
 export const DELETE_COURSE_POST: Action<DeleteCoursePostParams> = {
   schema: deleteCoursePostSchema,
   progress: true,

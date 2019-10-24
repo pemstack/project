@@ -9,6 +9,7 @@ export interface UserInfo {
   email: string
 }
 
+// GET /api/users/me
 export const GET_CURRENT_USER: Query<UserInfo | null> = {
   resource: 'users/me',
   cache: true,

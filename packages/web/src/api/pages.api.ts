@@ -134,6 +134,7 @@ export interface UpdateCoursePageResult {
   pageId: string
 }
 
+// PATCH /api/courses/:courseid/pages/:pageid
 export const UPDATE_COURSE_PAGE: Action<UpdateCoursePageParams, UpdateCoursePageResult> = {
   schema: updateCoursePageSchema as Schema<UpdateCoursePageParams>,
   progress: true,
