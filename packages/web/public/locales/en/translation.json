@@ -56,6 +56,9 @@
       "cancel": "No"
     }
   },
+  "ManageMembers": {
+    "paginationTotal": "Showing {{from}}-{{to}} of {{total}}"
+  },
   "EditPageForm": {
     "title": "Edit page",
     "tooltip": "A private page can only be seen by the course members. A public page can be seen by anyone.",

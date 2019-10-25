@@ -4,6 +4,7 @@ import { DELETE_COURSE_MEMBER, GET_COURSE_MEMBERS } from 'api/members.api'
 import { useLoadingAction, useQuery } from 'app'
 import React, { FunctionComponent } from 'react'
 import { MemberCard } from './MemberCard'
+import { useTranslation } from 'react-i18next'
 
 interface MemberCardListProps {
   courseId: string
@@ -41,6 +42,7 @@ const MemberCardItem: FunctionComponent<MemberCardItemProps> = ({
 export const MemberCardList: FunctionComponent<MemberCardListProps> = ({
   courseId
 }) => {
+  const { t } = useTranslation()
   const members = useQuery(GET_COURSE_MEMBERS, { courseId }).read()
   return (
     <List
@@ -55,6 +57,10 @@ export const MemberCardList: FunctionComponent<MemberCardListProps> = ({
       }}
       dataSource={members}
       rowKey='email'
+      pagination={{
+        pageSize: 12,
+        showTotal: (total, range) => t('ManageMembers.paginationTotal', { from: range[0], to: range[1], total })
+      }}
       renderItem={({ name, email, status, permission }) => (
         <List.Item key={email}>
           <MemberCardItem

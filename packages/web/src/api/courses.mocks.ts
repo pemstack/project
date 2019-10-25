@@ -2,7 +2,7 @@ import { Dictionary } from '@pema/utils'
 import { delay, MockApi } from 'app/mock'
 import slugify from 'slugify'
 import { CoursePermission, GET_COURSE, GET_COURSES, GET_COURSE_PERMISSION } from './courses.api'
-import { DELETE_COURSE_MEMBER, GetCourseMembersResult, GET_COURSE_MEMBERS } from './members.api'
+import { DELETE_COURSE_MEMBER, GetCourseMembersResult, GET_COURSE_MEMBERS, INVITE_MEMBERS } from './members.api'
 import {
   CREATE_COURSE_PAGE,
   DELETE_COURSE_PAGE,
@@ -21,6 +21,7 @@ import {
   GET_COURSE_POSTS,
   UPDATE_COURSE_POST
 } from './posts.api'
+import { GET_GROUPS } from './groups.api'
 
 const longMarkdown = `
 ## Project 1 deadline
@@ -351,6 +352,8 @@ class MockCourses {
 
 let courses = new MockCourses()
 
+async function noop() { }
+
 export function mockCourses(api: MockApi) {
   api.withQuery(GET_COURSES, async () => {
     await delay(500)
@@ -465,6 +468,18 @@ export function mockCourses(api: MockApi) {
     const course = courses.findCourse(courseId)
     const members = course.members || []
     course.members = members.filter(m => m.email !== email)
+  })
+
+  api.withAction(INVITE_MEMBERS, noop)
+
+  api.withQuery(GET_GROUPS, async () => {
+    await delay(500)
+    return [
+      { groupName: '1A' },
+      { groupName: '1B' },
+      { groupName: '2A' },
+      { groupName: '2B' }
+    ]
   })
 }
 
