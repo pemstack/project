@@ -38,6 +38,11 @@ function deriveError(
       status: '500',
       title: t('error.500')
     }
+  } else if (code == 501) {
+    return {
+      status: 'info',
+      title: t('error.501')
+    }
   } else {
     return {
       status: 'error',

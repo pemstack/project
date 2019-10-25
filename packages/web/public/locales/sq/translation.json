@@ -219,7 +219,8 @@
     "401": "401: Not authorized.",
     "403": "403: Kërkesë e pa autorizuar.",
     "404": "404: Nuk është gjetur ajo që kërkoni.",
-    "500": "500: Server-i aktualisht nuk mund të procesojë kërkesën."
+    "500": "500: Server-i aktualisht nuk mund të procesojë kërkesën.",
+    "501": "501: Kjo faqe ende nuk është implementuar, ju lutem keni durim."
   },
   "Comments": {
     "reply": "Përgjigju"

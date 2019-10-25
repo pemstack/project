@@ -219,7 +219,8 @@
     "401": "401: Not authorized.",
     "403": "403: Not authorized.",
     "404": "404: Not found.",
-    "500": "500: The server is currently unable to handle this request."
+    "500": "500: The server is currently unable to handle this request.",
+    "501": "501: This page has not been implemented yet. Please be patient."
   },
   "Comments": {
     "reply": "reply"
