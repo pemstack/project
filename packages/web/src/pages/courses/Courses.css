@@ -5,3 +5,7 @@
 .Courses__item-content {
   flex-grow: 1;
 }
+
+.Courses__top-bar {
+  margin-bottom: 16px;
+}

@@ -29,7 +29,7 @@ export const ManageCourseGroups: FunctionComponent<ManageCourseGroupsProps> = ({
         controller={createGroupModal}
         courseId={courseId}
       />
-      <Flex justifyContent='space-between' alignItems='flex-start'>
+      <Flex className='ManageCourseGroups__top-bar' justifyContent='space-between' alignItems='flex-start'>
         <h2 className='ManageCourseGroups__title'>
           {t('ManageCourse.title.groups')}
         </h2>

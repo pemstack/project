@@ -13,7 +13,7 @@ export const Courses: FunctionComponent = () => {
   const courses = useQuery(GET_COURSES).read()
   return (
     <CollapseCard className='Courses'>
-      <Flex justifyContent='space-between' alignItems='flex-start'>
+      <Flex className='Courses__top-bar' justifyContent='space-between' alignItems='flex-start'>
         <h2 className='Courses__title'>{t('Courses.title')}</h2>
         <LinkButton
           to='/courses/create'
@@ -26,6 +26,7 @@ export const Courses: FunctionComponent = () => {
       <List
         dataSource={courses}
         rowKey='courseId'
+        size='large'
         pagination={{
           pageSize: 10
         }}
@@ -36,14 +37,14 @@ export const Courses: FunctionComponent = () => {
               key={course.courseId}
               actions={
                 course.permission === 'write'
-                  ? [
+                  ? [(
                     <Link
                       key='manage'
                       to={`/courses/manage/${course.courseId}/${title}`}
                     >
                       <Icon type='setting' />
                     </Link>
-                  ]
+                  )]
                   : undefined
               }
             >

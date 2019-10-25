@@ -22,7 +22,7 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
 
   return (
     <CollapseCard>
-      <Flex justifyContent='space-between' alignItems='flex-start'>
+      <Flex className='ManageCoursePages__top-bar' justifyContent='space-between' alignItems='flex-start'>
         <h2 className='ManageCoursePages__title'>
           {t('ManageCourse.title.pages')}
         </h2>

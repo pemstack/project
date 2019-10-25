@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { InviteMembersModal } from '../../invite/InviteMembersModal'
 import { ManageCourseProps } from '../ManageCourse'
 import { MemberCardList } from '../MemberCardList'
+import './ManageCourseMembers.css'
 
 export const ManageCourseMembers: FunctionComponent<ManageCourseProps> = ({
   courseId,
@@ -18,7 +19,7 @@ export const ManageCourseMembers: FunctionComponent<ManageCourseProps> = ({
 
   return (
     <CollapseCard>
-      <Flex justifyContent='space-between' alignItems='flex-start'>
+      <Flex className='ManageCourseMembers__top-bar' justifyContent='space-between' alignItems='flex-start'>
         <h2 className='ManageCourse__title'>
           {t('ManageCourse.title.members')}
         </h2>

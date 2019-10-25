@@ -5,3 +5,7 @@
 .ManageCourseGroups__item-content {
   flex-grow: 1;
 }
+
+.ManageCourseGroups__top-bar {
+  margin-bottom: 16px;
+}
