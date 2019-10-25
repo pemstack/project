@@ -464,6 +464,24 @@ export class CoursesService {
     return await this.entities.insert(CoursePermission, { userId, courseId, permissionLevel, group })
   }
 
+  async isMemberByEmail({
+    courseId,
+    email
+  }: { courseId: string, email: string }) {
+    const user = await this.users.findOne({ email })
+    if (!user) {
+      return false
+    }
+
+    const { userId } = user
+    const permission = await this.tryGetCoursePermission({ courseId, userId })
+    if (!permission) {
+      return false
+    }
+
+    return permission.isMember
+  }
+
   async tryGetCoursePermission({
     courseId,
     userId
@@ -503,7 +521,7 @@ export class CoursesService {
         ? permission.permissionLevel
         : course.access === CourseAccess.Public ?
           CoursePermissionLevel.Read : CoursePermissionLevel.None,
-      isMember: permission && permission.permissionLevel !== CoursePermissionLevel.None
+      isMember: !!(permission && permission.permissionLevel !== CoursePermissionLevel.None)
     }
   }
 

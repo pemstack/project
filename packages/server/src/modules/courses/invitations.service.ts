@@ -28,7 +28,7 @@ export class InvitationsService {
   }
 
   async getInvitation({ userEmail, courseId }: GetInvitationParams) {
-    return await this.entities.findOne(Invitation, { where: { userEmail, courseId } })
+    return await this.entities.findOne(Invitation, { userEmail, courseId })
   }
 
   // async sendInvitationEmail({ userEmail, courseId }: SendInvitationEmailParams) {
@@ -38,8 +38,12 @@ export class InvitationsService {
   async createInvitations({ requesterUserId, emails, courseId, permission, group }: CreateInvitationParams) {
     await this.courses.assertWritePermission({ courseId, userId: requesterUserId })
 
-    Promise.all((emails || []).map(async userEmail => {
-      const exists = await this.getInvitation({ userEmail, courseId })
+    await Promise.all((emails || []).map(async userEmail => {
+      let exists = !!(await this.getInvitation({ userEmail, courseId }))
+      if (!exists) {
+        exists = await this.courses.isMemberByEmail({ courseId, email: userEmail })
+      }
+
       if (!exists) {
         await this.entities.insert(
           Invitation,
