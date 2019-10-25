@@ -18,6 +18,17 @@ export interface MemberCardProps {
   onDelete: (email: string) => void
 }
 
+function formatName(
+  name: string | null,
+  email: string
+): string | undefined {
+  if (name && email) {
+    return `${name} (${email})`
+  } else {
+    return email || name || undefined
+  }
+}
+
 export const MemberCard: FunctionComponent<MemberCardProps> = ({
   name,
   email,
@@ -42,7 +53,7 @@ export const MemberCard: FunctionComponent<MemberCardProps> = ({
       </Dropdown>
       <Card.Meta
         avatar={avatar ? <Avatar src={avatar} /> : <Avatar icon='user' />}
-        title={name || email}
+        title={<span title={formatName(name, email)}>{name || email}</span>}
         description={status + ', ' + permission}
       />
     </Card>

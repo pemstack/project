@@ -50,10 +50,10 @@ export const MemberCardList: FunctionComponent<MemberCardListProps> = ({
         gutter: 16,
         xs: 1,
         sm: 1,
-        md: 2,
+        md: 1,
         lg: 2,
         xl: 2,
-        xxl: 3
+        xxl: 2
       }}
       dataSource={members}
       rowKey='email'
@@ -63,7 +63,7 @@ export const MemberCardList: FunctionComponent<MemberCardListProps> = ({
         )
       }}
       pagination={{
-        pageSize: 12,
+        pageSize: 8,
         showTotal: (total, range) => t('ManageMembers.paginationTotal', { from: range[0], to: range[1], total })
       }}
       renderItem={({ name, email, status, permission }) => (
