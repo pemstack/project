@@ -68,9 +68,6 @@ export const ManageCoursePages: FunctionComponent<ManageCourseProps> = ({
                   <Option value='public'>
                     {t('ManageCourse.label.public')}
                   </Option>
-                  <Option value='unlisted'>
-                    {t('ManageCourse.label.unlisted')}
-                  </Option>
                 </Select>
               ),
               (

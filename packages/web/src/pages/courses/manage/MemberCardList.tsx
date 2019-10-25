@@ -1,4 +1,4 @@
-import { List, Spin } from 'antd'
+import { List, Spin, Empty } from 'antd'
 import { CoursePermission } from 'api/courses.api'
 import { DELETE_COURSE_MEMBER, GET_COURSE_MEMBERS } from 'api/members.api'
 import { useLoadingAction, useQuery } from 'app'
@@ -57,6 +57,11 @@ export const MemberCardList: FunctionComponent<MemberCardListProps> = ({
       }}
       dataSource={members}
       rowKey='email'
+      locale={{
+        emptyText: (
+          <Empty description={t('ManageCourse.label.noMembers')} />
+        )
+      }}
       pagination={{
         pageSize: 12,
         showTotal: (total, range) => t('ManageMembers.paginationTotal', { from: range[0], to: range[1], total })
