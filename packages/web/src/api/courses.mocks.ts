@@ -257,6 +257,78 @@ class MockCourses {
             email: 'first4.last4@example.com',
             permission: 'read',
             status: 'invited'
+          },
+          {
+            name: 'Florentina Haxhimustafaj',
+            email: 'first5.last5@example.com',
+            permission: 'write',
+            status: 'member'
+          },
+          {
+            name: 'Nexhmedin Demehajdaraj',
+            email: 'first6.last6@example.com',
+            permission: 'read',
+            status: 'member'
+          },
+          {
+            name: 'Muzafer Mahmutdemaj',
+            email: 'first7.last7@example.com',
+            permission: 'read',
+            status: 'invited'
+          },
+          {
+            name: 'Dea Aliu',
+            email: 'first8.last8@example.com',
+            permission: 'read',
+            status: 'invited'
+          },
+          {
+            name: 'Florentina Haxhimustafaj',
+            email: 'first9.last9@example.com',
+            permission: 'write',
+            status: 'member'
+          },
+          {
+            name: 'Nexhmedin Demehajdaraj',
+            email: 'first10.last10@example.com',
+            permission: 'read',
+            status: 'member'
+          },
+          {
+            name: 'Muzafer Mahmutdemaj',
+            email: 'first11.last11@example.com',
+            permission: 'read',
+            status: 'invited'
+          },
+          {
+            name: 'Dea Aliu',
+            email: 'first12.last12@example.com',
+            permission: 'read',
+            status: 'invited'
+          },
+          {
+            name: 'Florentina Haxhimustafaj',
+            email: 'first13.last13@example.com',
+            permission: 'write',
+            status: 'member'
+          },
+          {
+            name: 'Nexhmedin Demehajdaraj',
+            email: 'first14.last14@example.com',
+            permission: 'read',
+            status: 'member'
+          },
+          {
+            name: 'Muzafer Mahmutdemaj',
+            email: 'first15.last15@example.com',
+            permission: 'read',
+            status: 'invited'
+          },
+          {
+            name: 'Dea Aliu',
+            email: 'first16.last16@example.com',
+            permission: 'read',
+            status: 'invited'
           }
         ]
       })
