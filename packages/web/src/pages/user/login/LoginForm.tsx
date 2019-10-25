@@ -49,7 +49,7 @@ export const LoginForm: FunctionComponent<LoginFormProps> = ({
           >
             {t('user.label.login')}
           </SubmitButton>
-          <Link to='/user/register'>{t('user.label.register')}!</Link>
+          <Link to='/user/register'>{t('user.label.register')}</Link>
         </Form.AntdItem>
       </Form>
     </Card>

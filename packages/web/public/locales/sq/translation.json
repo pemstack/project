@@ -122,6 +122,9 @@
     "title": "Emaili është dërguar me sukses.",
     "subtitle": "Ndjekni linkun në email për të rivendosur fjalëkalimin."
   },
+  "ResetPasswordForm": {
+    "title": "Rivendosni fjalëkalimin"
+  },
   "ResetPasswordError": {
     "title": "Linku për rivendosje është jo valid",
     "subtitle": "Linku mund të jetë jo valid ose i skaduar."
@@ -184,7 +187,7 @@
       "settings": "Cilësimet e llogarisë",
       "login": "Kyçuni",
       "logout": "Shkyçuni",
-      "register": "Regjistrohuni",
+      "register": "Krijo llogari",
       "existingAccount": "Keni llogari aktive?",
       "username": "Emri i përdoruesit",
       "remember": "Më mbaj mend",

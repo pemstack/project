@@ -212,6 +212,7 @@ export class UsersService {
 
     const password = await bcrypt.hash(newPassword, 10)
 
+    await this.passwordTokens.update({ resetToken }, { state: TokenState.Confirmed })
     return await this.users.update({ email }, { password })
   }
 

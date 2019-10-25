@@ -18,7 +18,7 @@ export const INITIATE_PASSWORD_RESET: Action<InitiatePasswordResetParams> = {
 }
 
 export interface GetResetPasswordTokenStateResult {
-  valid: boolean
+  isValid: boolean
   email: string | null
 }
 

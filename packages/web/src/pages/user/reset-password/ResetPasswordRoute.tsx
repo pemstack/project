@@ -9,13 +9,13 @@ import { useTranslation } from 'react-i18next'
 
 export const ResetPasswordRoute: View = ({ router, match }) => {
   const { resetToken } = match.params
-  const { valid, email } = useQuery(GET_RESET_PASSWORD_TOKEN_STATE, { resetToken }).read()
+  const { isValid, email } = useQuery(GET_RESET_PASSWORD_TOKEN_STATE, { resetToken }).read()
   const { t } = useTranslation()
   const resetPassword = useAction(RESET_PASSWORD)
   const messages = useMessages()
   return (
-    <CenterContent width='small'>
-      {valid
+    <CenterContent width={isValid ? 'small' : 'default'}>
+      {isValid
         ? (
           <Formik
             validationSchema={resetPasswordSchema}

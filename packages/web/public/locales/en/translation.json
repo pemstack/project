@@ -112,6 +112,9 @@
     "title": "Email has been sent successfully.",
     "subtitle": "Follow the link in the email to reset your password."
   },
+  "ResetPasswordForm": {
+    "title": "Reset your password"
+  },
   "ResetPasswordError": {
     "title": "Invalid reset link",
     "subtitle": "The link may be invalid or expired."
@@ -184,7 +187,7 @@
       "settings": "Account Settings",
       "login": "Log In",
       "logout": "Log Out",
-      "register": "Register",
+      "register": "Create an account",
       "existingAccount": "Already have an account?",
       "username": "Username",
       "remember": "Remember me",
