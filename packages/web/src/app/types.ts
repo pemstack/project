@@ -13,6 +13,7 @@ import { UserLayoutProps } from 'app/layout/UserLayout'
 import { AnonymousLayoutProps } from 'app/layout/AnonymousLayout'
 import { ComponentType } from 'react'
 import {
+  ConfigStore,
   UserStore,
   ProgressStore,
   CookiesStore,
@@ -31,6 +32,7 @@ export interface App extends AppNode {
   apiClient: ApiClient
   recaptcha: RecaptchaStore
   messages: MessagesStore
+  config: ConfigStore
   reload(hardReload?: boolean): void
   req(url: string, context?: RequestContext): Wretcher
 }

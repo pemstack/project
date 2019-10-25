@@ -5,6 +5,7 @@ import { JObject } from '@pema/utils'
 import { createBrowserHistory, History } from 'history'
 import routes from 'pages'
 import {
+  ConfigStore,
   UserStore,
   ProgressStore,
   CookiesStore,
@@ -57,7 +58,8 @@ export function init(
       apiClient: ApiClient || CachedApiClient,
       session: SessionStore,
       recaptcha: RecaptchaStore,
-      messages: MessagesStore
+      messages: MessagesStore,
+      config: ConfigStore
     })
 
   const request = baseWretcher(root as any)

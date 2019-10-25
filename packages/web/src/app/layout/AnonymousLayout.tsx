@@ -5,7 +5,7 @@ import { Loading } from 'app/components'
 import { Link } from '@pema/router-react'
 import { useTranslation } from 'react-i18next'
 import './AnonymousLayout.css'
-
+import { NavbarTitle } from './NavbarTitle'
 
 const { Header, Content, Footer } = Layout
 
@@ -20,7 +20,7 @@ export const AnonymousLayout: FunctionComponent<AnonymousLayoutProps> = ({
   return (
     <Layout className='AnonymousLayout'>
       <Header className='AnonymousLayout__header'>
-        <Link className='AnonymousLayout__title' to='/'>InClass</Link>
+        <Link className='AnonymousLayout__title' to='/'><NavbarTitle /></Link>
         <Link className='AnonymousLayout__login' to='/user/login'>{t('Layout.anonymous.login')}</Link>
         <span className='AnonymousLayout__language-selector'>
           <LanguageSelector />

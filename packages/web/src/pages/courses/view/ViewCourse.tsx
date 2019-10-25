@@ -1,9 +1,11 @@
 import { Link } from '@pema/router-react'
 import { Tabs } from 'antd'
+import { GET_COURSE } from 'api/courses.api'
 import { GET_COURSE_PAGES } from 'api/pages.api'
 import { useQuery } from 'app'
 import { Loading } from 'app/components'
 import { CenterContent } from 'components'
+import { useNavbarTitle } from 'hooks'
 import React, { FunctionComponent, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Newsfeed } from '../newsfeed/Newsfeed'
@@ -26,7 +28,9 @@ export const ViewCourse: FunctionComponent<CourseProps> = ({
   pageNumber = 1
 }) => {
   const { t } = useTranslation()
+  const { title } = useQuery(GET_COURSE, { courseId }).read()
   const pages = useQuery(GET_COURSE_PAGES, { courseId }).read()
+  useNavbarTitle(`InClass ${title}`)
   const pageTabs = pages.map(p => (
     <TabPane
       tab={(

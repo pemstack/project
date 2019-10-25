@@ -1,9 +1,10 @@
-import React, { useState, FunctionComponent, Suspense } from 'react'
 import { Link, useRouter } from '@pema/router-react'
-import { Layout, Menu, Icon } from 'antd'
-import { LanguageSelector, ProfileDropdownConnector } from 'components'
+import { Icon, Layout, Menu } from 'antd'
 import { Loading } from 'app/components'
+import { LanguageSelector, ProfileDropdownConnector } from 'components'
+import React, { FunctionComponent, Suspense, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { NavbarTitle } from './NavbarTitle'
 import './UserLayout.css'
 
 const { Header, Content, Footer, Sider } = Layout
@@ -85,7 +86,7 @@ export const UserLayout: FunctionComponent<UserLayoutProps> = ({
             onClick={toggle}
           />
           <Link to='/' className='UserLayout__title'>
-            InClass
+            <NavbarTitle />
           </Link>
           <span className='UserLayout__header-profile'>
             <ProfileDropdownConnector />
