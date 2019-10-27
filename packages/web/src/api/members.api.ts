@@ -11,6 +11,7 @@ export interface GetCourseMembersResult {
   email: string
   permission: CoursePermission
   status: 'member' | 'invited'
+  groups: string[]
 }
 
 // GET /api/courses/:courseid/members
@@ -22,6 +23,24 @@ export const GET_COURSE_MEMBERS: Query<GetCourseMembersResult[], GetCourseMember
       .get()
       .json()
   }
+}
+
+export interface UpdateCourseMemberParams {
+  courseId: string
+  email: string
+  permission: CoursePermission
+  groups: string[]
+}
+
+// PATCH /api/courses/:courseid/members/:email
+export const UPDATE_COURSE_MEMBER: Action<UpdateCourseMemberParams> = {
+  async perform({ courseId, email, permission, groups }, app) {
+    return await app
+      .req(`/api/courses/${courseId}/members/${email}`)
+      .patch({ permission, groups })
+      .res()
+  },
+  invalidates: ({ courseId }) => [`courses/${courseId}/members`]
 }
 
 export interface DeleteCourseMemberParams {
