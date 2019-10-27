@@ -58,7 +58,19 @@
     }
   },
   "ManageMembers": {
-    "paginationTotal": "Showing {{from}}-{{to}} of {{total}}"
+    "paginationTotal": "Showing {{from}}-{{to}} of {{total}}",
+    "label": {
+      "cancelInvite": "Cancel invite",
+      "removeFromClass": "Remove from course",
+      "editPermission": "Edit permissions"
+    },
+    "edit": {
+      "title": "Edit permissions",
+      "groups": "Groups",
+      "selectGroups": "Select groups",
+      "cancel": "Cancel",
+      "ok": "Ok"
+    }
   },
   "EditPageForm": {
     "title": "Edit page",
