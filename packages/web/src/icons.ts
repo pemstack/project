@@ -464,7 +464,7 @@ export { default as DownOutline } from '@ant-design/icons/lib/outline/DownOutlin
 // export { default as FileSyncOutline } from '@ant-design/icons/lib/outline/FileSyncOutline'
 // export { default as FileSearchOutline } from '@ant-design/icons/lib/outline/FileSearchOutline'
 // export { default as FontSizeOutline } from '@ant-design/icons/lib/outline/FontSizeOutline'
-// export { default as FormOutline } from '@ant-design/icons/lib/outline/FormOutline'
+export { default as FormOutline } from '@ant-design/icons/lib/outline/FormOutline'
 // export { default as FontColorsOutline } from '@ant-design/icons/lib/outline/FontColorsOutline'
 // export { default as ForkOutline } from '@ant-design/icons/lib/outline/ForkOutline'
 // export { default as FullscreenExitOutline } from '@ant-design/icons/lib/outline/FullscreenExitOutline'
