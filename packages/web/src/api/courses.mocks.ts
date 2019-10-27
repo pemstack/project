@@ -239,97 +239,113 @@ class MockCourses {
             name: 'Florentina Haxhimustafaj',
             email: 'first1.last1@example.com',
             permission: 'write',
-            status: 'member'
+            status: 'member',
+            groups: ['1A']
           },
           {
             name: 'Nexhmedin Demehajdaraj',
             email: 'first2.last2@example.com',
             permission: 'read',
-            status: 'member'
+            status: 'member',
+            groups: ['1A']
           },
           {
             name: 'Muzafer Mahmutdemaj',
             email: 'first3.last3@example.com',
             permission: 'read',
-            status: 'invited'
+            status: 'invited',
+            groups: ['1A']
           },
           {
             name: 'Dea Aliu',
             email: 'first4.last4@example.com',
             permission: 'read',
-            status: 'invited'
+            status: 'invited',
+            groups: ['1A']
           },
           {
             name: 'Florentina Haxhimustafaj',
             email: 'first5.last5@example.com',
             permission: 'write',
-            status: 'member'
+            status: 'member',
+            groups: ['1B']
           },
           {
             name: 'Nexhmedin Demehajdaraj',
             email: 'first6.last6@example.com',
             permission: 'read',
-            status: 'member'
+            status: 'member',
+            groups: ['1B']
           },
           {
             name: 'Muzafer Mahmutdemaj',
             email: 'first7.last7@example.com',
             permission: 'read',
-            status: 'invited'
+            status: 'invited',
+            groups: ['1B']
           },
           {
             name: 'Dea Aliu',
             email: 'first8.last8@example.com',
             permission: 'read',
-            status: 'invited'
+            status: 'invited',
+            groups: ['1B']
           },
           {
             name: 'Florentina Haxhimustafaj',
             email: 'first9.last9@example.com',
             permission: 'write',
-            status: 'member'
+            status: 'member',
+            groups: ['1B']
           },
           {
             name: 'Nexhmedin Demehajdaraj',
             email: 'first10.last10@example.com',
             permission: 'read',
-            status: 'member'
+            status: 'member',
+            groups: ['1B']
           },
           {
             name: 'Muzafer Mahmutdemaj',
             email: 'first11.last11@example.com',
             permission: 'read',
-            status: 'invited'
+            status: 'invited',
+            groups: ['1B']
           },
           {
             name: 'Dea Aliu',
             email: 'first12.last12@example.com',
             permission: 'read',
-            status: 'invited'
+            status: 'invited',
+            groups: ['1B']
           },
           {
             name: 'Florentina Haxhimustafaj',
             email: 'first13.last13@example.com',
             permission: 'write',
-            status: 'member'
+            status: 'member',
+            groups: ['1B']
           },
           {
             name: 'Nexhmedin Demehajdaraj',
             email: 'first14.last14@example.com',
             permission: 'read',
-            status: 'member'
+            status: 'member',
+            groups: ['1B']
           },
           {
             name: 'Muzafer Mahmutdemaj',
             email: 'first15.last15@example.com',
             permission: 'read',
-            status: 'invited'
+            status: 'invited',
+            groups: ['1B']
           },
           {
             name: 'Dea Aliu',
             email: 'first16.last16@example.com',
             permission: 'read',
-            status: 'invited'
+            status: 'invited',
+            groups: ['1B']
           }
         ]
       })

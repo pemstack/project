@@ -209,6 +209,9 @@ export class GetCourseMembersResponse {
 
   @ApiResponseModelProperty()
   status: 'member' | 'invited'
+
+  @ApiResponseModelProperty()
+  groups: string[]
 }
 
 export class InviteCourseMembersRequest {
@@ -219,7 +222,15 @@ export class InviteCourseMembersRequest {
   permission: 'read' | 'write'
 
   @ApiModelProperty()
-  group: string
+  groups: string[]
+}
+
+export class UpdateCourseMemberRequest {
+  @ApiModelProperty()
+  permission: 'read' | 'write'
+
+  @ApiModelProperty()
+  groups: string[]
 }
 
 export class GetGroupsResponse {

@@ -1,6 +1,6 @@
-import { PrimaryColumn, Column, Entity, CreateDateColumn, ManyToOne, JoinColumn, IsNull } from 'typeorm'
+import { PrimaryColumn, Column, Entity, CreateDateColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm'
 import { IsEnum } from 'class-validator'
-import { Course } from './courses.entity'
+import { Course, CourseGroup } from './courses.entity'
 
 export enum InvitationStatus {
   Pending = 'pending',
@@ -37,10 +37,35 @@ export class Invitation {
   @CreateDateColumn()
   dateInvited: Date
 
-  @Column({ nullable: true })
-  group: string
+  @ManyToMany(type => CourseGroup)
+  @JoinTable()
+  groups: CourseGroup[]
 
   @IsEnum(InvitationStatus)
   @Column()
   status: InvitationStatus
 }
+
+// @Entity()
+// export class InvitationGroup {
+//   @PrimaryColumn()
+//   userEmail: string
+
+//   @PrimaryColumn()
+//   courseId: string
+
+//   @PrimaryColumn()
+//   groupName: string
+
+//   @ManyToOne(type => Invitation, {
+//     primary: true,
+//     nullable: false,
+//     onDelete: 'CASCADE'
+//   })``
+
+//   @JoinColumn([
+//     { name: 'courseId', referencedColumnName: 'courseId' },
+//     { name: 'pageId', referencedColumnName: 'pageId' }
+//   ])
+//   invitation: Course
+// }

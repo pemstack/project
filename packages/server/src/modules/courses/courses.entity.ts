@@ -1,4 +1,4 @@
-import { PrimaryColumn, Column, ManyToOne, OneToMany, Entity, JoinColumn, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm'
+import { PrimaryColumn, Column, ManyToOne, OneToMany, Entity, JoinColumn, CreateDateColumn, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm'
 import { User } from 'modules/users'
 import { IsEnum } from 'class-validator'
 
@@ -73,8 +73,9 @@ export class CoursePermission {
   @Column({ nullable: true })
   role: string
 
-  @Column({ nullable: true })
-  group: string
+  @ManyToMany(type => CourseGroup, { cascade: true })
+  @JoinTable()
+  groups: CourseGroup[]
 
   @IsEnum(CoursePermissionLevel)
   @Column()

@@ -391,6 +391,20 @@ export class CoursesController {
     })
   }
 
+  // PATCH /api/courses/:courseid/members/:email
+  @ApiResponse({ status: 200 })
+  @ApiBearerAuth()
+  @Authorize()
+  @Patch(':courseid/members/:email')
+  async updateCourseMember(
+    @Param('courseid') courseId: string,
+    @Param('email') email: string,
+    @ReqUser('userId') userId: string,
+    @Body() { permission, groups }: UpdateCourseMemberRequest
+  ): Promise<void> {
+    await this.courses.updateCourseMember({ courseId, userId, email, permission, groups })
+  }
+
   // DELETE /api/courses/:courseid/members/:email
   @ApiResponse({ status: 200 })
   @ApiBearerAuth()

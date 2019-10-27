@@ -69,7 +69,7 @@ export interface AddMemberToCourseParams {
   userId: string
   courseId: string
   permissionLevel: CoursePermissionLevel
-  group: string
+  groups: string[]
 }
 
 export interface TryGetPermissionParams {
@@ -118,6 +118,15 @@ export interface GetCourseMembersResult {
   email: string
   permission: CoursePermissionLevel
   status: 'member' | 'invited'
+  groups: string[]
+}
+
+export interface UpdateCourseMemberParams {
+  courseId: string
+  userId: string
+  email: string
+  permission: CoursePermissionLevel
+  groups: string[]
 }
 
 export interface DeleteCourseMemberParams {

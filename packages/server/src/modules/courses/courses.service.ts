@@ -6,7 +6,7 @@ import {
   UnauthorizedException
 } from '@nestjs/common'
 import { InjectEntityManager } from '@nestjs/typeorm'
-import { EntityManager } from 'typeorm'
+import { EntityManager, In } from 'typeorm'
 import {
   Course,
   CoursePage,
@@ -44,7 +44,8 @@ import {
   DeleteFilesParams,
   CreateGroupParams,
   DeleteGroupParams,
-  GetGroupsParams
+  GetGroupsParams,
+  UpdateCourseMemberParams
 } from './courses.interface'
 import uniqid from 'uniqid'
 import slugify from 'slugify'
@@ -127,13 +128,13 @@ export class CoursesService {
     newTitle,
     access
   }: UpdateCourseParams) {
-    this.assertWritePermission({ courseId, userId })
+    await this.assertWritePermission({ courseId, userId })
 
     await this.entities.update(Course, { courseId }, { title: newTitle, access })
   }
 
   async deleteCourse({ courseId, userId }: DeleteCourseParams) {
-    this.assertWritePermission({ courseId, userId })
+    await this.assertWritePermission({ courseId, userId })
 
     await this.entities.delete(Course, { courseId })
   }
@@ -333,7 +334,7 @@ export class CoursesService {
   }
 
   async createCoursePost({ courseId, userId, content }: CreateCoursePostParams) {
-    this.assertWritePermission({ courseId, userId })
+    await this.assertWritePermission({ courseId, userId })
 
     await this.entities.insert(CoursePost, {
       courseId,
@@ -343,7 +344,7 @@ export class CoursesService {
   }
 
   async updateCoursePost({ courseId, postId, userId, content }: EditCoursePostParams) {
-    this.assertWritePermission({ courseId, userId })
+    await this.assertWritePermission({ courseId, userId })
 
     const postExists = await this.entities.find(CoursePost, {
       where: { courseId, postId }
@@ -361,7 +362,7 @@ export class CoursesService {
   }
 
   async deleteCoursePost({ courseId, postId, userId }: DeleteCoursePostParams) {
-    this.assertWritePermission({ courseId, userId })
+    await this.assertWritePermission({ courseId, userId })
 
     const postExists = await this.entities.find(CoursePost, {
       where: { courseId, postId }
@@ -377,10 +378,10 @@ export class CoursesService {
   // Members
 
   async getCourseMembers({ courseId, userId }: GetCourseMembersParams) {
-    this.assertWritePermission({ courseId, userId })
+    await this.assertWritePermission({ courseId, userId })
 
     const members: GetCourseMembersResult[] = (await this.entities.find(CoursePermission, {
-      relations: ['user'],
+      relations: ['user', 'groups'],
       where: { courseId },
       order: {
         permissionLevel: 'DESC'
@@ -389,7 +390,8 @@ export class CoursesService {
       name: `${m.user.firstName} ${m.user.lastName}`,
       email: m.user.email,
       permission: m.permissionLevel,
-      status: 'member' as 'member' | 'invited'
+      status: 'member' as 'member' | 'invited',
+      groups: m.groups.map(g => g.groupName)
     }))
 
     const invited: GetCourseMembersResult[] = (await this.entities.find(Invitation, {
@@ -401,17 +403,58 @@ export class CoursesService {
       name: null,
       email: m.userEmail,
       permission: m.permission,
-      status: 'invited' as 'member' | 'invited'
+      status: 'invited' as 'member' | 'invited',
+      groups: []
     }))
 
     return members.concat(invited)
   }
 
-  async deleteCourseMember({ courseId, userId, email }: DeleteCourseMemberParams) {
-    this.assertWritePermission({ courseId, userId })
+  async updateCourseMember({ courseId, userId, email, permission, groups }: UpdateCourseMemberParams) {
+    await this.assertWritePermission({ courseId, userId })
 
     const user = await this.users.findOne({ email })
 
+    const groupEntities = await this.entities.find(CourseGroup, {
+      where: {
+        courseId,
+        groupName: In(groups)
+      }
+    })
+
+    if (!user) {
+      const invitation = await this.entities.findOne(Invitation, { where: { courseId, email } })
+      if (invitation) {
+        invitation.groups = groupEntities
+        invitation.permission = permission
+
+        await this.entities.save(invitation)
+      } else {
+        throw new NotFoundException()
+      }
+
+      return
+    }
+
+    const userPermission = await this.entities.findOne(CoursePermission, {
+      where: { courseId, userId: user.userId },
+      relations: ['groups']
+    })
+
+    if (userPermission) {
+      userPermission.groups = groupEntities
+      userPermission.permissionLevel = permission
+
+      await this.entities.save(userPermission)
+    } else {
+      throw new NotFoundException()
+    }
+  }
+
+  async deleteCourseMember({ courseId, userId, email }: DeleteCourseMemberParams) {
+    await this.assertWritePermission({ courseId, userId })
+
+    const user = await this.users.findOne({ email })
     if (user) {
       await this.entities.delete(CoursePermission, { courseId, userId: user.userId })
     }
@@ -433,7 +476,7 @@ export class CoursesService {
   }
 
   async createGroup({ courseId, userId, groupName }: CreateGroupParams) {
-    this.assertWritePermission({ courseId, userId })
+    await this.assertWritePermission({ courseId, userId })
 
     const exists = await this.entities.findOne(CourseGroup, { courseId, groupName })
 
@@ -445,14 +488,14 @@ export class CoursesService {
   }
 
   async deleteGroup({ courseId, userId, groupName }: DeleteGroupParams) {
-    this.assertWritePermission({ courseId, userId })
+    await this.assertWritePermission({ courseId, userId })
 
     return await this.entities.delete(CourseGroup, { courseId, groupName })
   }
 
   // Permissions
 
-  async addMemberToCourse({ userId, courseId, permissionLevel, group }: AddMemberToCourseParams) {
+  async addMemberToCourse({ userId, courseId, permissionLevel, groups: groupIds }: AddMemberToCourseParams) {
     if (!userId || !courseId) {
       throw new NotFoundException()
     }
@@ -461,7 +504,14 @@ export class CoursesService {
       throw new BadRequestException()
     }
 
-    return await this.entities.insert(CoursePermission, { userId, courseId, permissionLevel, group })
+    const groups = await this.entities.find(CourseGroup, {
+      where: {
+        courseId,
+        groupName: In(groupIds)
+      }
+    })
+
+    return await this.entities.insert(CoursePermission, { userId, courseId, permissionLevel, groups })
   }
 
   async isMemberByEmail({
