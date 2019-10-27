@@ -11,7 +11,7 @@ export interface ModalController {
   readonly visible: boolean
   readonly loading: boolean
   readonly key: number
-  open(): void
+  open(refreshState?: boolean): void
   close(): void
   setLoading(loading: boolean): void
 }
@@ -49,10 +49,10 @@ export function useModalController(config: ModalControllerConfig = {}): ModalCon
     get key() {
       return refs.current.key
     },
-    open() {
+    open(refreshState = false) {
       setState(({ key, loading }) => ({
         visible: true,
-        key,
+        key: refreshState ? key + 1 : key,
         loading
       }))
     },
