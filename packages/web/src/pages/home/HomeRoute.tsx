@@ -1,34 +1,33 @@
-import React, { useState } from 'react'
+import { Empty } from 'antd'
 import { View } from 'app'
-import { useEffect } from 'react'
-import { Markdown, CenterContent, CollapseCard } from 'components'
-import { Button } from 'antd'
+import { CenterContent, CollapseCard } from 'components'
+import React from 'react'
 import { LandingPage } from './LandingPage'
 
 export const HomeRoute: View = ({
   app
 }) => {
-  const [accessToken, setAccessToken] = useState<string | null>(null)
-  useEffect(() => {
-    let cancel = false
-    async function fetch() {
-      let token: string | null
-      try {
-        token = await app.user.getAccessToken(true)
-      } catch {
-        token = null
-      }
+  // const [accessToken, setAccessToken] = useState<string | null>(null)
+  // useEffect(() => {
+  //   let cancel = false
+  //   async function fetch() {
+  //     let token: string | null
+  //     try {
+  //       token = await app.user.getAccessToken(true)
+  //     } catch {
+  //       token = null
+  //     }
 
-      if (cancel) {
-        return
-      }
+  //     if (cancel) {
+  //       return
+  //     }
 
-      setAccessToken(token)
-    }
+  //     setAccessToken(token)
+  //   }
 
-    fetch()
-    return () => { cancel = true }
-  }, [app.user])
+  //   fetch()
+  //   return () => { cancel = true }
+  // }, [app.user])
 
   if (!app.user.authenticated) {
     return (
@@ -38,18 +37,19 @@ export const HomeRoute: View = ({
     )
   }
 
-  const source = `
-## Access token
+//   const source = `
+// ## Access token
 
-\`\`\`
-${accessToken || '<no token>'}
-\`\`\`
-  `
+// \`\`\`
+// ${accessToken || '<no token>'}
+// \`\`\`
+//   `
 
   return (
     <div className='HomeRoute'>
       <CenterContent>
         <CollapseCard>
+          <Empty />
           {/* <Markdown source={source} />
           {accessToken && (
             <Button
@@ -65,4 +65,5 @@ ${accessToken || '<no token>'}
     </div>
   )
 }
+
 HomeRoute.layout = ({ app }) => app.user.authenticated ? 'user' : 'none'
