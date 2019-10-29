@@ -134,7 +134,7 @@ export class UserStore {
       this.session = session
       return session
     } catch (error) {
-      if (isErrorCode(401, error)) {
+      if (isErrorCode(401, error) || isErrorCode(500, error)) {
         this.session = null
         this.app.cookies.remove('session_id')
         return null
