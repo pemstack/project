@@ -50,7 +50,7 @@ ${accessToken || '<no token>'}
     <div className='HomeRoute'>
       <CenterContent>
         <CollapseCard>
-          <Markdown source={source} />
+          {/* <Markdown source={source} />
           {accessToken && (
             <Button
               icon='copy'
@@ -59,7 +59,7 @@ ${accessToken || '<no token>'}
             >
               Copy
             </Button>
-          )}
+          )} */}
         </CollapseCard>
       </CenterContent>
     </div>
