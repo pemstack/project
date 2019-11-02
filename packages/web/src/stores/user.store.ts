@@ -37,10 +37,10 @@ export type LoginParams = {
 
 const LOGIN: Action<LoginParams, TokenResponse> = {
   async perform(params, app) {
-    // const captchaToken = await app.recaptcha.token('login')
+    const captchaToken = await app.recaptcha.token('login')
     return await api
       .url('/login')
-      // .headers({ 'Captcha-Token': captchaToken })
+      .headers({ 'Captcha-Token': captchaToken })
       .post(params, { credentials: 'same-origin' })
       .json()
   }
