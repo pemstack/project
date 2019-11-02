@@ -28,6 +28,7 @@ export class InvitationsService {
   }
 
   async getInvitation({ userEmail, courseId }: GetInvitationParams) {
+    userEmail = userEmail.toLowerCase()
     return await this.entities.findOne(Invitation, { userEmail, courseId })
   }
 
