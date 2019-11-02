@@ -40,7 +40,7 @@ export class AuthController {
   @ApiResponse({ status: 200, type: TokenResponse })
   @ApiResponse({ status: 401 })
   @RateLimit({ points: 3, duration: 1 })
-  // @Recaptcha('login')
+  @Recaptcha('login')
   @Post('login')
   async login(
     @RecaptchaResponse('score') score: number,
