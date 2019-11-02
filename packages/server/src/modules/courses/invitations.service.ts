@@ -9,7 +9,6 @@ import {
   CreateInvitationParams,
   CancelInvitationParams
 } from './invitations.interface'
-import { CoursePermissionLevel } from './courses.entity'
 import { CoursesService } from './courses.service'
 
 @Injectable()
@@ -21,6 +20,7 @@ export class InvitationsService {
   ) { }
 
   async getUserInvitations({ userEmail }: GetUserInvitationsParams) {
+    userEmail = userEmail.toLowerCase()
     return await this.entities.find(Invitation, {
       where: { userEmail, status: InvitationStatus.Pending },
       relations: ['course']
@@ -39,6 +39,7 @@ export class InvitationsService {
     await this.courses.assertWritePermission({ courseId, userId: requesterUserId })
 
     await Promise.all((emails || []).map(async userEmail => {
+      userEmail = userEmail.toLowerCase()
       let exists = !!(await this.getInvitation({ userEmail, courseId }))
       if (!exists) {
         exists = await this.courses.isMemberByEmail({ courseId, email: userEmail })
@@ -56,7 +57,8 @@ export class InvitationsService {
   }
 
   async updateInvitation({ user, courseId, accepted }: UpdateInvitationParams) {
-    const invitation = await this.getInvitation({ userEmail: user.email, courseId })
+    const userEmail = user.email.toLowerCase()
+    const invitation = await this.getInvitation({ userEmail, courseId })
 
     if (!invitation) {
       throw new NotFoundException('Invitation doesn\'t exist')
@@ -77,12 +79,13 @@ export class InvitationsService {
 
     return await this.entities.update(
       Invitation,
-      { userEmail: user.email, courseId },
+      { userEmail, courseId },
       { status: accepted ? InvitationStatus.Accepted : InvitationStatus.Declined }
     )
   }
 
   async cancelinvitation({ userEmail, courseId }: CancelInvitationParams) {
+    userEmail = userEmail.toLowerCase()
     return await this.entities.delete(Invitation, { userEmail, courseId })
   }
 }

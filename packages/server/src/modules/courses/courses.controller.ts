@@ -144,7 +144,6 @@ export class CoursesController {
     await this.courses.deleteCourse({ courseId, userId })
   }
 
-
   // Pages
 
   @ApiResponse({ status: 200, type: [GetCoursePagesResponse] })

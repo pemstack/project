@@ -50,11 +50,9 @@ import uniqid from 'uniqid'
 import slugify from 'slugify'
 import { unionBy } from 'lodash'
 import { reduceObject } from 'common/utils'
-import { plainToClass } from 'class-transformer'
 import { UsersService } from 'modules/users'
 import { Invitation, InvitationStatus } from './invitations.entity'
-import { createReadStream } from 'fs'
-import { inProject, inUploads } from 'globals'
+import { inUploads } from 'globals'
 import fs from 'fs'
 
 @Injectable()
@@ -387,7 +385,7 @@ export class CoursesService {
       }
     })).map(m => ({
       name: `${m.user.firstName} ${m.user.lastName}`,
-      email: m.user.email,
+      email: m.user.email.toLowerCase(),
       permission: m.permissionLevel,
       status: 'member' as 'member' | 'invited'
     }))
@@ -399,7 +397,7 @@ export class CoursesService {
       }
     })).map(m => ({
       name: null,
-      email: m.userEmail,
+      email: m.userEmail.toLowerCase(),
       permission: m.permission,
       status: 'invited' as 'member' | 'invited'
     }))
@@ -409,7 +407,7 @@ export class CoursesService {
 
   async deleteCourseMember({ courseId, userId, email }: DeleteCourseMemberParams) {
     this.assertWritePermission({ courseId, userId })
-
+    email = email.toLowerCase()
     const user = await this.users.findOne({ email })
 
     if (user) {
@@ -468,6 +466,7 @@ export class CoursesService {
     courseId,
     email
   }: { courseId: string, email: string }) {
+    email = email.toLowerCase()
     const user = await this.users.findOne({ email })
     if (!user) {
       return false
