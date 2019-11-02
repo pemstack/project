@@ -31,6 +31,7 @@ export class UsersService {
 
   public async create(user: User) {
     await ensureValid(user)
+    user.email = user.email.toLowerCase()
     const exists = !!(await this.users.findOne({
       email: user.email
     }))
@@ -115,6 +116,7 @@ export class UsersService {
     }
 
     const user = plainToClass(User, registration.userData)
+    user.email = user.email.toLowerCase()
     const exists = !!(await this.users.findOne({
       email: user.email
     }))
@@ -124,7 +126,7 @@ export class UsersService {
     }
 
     await this.users.insert(user)
-    await this.tokens.update({ email: user.email.toLowerCase() }, { state: TokenState.Canceled })
+    await this.tokens.update({ email: user.email }, { state: TokenState.Canceled })
     await this.tokens.update({ registerToken }, { state: TokenState.Confirmed })
     return user.email
   }
@@ -132,7 +134,7 @@ export class UsersService {
   public async initiateRegistration(user: User) {
     await ensureValid(user)
     const exists = !!(await this.users.findOne({
-      email: user.email
+      email: user.email.toLowerCase()
     }))
 
     if (exists) {
@@ -166,6 +168,7 @@ export class UsersService {
   }
 
   public async initiatePasswordReset(email: string) {
+    email = email.toLowerCase()
     const exists = !!(await this.users.findOne({
       email
     }))
@@ -202,7 +205,8 @@ export class UsersService {
       throw new NotFoundException()
     }
 
-    const { email, dateCreated } = request
+    const { dateCreated } = request
+    const email = request.email.toLowerCase()
 
     const expires = moment(dateCreated).add(RESET_PASSWORD_EXPIRY, 'seconds')
     const now = moment()
@@ -217,6 +221,7 @@ export class UsersService {
   }
 
   public async match(email: string, password: string) {
+    email = email.toLowerCase()
     const user = await this.findOne({ email })
     if (!user) {
       return null
