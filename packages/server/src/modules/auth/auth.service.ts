@@ -75,7 +75,7 @@ export class AuthService {
   async createTokens(user: User, persist = false, sessionId = uniqid()): Promise<AuthTokens> {
     const accessTokenPayload: AccessTokenPayload = {
       sub: user.userId,
-      email: user.email
+      email: user.email.toLowerCase()
     }
 
     const refreshTokenPayload: RefreshTokenPayload = {
