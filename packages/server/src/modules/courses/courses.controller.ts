@@ -400,6 +400,10 @@ export class CoursesController {
     @Param('email') email: string,
     @ReqUser('userId') userId: string
   ): Promise<void> {
+    if (!courseId || !email) {
+      throw new BadRequestException()
+    }
+
     await this.courses.deleteCourseMember({ courseId, userId, email })
   }
 
