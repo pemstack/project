@@ -86,6 +86,10 @@ export class InvitationsService {
   }
 
   async cancelinvitation({ userEmail, courseId }: CancelInvitationParams) {
+    if (!userEmail) {
+      throw new BadRequestException()
+    }
+
     userEmail = userEmail.toLowerCase()
     return await this.entities.delete(Invitation, { userEmail, courseId })
   }
