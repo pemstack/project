@@ -33,7 +33,7 @@ export interface DeleteCourseMemberParams {
 export const DELETE_COURSE_MEMBER: Action<DeleteCourseMemberParams> = {
   async perform({ courseId, email }, app) {
     return await app
-      .req(`/api/courses/${courseId}/members/${email}`, { action: 'deleteCourseMember' })
+      .req(`/api/courses/${courseId}/members/${encodeURIComponent(email)}`, { action: 'deleteCourseMember' })
       .delete()
       .res()
   },
