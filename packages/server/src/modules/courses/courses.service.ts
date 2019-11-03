@@ -407,6 +407,10 @@ export class CoursesService {
 
   async deleteCourseMember({ courseId, userId, email }: DeleteCourseMemberParams) {
     this.assertWritePermission({ courseId, userId })
+    if (!email || !courseId) {
+      throw new BadRequestException()
+    }
+
     email = email.toLowerCase()
     const user = await this.users.findOne({ email })
 
