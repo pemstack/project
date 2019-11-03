@@ -418,7 +418,7 @@ export class CoursesService {
       await this.entities.delete(CoursePermission, { courseId, userId: user.userId })
     }
 
-    await this.entities.delete(Invitation, { courseId, email })
+    await this.entities.delete(Invitation, { courseId, userEmail: email })
   }
 
   // Groups
