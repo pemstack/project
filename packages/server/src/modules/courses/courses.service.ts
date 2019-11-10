@@ -50,7 +50,7 @@ import uniqid from 'uniqid'
 import slugify from 'slugify'
 import { unionBy } from 'lodash'
 import { reduceObject } from 'common/utils'
-import { UsersService } from 'modules/users'
+import { UsersService, User } from 'modules/users'
 import { Invitation, InvitationStatus } from './invitations.entity'
 import { inUploads } from 'globals'
 import fs from 'fs'
@@ -338,6 +338,31 @@ export class CoursesService {
       authorId: userId,
       content
     })
+
+    const result = await this.entities.find(CoursePermission, {
+      relations: ['user'],
+      where: { courseId }
+    })
+
+    const memberEmails = result.reduce((acc: Array<string>, e) => {
+      if (e.user.email && e.user.userId != userId) {
+        acc.push(e.user.email)
+      }
+
+      return acc
+    }, [])
+
+    const { title: courseTitle } = await this.entities.findOneOrFail(Course, { courseId })
+
+    const teacher = await this.entities.findOne(User, { userId })
+
+    if (!teacher) {
+      throw new NotFoundException()
+    }
+
+    const teacherName = teacher.firstName + ' ' + teacher.lastName
+
+    return { memberEmails, courseTitle, teacherName }
   }
 
   async updateCoursePost({ courseId, postId, userId, content }: EditCoursePostParams) {

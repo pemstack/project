@@ -10,6 +10,7 @@ import {
   CancelInvitationParams
 } from './invitations.interface'
 import { CoursesService } from './courses.service'
+import { User } from 'modules/users'
 
 @Injectable()
 export class InvitationsService {
@@ -39,6 +40,8 @@ export class InvitationsService {
   async createInvitations({ requesterUserId, emails, courseId, permission, group }: CreateInvitationParams) {
     await this.courses.assertWritePermission({ courseId, userId: requesterUserId })
 
+    const filteredEmails: Array<{ email: string, isRegistered: boolean }> = []
+
     await Promise.all((emails || []).map(async userEmail => {
       userEmail = userEmail.toLowerCase()
       let exists = !!(await this.getInvitation({ userEmail, courseId }))
@@ -47,14 +50,22 @@ export class InvitationsService {
       }
 
       if (!exists) {
+        const isRegistered = await this.entities.findOne(User, { email: userEmail })
+
+        if (isRegistered) {
+          filteredEmails.push({ email: userEmail, isRegistered: true })
+        } else {
+          filteredEmails.push({ email: userEmail, isRegistered: false })
+        }
+
         await this.entities.insert(
           Invitation,
           { userEmail, courseId, permission, group, status: InvitationStatus.Pending }
         )
-
-        // this.sendInvitationEmail({ userEmail, courseId })
       }
     }))
+
+    return filteredEmails
   }
 
   async updateInvitation({ user, courseId, accepted }: UpdateInvitationParams) {

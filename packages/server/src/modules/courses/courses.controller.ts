@@ -40,13 +40,16 @@ import {
   GetCoursePageResponseFile,
   GetGroupsResponse
 } from './courses.dto'
-import { ReqUser, Authorize, Cookie } from 'common/decorators'
+import { ReqUser, Authorize, Cookie, ReqUrl } from 'common/decorators'
 import { plainToClass } from 'class-transformer'
 import { CoursePermissionLevel } from './courses.entity'
 import { MulterFile } from 'common/interfaces'
 import { Response } from 'express'
 import { inProject, inUploads } from 'globals'
 import { AuthService } from 'modules/auth'
+import { MailerService } from '@nest-modules/mailer'
+import { template, subjects } from 'mailer'
+import slugify from 'slugify'
 
 @ApiUseTags('courses')
 @Controller('courses')
@@ -54,7 +57,8 @@ export class CoursesController {
   constructor(
     private readonly courses: CoursesService,
     private readonly invitations: InvitationsService,
-    private readonly auth: AuthService
+    private readonly auth: AuthService,
+    private readonly mailerService: MailerService
   ) { }
 
   // Courses
@@ -314,9 +318,23 @@ export class CoursesController {
   async createCoursePost(
     @Param('courseid') courseId: string,
     @ReqUser('userId') userId: string,
+    @ReqUrl() url: string,
     @Body() { content }: CreateCoursePostRequest
   ): Promise<void> {
-    await this.courses.createCoursePost({ courseId, userId, content })
+    const { memberEmails, courseTitle, teacherName } = await this.courses.createCoursePost({ courseId, userId, content })
+    memberEmails.forEach(email => {
+      this.mailerService.sendMail({
+        to: email,
+        subject: subjects.en.newPost(teacherName),
+        template: template('new-post', 'en'),
+        context: {
+          courseTitle,
+          teacherName,
+          content,
+          link: url + `/courses/${courseId}/${slugify(courseTitle, { lower: true })}`
+        }
+      })
+    })
   }
 
   // PATCH /api/courses/:courseid/posts/:postid
@@ -367,6 +385,7 @@ export class CoursesController {
   async inviteCourseMembers(
     @Param('courseid') courseId: string,
     @ReqUser('userId') requesterUserId: string,
+    @ReqUrl() url: string,
     @Body() { emails, permission, group }: InviteCourseMembersRequest
   ): Promise<void> {
     let coursePermissionlevel: CoursePermissionLevel
@@ -381,12 +400,26 @@ export class CoursesController {
         throw new BadRequestException()
     }
 
-    await this.invitations.createInvitations({
+    const filteredEmails = await this.invitations.createInvitations({
       requesterUserId,
       courseId,
       emails,
       permission: coursePermissionlevel,
       group
+    })
+
+    const { title: courseTitle } = await this.courses.getCourse({ courseId, userId: requesterUserId })
+
+    filteredEmails.forEach(user => {
+      this.mailerService.sendMail({
+        to: user.email,
+        subject: subjects.en.invitationPending,
+        template: user.isRegistered ? template('invitation-pending-user', 'en') : template('invitation-pending-no-user', 'en'),
+        context: {
+          courseTitle,
+          link: url + (user.isRegistered ? '/invitations' : '/user/register')
+        }
+      })
     })
   }
 
