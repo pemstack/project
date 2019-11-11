@@ -325,7 +325,7 @@ export class CoursesController {
     memberEmails.forEach(email => {
       this.mailerService.sendMail({
         to: email,
-        subject: subjects.en.newPost(teacherName),
+        subject: subjects.en.newPost(courseTitle),
         template: template('new-post', 'en'),
         context: {
           courseTitle,
