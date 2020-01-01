@@ -38,7 +38,7 @@ export const CoursePage: FunctionComponent<CoursePageProps> = ({
                       <Icon type='paper-clip' />
                       <a
                         className='ant-upload-list-item-name'
-                        href={`${process.env.REACT_APP_URL_BASE}/api/courses/${courseId}/pages/${pageId}/${f.fileId}`}
+                        href={`${process.env.REACT_APP_URL_BASE || ''}/api/courses/${courseId}/pages/${pageId}/${f.fileId}`}
                       >
                         {f.fileName}
                       </a>
